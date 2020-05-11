@@ -4,6 +4,7 @@ title: Three-level Model for Reaching Mature Scientific Thinking
 date: 2020-05-10
 Author: Sizhe
 tags: [philosophy, daily]
+toc: true
 ---
 
 I spend last two days reading Jakob Schwichtenberg's *Teach Yourself Physics*, in which Jacob introduced multiple inspiring books of scientific philosophy.  Philosophy has not been a part of my life since my high school where Chinese students are required to remember philosophical quotes of Confusius and Laozi. Over the last decade, philosophical concepts like Yin and Yang are just fancy words that I use whenever I need to show people I know stuff. As a research assistant it is so easy for me to draw an equivalence sign between philosophy and subjective perspectives. Since my work is to provide objective views of how electrode materials evolve during physio-chemical processes, I used to believe that there is no need to learn things from people who spend their whole life in isolation and write out their hard-to-fanthom thoughts.
