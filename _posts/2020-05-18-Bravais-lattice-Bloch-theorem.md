@@ -1,4 +1,4 @@
-\---
+---
 
 layout: post
 
@@ -28,9 +28,9 @@ I've been reading stuff for quite some time, now it's the time to dive into some
 
 ## References
 
-```latex
+
 <a id="1">[1]</a> Sio, Weng Hong, et al. "Ab initio theory of polarons: Formalism and applications." Physical Review B 99.23 (2019): 235139.
-```
+
 
  
 
