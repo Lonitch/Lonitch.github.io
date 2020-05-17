@@ -100,8 +100,9 @@ $$
 $$
 
 where $d$ is the distance between the lattice planes in the same plane family shown in the figure.
-
-![R and G on lattice]({{ site.url }}/images/R-G-lattice.png =100x100#center)
+<p align="center">
+  <img width="200" height="200" src="{{ site.url }}/images/R-G-lattice.png">
+</p>
 <p style="text-align: center;">Figure 1. R and G on Bravais Lattice</p>
 ## Bloch's Theorem
 
