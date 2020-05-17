@@ -26,14 +26,19 @@ $$
 \mathbf{R}=\{\mathbf{R}|\mathbf{R}=n_1\mathbf{a}_1+n_2\mathbf{a}_2+n_3\mathbf{a}_3;n_i\in\mathbb{Z}\}\tag{1}
 $$
 The primitive cell of a Bravais lattice is the basic volume that encloses single point of the lattice. We can reproduce the whole lattice by duplicating the primitive cell along the directions of three base vectors without overlapping the cells. When an atomic base is used to describe crystal, the real atoms are occupying the positions that are usually off the point in the primitive cell. Thus, we need another set of vector, ${\mathbf{r}_i}$, to represent locations of real atoms. Because $\mathbf{r}_i$ is defined within the primitive cell $\mathcal{B}$ some people call such vector as "relative coordinates". Thus, the coordinate of atom "X" in a crystal lattice, $\mathbf{X}$, is:
+
 $$
 \mathbf{X}=\mathbf{R}+\mathbf{r}_i
 $$
+
 From here, the mass distribution of the lattice is given by:
+
 $$
 \rho(\mathbf{X})=\sum_{\mathbf{R}\in\mathcal{BL}}\sum_{\mathbf{r}\in\mathcal{B}}m_i\delta(\mathbf{X}-\mathbf{R}-\mathbf{r}_i)
 $$
+
 where $m_i$ is the mass of ith atom. In a perfect crystal lattice where defects and impurity are negligible, the mass distribution is a periodic function, i.e.:
+
 $$
 \rho(\mathbf{X})=\rho(\mathbf{X+R})
 $$
@@ -89,12 +94,15 @@ $$
 where in second step we used a famous theorem:
 $$\frac{1}{V}\sum_ke^{i\mathbf{r\cdot k}}=\delta(\mathbf{r})\tag{11}$$
 and **$N$ is the number of points in Bravais lattice**. We now let $\mathbf{G}$ as vectors on reciprocal lattice and $\mathbf{R}$ as vectos on Bravais lattice. From the figure blow, we derive the following relation between the two:
+
 $$
 \mathbf{R}\cdot\frac{\mathbf{G}}{|\mathbf{G}|}=nd\quad n\in\mathbb{Z}
 $$
+
 where $d$ is the distance between the lattice planes in the same plane family shown in the figure.
 
-![R and G on lattice]({{ site.url }}/images/R-G-lattice.png)
+![R and G on lattice]({{ site.url }}/images/R-G-lattice.png =100x100#center)
+<p style="text-align: center;">Figure 1. R and G on Bravais Lattice</p>
 ## Bloch's Theorem
 
 ## References
