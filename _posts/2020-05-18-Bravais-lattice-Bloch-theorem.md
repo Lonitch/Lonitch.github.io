@@ -73,7 +73,7 @@ The volume of the primitive cell is $V_0=\mathbf{a_1\cdot(a_2\times a_3)}$, from
 $$
 \mathbf{b}_1=\frac{2\pi}{V_0}(\mathbf{a_2\times a_3})\tag{7}
 $$
-One of the most profound properties of reciprocal lattice is that **the symmetry of reciprocal lattice is identical to that of Bravais lattice except that Bravais lattice vector $\mathbf{R}$ is replaced with reciprocal lattice vecotor $\mathbf{Q}$**. This fact has deep consequences, as we shall see. For instance,we Fourier transform the periodic function $f(\mathbf{r})$ as:
+Similar things happen to $\mathbf{b}_2$ and $\mathbf{b}_3$. One of the most profound properties of reciprocal lattice is that **the symmetry of reciprocal lattice is identical to that of Bravais lattice except that Bravais lattice vector $\mathbf{R}$ is replaced with reciprocal lattice vecotor $\mathbf{Q}$**. This fact has deep consequences, as we shall see. For instance,we Fourier transform the periodic function $f(\mathbf{r})$ as:
 $$
 \begin{align}
 f(\mathbf{Q})&=\int_{V}d\mathbf{r}f(\mathbf{r})e^{-i\mathbf{Q}\cdot\mathbf{r}}\\
@@ -88,7 +88,13 @@ f(\mathbf{Q})=\sum_{\mathbf{R}}e^{i\mathbf{Q}\cdot\mathbf{R}}\int_{V_0}d\mathbf{
 $$
 where in second step we used a famous theorem:
 $$\frac{1}{V}\sum_ke^{i\mathbf{r\cdot k}}=\delta(\mathbf{r})\tag{11}$$
-and **$N$ is the number of points in Bravais lattice**.
+and **$N$ is the number of points in Bravais lattice**. We now let $\mathbf{G}$ as vectors on reciprocal lattice and $\mathbf{R}$ as vectos on Bravais lattice. From the figure blow, we derive the following relation between the two:
+$$
+\mathbf{R}\cdot\frac{\mathbf{G}}{|\mathbf{G}|}=nd\quad n\in\mathbb{Z}
+$$
+where $d$ is the distance between the lattice planes in the same plane family shown in the figure.
+
+![R and G on lattice]({{ site.url }}/images/R-G-lattice.png)
 ## Bloch's Theorem
 
 ## References
