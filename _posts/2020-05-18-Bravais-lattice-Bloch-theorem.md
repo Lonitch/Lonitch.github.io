@@ -31,7 +31,7 @@ $$
 \mathbf{R}=\{\mathbf{R}|\mathbf{R}=n_1\mathbf{a}_1+n_2\mathbf{a}_2+n_3\mathbf{a}_3;n_i\in\mathbb{Z}\}\tag{1}
 $$
 
-The primitive cell of a Bravais lattice is the basic volume that encloses single point of the lattice. We can reproduce the whole lattice by duplicating the primitive cell along the directions of three base vectors without overlapping the cells. When an atomic base is used to describe crystal, the real atoms are occupying the positions that are usually off the point in the primitive cell. Thus, we need another set of vector, ${\mathbf{r}_i}$, to represent locations of real atoms. Because $\mathbf{r}_i$ is defined within the primitive cell $\mathcal{B}$ some people call such vector as "relative coordinates". Thus, the coordinate of atom "X" in a crystal lattice, $\mathbf{X}$, is:
+The primitive cell of a Bravais lattice is the basic volume that encloses single point of the lattice. We can reproduce the whole lattice by duplicating the primitive cell along the directions of three base vectors without overlapping the cells. When an atomic base is used to describe crystal, the real atoms are occupying the positions that are usually off the point in the Bravais primitive cell. Thus, we need another set of vector, ${\mathbf{r}_i}$, to represent locations of real atoms. Because $\mathbf{r}_i$ is defined within the primitive cell $\mathcal{B}$ some people call such vector as "relative coordinates". Thus, the coordinate of atom "X" in a crystal lattice, $\mathbf{X}$, is:
 
 $$
 \mathbf{X}=\mathbf{R}+\mathbf{r}_i\tag{2}
@@ -94,7 +94,7 @@ $$
 \tag{7}\{\mathbf{Q}|\mathbf{Q}=\sum_in_i\mathbf{b}_i;n_i\in\mathbb{Z}\}
 $$
 
-The volume of the primitive cell is $V_0=\mathbf{a_1\cdot(a_2\times a_3)}$, from this and (5) we have
+The volume of the Bravais primitive cell is $V_0=\mathbf{a_1\cdot(a_2\times a_3)}$, from this and (5) we have
 
 $$
 \mathbf{b}_1=\frac{2\pi}{V_0}(\mathbf{a_2\times a_3})\tag{8}
@@ -137,7 +137,7 @@ where $d$ is the distance between the lattice planes in the same plane family sh
 If we choose $\|\mathbf{G}\|=\frac{2\pi}{d}$, Eq.(12) is recovered to Eq. (4). Each $\mathbf{Q}$ in Eq.(7) therefore determines a family of lattice planes with plane interval equal to $d=\frac{2\pi}{\|\mathbf{Q}\|}$.
 
 ### First Brillouin Zone
-To understand first Brillouin zone, we first introduce the concept of Wigner-Seitz primitive unit cell. Imagine now we select a point,A, in Bravais lattice and its nearest neighbors. We then draw straight lines from A to its nearest neighbors and find the middle points of these lines. In a 3D Bravais lattice let's further imagine that planes passing through the middle points and perpendicular to the lines enclose a region around point A. This region is called **Wigner-Seitz primitive cell**. It is not a surprise that the minimum sum of distances from vertices of primitive unit cell to point A is obtained when the primitive cell is Wigner-Seitz cell. Similarly, the space enclosed by Wigner-Seitz primitive cell on reciprocal lattice is called "**First Brillouin zone**".  See Fig. 2 for the First Brillouin zone (FBZ) on a 2D reciprocal lattice.
+To understand first Brillouin zone, we first introduce the concept of Wigner-Seitz primitive unit cell. Imagine now we select a point,A, in Bravais lattice and its nearest neighbors. We then draw straight lines from A to its nearest neighbors and find the middle points of these lines. In a 3D Bravais lattice let's further imagine that planes passing through the middle points and perpendicular to the lines enclose a region around point A. This region is called **Wigner-Seitz primitive cell**. It is not a surprise that the minimum sum of distances from vertices of Bravais primitive unit cell to point A is obtained when the primitive cell is Wigner-Seitz cell. Similarly, the space enclosed by Wigner-Seitz primitive cell on reciprocal lattice is called "**First Brillouin zone**".  See Fig. 2 for the First Brillouin zone (FBZ) on a 2D reciprocal lattice.
 <p align="center">
   <img width="260" height="260" src="{{ site.url }}/images/FBZ.PNG">
 </p>
@@ -151,12 +151,12 @@ $$
 
 The reflection of electromagnetic wave in X-ray scattering process may be described as the incoming photon at state $\|\mathbf{k}_i\rangle$ interacts with periodic potential $V(\mathbf{r})$ in crystal lattice and results in the outcoming photon at state $\|\mathbf{k}_f\rangle$.
 
->For those who have no experience with Dirac notation, $\|X\rangle$ is used to represent an eigenstate of an Hamiltonian and is called "ket". Its Hermitian adjoint, $\langle X\|$ is called "bra". To give an example of their use, let's recall the time-independent Schrodinger equation (TISE) as $(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))\psi(r)=E\psi(r)$, where $E$ is the eigenvalue corresponding to the eigenstate $\psi(r)$. To make TISE more compact, we call $\mathbf{H}=(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))$ as the "Hamiltonian" and now TISE becomes $\mathbf{H}\psi=E\psi$. Using Dirac notation, the possibility amplitude of transforming state $\psi_1$ to $\psi_2$ is simply $\langle\psi_2\|\mathbf{H\|\psi_1}\rangle$. Note that this amplitude is not a product of eigenstate, Hamiltonian, and another eigenstate, it is a integral. If eigenstates are coordinate-based ($\psi=\psi(\mathbf{r})$), $\langle\psi_2\|\mathbf{H\|\psi_1}\rangle=\int d\mathbf{r}\phi^{\dagger}_2(r)\mathbf{H}\psi_1(r)$, where ${^{\dagger}}$ means Hermitian transpose operation.
+>For those who have no experience with Dirac notation, $\|X\rangle$ is used to represent an eigenstate of an Hamiltonian and is called "ket". Its Hermitian adjoint, $\langle X\|$ is called "bra". To give an example of their use, let's recall the time-independent Schrodinger equation (TISE) as $(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))\psi(r)=E\psi(r)$, where $E$ is the eigenvalue corresponding to the eigenstate $\psi(r)$. To make TISE more compact, we call $\mathbf{H}=(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))$ as the "Hamiltonian" and now TISE becomes $\mathbf{H}\|\psi\rangle=E\|\psi\rangle$. Using Dirac notation, the possibility amplitude of transforming state $\psi_1$ to $\psi_2$ is simply $\langle\psi_2\|\mathbf{H\|\psi_1}\rangle$. Note that this amplitude is not a product of eigenstate, Hamiltonian, and another eigenstate, it is a integral. If eigenstates are coordinate-based ($\psi=\psi(\mathbf{r})$), $\langle\psi_2\|\mathbf{H\|\psi_1}\rangle=\int d\mathbf{r}\phi^{\dagger}_2(r)\mathbf{H}\psi_1(r)$, where ${^{\dagger}}$ means Hermitian transpose operation.
 
 Thus, the posibility amplitude of obtaining photon at state $\|k_f\rangle$ from $\|k_i\rangle$ through periodic potential field $V(\mathbf{R})$ is:
 
 $$
-\left\langle\mathbf{k}_{f}\|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle=\int d^{3} r e^{-i\left(\mathbf{k}_{f}-\mathbf{k}_{i}\right) \cdot \mathbf{r}} V(\mathbf{r})\tag{14}
+\left\langle\mathbf{k}_{f}|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle=\int d^{3} r e^{-i\left(\mathbf{k}_{f}-\mathbf{k}_{i}\right) \cdot \mathbf{r}} V(\mathbf{r})\tag{14}
 $$
 
 as the coordinate-based wavefunctions that satisfy non-relativistic Schrodinger equation has the form of $e^{i\mathbf{k\cdot r}}$. Because potential function $V(r)$ is periodic on Bravais lattice, **its Fourier transformation (14) must be periodic on reciprocal lattice**. Based on the discussion in the previous section, we must have:
@@ -227,7 +227,7 @@ where $C$ is the modulation to $\Psi$. To make sure that $\|\Psi(\mathbf{r})\|^2
 </p>
 <p style="text-align: center;">Figure 4. Circular 1D  lattice</p>
 
->The use of PBC here might sound weird here, but if we think of a real crystal lattice,the dimensions of crystal lattice are infinite comparing to atomic interval. The PBC then indicates a enormous hyperspherical lattice structure and is valid for the parts that are sufficiently far away from the crystal surface.
+>The use of PBC might sound weird here, but if we think of a real crystal lattice,the dimensions of crystal lattice are infinite comparing to atomic interval. The PBC then indicates an enormous hyperspherical lattice structure and is valid for the parts that are sufficiently far away from the crystal surface.
 
 Using the circular lattice in Fig. 4, we can translate the original wavefunction $\Psi$ by $N$ times to go back to the original wavefunction. That is:
 
@@ -245,7 +245,7 @@ $$
 C\Psi(r)=e^{i2\pi S/N}e^{i\frac{2\pi S}{N}\frac{r}{a}}=e^{i2\pi S/N(r+a/a)}=\Psi(r+a)\tag{21}
 $$
 
-We know define a **crystal momentum** $k$ as $k=\frac{2\pi S}{Na}$, and the wavefunction becomes:
+We now define a **crystal momentum** $k$ as $k=\frac{2\pi S}{Na}$, and the wavefunction becomes:
 
 $$
 \Psi(r)=e^{ikr}\quad k=\frac{2\pi S}{Na}\tag{22}
@@ -264,7 +264,7 @@ $$
 which is just Bloch's theorem, Q.E.D.
 
 > An Probably important side note: nitice that the crystal momentum of a 1D
-lattice is defined as $k=2\pi S/Na$, and the dimension of our hypothetical 1D lattice is $L=Na$. Thus, the product of $kr=2\pi Sr/L$ is only important when it is in FBZ. In other wards. when $2\pi Sr/L$ is outside of FBZ, that is $kr=2\pi n+k^{\prime}r$, we always have a factor of $e^{i2\pi n}=1$, and the wavefunction essentially corresponds to a crystal momentum $k^{\prime}$ in FBZ. Similar arguments can be easily applied to high dimensional wavefunction.
+lattice is defined as $k=2\pi S/Na$, and the dimension of our hypothetical 1D lattice is $L=Na$. Thus, the product of $kr=2\pi Sr/L$ is only important when it is in FBZ. In other words, when $2\pi Sr/L$ is outside of FBZ, that is $kr=2\pi n+k^{\prime}r$, we always have a factor of $e^{i2\pi n}=1$, and the wavefunction essentially corresponds to a crystal momentum $k^{\prime}$ in FBZ. Similar arguments can be easily applied to high dimensional wavefunction.
 
 ### Proof using Fourier transformed Schrodinger equation
 The proof introduced in this section starts from time-independent Schrodinger equation:
@@ -315,7 +315,7 @@ $$
 Q.E.D.
 
 ### Proof using translational operators
-The proof in this section is prepared for those who knows something about quantum-mechanical operators and their embeddied symmetries, more specifically, translation operators and their commutation rules with Hamiltonian. Let's start with a free electron, whose Hamiltonian is just its kinetic energy:
+The proof in this section is prepared for those who know something about quantum-mechanical operators and their embeddied symmetries, more specifically, translation operators and their commutation rules with Hamiltonian. Let's start with a free electron, whose Hamiltonian is just its kinetic energy:
 
 $$
 H_0=\hbar^2\frac{\mathbf{P}^2}{2m} \tag{29}
@@ -324,10 +324,10 @@ $$
 (29) is obviously invariant under translational transformation as it is not dependent on coordinates. As a consequence, the translational operator
 
 $$
-T(\mathbf{a})=e^{i \frac{\mathrm{P}}{\hbar} \cdot \mathrm{a}}\tag{30}
+T(\mathbf{a})=e^{i \frac{\mathbf{P}}{\hbar} \cdot \mathbf{a}}\tag{30}
 $$
 
-commutes with Hamiltonian. However, when the electron is in a periodic potential $V(r)=V(r+R)$, such translational symmetry is broken. But the Hamiltonian now commutes with $T(\mathbf{R})$. When $T(R)$ is applied to wavefunction $\Psi(r)$, we find:
+commutes with Hamiltonian. However, when the electron is in a periodic potential $V(r)=V(r+R)$, such global translational symmetry is broken. But the Hamiltonian now commutes with $T(\mathbf{R})$. When $T(R)$ is applied to wavefunction $\Psi(r)$, we find:
 
 $$
 T(R)\Psi(r)=e^{i\mathbf{q\cdot R}}\Psi(\mathbf{r})=\Psi(r+R)\tag{31}
