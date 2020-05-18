@@ -133,12 +133,13 @@ where $d$ is the distance between the lattice planes in the same plane family sh
 </p>
 <p style="text-align: center;">Figure 1. R and G on Bravais Lattice</p>
 
+
 If we choose $|\mathbf{G}|=\frac{2\pi}{d}$, Eq.(12) is recovered to Eq. (4). Each $\mathbf{Q}$ in Eq.(7) therefore determines a family of lattice planes with plane interval equal to $d=\frac{2\pi}{|\mathbf{Q}|}$.
 
 ### First Brillouin Zone
 To understand first Brillouin zone, we first introduce the concept of Wigner-Seitz primitive unit cell. Imagine now we select a point,A, in Bravais lattice and its nearest neighbors. We then draw straight lines from A to its nearest neighbors and find the middle points of these lines. In a 3D Bravais lattice let's further imagine that planes passing through the middle points and perpendicular to the lines enclose a region around point A. This region is called **Wigner-Seitz primitive cell**. It is not a surprise that the minimum sum of distances from vertices of primitive unit cell to point A is obtained when the primitive cell is Wigner-Seitz cell. Similarly, the space enclosed by Wigner-Seitz primitive cell on reciprocal lattice is called "**First Brillouin zone**".  See Fig. 2 for the First Brillouin zone (FBZ) on a 2D reciprocal lattice.
 <p align="center">
-  <img width="260" height="260" src="{{ site.url }}/images/FBZ.png">
+  <img width="260" height="260" src="{{ site.url }}/images/FBZ.PNG">
 </p>
 <p style="text-align: center;">Figure 2. FBZ on a 2D reciprocal lattice</p>
 
@@ -149,6 +150,7 @@ $$
 $$
 
 The reflection of electromagnetic wave in X-ray scattering process may be described as the incoming photon at state $|\mathbf{k}_i\rangle$ interacts with periodic potential $V(\mathbf{r})$ in crystal lattice and results in the outcoming photon at state $|\mathbf{k}_f\rangle$.
+
 >For those who have no experience with Dirac notation, $|X\rangle$ is used to represent an eigenstate of an Hamiltonian and is called "ket". Its Hermitian adjoint, $\langle X|$ is called "bra". To give an example of their use, let's recall the time-independent Schrodinger equation (TISE) as $(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))\psi(r)=E\psi(r)$, where $E$ is the eigenvalue corresponding to the eigenstate $\psi(r)$. To make TISE more compact, we call $\mathbf{H}=(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))$ as the "Hamiltonian" and now TISE becomes $\mathbf{H}\psi=E\psi$. Using Dirac notation, the possibility amplitude of transforming state $\psi_1$ to $\psi_2$ is simply $\langle\psi_2|\mathbf{H|\psi_1}\rangle$. Note that this amplitude is not a product of eigenstate, Hamiltonian, and another eigenstate, it is a integral. If eigenstates are coordinate-based ($\psi=\psi(\mathbf{r})$), $\langle\psi_2|\mathbf{H|\psi_1}\rangle=\int d\mathbf{r}\phi^{\dagger}_2(r)\mathbf{H}\psi_1(r)$, where ${^{\dagger}}$ means Hermitian transpose operation.
 
 Thus, the posibility amplitude of obtaining photon at state $|k_f\rangle$ from $|k_i\rangle$ through periodic potential field $V(\mathbf{R})$ is:
