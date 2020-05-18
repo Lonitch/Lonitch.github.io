@@ -194,7 +194,7 @@ $$
 \left\langle\mathbf{k}_{f}|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle=N v(\mathbf{Q}) \sum_{i \in \mathcal{B}} e^{-i \mathbf{Q} \cdot \mathbf{r}_{i}} \equiv N v(\mathbf{Q}) S(\mathbf{Q})\tag{19}
 $$
 
-where $S(Q)$ is the famous "**geometric form factor**". In an x-ray experiment, the peaks in the reflected beam will occur right at $\mathbf{k_i +Q}$, with an intensity proportional to $|v(\mathbf{Q})|^2$, with a possible additional modulation by the geometrical form factor.
+where $S(Q)$ is the famous "**geometric form factor**". In an x-ray experiment, the peaks in the reflected beam will occur right at $\mathbf{k_i +Q}$, with an intensity proportional to $\|v(\mathbf{Q})\|^2$, with a possible additional modulation by the geometrical form factor.
 
 ## Bloch's Theorem
 This section is all about Bloch's theorem, the first symmetry-flavored theorem appears in condensed matter physics textbook, which gives general from of wavefunction for fermions in periodic lattice. We first restate it here and then prove it using three different but related ways in latter subsections.
@@ -220,7 +220,7 @@ $$
 \Psi(\mathbf{r})=\Psi(\mathbf{r+a})=C\Psi(\mathbf{r})
 $$
 
-where $C$ is the modulation to $\Psi$. To make sure that $|\Psi(\mathbf{r})|^2=|\Psi(\mathbf{r+a})|^2$, we must have $C^2\equiv1$. We now impose the **"periodic boundary condition"**(PBC), hence for finite 1D lattice, the PBC indicates the linear lattice becomes a circular lattice shown below:
+where $C$ is the modulation to $\Psi$. To make sure that $\|\Psi(\mathbf{r})\|^2=\|\Psi(\mathbf{r+a})\|^2$, we must have $C^2\equiv1$. We now impose the **"periodic boundary condition"**(PBC), hence for finite 1D lattice, the PBC indicates the linear lattice becomes a circular lattice shown below:
 
 <p align="center">
 <img width="300" height="310" src="{{ site.url }}/images/lattice-1D-circle.png">
