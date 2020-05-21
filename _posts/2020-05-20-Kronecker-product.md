@@ -74,7 +74,11 @@ $$
 |\phi_1,\phi_2,\cdots,\phi_N\rangle=\frac{1}{\sqrt{N!\Pi_{\phi=1}^{\infty}(n_{\phi}}!)}\sum_{\mathcal{P}}\xi^{(1-sgn\mathcal{P})/2}|\phi_{\mathcal{P1}}\rangle\otimes|\phi_{\mathcal{P2}}\rangle\cdots|\phi_{\mathcal{P}_N}\rangle\tag{7}
 $$
 
-where $sgn\mathcal{P}=1(-1)$ when the permutation of the particles can be obtained after even(odd) steps. The summation in Eq.(7) runs over all possible permutations of $\{\mathcal{P}_1,\mathcal{P}_2,\cdots,\mathcal{P}_N\}$. If we treat $\phi_i$ as the ith quantum state, then $n_{\phi}$ is just the number of particles with state $\phi$. For fermion $n_{\phi}\le1$, and (7) is just the "**Slater determinant**". With notation conventions, we always arrange the quantum states in ascending sequence in $\|\cdots\rangle$ according to the energy levels. As a result, we can write the N-particle state using integers as $\|1,2,3,\cdots\rangle$.
+where $sgn\mathcal{P}=1(-1)$ when the permutation of the particles can be obtained after even(odd) steps. The summation in Eq.(7) runs over all possible permutations of 
+
+$$\{\mathcal{P}_1,\mathcal{P}_2,\cdots,\mathcal{P}_N\}$$
+
+If we treat $\phi_i$ as the ith quantum state, then $n_{\phi}$ is just the number of particles with state $\phi$. For fermion $n_{\phi}\le1$, and (7) is just the "**Slater determinant**". With notation conventions, we always arrange the quantum states in ascending sequence in $\|\cdots\rangle$ according to the energy levels. As a result, we can write the N-particle state using integers as $\|1,2,3,\cdots\rangle$.
 
 ## Other Useful Identity of Kronecker Product
 Let $A$, $B$,... be matrices, we have
