@@ -41,13 +41,13 @@ $$
 \hat{H}|\phi\rangle=E|\phi\rangle\tag{3}
 $$
 
-where $\hat{H}$ is the Hamiltonian operator, and $|\phi\rangle$ is a single-particle eigenstate, see the article [here](https://lonitch.github.io/Bravais-lattice-Bloch-theorem/). We now write a two-particle eigenstate as $|\phi_1,\phi_2\rangle$, and Eq. (3) becomes:
+where $\hat{H}$ is the Hamiltonian operator, and $\|\phi\rangle$ is a single-particle eigenstate, see the article [here](https://lonitch.github.io/Bravais-lattice-Bloch-theorem/). We now write a two-particle eigenstate as $\|\phi_1,\phi_2\rangle$, and Eq. (3) becomes:
 
 $$
 \hat{H}|\phi_1,\phi_2\rangle=E^{\prime}|\phi_1,\phi_2\rangle \tag{4}
 $$
 
-Because the most common wavefunctions are spatial-coordinate based, we need to project our state $|\phi_1,\phi_2\rangle$ on to coordinate bases. To this end, we need to define spatial location "state" as $|x\rangle$, and the two-particle wavefunction as $\Psi(x_1,x_2)$. For two-fermion(boson) state we have
+Because the most common wavefunctions are spatial-coordinate based, we need to project our state $\|\phi_1,\phi_2\rangle$ on to coordinate bases. To this end, we need to define spatial location "state" as $\|x\rangle$, and the two-particle wavefunction as $\Psi(x_1,x_2)$. For two-fermion(boson) state we have
 
 $$
 \begin{align}
@@ -56,7 +56,7 @@ $$
 \end{align}\tag{5}
 $$
 
-where $\xi=-1$ for fermion states and $\xi=1$ for boson states, as a result of indistinguishability of particles. The factor $\frac{1}{\sqrt{2}}$ here guarantees the sum of moduli of each term equal to 1. From (5), we can derive the form of $|\phi_1,\phi_2\rangle$ using Kronecker product as:
+where $\xi=-1$ for fermion states and $\xi=1$ for boson states, as a result of indistinguishability of particles. The factor $\frac{1}{\sqrt{2}}$ here guarantees the sum of moduli of each term equal to 1. From (5), we can derive the form of $\|\phi_1,\phi_2\rangle$ using Kronecker product as:
 
 $$
 |\phi_1,\phi_2\rangle=\frac{1}{\sqrt{2}}|\phi_1\rangle\otimes|\phi_2\rangle-\frac{1}{\sqrt{2}}|\phi_2\rangle\otimes|\phi_1\rangle\tag{6}
@@ -74,7 +74,7 @@ $$
 |\phi_1,\phi_2,\cdots,\phi_N\rangle=\frac{1}{\sqrt{N!\Pi_{\phi=1}^{\infty}(n_{\phi}}!)}\sum_{\mathcal{P}}\xi^{(1-sgn\mathcal{P})/2}|\phi_{\mathcal{P1}}\rangle\otimes|\phi_{\mathcal{P2}}\rangle\cdots|\phi_{\mathcal{P}_N}\rangle\tag{7}
 $$
 
-where $sgn\mathcal{P}=1(-1)$ when the permutation of the particles can be obtained after even(odd) steps. The summation in Eq.(7) runs over all possible permutations of $\{\mathcal{P}_1,\mathcal{P}_2,\cdots,\mathcal{P}_N\}$. If we treat $\phi_i$ as the ith quantum state, then $n_{\phi}$ is just the number of particles with state $\phi$. For fermion $n_{\phi}\le1$, and (7) is just the "**Slater determinant**". With notation conventions, we always arrange the quantum states in ascending sequence in $|\cdots\rangle$ according to the energy levels. As a result, we can write the N-particle state using integers as $|1,2,3,\cdots\rangle$.
+where $sgn\mathcal{P}=1(-1)$ when the permutation of the particles can be obtained after even(odd) steps. The summation in Eq.(7) runs over all possible permutations of $\{\mathcal{P}_1,\mathcal{P}_2,\cdots,\mathcal{P}_N\}$. If we treat $\phi_i$ as the ith quantum state, then $n_{\phi}$ is just the number of particles with state $\phi$. For fermion $n_{\phi}\le1$, and (7) is just the "**Slater determinant**". With notation conventions, we always arrange the quantum states in ascending sequence in $\|\cdots\rangle$ according to the energy levels. As a result, we can write the N-particle state using integers as $\|1,2,3,\cdots\rangle$.
 
 ## Other Useful Identity of Kronecker Product
 Let $A$, $B$,... be matrices, we have
