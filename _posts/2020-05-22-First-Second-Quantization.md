@@ -180,7 +180,7 @@ $$
 $$
 
 ## Operators in First quantization
-Now that we have our quantum states prepared mathematically, let's derive the operators that can be applied to these states. Our first step is to look for single-particle operators, $\hat{T}(\mathbf{r}_j,\nabla)$, that only act locally. For instance the kinetic energy operator, $\hat{T}=-\hbar^2\nabla^2/2m$. At a local coordinate, the operator, according to the #2 QM postulate listed in the previous section, represents an observable, which is a superpostion of many different base states. Thus, following the similar logic led to Eq.(1), we thus conclude that all the single-particle operators are **unitary** (that is, changes the direction of state vectors in Hilbert space but remains the magnitude of the vectors). Therefore, the local operator acting at coordinate $\mathbf{r}_{\alpha}$ can be written in Dirac notation as:
+Now that we have our quantum states prepared mathematically, let's derive the operators that can be applied to these states. Our first step is to look for single-particle operators, $$\hat{T}(\mathbf{r}_j,\nabla),$$ that only act locally. For instance the kinetic energy operator, $$\hat{T}=-\hbar^2\nabla^2/2m.$$ At a local coordinate, the operator, according to the #2 QM postulate listed in the previous section, represents an observable, which is a superpostion of many different base states. Thus, following the similar logic led to Eq.(1), we thus conclude that all the single-particle operators are **unitary** (that is, changes the direction of state vectors in Hilbert space but remains the magnitude of the vectors). Therefore, the local operator acting at coordinate $\mathbf{r}_{\alpha}$ can be written in Dirac notation as:
 
 $$
 \hat{T}_{\alpha}=\sum_{\nu_i,\nu_j}T_{\nu_j\nu_i}|\phi_{\nu_j}(\mathbf{r}_{\alpha})\rangle\langle\phi_{\nu_i}(\mathbf{r}_{\alpha})|\tag{18}
@@ -222,7 +222,7 @@ V_{\nu_p\nu_q\nu_i\nu_j}=\int\int d\mathbf{r}_{\alpha}d\mathbf{r}_{\beta}\phi^{\
 \end{aligned}
 \tag{23}
 $$
-Finally, pay attention to the sequence of subscripts in (23)! The part of $\phi^{\dagger}_{\nu_q}(\mathbf{r}_{\beta})\phi^{\dagger}_{\nu_p}(\mathbf{r}_{\alpha})$ comes from the Hermitian adjoint of $\phi_{\nu_{p}}\phi_{\nu_q}$, which says:
+Finally, pay attention to the sequence of subscripts in (23)! The part of $$\phi^{\dagger}_{\nu_q}(\mathbf{r}_{\beta})\phi^{\dagger}_{\nu_p}(\mathbf{r}_{\alpha})$$ comes from the Hermitian adjoint of $$\phi_{\nu_{p}}\phi_{\nu_q}$$, which says:
 
 $$
 \left(\phi_{\nu_{p}}\phi_{\nu_q}\right)^{\dagger}=\phi_{\nu_q}^{\dagger}\phi_{\nu_p}^{\dagger}
@@ -245,7 +245,7 @@ $$
 If we use Eq.(24) as base states and relax the contraint of fixed number of particles, we end up with a state vector that resides in **Fock space**. For fermions $n_{\nu_i}=0,1$, but $n_{\nu_i}$ can be any non-negative integers for bosons. To change the N-particle state into another state with an arbitrary number of particles, we need two kinds of operators that act on states in ONR: (1) creation operators that increment the number of particles on a specific orbital by 1, and (2) annihilation operators that decrease the number of particles on an orbital by 1. Let's first check thse operations in bosons' systems.
 
 ## Boson creation and annihilation operators
-Intuitively we can define the creation $b^{\dagger}_{\nu_i}$ and annihilation operators $b_{\nu_i}$ as follows:
+Intuitively we can define the creation $$b^{\dagger}_{\nu_i}$$ and annihilation operators $$b_{\nu_i}$$ as follows:
 
 $$
 \begin{aligned}
@@ -274,7 +274,7 @@ $$
 
 The proof of Eq.(27) involves knowledge of relativistic quantum mechanics (RQM), and thus will not be elaborated in this blog. Any self-respected textbook of RQM should have the proof. The one I love in particular is from Dr. Klauber's *Student Friendly Quantum Field Theory*.
 
-With the definition of the number operator, we can now summarize the commutation rules for $b^{\dagger}_{\nu}$ and $b_{\nu}$. **The commutation rules are at the core of the quantum field theory because they make QFT obeys symmetry properties of QM formulation**. First, $b_{\nu}$ and $b^{\dagger}_{\nu}$ do not commute. To see this, we use vacuum state $\|0\rangle$ as an example:
+With the definition of the number operator, we can now summarize the commutation rules for $$b^{\dagger}_{\nu}$$ and $$b_{\nu}$$. **The commutation rules are at the core of the quantum field theory because they make QFT obeys symmetry properties of QM formulation**. First, $b_{\nu}$ and $b^{\dagger}_{\nu}$ do not commute. To see this, we use vacuum state $\|0\rangle$ as an example:
 
 $$
 b_{\nu}b^{\dagger}_{\nu}|0\rangle-b^{\dagger}_{\nu}b_{\nu}|0\rangle=[b_{\nu},b^{\dagger}_{\nu}]|0\rangle=|0\rangle\tag{29}
@@ -289,10 +289,10 @@ Using commutation bracket we can easily derive other commutation rules shown bel
 
 $$
 \begin{aligned}
-[b_{\nu},b_{\nu^{\prime}}]=0\quad[b^{\dagger}_{\nu},b^{\dagger}_{\nu^{\prime}}]=0
+\left[b_{\nu},b_{\nu^{\prime}}\right]=0\quad[b^{\dagger}_{\nu},b^{\dagger}_{\nu^{\prime}}]=0
 \end{aligned}\tag{31}
 $$
-We closes this section by deriving the normalization factor $B^{-}$ and $B^{+}$. Notice that the Hermitian adjoint of the state $b^{\dagger}_{\nu}\|n_{\nu}\rangle$ is $\langle n_{\nu}\|b_{\nu}$, we can use (30) to get:
+We closes this section by deriving the normalization factor $B^{-}$ and $B^{+}$. Notice that the Hermitian adjoint of the state $$b^{\dagger}_{\nu}\|n_{\nu}\rangle$$ is $$\langle n_{\nu}\|b_{\nu}$$, we can use (30) to get:
 
 $$
 \langle n_{\nu}|b_{\nu}b^{\dagger}_{\nu}|n_{\nu}\rangle=\langle n_{\nu}|b^{\dagger}_{\nu}b_{\nu}+1|n_{\nu}\rangle=n_{\nu}+1=(B^+)^{\dagger}B^+\tag{32}
@@ -343,7 +343,7 @@ $$
 \{a_{\nu},a^{\dagger}_{\nu^{\prime}}\}=\delta_{\nu\nu^{\prime}}\tag{39}
 $$
 
-where the number operator is $\hat{n}_{\nu}=a^{\dagger}_{\nu}a_{\nu}$. Like bosons the other commutation rules are:
+where the number operator is $$\hat{n}_{\nu}=a^{\dagger}_{\nu}a_{\nu}$$. Like bosons the other commutation rules are:
 
 $$
 \{a_{\nu},a_{\nu^{\prime}}\}=0\quad\{a^{\dagger}_{\nu},a^{\dagger}_{\nu^{\prime}}\}=0\tag{40}
@@ -413,7 +413,7 @@ where $b$ is quantum number. For bosons and fermions, the commutation rules for 
 
 $$
 \begin{aligned}
-[\tilde{c}(\mathbf{r}),\tilde{c}^{\dagger}(\mathbf{r}^{\prime})]=\delta(\mathbf{r-r^{\prime}})\quad \text{for bosons}\\
+\left[\tilde{c}(\mathbf{r}),\tilde{c}^{\dagger}(\mathbf{r}^{\prime})\right]=\delta(\mathbf{r-r^{\prime}})\quad \text{for bosons}\\
 \{\tilde{c}(\mathbf{r}),\tilde{c}^{\dagger}(\mathbf{r}^{\prime})\}=\delta(\mathbf{r-r^{\prime}})\quad \text{for fermion}
 \end{aligned}\tag{49}
 $$
