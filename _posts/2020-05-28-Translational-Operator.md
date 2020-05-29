@@ -218,7 +218,7 @@ $$
 \hat{H}_{tb}=\sum_{\mathbf{R}_i}\epsilon_n|n\mathbf{;R_i}\rangle\langle n\mathbf{;R_i}|-t\sum_{\langle \mathbf{R}_i\mathbf{R}_j\rangle}|n\mathbf{;R_j}\rangle\langle n\mathbf{;R_i}|\tag{12}
 $$
 
-where $$|n;\mathbf{R}_i\rangle$$ is an electron state at $\mathbf{R}_i$ and $n$th binding energy level. The seond term in (12) represents the hopping event and sums over the nearest neighbors around each location. The $t$ is a hopping parameter, representing the hopping intensity.
+where $$\|n;\mathbf{R}_i\rangle$$ is an electron state at $\mathbf{R}_i$ and $n$th binding energy level. The seond term in (12) represents the hopping event and sums over the nearest neighbors around each location. The $t$ is a hopping parameter, representing the hopping intensity.
 
 The eigenstates to the Hamiltonian (12) can be represented by the so-called "**Wannier states**:
 
