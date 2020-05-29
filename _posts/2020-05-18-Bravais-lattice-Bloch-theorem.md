@@ -165,7 +165,7 @@ $$
 \mathbf{k_f-k_i=Q}\tag{15}
 $$
 
-Let $\mathcal{BL}$ and $\mathcal{B}$ represent the point colletions in Bravais lattice and in atom base, respectively. We can write potential function $V(r)$ as:
+which is the "**von Laue condition**"Let $\mathcal{BL}$ and $\mathcal{B}$ represent the point colletions in Bravais lattice and in atom base, respectively. We can write potential function $V(r)$ as:
 
 $$
 V(\mathbf{r})=\sum_{\mathbf{R} \in \mathcal{B} \mathcal{L}} \sum_{i \in \mathcal{B}} v_{i}\left(\mathbf{r}-\mathbf{R}-\mathbf{r}_{i}\right)\tag{16}
@@ -291,7 +291,7 @@ $$
 Next, we multiply (25) with $e^{-ik^{\prime}r}$ and integrate (25) over $r$ to obtain:
 
 $$
-\int d^3r\sum_k\frac{\hbar^2k^2}{2m}c_ke^{i(k-k')r}+\sum_G\sum_kc_kV_Ge^{i(k+G-k')r}=\int d^3rE\sum_kc_ke^{i(k-k')r} \tag{26}
+\int d^3r\left(\sum_k\frac{\hbar^2k^2}{2m}c_ke^{i(k-k')r}+\sum_G\sum_kc_kV_Ge^{i(k+G-k')r}\right)=\int d^3rE\sum_kc_ke^{i(k-k')r} \tag{26}
 $$
 
 Using the orthogonality of periodic functions, similar to (11):
