@@ -30,7 +30,7 @@ $$
 A(t)=U^{\dagger}(t)AU(t).
 $$
 
-If we apply this time-evolution operator on quantum state $$|\phi(0)\rangle$$ we have $$U(t)|\phi(0)\rangle=|\phi(t)\rangle$$. Comparing this to the expectation value in SP we should now appreciate the argument of basis transformation between SP and HP, because:
+If we apply this time-evolution operator on quantum state $$\|\phi(0)\rangle$$ we have $$U(t)\|\phi(0)\rangle=\|\phi(t)\rangle$$. Comparing this to the expectation value in SP we should now appreciate the argument of basis transformation between SP and HP, because:
 
 $$
 \langle\phi(t)|A|\phi(t)\rangle_{SP}=\langle\phi(0)|U^{\dagger}(t)AU(t)|\phi(0)\rangle=\langle\phi|A(t)|\phi\rangle_{HP}.
@@ -57,10 +57,10 @@ $$
 and the operators are similar to those in HP:
 
 $$
-A_{HP}(t)=e^{iH_0t/\hbar}Ae^{-iH_0t/\hbar}
+A_{IP}(t)=e^{iH_0t/\hbar}Ae^{-iH_0t/\hbar}
 $$
 
-For the Hamiltonian operator itself, the time-indeoendent/solvable part $H_{0,IP}$ is:
+For the Hamiltonian operator itself, the time-independent/solvable part $H_{0,IP}$ is:
 
 $$
 H_{0,IP}=e^{iH_0t/\hbar}H_{0}e^{-iH_0t/\hbar}=H_0
@@ -74,13 +74,13 @@ $$
 
 ### Space evolution operator
 
-Just like the time evolution, our quantum states can evolve in the real space also. Let's say we have a state at coordinate x, $$|x\rangle$$, and we apply a space evolution operator $\hat{T}$ on it to change its coordinate by $\epsilon$:
+Just like the time evolution, our quantum states can evolve in the real space also. Let's say we have a state at coordinate x, $$\|x\rangle$$, and we apply a space evolution operator $\hat{T}$ on it to change its coordinate by $\epsilon$:
 
 $$
 \hat{T}(\epsilon)|x\rangle=|x+\epsilon\rangle\tag{2}
 $$
 
-Use (2) and apply it to an arbitrary state $$|\psi\rangle$$, we have:
+Use (2) and apply it to an arbitrary state $$\|\psi\rangle$$, we have:
 
 $$
 \begin{aligned}
@@ -90,7 +90,7 @@ $$
 \end{aligned}\tag{3}
 $$
 
-and we multiply (3) with $|x\rangle$, and notice that $$\langle x|x^{\prime}\rangle=\delta(x-x^{\prime})$$ we have
+We then multiply (3) with $\|x\rangle$, and notice that $$\langle x\|x^{\prime}\rangle=\delta(x-x^{\prime})$$, we arrive at
 
 $$
 \langle x|\hat{T}(\epsilon)|\psi\rangle=\langle x-\epsilon|\psi\rangle=\psi(x-\epsilon)\tag{4}
@@ -132,7 +132,7 @@ $$
 Comparing the LHS and RHS in the equation above, we find that 
 
 $$
-\hat{G}=i\hbar\frac{\partial}{\partial r}=-\hat{pP}
+\hat{G}=i\hbar\frac{\partial}{\partial r}=-\hat{p}
 $$
 
 that is, $-\hat{G}$ is just momentum operator! In 3D space the form of translational operator is:
@@ -148,7 +148,7 @@ Using (6) we can easily prove that $\hat{H}$ commutes with Hamiltonian: $[\hat{H
 The tight-binding model is one of the earliest models for electrons in periodic potential environment. It assumes that electrons are strongly bounded to the static ions in the lattice, and have limited possibility of hopping between two adjacent ions in a perfect lattice. To explain the basic tight-binding formalism we start with [Bloch's theorem](https://lonitch.github.io/Bravais-lattice-Bloch-theorem) and **tight-binding Hamiltonian** operator to first find the energy eigenstates, and energy eigenvalues. Then we discuss the relationship between the **Fermi surface** and **First Brillouin Zone** (FBZ). The reason we care so much about the energy eigenvalues is that the distribution of energy levels tells intrinsic properties of different materials.
 
 ### "umklapp": flip over in FBZ
-The topic discussed in section is commonly seen in solid state textbook. The "umklapp" of electron momentum vector emphsizes the importance of FBZ and is benefitial for our discussion of Fermi surface later. To see "umklapp", we recall that from Bloch's theorem, the wavefunction of an electron with momentum $\mathbf{k}$ in periodic potential has a form of:
+The topic discussed in section is commonly seen in solid state textbook. The "umklapp" of electron momentum vector emphsizes the importance of FBZ and is benefitial for our discussion of Fermi surface later. To understand "umklapp", we recall that from Bloch's theorem, the wavefunction of an electron with momentum $\mathbf{k}$ in periodic potential has a form of:
 
 $$
 \phi_{\mathbf{k}}(\mathbf{r})=e^{i\mathbf{k\cdot r}}u_{\mathbf{k}}(\mathbf{r})\tag{7}
@@ -218,7 +218,7 @@ $$
 \hat{H}_{tb}=\sum_{\mathbf{R}_i}\epsilon_n|n\mathbf{;R_i}\rangle\langle n\mathbf{;R_i}|-t\sum_{\langle \mathbf{R}_i\mathbf{R}_j\rangle}|n\mathbf{;R_j}\rangle\langle n\mathbf{;R_i}|\tag{12}
 $$
 
-$$|n;\mathbf{R}_i\rangle$$ is an electron state at $\mathbf{R}_i$ and $n$th binding energy level. The seond term in (12) represents the hopping event and sums over the nearest neighbors around each location. The $t$ is a hopping parameter, representing the hopping intensity.
+where $$|n;\mathbf{R}_i\rangle$$ is an electron state at $\mathbf{R}_i$ and $n$th binding energy level. The seond term in (12) represents the hopping event and sums over the nearest neighbors around each location. The $t$ is a hopping parameter, representing the hopping intensity.
 
 The eigenstates to the Hamiltonian (12) can be represented by the so-called "**Wannier states**:
 
@@ -246,6 +246,15 @@ H_{tb}|n ; \mathbf{k}\rangle&=E_{n}(\mathbf{k})|n ; \mathbf{k}\rangle\\
 E_{n}(\mathbf{k})&=\epsilon_{n}-t \sum_{\mathbf{R}_{i} \in \mathbf{R}} e^{i \mathbf{k} \cdot \mathbf{R}_{i}}
 \end{aligned}\tag{14}
 $$
+where the sum runs over all nearest neighbors of a given Bravais lattice point $\mathbf{R}$.To derive (14) we put (13) into (12) and make the variable transformation $$\mathbf{R^{\prime}=R_i-R_j}$$ to give
+
+$$
+\begin{aligned}
+H_{tb}|n ; \mathbf{k}\rangle&=\epsilon_n|n ; \mathbf{k}\rangle-t\sum_{\langle R_iR_j \rangle}e^{i\mathbf{k\cdot R_i}}|n ; \mathbf{R}_j\rangle\\
+&=\epsilon_n|n ; \mathbf{k}\rangle-t\sum_{\mathbf{R}^{\prime}=\mathbf{R}}\sum_{\mathbf{R}_j}e^{i\mathbf{k}(\mathbf{R^{\prime}+R_j})}|n;\mathbf{R}_j\rangle\\
+&=\epsilon_n|n ; \mathbf{k}\rangle-t\sum_{\mathbf{R}^{\prime}=\mathbf{R}}e^{i\mathbf{k\cdot}\mathbf{R^{\prime}}}|n;\mathbf{k}\rangle
+\end{aligned}
+$$
 
 For a one-dimensional lattice with spacing $a$, Eq. (14) becomes
 
@@ -267,7 +276,7 @@ $$
 
 which gives $$k_{y}=\pm k_{x} \pm \frac{\pi}{a}$$. The gray region in figure 1 below contains the occupied states in the 2D reciprocal lattice.
 <p align="center">
-  <img width="260" height="260" src="{{ site.url }}/images/occupied-state-FBZ.png">
+  <img width="260" height="260" src="{{ site.url }}/images/occupied-state-FBZ.PNG">
 </p>
 <p style="text-align: center;">Figure 1. Fermi “surface” (line) separating the occupied from non-occupied states of the first Brillouin zone of a square lattice, at half-filling, in the tightbinding approach</p>
 
