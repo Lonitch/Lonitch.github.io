@@ -3,7 +3,7 @@ layout: post
 
 title: Notes on Band Theory for Sloppy Non-Physicists
 
-date: 2020-06-05
+date: 2020-05-31
 
 Author: Sizhe
 
@@ -66,4 +66,38 @@ As atoms are getting closer in Figure 3, the orbitals emerge and the energies sp
 </p>
 <p style="text-align: center;">Figure 4. Half-filled energy band</p>
 
+So far we have talked about the differences in band structures of insulator and metal. And we filled our energy band like there is no interaction between the electrons. But that is not true because the Coulombic interaction among electrons could be at level of multiple $eV$ or even higher. Fortunately, in many cases the ignorance of Coulombic interactions is justified due to the explanation that Lev Landau gave in 1950s. Since it is quite subtle, we are not explaining it here.
+
+Let's now close this section by talking a little about the semiconductor, or insulator with finite energy band gap. Because the filled energy band does not conduct electronic current, we need electrons to hop from filled bands to empty bands and create **holes** in the filled bands. Following the convention, we call filled bands in semiconductor as "**valence bands**" and empty bands as "**conducting bands**". The electron hopping in semiconductor is possible through various excitation processes, such as thermal, and optical excitation. Figure 6. shows the electron hopping process between two energy bands of semiconductor:
+
+<p align="center">
+  <img width="486" height="409" src="{{ site.url }}/images/hopping-semiconductor.png">
+</p>
+<p style="text-align: center;">Figure 5. Electron hopping from valence band to conducting band</p>
+
 ## Fermi surface in first Brillouin zone
+
+Instead of plotting the dispersion relation of occupied states on energy band plot, we can find out the topology of the surface that separates the occupied states and the unoccupied states in first Brillouin zone (FBZ). Such surface is called **fermi surface**, and all the states(occupied or unoccupied) on the surface are at fermi energy level.
+
+For free electron, the energy is simply $E=\hbar^2\mathbf{k}/2m$. Setting $E$ eqaul to fermi energy $E_f$, it is obvious that the shape of fermi surface is spherical. For metals, the sphere that encloses all the occupied states has a volume that is half of the first Brillouin zone (FBZ), and this spherical space is referred as **Fermi sea**. When the electron is no longer free and influenced by periodic potential, the fermi surface starts to change its shape based on how strong the external potential is but still encloses half volume of FBZ. How fermi surface changes with the strength of periodic potential is shown in Figure 6. Notice that the filled space is called **Fermi sea**.
+
+<p align="center">
+  <img width="646" height="242" src="{{ site.url }}/images/fermi-surface-changing.png">
+</p>
+<p style="text-align: center;">Figure 6. Filled Fermi sea of a square lattice of monovalent atoms in two dimensions
+as the strength of the periodic potential is varied.</p>
+
+The right subplot in figure 6 shows that **the fermi surface is perpendicular to the boundaries of FBZ when it intercepts with the FBZ boundaries**. This turns out to be a general rule for both metals and insulators.
+
+When electrons are totally free in insulators, on the other hand, we have a sphere in FBZ that has a volume equal to the volume of FBZ. As the presence of periodic potential becomes stronger, less states outside of FBZ are occupied. Because the reciprocal lattice is periodic, the states that are outside of FBZ correspond to their images in FBZ through "umklapp".
+
+<p align="center">
+  <img width="646" height="242" src="{{ site.url }}/images/fermi-surface-changing-insulator.png">
+</p>
+<p style="text-align: center;">Figure 7. Filled Fermi sea of a square lattice of divalent atoms in two dimensions
+as the strength of the periodic potential is varied.</p>
+
+A closer look on the middle subplot in figure 7 gives the conclusion that the topology of Fermi surface outside of FBZ distorted comparing to the Fermi surface of free electrons in the left subplot. Using the argument of tight-binding model, we can understand the distortion as the decrease in energies of states due to the binding between electrons and nulei. When a strong periodic potential is added, all of the states are filled and no states outside the first Brillouin zone are filled because of such distortion.
+
+## Conclusion
+I guess I don't know how to close this blog yet because there are still a lot I might want to add when the time is right. So keep your eyes on this.
