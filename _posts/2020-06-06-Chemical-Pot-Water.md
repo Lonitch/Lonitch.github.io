@@ -137,12 +137,21 @@ We can also calculate the Gibbs free energy (i.e.$F+PV$ in Eq. 18) by looking up
 ## **References**
 
 [1]	T. M. Truskett and K. A. Dill, “A simple statistical mechanical model of water,” J. Phys. Chem. B, vol. 106, no. 45, pp. 11829–11842, Nov. 2002.
+
 [2]	B. Boddenberg, G. U. Rakhmatkariev, S. Hufnagel, and Z. Salimov, “A calorimetric and statistical mechanics study of water adsorption in zeolite NaY,” Phys. Chem. Chem. Phys., vol. 4, no. 17, pp. 4172–4180, Aug. 2002.
+
 [3]	E. U. Condon, “Introduction to Quantum Mechanics, with applications to chemistry,” Science (80-. )., vol. 83, no. 2144, pp. 105–106, 1936.
+
 [4]	“Phonon calculations - Wiki.” [Online]. Available: https://wiki.materialsproject.org/Phonon_calculations. [Accessed: 06-Jun-2020].
+
 [5]	C. M. Van Vliet, Equilibrium and Non-Equilibrium Statistical Mechanics. 2008.
+
 [6]	D. J. Rowe, “The moment of inertia,” in Nuclear Collective Motion, 2010, pp. 119–129.
+
 [7]	T. Hill, An introduction to statistical thermodynamics. 1986.
+
 [8]	J. Mayer, Equilibrium statistical mechanics. 2013.
+
 [9]	“Kinetic theory.” [Online]. Available: http://physics.bu.edu/~duffy/py105/Kinetictheory.html#:~:text=The internal energy of an,also the total internal energy. [Accessed: 06-Jun-2020].
+
 [10]	G. Hewitt and J. Barbosa, Heat exchanger design handbook. 2008.
