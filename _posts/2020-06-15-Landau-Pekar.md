@@ -1,7 +1,7 @@
 ---
 layout: post
 
-title: Landau-Pekar Model, The Beginning of Polaron
+title: Landau-Pekar Model, The Beginning of the Polaron
 
 date: 2020-06-15
 
@@ -146,7 +146,7 @@ Because $\varepsilon>1$, This model, therefore, predicts a **binding effect** as
 
 ## Qualitative derivation of self-energy and effective mass of polaron
 
-In the previous section we describe the effects of adding extra free electron in dielectric continuum as the reason for polarization of charge distribution. In this section we explore the size and mass of polaron by taking a closer look at the **dielectric polarization field** $\mathbf{P}$ defined in Eq.(1) and (4). We first split $\mathbf{P}$ into an "optical" part $\mathbf{P}_{opt}$ and an "acoustic" part $\mathbf{P}_{acs}$ because the dielectric spetroscopy of dielectric materials usually has resonances in the ultraviolet and the infrared frequency regions[1] (see Figure 2).
+In the previous section we describe the effects of adding extra free electron in dielectric continuum as the reason for polarization of charge distribution. In this section we explore the size and mass of polaron by taking a closer look at the **dielectric polarization field** $\mathbf{P}$ defined in Eq.(1) and (4). We first split $\mathbf{P}$ into an "optical" part $$\mathbf{P}_{opt}$$ and an "acoustic" part $$\mathbf{P}_{acs}$$ because the dielectric spetroscopy of dielectric materials usually has resonances in the ultraviolet and the infrared frequency regions[1] (see Figure 2).
 
 <p align="center">
   <img width="512" height="455" src="{{ site.url }}/images/dielectric-spectroscopy.png">
@@ -196,8 +196,87 @@ $$
 Both $\varepsilon$ and $\varepsilon_{\infty}$ are experimentally measurable, making the calculation for $\bar{\varepsilon}$ easy.
 
 ### The size of the polaron
+Accroding to Landau's model, the charge distribution of a bounded electron (small polaron) is localized within a sphere with radius of $l_1$. At distances larger than $l_1$, the field created by the localized electron is Coulombic. Our target in this section is first to calculate the energy of a localized electron with static charge distribution. The total energy will be an expression with $l_1$ as its parameter. We then find the value of $l_1$ that minimize the energy. Second, we derive the size of the polaron by considering the dynamics of electron-phonon interactions.
+
+Let us first visualize the field induced by the localized electron in Figure 3 where the charge of our localized electron is uniformly distributed within a sphere with radius of $l_1$.
+
+<p align="center">
+  <img width="565" height="260" src="{{ site.url }}/images/Landau-polaron-field.png">
+</p>
+<p style="text-align: center;">Figure 3. Localized charge distribution assumed in Landau's polaron theory</p>
+
+The Coulombic(potential) energy of our electron friend is of order $-e^2/\bar{\varepsilon}l_1$ (see Feynman's derivation [here](https://www.feynmanlectures.caltech.edu/II_08.html)). We use $\bar{\varepsilon}$ here because we assumed that **the polarization induced by the electron is only acoustic**. The kinetic energy of the electron is of order $$\hbar^2k^2/2m$$ where $k$ is the characteristic wavenumber of a system with spatial extent of order $l_1$, i.e. $k=2\pi/l_1$. Thus the kinetic energy is of order $$4\pi^2\hbar^2/2ml^2_1$$, and our estimation of the total energy for the electron in Figure 3, $\mathcal{U}_1$, is
+
+$$
+\mathcal{U}_1\sim \frac{-e^2}{\bar{\varepsilon}l_1}+\frac{4\pi^2\hbar^2}{2ml^2_1}\tag{15}.
+$$
+
+To find the $l_1$ that minimze $\mathcal{U}_1$, we calculate the derivative and find:
+
+$$
+\frac{\partial\mathcal{U}_1}{\partial l_1}\sim\frac{e^2}{\bar{\varepsilon}l^2_1}-\frac{4\pi^2\hbar^2}{ml^3_1}=0
+$$
+
+and
+
+$$
+l_1=\frac{4\pi^2\hbar^2\bar{\varepsilon}}{me^2}\tag{16}.
+$$
+
+Substitute (16) into (15) to give
+
+$$
+\mathcal{U}_1\sim\frac{-me^4}{8\pi^2\hbar^2\bar{\varepsilon}^2}\tag{17}.
+$$
+
+The picture depicted in Figure 3 is **only reasonable when the velocity of polaron movements is much faster than that of ions, otherwise the charge distribution would not be static**. We now shift our focus to the dynamic problem of an electron moving with velocity of $v$ interacting with lattice vibration with frequency of $\omega$.
+
+If the lattice is vibrating with a frequency $\omega$, the angular distance travelled by an electron at distance $d_1$ from an ion (see Figure 4) in a time $1/\omega$ is just $$v/\omega d_1$$. If the angle is small, we have
+
+$$
+d_1\gg v/\omega\tag{18}.
+$$
+
+**The limiting value of $d_1$ for an electron to see a polaron as a static charge is of order $v/\omega$.**
+
+<p align="center">
+  <img width="667" height="320" src="{{ site.url }}/images/Landau-polaron-size-dynamic.png">
+</p>
+<p style="text-align: center;">Figure 4. Electron-phonon interaction when the small polaron moves not so fast, and the ion see the localized electron as a static point charge at d1. The effective radius of the polaron is d2 </p>
+
+On the other hand, **the effective size of polaron(localized electron) $d_2$ must not exceed the limiting value of $d_1$**. According to the uncertainty principle,
+
+$$
+d_2p\geq 2\pi \hbar\tag{19},
+$$
+
+where the momentum of polaron is $p=mv$. Therefore,
+
+$$
+d_2\sim\frac{2\pi\hbar}{mv}\tag{20}.
+$$
+
+The right subplot in Figure 4 shows that curves $d_1(v)$ and $d_2(v)$ intercept at the distance $l_2$. For ions outside of the sphere around the polaron with radius of $l_2$, the polaron acts like a static charge. At the intersection,
+
+$$
+v=\sqrt{\frac{2\pi\hbar\omega}{m}}
+$$
+
+and
+
+$$
+l_2=\sqrt{\frac{2\pi\hbar}{m\omega}}\tag{21}.
+$$
+
+Because the localized electron in Figure 4 moves slower than the electron depiced in Figure 3, the energy of the polaron is just its potential energy, and we have
+
+$$
+\mathcal{U}_2\sim-\frac{e^2}{\bar{\varepsilon}l_2}=-\frac{e^2\sqrt{m\omega}}{\bar{\varepsilon}\sqrt{2\pi\hbar}}
+$$
 
 ### Effective mass of the polaron
+
+
 ## References
 
 [1] Kuper, Charles Goethe, and George Danley Whitfield, eds. Polarons and excitons. Plenum Press, 1963.
