@@ -17,7 +17,7 @@ toc: true
 
 My journey towards the polaron theory has just begun. The first stop will be the Landau-Pekar theory that everybody in the community cites. It takes some knowledge of electromagnetism to appreciate the model, but unfortunately, I never took a formal class of EM in the school. So, another self-learning journey for me.
 
-## Binding Energy in Electric Displacement Field
+## Polaron Resulting from Binding Effect
 The idea of polaron is that a free electron, attacted by a positively chaged particle, creates a positively charged "hole" around it through Coulombic interactions with nuclei. As a reseult, the electron is self-trapped by the potential well induced by itself. **The effect of polaron may be quanlitatively described by comparing the field energy of adding a free electron in a dielectric continuum with that *in vacuo* where the dielectric constant $\varepsilon=1$**. Based on this argument, we will derive an expression for the binding energy of an electron to a dielectric medium.
 
 ### Brief review of electric displacement field
@@ -50,7 +50,7 @@ $$
 \end{aligned}
 $$
 
-from which we can easily get a relation between the change in charge density $\rho=Q/(dxdydz)$ and gradient of electric polarization $\mathbf{P}$ as
+from which we can easily get a relation between the change in charge density $\rho=Q/(dxdydz)$ and gradient of the **electric polarization field** $\mathbf{P}$ as
 
 $$
 d\rho=\frac{\partial \mathbf{P}_x}{\partial x}+\frac{\partial \mathbf{P}_y}{\partial y}+\frac{\partial \mathbf{P}_z}{\partial z}=-\nabla\cdot\mathbf{P}\tag{1}
@@ -84,10 +84,10 @@ $$
 with $\chi_e$ being the **electric susceptivity**. And the constitutive relation between $\mathbf{E}$ and $\mathbf{D}$ is just
 
 $$
-\mathbf{D}=\varepsilon_0\epsilon\mathbf{E}=\epsilon\mathbf{E}\tag{5}
+\mathbf{D}=\varepsilon_0\epsilon\mathbf{E}=\varepsilon\mathbf{E}\tag{5}
 $$
 
-with $\epsilon=1+\chi_e$ being the **relative permitivity**, and $\varepsilon=\varepsilon_0\epsilon$ the **dielectric constant**.
+with $\epsilon=1+\chi_e$ being the **relative permitivity**, and $\varepsilon=\varepsilon_0\epsilon$ the **static dielectric constant**.
 
 ### Field energy of $\mathbf{D}$
 If we add a small amount of free charge $\delta\rho_f$ in the dielectric with its dielectric constant being $\varepsilon$, the **change in electric field energy is:**
@@ -116,7 +116,7 @@ $$
 \delta W=\int \frac{\mathbf{D}\delta \mathbf{D}}{\varepsilon}d\mathbf{r}=\frac{1}{2}\int\frac{\delta \mathbf{D}^2}{\varepsilon}d\mathbf{r}\tag{7}
 $$
 
-Therefore, the total energy change associated with changing the displacement field $\mathbf{D}$ from 0 to $\mathbf{D}$ is just
+Therefore, the **total energy change associated with changing the displacement field from 0 to $\mathbf{D}$ due to the addition of free charges** is just
 
 $$
 W=\int_0^D\int\frac{1}{2\varepsilon}d\mathbf{D}^2d\mathbf{r}=\int\frac{\mathbf{D}^2}{2\varepsilon}d\mathbf{r}\tag{8}
@@ -128,7 +128,7 @@ $$
 W=\int\frac{\mathbf{D}^2}{8\pi\varepsilon}d\mathbf{r}\tag{9}
 $$
 ### Binding energy of electron in dielectric medium
-If we let $\rho$ be the charge density of a model electron in dielectric continuum, we have in SI unit,
+If we let $\rho$ be the charge density of a free electron in dielectric continuum, we have in SI unit,
 
 $$
 \nabla\cdot\mathbf{D}=4\pi\rho.
@@ -141,3 +141,65 @@ W(\varepsilon\neq1)-W(\varepsilon=1)=\int\frac{\mathbf{D}^2}{8\pi}(\frac{1}{\var
 $$
 
 Because $\varepsilon>1$, This model, therefore, predicts a **binding effect** as $W(\varepsilon\neq1)-W(\varepsilon=1)<0$. The next step in the Landau-pekar theory is to consider a rigid charge moving through the lattice, carrying its polarization potential with it.
+
+>**Side note on the effects of extra electron in dielectric continuum:** The purpose of this qualitative analysis above is to stress the fact that **the binded electron causes extra charge polarization in a dielectric medium in the electric field**. You can understand Eq.(10) as follow: if we add a free electron in vacuum, the displacement field strength changes from 0 to $\mathbf{D}$, and the change in field energy is $W(\varepsilon=1)$. In a dielectric continuum the displacement field strength also changes from 0 to $\mathbf{D}$, but the change in field energy becomes $W(\varepsilon\neq1)$. Since the only difference between the two cases is the electron-continuum interaction, the energy difference $W(\varepsilon\neq1)-W(\varepsilon=1)$ thus reflects the effects of electron-ion interactions in dielectric continuum.
+
+## Qualitative derivation of self-energy and effective mass of polaron
+
+In the previous section we describe the effects of adding extra free electron in dielectric continuum as the reason for polarization of charge distribution. In this section we explore the size and mass of polaron by taking a closer look at the **dielectric polarization field** $\mathbf{P}$ defined in Eq.(1) and (4). We first split $\mathbf{P}$ into an "optical" part $\mathbf{P}_{opt}$ and an "acoustic" part $\mathbf{P}_{acs}$ because the dielectric spetroscopy of dielectric materials usually has resonances in the ultraviolet and the infrared frequency regions[1] (see Figure 2).
+
+<p align="center">
+  <img width="512" height="455" src="{{ site.url }}/images/dielectric-spectroscopy.png">
+</p>
+<p style="text-align: center;">Figure 2.A typical dielectric spectroscopy[2]: dielectric constants are usually imaginary with the real part being permitivity and the imaginary part dielectric loss. The dielectric loss evaluates the asorption of electric energy by a dielectric material subjected to an alternating electric field</p>
+
+>**Side notes on dielectric spectroscopy:** the dielectric constant measured at direct-current condition is called **static dielectric**, and it contains contributions to polarization from optical and acoustic excitations.
+
+We now proceed to derive an expression for the **effective dielectric constant** $\bar{\varepsilon}$ from $\mathbf{P}$. We will use $\bar{\varepsilon}$ later to calculate the energy of self-trapped electron $\mathcal{U}$ from which we can further derive the effective mass and size of polaron.
+
+In SI unit the Eq.(4) (with $\varepsilon_0=1$) becomes
+
+$$
+\mathbf{D}=\mathbf{E}+4\pi\mathbf{P}\tag{11}
+$$
+
+Because $\mathbf{D}=\varepsilon\mathbf{E}$, Eq.(11) gives
+
+$$
+\mathbf{P}=\frac{1}{4\pi}(1-\frac{1}{\varepsilon})\mathbf{D}\tag{12}
+$$
+
+When a dielectric material is subjected to high-frequency AC electric field, 
+
+$$
+\mathbf{P\approx P_{opt}}.
+$$
+
+Let us write that
+
+$$
+\mathbf{D}=\varepsilon_{\infty}\mathbf{E}
+$$
+
+where $\varepsilon_{\infty}$ is **the dielectric constant measured at the AC frequency $\omega$ right below the ultraviolet resonance**. Therefore,
+
+$$
+\mathbf{P}_{opt}=\frac{1}{4\pi}(1-\frac{1}{\varepsilon_{\infty}})\mathbf{D}\tag{13}.
+$$
+
+Substracting (13) from (12) gives an expression for $\mathbf{P}_{acs}$:
+
+$$
+\mathbf{P}_{acs}=\frac{1}{4\pi}(\frac{1}{\varepsilon_{\infty}}-\frac{1}{\varepsilon})\mathbf{D}=\frac{\mathbf{D}}{4\pi\bar{\varepsilon}}\tag{14}.
+$$
+
+Both $\varepsilon$ and $\varepsilon_{\infty}$ are experimentally measurable, making the calculation for $\bar{\varepsilon}$ easy.
+
+### The size of the polaron
+
+### Effective mass of the polaron
+## References
+
+[1] Kuper, Charles Goethe, and George Danley Whitfield, eds. Polarons and excitons. Plenum Press, 1963.
+
+[2]https://web.archive.org/web/20010307184808/http://www.psrc.usm.edu/mauritz/dilect.html
