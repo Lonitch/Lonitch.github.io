@@ -62,7 +62,7 @@ $$
 \nabla\cdot \mathbf{E}=\frac{\rho_b+\rho_f}{\varepsilon_0}\tag{2}
 $$
 
-where $\varepsilon_0$ is the **permitivity of free space**. If we define that the electric displacement field $\mathbf{D}$ as
+where $\varepsilon_0$ is the **permitivity of free space**. If we define that the **electric displacement field** $\mathbf{D}$ as
 
 $$\nabla\cdot \mathbf{D}=\rho_f\tag{3}$$
 
@@ -146,14 +146,14 @@ Because $\varepsilon>1$, This model, therefore, predicts a **binding effect** as
 
 ## Qualitative derivation of self-energy and effective mass of polaron
 
-In the previous section we describe the effects of adding extra free electron in dielectric continuum as the reason for polarization of charge distribution. In this section we explore the size and mass of polaron by taking a closer look at the **dielectric polarization field** $\mathbf{P}$ defined in Eq.(1) and (4). We first split $\mathbf{P}$ into an "optical" part $$\mathbf{P}_{opt}$$ and an "acoustic" part $$\mathbf{P}_{acs}$$ because the dielectric spetroscopy of dielectric materials usually has resonances in the ultraviolet and the infrared frequency regions[1] (see Figure 2).
+In the previous section we describe the effects of adding extra free electron in dielectric continuum as the reason for the polarization field. In this section we explore the size and mass of polaron by taking a closer look at the **dielectric polarization field** $\mathbf{P}$ defined in Eq.(1) and (4). We first split $\mathbf{P}$ into an "optical" part $$\mathbf{P}_{opt}$$ and an "acoustic" part $$\mathbf{P}_{acs}$$ because the dielectric spetroscopy of real materials usually has resonances in the ultraviolet and the infrared frequency regions[1] (see Figure 2).
 
 <p align="center">
   <img width="512" height="455" src="{{ site.url }}/images/dielectric-spectroscopy.png">
 </p>
 <p style="text-align: center;">Figure 2.A typical dielectric spectroscopy[2]: dielectric constants are usually imaginary with the real part being permitivity and the imaginary part dielectric loss. The dielectric loss evaluates the asorption of electric energy by a dielectric material subjected to an alternating electric field</p>
 
->**Side notes on dielectric spectroscopy:** the dielectric constant measured at direct-current condition is called **static dielectric**, and it contains contributions to polarization from optical and acoustic excitations.
+>**Side notes on dielectric spectroscopy:** the dielectric constant measured at direct-current condition is called **static dielectric**, and it contains contributions to polarization from optical and acoustic frequency responces.
 
 We now proceed to derive an expression for the **effective dielectric constant** $\bar{\varepsilon}$ from $\mathbf{P}$. We will use $\bar{\varepsilon}$ later to calculate the energy of self-trapped electron $\mathcal{U}$ from which we can further derive the effective mass and size of polaron.
 
@@ -193,10 +193,10 @@ $$
 \mathbf{P}_{acs}=\frac{1}{4\pi}(\frac{1}{\varepsilon_{\infty}}-\frac{1}{\varepsilon})\mathbf{D}=\frac{\mathbf{D}}{4\pi\bar{\varepsilon}}\tag{14}.
 $$
 
-Both $\varepsilon$ and $\varepsilon_{\infty}$ are experimentally measurable, making the calculation for $\bar{\varepsilon}$ easy.
+Both $\varepsilon$ and $\varepsilon_{\infty}$ are experimentally measurable, making the calculation of $\bar{\varepsilon}$ easy.
 
 ### The size of the polaron
-Accroding to Landau's model, the charge distribution of a bounded electron (small polaron) is localized within a sphere with radius of $l_1$. At distances larger than $l_1$, the field created by the localized electron is Coulombic. Our target in this section is first to calculate the energy of a localized electron with static charge distribution. The total energy will be an expression with $l_1$ as its parameter. We then find the value of $l_1$ that minimize the energy. Second, we derive the size of the polaron by considering the dynamics of electron-phonon interactions.
+Accroding to Landau's model, the charge distribution of a bounded electron is localized within a sphere with radius of $l_1$. At distances larger than $l_1$, the field created by the localized electron is Coulombic. Our target in this section is first to calculate the energy of a localized electron with static charge distribution. The total energy will be an expression with $l_1$ as its parameter. We then find the value of $l_1$ that minimize the energy. Second, we derive the size of the polaron by considering the dynamics of electron-phonon interactions.
 
 Let us first visualize the field induced by the localized electron in Figure 3 where the charge of our localized electron is uniformly distributed within a sphere with radius of $l_1$.
 
@@ -205,7 +205,7 @@ Let us first visualize the field induced by the localized electron in Figure 3 w
 </p>
 <p style="text-align: center;">Figure 3. Localized charge distribution assumed in Landau's polaron theory</p>
 
-The Coulombic(potential) energy of our electron friend is of order $-e^2/\bar{\varepsilon}l_1$ (see Feynman's derivation [here](https://www.feynmanlectures.caltech.edu/II_08.html)). We use $\bar{\varepsilon}$ here because we assumed that **the polarization induced by the electron is only acoustic**. The kinetic energy of the electron is of order $$\hbar^2k^2/2m$$ where $k$ is the characteristic wavenumber of a system with spatial extent of order $l_1$, i.e. $k=2\pi/l_1$. Thus the kinetic energy is of order $$4\pi^2\hbar^2/2ml^2_1$$, and our estimation of the total energy for the electron in Figure 3, $\mathcal{U}_1$, is
+The Coulombic(potential) energy of our electron friend is of order $-e^2/\bar{\varepsilon}l_1$ (see Feynman's derivation [here](https://www.feynmanlectures.caltech.edu/II_08.html)). We use $\bar{\varepsilon}$ here because we assumed that **the polarization induced by the electron is only from acoustic responces**. The kinetic energy of the electron is of order $$\hbar^2k^2/2m$$ where $k$ is the characteristic wavenumber of a system with spatial extent of order $l_1$, i.e. $k=2\pi/l_1$. Thus the kinetic energy is of order $$4\pi^2\hbar^2/2ml^2_1$$, and our estimation of the total energy for the electron in Figure 3, $\mathcal{U}_1$, is
 
 $$
 \mathcal{U}_1\sim \frac{-e^2}{\bar{\varepsilon}l_1}+\frac{4\pi^2\hbar^2}{2ml^2_1}\tag{15}.
@@ -229,7 +229,7 @@ $$
 \mathcal{U}_1\sim\frac{-me^4}{8\pi^2\hbar^2\bar{\varepsilon}^2}\tag{17}.
 $$
 
-The static charge distribution of the polaron is **only reasonable when the velocity of polaron movements is much faster than that of ions, otherwise the charge distribution would not be static**. When the polaron moves slower than the propagation of lattice vibration,We need to find the polaron size by studying the dynamic problem of an electron moving with velocity of $v$ interacting with lattice vibration with frequency of $\omega$.
+The static charge distribution of the polaron assumed in (15)-(17) is **only reasonable when the velocity of electron movements is much faster than that of ions, otherwise the charge distribution would not be able to build up**. When the bounded electron moves slower than the propagation of lattice vibration,We need to find the polaron size by studying the dynamic problem of an electron moving with velocity of $v$ interacting with lattice vibration with frequency of $\omega$.
 
 If the lattice is vibrating with a frequency $\omega$, the angular distance travelled by an electron at distance $d_1$ from an ion (see Figure 4) in a time $1/\omega$ is just $$v/\omega d_1$$. If the angle is small, we have
 
@@ -237,12 +237,12 @@ $$
 d_1\gg v/\omega\tag{18}.
 $$
 
-**The limiting value of $d_1$ for an electron to see a polaron as a static charge is of order $v/\omega$.**
+**The limiting value of $d_1$ for an ion to see an electron as a static charge is of order $v/\omega$.**
 
 <p align="center">
   <img width="667" height="320" src="{{ site.url }}/images/Landau-polaron-size-dynamic.png">
 </p>
-<p style="text-align: center;">Figure 4. Electron-phonon interaction when the small polaron moves not so fast, and the ion see the localized electron as a static point charge at d1. The effective radius of the polaron is d2 </p>
+<p style="text-align: center;">Figure 4. Electron-phonon interaction when the bounded electron moves not so fast, and the ion see the localized electron as a static point charge at d1. The effective radius of the polaron is d2 </p>
 
 On the other hand, **the effective size of polaron(localized electron) $d_2$ must not exceed the limiting value of $d_1$**. According to the uncertainty principle,
 
@@ -250,13 +250,13 @@ $$
 d_2p\geq 2\pi \hbar\tag{19},
 $$
 
-where the momentum of polaron is $p=mv$. Therefore,
+where the momentum of the electron is $p=mv$. Therefore,
 
 $$
 d_2\sim\frac{2\pi\hbar}{mv}\tag{20}.
 $$
 
-The right subplot in Figure 4 shows that curves $d_1(v)$ and $d_2(v)$ intercept at the distance $l_2$. For ions outside of the sphere around the polaron with radius of $l_2$, the polaron acts like a static charge. At the intersection,
+The right subplot in Figure 4 shows that curves $d_1(v)$ and $d_2(v)$ intercept at the distance $l_2$. For ions outside of the polaron sphere with the radius of $l_2$, the polaron acts like a static charge. At the intersection,
 
 $$
 v=\sqrt{\frac{2\pi\hbar\omega}{m}}
@@ -275,9 +275,9 @@ $$
 $$
 
 ### Effective mass of the polaron
-In the previous subsection we discussed the polaron size under two conditions:(1) the fast moving polaron with a size of $l_1$ and (2) the slow moving polaron (comparing to the lattice vibration frequency) with a size of $l_2$. We now propose a simple model, which **treated the ions and polarons as point charges**, to calculate the effective mass of the polaron. **In the model the polarization induced by polaron is represented by the displacement of ions**, and the effective mass of the polaron is then derived from the sum of kinetic energies of vibrating ions and mobile polaron.
+In the previous subsection we discussed the polaron size under two conditions:(1) the fast moving electron with a size of $l_1$ and (2) the slow moving electron (comparing to the lattice vibration frequency) with a size of $l_2$. We now propose a simple model, which **treated the ions as point charges**, to calculate the effective mass of the polaron. **In the model the polarization induced by the polaron is represented by the displacements of ions**, and the effective mass of the polaron is then derived from the sum of kinetic energies of vibrating ions and mobile polaron.
 
-Let us first derive an expression for the polarization field $\mathbf{P}$, because by the definition of Eq.(0) $\mathbf{P}$ is related to the displacement of charge centers. Since we consider ions in the lattice as point charges (e.g. the lattice sketched in Figure 4), the displacement of charge centers (see Figure 1) is the displacements of ions' coordinates. In Figure 3 we assumed that the induced polarization field is Coulombic outside the localized charge distribution, and is constant inside the confined charge distribution. Use Eq.(14) and the definition of electric field strenth to give:
+Let us first derive an expression for the polarization field $\mathbf{P}$, because by the definition of Eq.(0) $\mathbf{P}$ is related to the displacement of charge centers. Since we consider ions in the lattice as point charges (e.g. the lattice sketched in Figure 4), the displacements of charge centers (see Figure 1) is ions' displacements. In Figure 3 we assumed that the induced polarization field is Coulombic outside the localized charge distribution, and is constant inside the confined charge distribution. Use Eq.(14) and the definition of electric field strenth to give:
 
 $$
 \left.\begin{array}{rl}
@@ -286,7 +286,9 @@ $$
 \end{array}\right\}\tag{22}
 $$
 
-where $\mathbf{r}_{e}$ is the bounded electron coordinates, and $l_i$ could either be $l_1$ or $l_2$. The second line in Eq.(22) indicates that there is no polarization within the localized charge distribution of the bounded electron as no displacement of charge center is assumed within the distribution. The polarization field $\mathbf{P}$ is again assumed to only contains contributions from acoustic dielectric modes.
+where $\mathbf{r}_{e}$ is the bounded electron coordinates, and $l_i$ could either be $l_1$ or $l_2$. The second line in Eq.(22) indicates that $\rho_b=0$ in the charge distribution of the free electron. The polarization field $\mathbf{P}$ is again assumed to only contains contributions from acoustic dielectric frequency responces.
+
+>We use the assumption of acoustic polarization field again because **$$\mathbf{P}_{opt}$$ is only important when we have super fast polarons.**
 
 According to the definition of Eq.(0), we have
 
@@ -294,18 +296,18 @@ $$
 \mathbf{P(r)}=Nq\mathbf{d(r)}\tag{23},
 $$
 
-with $q$ and $\mathbf{d(r)}$ being ionic charge and relative ionic displacement of ith ion at arbitrary coodinates, respectively. Substitute (23) into (22), and perform a time derivative to give the kinetic energy of all the displaced ions, $$T_{ion}$$, as
+with $q$ and $\mathbf{d(r)}$ being ionic charge and relative ionic displacement at arbitrary coodinates, respectively. Substitute (23) into (22), and perform a time derivative to give the kinetic energy of all the displaced ions, $$T_{ion}$$, as
 
 $$
 T_{ion}=\sum_i \frac{1}{2}M\mathbf{\dot{d}_i^2(r)}=\sum_i\frac{1}{2}M\left(\frac{e}{4\pi\bar{\varepsilon}Nq}\frac{\partial}{\partial\mathbf{r}}\frac{\partial}{\partial t}\frac{1}{|\mathbf{r_{e}-r}|}\right)\tag{24}
 $$
-where $M$ is the reduced mass of ith ion pair. Let $\mathbf{v}=\dot{\mathbf{r}_e}$ and $m$ be the velocity and the mass of the bounded electron, the **effective mass of the polaron** $m^*$ is then defined as:
+where $M$ is the reduced mass of ion pair. Let $\mathbf{v}=\dot{\mathbf{r}_e}$ and $m$ be the velocity and the mass of the bounded electron, the **effective mass of the polaron** $m^*$ is then defined as:
 
 $$
 \frac{1}{2}mv^2+T_{ion}=\frac{1}{2}m^*v^2\tag{25}.
 $$
 
-We can simplify Eq.(24) by using the following identity of vector derivative:
+We can simplify Eq.(24) by using the following identities of vector derivative:
 
 $$
 \frac{d}{d t} \frac{1}{|\vec{x}|}=-\frac{1}{|\vec{x}|^{3}}\left(\vec{x} \cdot \frac{d \vec{x}}{d t}\right)\tag{26}
@@ -314,10 +316,10 @@ $$
 and
 
 $$
-\frac{d}{d\mathbf{r}}\frac{1}{|\mathbf{r}|^n}=-n\frac{\mathbf{r}}{|\mathbf{r}|^{n+2}}\tag{27}
+\frac{d}{d\mathbf{r}}\frac{1}{|\mathbf{r}|^n}=-n\frac{\mathbf{r}}{|\mathbf{r}|^{n+2}}\tag{27}.
 $$
 
-we find that
+We find that
 
 $$(\dot{d}(\boldsymbol{r}))^{2}=\frac{1}{16 \pi^{2} \bar{\varepsilon}^{2} N_{0}^{2}}\left(\frac{e}{q}\right)^{2}\left\{\frac{3(\boldsymbol{R} \cdot \boldsymbol{v})^{2}+R^{2} v^{2}}{R^{8}}\right\}, \quad R>l_{i}\tag{28}.$$
 
@@ -341,13 +343,15 @@ $$
 \int d\Omega=\iiint d \theta d \phi \sin \theta\tag{30}
 $$
 
+and the number density of ion $N$ is a constant.
+
 Aligning the angle between the vectors $\mathbf{R}$ and $\mathbf{v}$ with $\theta$, we find that
 
 $$
 \begin{aligned}
 \int d \Omega\left\{3(\mathbf{R \cdot v})^{2}+R^{2} v^{2}\right\}&=\iiint d \theta d \phi \sin \theta R^2v^2(3cos^2\theta+1)\\
-&=8 \pi R^{2} v^{2}\\
-\end{aligned}\tag{31}.
+&=8 \pi R^{2} v^{2}.
+\end{aligned}\tag{31}
 $$
 
 With Eq.(28),(29), and (31) we deduce that
@@ -377,10 +381,11 @@ $$\alpha=\frac{1}{\sqrt{2}} \frac{e^{2}}{\bar{\varepsilon}} \sqrt{\frac{m}{\omeg
 
 **We thus obtained a very strong dependence of effective mass on the coupling constants in the case of $l_i=l_1$.** Notice that
 
-$$-\frac{\mathcal{U}_{1}}{\hbar \omega}=\frac{1}{8 \pi^{2}} \cdot \frac{e^{4} m}{\bar{\varepsilon}^{2} \hbar^{3} \omega}=-\frac{1}{4 \pi}\left(\frac{\mathcal{U}_{2}}{h \omega}\right)^{2}=\frac{\sqrt{2}}{8\pi^2}\alpha^2\tag{36}$$
+$$-\frac{\mathcal{U}_{1}}{\hbar \omega}=\frac{1}{8 \pi^{2}} \cdot \frac{e^{4} m}{\bar{\varepsilon}^{2} \hbar^{3} \omega}=-\frac{1}{4 \pi}\left(\frac{\mathcal{U}_{2}}{h \omega}\right)^{2}=\frac{\sqrt{2}}{8\pi^2}\alpha^2\tag{36}.$$
 
-When $\alpha$ is large, $$\left|\mathcal{U}_{1}\right|>\left|\mathcal{U}_{2}\right| .$$ In this case the first type of approximation is better than the second, and the frequency corresponding to $$\left|\mathcal{U}_{1}\right|$$ is much greater than the oscillation frequency of the polarization. **For large $\alpha$, we have large $$T_{ion}$$ too, indicating the most sytem inertia is carried by the ions outside of the localized electron charge distribution.**
+When $\alpha$ is large, $$\left\|\mathcal{U}_{1}\right\|>\left\|\mathcal{U}_{2}\right\| .$$ In this case the first type of approximation is better than the second, and the frequency corresponding to $$\left\|\mathcal{U}_{1}\right\|$$ is much greater than the oscillation frequency of the polarization(i.e. the polaron moves fast). **For large $\alpha$, we have large $$T_{ion}$$ too, indicating the most sytem inertia is carried by the ions outside of the localized electron charge distribution.**
 
+## Macroscopic Model
 
 ## References
 
