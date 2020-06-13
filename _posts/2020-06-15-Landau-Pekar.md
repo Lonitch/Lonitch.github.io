@@ -31,7 +31,7 @@ When a dielectric material is placed in an electric field with strength equal to
 The extent to which the molecules or atoms in dielectric continuum are polarized is described by the dipole moment $\mathbf{p}$: the product of charge center displacement $\mathbf{d}$ and total amount of charge $q$, i.e. $\mathbf{p}=q\mathbf{d}$. If there are $N$ molecules or atoms in each unit cell of the dielectric, then the **electric polarization** (the dipole moment per unit volume) $\mathbf{P}$ is give by:
 
 $$
-\mathbf{P}=N\mathbf{p}
+\mathbf{P}=N\mathbf{p}\tag{0}
 $$
 
 One of the interesting things about $\mathbf{P}$ is its divergence $\mathbf{\nabla\cdot P}$, as we shall now discuss. Imagine we have a dielectric continuum in which the number density of atoms $n$ varies with spatial coordinates, i.e. $n(x,y,z)$, and each nucleus is balanced by $q$ unit of electron charges. If we considers an infitestimal cube in the dielectric with spatial coordinates in a range from $(x,y,z)$ to $(x+dx,y+dy,z+dz)$, then the total amount of electron charge in such cube is:
@@ -142,7 +142,7 @@ $$
 
 Because $\varepsilon>1$, This model, therefore, predicts a **binding effect** as $W(\varepsilon\neq1)-W(\varepsilon=1)<0$. The next step in the Landau-pekar theory is to consider a rigid charge moving through the lattice, carrying its polarization potential with it.
 
->**Side note on the effects of extra electron in dielectric continuum:** The purpose of this qualitative analysis above is to stress the fact that **the binded electron causes extra charge polarization in a dielectric medium in the electric field**. You can understand Eq.(10) as follow: if we add a free electron in vacuum, the displacement field strength changes from 0 to $\mathbf{D}$, and the change in field energy is $W(\varepsilon=1)$. In a dielectric continuum the displacement field strength also changes from 0 to $\mathbf{D}$, but the change in field energy becomes $W(\varepsilon\neq1)$. Since the only difference between the two cases is the electron-continuum interaction, the energy difference $W(\varepsilon\neq1)-W(\varepsilon=1)$ thus reflects the effects of electron-ion interactions in dielectric continuum.
+>**Side note on the effects of extra electron in dielectric continuum:** The purpose of this qualitative analysis above is to stress the fact that **the bounded electron causes extra charge polarization in a dielectric medium in the electric field**. You can understand Eq.(10) as follow: if we add a free electron in vacuum, the displacement field strength changes from 0 to $\mathbf{D}$, and the change in field energy is $W(\varepsilon=1)$. In a dielectric continuum the displacement field strength also changes from 0 to $\mathbf{D}$, but the change in field energy becomes $W(\varepsilon\neq1)$. Since the only difference between the two cases is the electron-continuum interaction, the energy difference $W(\varepsilon\neq1)-W(\varepsilon=1)$ thus reflects the effects of electron-ion interactions in dielectric continuum.
 
 ## Qualitative derivation of self-energy and effective mass of polaron
 
@@ -181,7 +181,7 @@ $$
 \mathbf{D}=\varepsilon_{\infty}\mathbf{E}
 $$
 
-where $\varepsilon_{\infty}$ is **the dielectric constant measured at the AC frequency $\omega$ right below the ultraviolet resonance**. Therefore,
+where $\varepsilon_{\infty}$ is **the high-frequency dielectric constant** measured at the AC frequency $\omega$ right below the ultraviolet resonance. Therefore,
 
 $$
 \mathbf{P}_{opt}=\frac{1}{4\pi}(1-\frac{1}{\varepsilon_{\infty}})\mathbf{D}\tag{13}.
@@ -229,7 +229,7 @@ $$
 \mathcal{U}_1\sim\frac{-me^4}{8\pi^2\hbar^2\bar{\varepsilon}^2}\tag{17}.
 $$
 
-The picture depicted in Figure 3 is **only reasonable when the velocity of polaron movements is much faster than that of ions, otherwise the charge distribution would not be static**. We now shift our focus to the dynamic problem of an electron moving with velocity of $v$ interacting with lattice vibration with frequency of $\omega$.
+The static charge distribution of the polaron is **only reasonable when the velocity of polaron movements is much faster than that of ions, otherwise the charge distribution would not be static**. When the polaron moves slower than the propagation of lattice vibration,We need to find the polaron size by studying the dynamic problem of an electron moving with velocity of $v$ interacting with lattice vibration with frequency of $\omega$.
 
 If the lattice is vibrating with a frequency $\omega$, the angular distance travelled by an electron at distance $d_1$ from an ion (see Figure 4) in a time $1/\omega$ is just $$v/\omega d_1$$. If the angle is small, we have
 
@@ -275,6 +275,111 @@ $$
 $$
 
 ### Effective mass of the polaron
+In the previous subsection we discussed the polaron size under two conditions:(1) the fast moving polaron with a size of $l_1$ and (2) the slow moving polaron (comparing to the lattice vibration frequency) with a size of $l_2$. We now propose a simple model, which **treated the ions and polarons as point charges**, to calculate the effective mass of the polaron. **In the model the polarization induced by polaron is represented by the displacement of ions**, and the effective mass of the polaron is then derived from the sum of kinetic energies of vibrating ions and mobile polaron.
+
+Let us first derive an expression for the polarization field $\mathbf{P}$, because by the definition of Eq.(0) $\mathbf{P}$ is related to the displacement of charge centers. Since we consider ions in the lattice as point charges (e.g. the lattice sketched in Figure 4), the displacement of charge centers (see Figure 1) is the displacements of ions' coordinates. In Figure 3 we assumed that the induced polarization field is Coulombic outside the localized charge distribution, and is constant inside the confined charge distribution. Use Eq.(14) and the definition of electric field strenth to give:
+
+$$
+\left.\begin{array}{rl}
+4 \pi \mathbf{P} & =\frac{\mathbf{D}}{\bar{\varepsilon}} = \frac{e}{\bar{\varepsilon}}\nabla_r\frac{1}{|\mathbf{r_{e}-r}|}\quad \text { if } \quad\left|\boldsymbol{r}-\boldsymbol{r}_{\mathrm{e}}\right|>l_{i} \\
+& =0 \quad \text { if } \quad\left|\boldsymbol{r}-\boldsymbol{r}_{\mathrm{e}}\right|<l_{i}
+\end{array}\right\}\tag{22}
+$$
+
+where $\mathbf{r}_{e}$ is the bounded electron coordinates, and $l_i$ could either be $l_1$ or $l_2$. The second line in Eq.(22) indicates that there is no polarization within the localized charge distribution of the bounded electron as no displacement of charge center is assumed within the distribution. The polarization field $\mathbf{P}$ is again assumed to only contains contributions from acoustic dielectric modes.
+
+According to the definition of Eq.(0), we have
+
+$$
+\mathbf{P(r)}=Nq\mathbf{d(r)}\tag{23},
+$$
+
+with $q$ and $\mathbf{d(r)}$ being ionic charge and relative ionic displacement of ith ion at arbitrary coodinates, respectively. Substitute (23) into (22), and perform a time derivative to give the kinetic energy of all the displaced ions, $$T_{ion}$$, as
+
+$$
+T_{ion}=\sum_i \frac{1}{2}M\mathbf{\dot{d}_i^2(r)}=\sum_i\frac{1}{2}M\left(\frac{e}{4\pi\bar{\varepsilon}Nq}\frac{\partial}{\partial\mathbf{r}}\frac{\partial}{\partial t}\frac{1}{|\mathbf{r_{e}-r}|}\right)\tag{24}
+$$
+where $M$ is the reduced mass of ith ion pair. Let $\mathbf{v}=\dot{\mathbf{r}_e}$ and $m$ be the velocity and the mass of the bounded electron, the **effective mass of the polaron** $m^*$ is then defined as:
+
+$$
+\frac{1}{2}mv^2+T_{ion}=\frac{1}{2}m^*v^2\tag{25}.
+$$
+
+We can simplify Eq.(24) by using the following identity of vector derivative:
+
+$$
+\frac{d}{d t} \frac{1}{|\vec{x}|}=-\frac{1}{|\vec{x}|^{3}}\left(\vec{x} \cdot \frac{d \vec{x}}{d t}\right)\tag{26}
+$$
+
+and
+
+$$
+\frac{d}{d\mathbf{r}}\frac{1}{|\mathbf{r}|^n}=-n\frac{\mathbf{r}}{|\mathbf{r}|^{n+2}}\tag{27}
+$$
+
+we find that
+
+$$(\dot{d}(\boldsymbol{r}))^{2}=\frac{1}{16 \pi^{2} \bar{\varepsilon}^{2} N_{0}^{2}}\left(\frac{e}{q}\right)^{2}\left\{\frac{3(\boldsymbol{R} \cdot \boldsymbol{v})^{2}+R^{2} v^{2}}{R^{8}}\right\}, \quad R>l_{i}\tag{28}.$$
+
+with
+
+$$
+\mathbf{R=r_e-r}.
+$$
+
+>To prove Eq.(26) and (27), we simply expand the vector derivative into its complete form as: $$\frac{d}{d\mathbf{r}}=\frac{d}{dx}\hat{e}_x+\frac{d}{dx}\hat{e}_y+\frac{d}{dx}\hat{e}_z.$$
+
+The sum in Eq.(24) can also be replaced by an integral as follow:
+
+$$
+\sum_i=N\int R^2 dRd\Omega\tag{29}
+$$
+
+with 
+
+$$
+\int d\Omega=\iiint d \theta d \phi \sin \theta\tag{30}
+$$
+
+Aligning the angle between the vectors $\mathbf{R}$ and $\mathbf{v}$ with $\theta$, we find that
+
+$$
+\begin{aligned}
+\int d \Omega\left\{3(\mathbf{R \cdot v})^{2}+R^{2} v^{2}\right\}&=\iiint d \theta d \phi \sin \theta R^2v^2(3cos^2\theta+1)\\
+&=8 \pi R^{2} v^{2}\\
+\end{aligned}\tag{31}.
+$$
+
+With Eq.(28),(29), and (31) we deduce that
+
+$$T_{\text {ion }}=\frac{1}{3} \frac{M}{4 \pi\left(q\right)^{2} N} \cdot \frac{e^{2}}{\bar{\varepsilon}^{2}} \cdot \frac{v^{2}}{l_{i}^{3}}\tag{32}.$$
+
+The Eq.(32) is still too bulky to handle, but we can reduce it by using Szigeti relation[3],
+
+$$\varepsilon-\varepsilon_{\infty}=\frac{\varepsilon}{\varepsilon_{\infty}}\left(\frac{\varepsilon_{\infty}+2}{3}\right)^{2} \frac{4 \pi\left(q\right)^{2} N_{0}}{M \omega^{2}}=\frac{\varepsilon \varepsilon_{\infty}}{\bar{\varepsilon}}\tag{33}.$$
+
+As a result, the kinetic energy of vibrating ions is
+
+$$T_{\text {ion }}=\frac{1}{3}\left(\frac{\varepsilon_{\infty}+2}{3 \varepsilon_{\infty}}\right)^{2} \frac{e^{2}}{\bar{\varepsilon} \omega^{2}} \frac{v^{2}}{l_{i}^{3}}\tag{34}$$
+
+>This expression is independent of the masses of the ions; therefore Landau's argument that an electron can become self-trapped because the ions are heavy is not valid.[1]
+
+We now see from(25) and (34) that 
+
+$$\begin{array}{rl}
+\left(\frac{m^{*}}{m}-1\right) & =C_{1} \alpha^{4}, \quad \text { for } l_1 \\
+& =C_{2} \alpha, \quad \text { for } l_2
+\end{array}$$
+
+with $C_i$ being constants, and the $\alpha$ is a **dimensionless coupling constant** and is defined as
+
+$$\alpha=\frac{1}{\sqrt{2}} \frac{e^{2}}{\bar{\varepsilon}} \sqrt{\frac{m}{\omega \hbar^{3}}}\tag{35}.$$
+
+**We thus obtained a very strong dependence of effective mass on the coupling constants in the case of $l_i=l_1$.** Notice that
+
+$$-\frac{\mathcal{U}_{1}}{\hbar \omega}=\frac{1}{8 \pi^{2}} \cdot \frac{e^{4} m}{\bar{\varepsilon}^{2} \hbar^{3} \omega}=-\frac{1}{4 \pi}\left(\frac{\mathcal{U}_{2}}{h \omega}\right)^{2}=\frac{\sqrt{2}}{8\pi^2}\alpha^2\tag{36}$$
+
+When $\alpha$ is large, $$\left|\mathcal{U}_{1}\right|>\left|\mathcal{U}_{2}\right| .$$ In this case the first type of approximation is better than the second, and the frequency corresponding to $$\left|\mathcal{U}_{1}\right|$$ is much greater than the oscillation frequency of the polarization. **For large $\alpha$, we have large $$T_{ion}$$ too, indicating the most sytem inertia is carried by the ions outside of the localized electron charge distribution.**
 
 
 ## References
@@ -282,3 +387,5 @@ $$
 [1] Kuper, Charles Goethe, and George Danley Whitfield, eds. Polarons and excitons. Plenum Press, 1963.
 
 [2]https://web.archive.org/web/20010307184808/http://www.psrc.usm.edu/mauritz/dilect.html
+
+[3] Szigeti, Bela. "Polarisability and dielectric constant of ionic crystals." Transactions of the Faraday Society 45 (1949): 155-166.
