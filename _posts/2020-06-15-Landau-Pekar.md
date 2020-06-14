@@ -7,7 +7,7 @@ date: 2020-06-15
 
 Author: Sizhe
 
-tags: [notes, electromagnetism, quantum-mechanics, polaron]
+tags: [notes, electromagnetism, quantum-field-theory, polaron]
 
 toc: true
 
