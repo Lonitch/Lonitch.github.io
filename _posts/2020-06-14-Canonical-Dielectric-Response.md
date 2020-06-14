@@ -156,7 +156,7 @@ $$\tilde{\mathbf{p}}(\mathbf{r})=\frac{q^{2}}{m\left(\omega_{0}^{2}-\omega^{2}\r
 
 To obtain the relationship between the macroscopic polarization field $\mathbf{P}$ and the electric field $\mathbf{E}$ we note that $\mathbf{P}=N_{c} \mathbf{p},$ where $N_{c}$ is the number density associated with the unit cells in the solid. This gives us
 
-$$\tilde{\mathbf{P}}(\mathbf{r})=\frac{N_{c} q^{2}}{m^{*}\left(\omega_{0}^{2}-\omega^{2}\right)} \tilde{\mathbf{E}}(\mathbf{r})\tag{3.5}.$$
+$$\tilde{\mathbf{P}}(\mathbf{r})=\frac{N_{c} q^{2}}{m\left(\omega_{0}^{2}-\omega^{2}\right)} \tilde{\mathbf{E}}(\mathbf{r})\tag{3.5}.$$
 
 Using the relationship among the electric displacement field $\mathbf{D}$, $\mathbf{E}$, and $\mathbf{P}$, $\mathbf{D}=\varepsilon_0\mathbf{E}+\mathbf{P}$, we have
 
@@ -187,7 +187,7 @@ $$\omega_{p n}^{2}=\frac{N_{c} q_{n}^{2}}{\varepsilon_{0} m_{n}}\tag{4.2}.$$
 At low frequency, (4.1) can be approximated by 
 
 $$
-\varepsilon(\omega)=\varepsilon_{\infty}+\frac{\omega_{pn}^2}{\omega_0^2-\omega^2}\tag{4.3}
+\varepsilon(\omega)=\varepsilon_{\infty}+\frac{\omega_{p0}^2}{\omega_0^2-\omega^2}\tag{4.3}
 $$
 
 with

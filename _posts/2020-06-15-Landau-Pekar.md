@@ -385,7 +385,9 @@ $$-\frac{\mathcal{U}_{1}}{\hbar \omega}=\frac{1}{8 \pi^{2}} \cdot \frac{e^{4} m}
 
 When $\alpha$ is large, $$\left\|\mathcal{U}_{1}\right\|>\left\|\mathcal{U}_{2}\right\| .$$ In this case the first type of approximation is better than the second, and the frequency corresponding to $$\left\|\mathcal{U}_{1}\right\|$$ is much greater than the oscillation frequency of the polarization(i.e. the polaron moves fast). **For large $\alpha$, we have large $$T_{ion}$$ too, indicating the most sytem inertia is carried by the ions outside of the localized electron charge distribution.**
 
-## Macroscopic Model
+## Derivation of the Hamiltonian
+
+
 
 ## References
 
