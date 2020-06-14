@@ -1,7 +1,7 @@
 ---
 layout: post
 
-title: Landau-Pekar Model, The Beginning of the Polaron
+title: Landau and Frohlich, The Beginning of the Polaron
 
 date: 2020-06-15
 
@@ -15,9 +15,9 @@ toc: true
 
 ## Background
 
-My journey towards the polaron theory has just begun. The first stop will be the Landau-Pekar theory that everybody in the community cites. It takes some knowledge of electromagnetism to appreciate the model, but unfortunately, I never took a formal class of EM in the school. So, another self-learning journey for me.
+The polaron theory will be an important part of my final thesis work. I'm writing this to make sure I own every piece of my research proposal that I need to submit to my prelim committee. The blog is divided into three parts. In the first part I will explain the idea of polaron using Landau's very first phenomenological theory. The second part develops a simple model to calculate the effective mass and size of the polaron. The results from Landau's theory will be further developed in the last part to derive a quantized Hamiltonian (i.e. Frohlich's Hamiltonian).
 
-## Polaron Resulting from Binding Effect
+## Landau's Polaron 
 The idea of polaron is that a free electron, attacted by a positively chaged particle, creates a positively charged "hole" around it through Coulombic interactions with nuclei. As a reseult, the electron is self-trapped by the potential well induced by itself. **The effect of polaron may be quanlitatively described by comparing the field energy of adding a free electron in a dielectric continuum with that *in vacuo* where the dielectric constant $\varepsilon=1$**. Based on this argument, we will derive an expression for the binding energy of an electron to a dielectric medium.
 
 ### Brief review of electric displacement field
@@ -385,9 +385,215 @@ $$-\frac{\mathcal{U}_{1}}{\hbar \omega}=\frac{1}{8 \pi^{2}} \cdot \frac{e^{4} m}
 
 When $\alpha$ is large, $$\left\|\mathcal{U}_{1}\right\|>\left\|\mathcal{U}_{2}\right\| .$$ In this case the first type of approximation is better than the second, and the frequency corresponding to $$\left\|\mathcal{U}_{1}\right\|$$ is much greater than the oscillation frequency of the polarization(i.e. the polaron moves fast). **For large $\alpha$, we have large $$T_{ion}$$ too, indicating the most sytem inertia is carried by the ions outside of the localized electron charge distribution.**
 
-## Derivation of the Hamiltonian
+## Derivation of the Frohlich Hamiltonian
 
+### The classical Hamiltonian before quantization
+Landau's phenomenological theory of the polaron triggers his fellow physicists to fromulate a mathematically rigorous Hamiltonian for a system that contains polarons. Like other condensed matter problems, the Hamiltonian for polarons is the center piece for us to understand the energy level distribution of our electron-ion-phonon interactions. One of the most influential formalation is come up with by Frohlich[1] based on quantum field theory. We shall now introduce the derivation of the Frohlich Hamiltonian by borrowing the results from previous sections.
 
+The Frohlich Hamiltonian starts with the assumption of **the independence of lattice vibration on the wavevectors**, i.e. the group velocity $d\omega/d\mathbf{k}$ vanishes. As a result, only the longitudinal modes of the polarization $\mathbf{P}$ is considered (i.e., the infrared dielectric responses,caused by ion displacement[4]). If we use the definition of $\mathbf{P}$ in Eq.(0) and assumes linear restoring forces to any disturbances in charge distribution(see my blog [here](https://lonitch.github.io/Canonical-Dielectric-Response/) for more details), the polarization field can be described by the simple harmonic motion equation:
+
+$$\ddot{\mathbf{P}}(\mathbf{r})+\omega^{2} \mathbf{P(r)}=\mathbf{F}\tag{37}$$
+
+where $\mathbf{F}$ is the source term, and the $\omega$ is the vibrational frequency of induced polarization (or ion displacement). The derivation of Eq.(37) can also be found in my earlier blog [here](https://lonitch.github.io/Canonical-Dielectric-Response/). Because we only care about a slow electron in dielectric material, we can assume that the magnetic field produced by the motion of the electron is negligibly small, and therefore the polarization field must be irrotational:
+
+$$
+\nabla\times \mathbf{P}=0\tag{38}.
+$$
+
+We now need to figure out what the source term $\mathbf{F}$ is. Recall that the $\mathbf{P}$ is related to the displacement field $\mathbf{D}$ by
+
+$$P(r)=\frac{1}{4 \pi}\left(\frac{1}{\varepsilon_{\infty}}-\frac{1}{\varepsilon}\right) D(r)=\frac{1}{4 \pi \bar{\varepsilon}} D(r).$$
+
+Since $\mathbf{D(r)}$ is the externally applied field, the energy density of $\mathbf{D-P}$ interaction will be given by $\mathbf{-D(r) \cdot P(r)}$.
+
+We now make a reasonable guess for the Lagrangian density $\mathcal{L}$ of our system, from which we can derive a canonical form of Hamiltonian $H$. The guessing process involves three steps:(1) identify the general field coordinates and their conjugate, (2) form the initial guess by comparing your system with other well-developed system, (3) adjust your Lagrangian density till it satisfies the Euler-Lagrange equation for fields. First, in our case the field coordinates, or the field variables we plug into $\mathbf{L}$ should be $\mathbf{P}$ and $\mathbf{D}$. Second, because $\mathbf{P}$ is a vector field, and the Lagrangian density $\mathbf{L}$ in this case should look similar to that for electromagnetic fields, which means that we need a term for the $\mathbf{P}$ itself, a term for field kinetic energy, and a term for interaction energy. Following the aforementioned logic and using trial-and-error method described in other research[5], we end up with the following Lagrangian density:
+
+$$\mathcal{L}^{\prime}=\frac{\mu}{2}\left[\dot{\boldsymbol{P}}^{2}(\boldsymbol{r})-\omega^{2} \boldsymbol{P}^{2}(\boldsymbol{r})\right]+\boldsymbol{D}(\boldsymbol{r}) \cdot \boldsymbol{P}(\boldsymbol{r})\tag{39}$$
+
+where $\mu$ is a constant needed to be determined. If we take $\mathbf{P}(\boldsymbol{r})$ as generalized coordinates $\mathbf{q_{r}}$ at each space point $\boldsymbol{r}$ then the conjugate generalized momenta $\mathbf{p_{r}}$ are
+
+$$\mathbf{p}_{r}=\frac{\delta \mathcal{L}^{\prime}(r)}{\delta \dot{\mathbf{q}}_{r}}\tag{40}.$$
+
+We Eq.(39) and (40), the Hamiltonian is then
+
+$$H^{\prime}=\int d^{3} r\left(\mathbf{\dot{q}_{r} \cdot p_{r}}-\mathcal{L}^{\prime}\right)\tag{41},$$
+
+and
+
+$$p_{r}=\frac{\delta \mathcal{L}^{\prime}(r)}{\delta \dot{P}(r)}=\mu \dot{P}(r),\tag{42}$$
+
+$$H^{\prime}=\int d^{3} r\left[\frac{\mu}{2}\{\mathbf{\dot{P}^{2}(r)+\omega^{2} P^{2}(r)\}-D(r) \cdot P(r)}\right]\tag{43}.$$
+
+Because the Hamiltonian density $\mathcal{H}^{\prime}$ is defined as 
+
+$$
+\mathcal{H}^{\prime}=\mathbf{\dot{q}_{r} \cdot p_{r}}-\mathcal{L}^{\prime}\tag{44}
+$$
+
+we have
+
+$$\begin{array}{l}
+\dot{q}_{r}=\frac{\delta \mathcal{H}^{\prime}}{\delta p_{r}}=\frac{1}{\mu} p_{r} \\
+\dot{p}_{r}=-\frac{\delta \mathcal{H}^{\prime}}{\delta q_{r}}=-\mu \omega^{2} q_{r}+D(r)
+\end{array}\tag{45}$$
+
+Combining the equation in (45) we find
+
+$$\ddot{\boldsymbol{q}}_{r}=\ddot{\boldsymbol{P}}(\boldsymbol{r})=\frac{1}{\mu}\left[-\mu \omega^{2} \boldsymbol{q}_{\boldsymbol{r}}+\boldsymbol{D}(\boldsymbol{r})\right]=-\omega^{2} \boldsymbol{P}(\boldsymbol{r})+\frac{1}{\mu} \boldsymbol{D}(\boldsymbol{r})\tag{46}.$$
+
+Comparing (46) with (37), we see that $\mathbf{F}=\frac{1}{\mu}\mathbf{D}$. To figure out the format of $\mu$, we first notice that in the static limit (37) becomes
+
+$$\omega^{2} \mathbf{P}=\frac{1}{\mu} \mathbf{D}.$$
+
+Since we only consider  the longitudinal polarization mode, we have from (12) to (14) that
+
+$$\omega^2=\frac{1}{\mu}\frac{1}{2\pi\bar{\varepsilon}}\tag{47}.$$
+
+The Lagrangian density in (39) is not complete as we only consider the fields. But we need to take account for the electron in a polaron-forming system. The Lagrangian of the electrion is just its kinetic energy, i.e.
+
+$$L_e=\frac{1}{2}m^*\mathbf{\dot{r}_e^2},$$
+
+with $m^*$ being the Bloch effective mass of the energy. The equation of motion for the electron is then
+
+$$m^{*} \ddot{r}_{e}=-4 \pi e \mathbf{P}\tag{48}.$$
+
+Because the field $\mathbf{P}$ is irrotational, we must have another field $\Phi$ whose gradient gives the field, i.e.
+
+$$4\pi\mathbf{P}=\nabla\Phi.$$
+
+Using $\Phi$ in our Lagrangian density to find that the complete Lagrangian is
+
+$$
+L=\frac{1}{2}m^*\mathbf{\dot{r}_e^2}+\int\mathcal{L}^{\prime}d\mathbf{r}\tag{49},
+$$
+
+and the complete Hamiltonian is
+
+$$\begin{aligned}
+H &=\mathbf{\dot{r}_{e}} \cdot \mathbf{p}_e+\int d^{3} r \mathbf{\dot{q}_{r} \cdot p_{r}}-L \\
+&=\frac{1}{2 m} \mathbf{p}_{e}^{2}+H^{\prime}\\
+&=H_{F}+H_e+H_{int}\tag{50}
+\end{aligned}$$
+
+where $\mathbf{p}_e=m^*\mathbf{\dot{r}}$,
+
+$$H_{F}=\frac{\mu}{2} \int d^{3} r\left\{\dot{\boldsymbol{P}}^{2}(\boldsymbol{r})+\omega^{2} \boldsymbol{P}^{2}(\boldsymbol{r})\right\}, \quad \mu=\frac{4 \pi \overline{\boldsymbol{\varepsilon}}}{\omega^{2}}\tag{51}$$
+
+$$H_{\mathrm{e}}=\frac{1}{2 m} p_{\mathrm{e}}^{2}=-\frac{\hbar^{2}}{2 m} \nabla_{r_{e}}^{2}\tag{52},$$
+
+and
+
+$$\begin{aligned}
+H_{\mathrm{int}} &=-\int d^{3} r \mathbf{D \cdot P}=\frac{e}{4 \pi} \int d^{3} r \nabla_{r} \frac{1}{\left|r-r_{\mathrm{e}}\right|} \cdot \nabla_{r} \Phi(r) \\
+&=-\frac{e}{4 \pi} \int d^{3} r \Phi(r) \nabla_{r}^{2} \frac{1}{\left|r-r_{\mathrm{e}}\right|}=e \Phi\left(r_{\mathrm{e}}\right)
+\end{aligned}.\tag{53}$$
+
+The Eq. (53) used the integration in part at the thir equivalence and droped the surface term because the interaction die out at the boundary. Also we have used the fact that 
+
+$$\nabla \cdot \boldsymbol{D}=-\nabla^{2} \frac{e}{\left|\boldsymbol{r}-\boldsymbol{r}_{\mathrm{el}}\right|}=4\pi\rho_f=4 \pi e \delta\left(\boldsymbol{r}-\boldsymbol{r}_{\mathrm{e}}\right).$$
+
+Note that $H_{\text {int }}$ depends on the field variables as well as on $r_{\mathrm{e}}$, although this dependence is not explicitly shown above.
+
+### Quantize your Hamiltonian
+
+You probably already noticed that in Eq.(52) I quantized the Hamiltonian of the electron into an operator. Now let us proceed to do the same thing for the rest of the Hamiltonian. Imagine we have a crystalline material whose unit cell has simple cubic volume of $V=L^3$. The periodic boundary condition (PBC) is applied for the unit cells. Each unit cell contains one extra electron and the Coulombic interaction between two electrons is long-range, so the image of building a material using unit cells and PBC introduce infinite interaction energy, which of course needs to be eliminated during our quantization process.
+
+Let us first expand $\mathbf{P}$ in terms of space and time as
+
+$$\boldsymbol{P}(\boldsymbol{r}, t)=\sum_{\boldsymbol{w}} \boldsymbol{P}_{\boldsymbol{w}}(t) e^{i \boldsymbol{w} \cdot \boldsymbol{r}}\tag{54},$$
+
+where PBC on $V$ requires $\mathbf{w}=\frac{2 \pi \mathbf{n}}{L},$ with $\boldsymbol{n}=\left(n_{1}, n_{2}, n_{3}\right) ; n_{j}=0,1,2, \ldots, \infty ; j=1,2,3 .$ **The usual procedure to quantize a vector field is to introduce canonical commutation relations between the field coordinates and the corresponding conjugate momenta.** In our case the field coordinate is $\mathbf{P}$ and the conjugate momenta is 
+
+$$
+\mathbf{Q}=\frac{\partial \mathcal{L}}{\partial \dot{\mathbf{P}}}=\mu\dot{\mathbf{P}}\tag{55}
+$$
+
+The commutation relation between the two should statisfy
+
+$$\left[\mathbf{P}_{i}(\boldsymbol{r}), \gamma \dot{\mathbf{P}}_{j}\left(\boldsymbol{r}^{\prime}\right)\right]=i \hbar \delta_{i j}\left(\boldsymbol{r}-\boldsymbol{r}^{\prime}\right)\tag{56}.$$
+
+which would lead us to define commutation relations for the Fourier components in (54). We also realize that $\mathbf{P}$ is a real vector field, meaning that its Fourier components $\mathbf{P_w}$ must be contrained by the following relation
+
+$$
+\mathbf{P_w^{\dagger}}=\mathbf{P_{-w}}\tag{57}.
+$$
+
+The subsidiary conditions of (56) and (57) meaning that $\mathbf{P_w}$ are not independent. Since the whole point of doing quantization is to transform the Hamiltonian into a separable format, we should get rid of this dependence among field coordinates. It is found to be more convenient to construct a new field $\mathbf{B}$ as a linear combination of $\mathbf{P}$ and $\mu\dot{\mathbf{P}}$ before we continue our quantization. Thus we define from the canonical transformation[6]:
+
+$$\begin{array}{l}
+\boldsymbol{B}(\boldsymbol{r})=\left(\frac{\mu \omega_{}}{2 \hbar}\right)^{1 / 2}\left[\mathbf{P}(\boldsymbol{r})+\frac{i}{\omega_{}} \dot{\mathbf{P}}(\boldsymbol{r})\right] \\
+\boldsymbol{B}^{\dagger}(\boldsymbol{r})=\left(\frac{\mu \omega_{}}{2 \hbar}\right)^{\frac{1}{2}}\left[\mathbf{P}(\boldsymbol{r})-\frac{i}{\omega_{}} \dot{\mathbf{P}}(\boldsymbol{r})\right]
+\end{array}\tag{58}$$
+
+And therefore,
+
+$$\begin{array}{l}
+\mathbf{P}(\boldsymbol{r})=\left(\frac{\hbar}{2 \mu \omega_{0}}\right)^{1 / 2}\left[\boldsymbol{B}^{\dagger}(\boldsymbol{r})+\boldsymbol{B}(\boldsymbol{r})\right] \\
+\dot{\mathbf{P}}(\boldsymbol{r})=i\left(\frac{\hbar \omega_{0}}{2 \mu}\right)^{1 / 2}\left[\boldsymbol{B}^{\dagger}(\boldsymbol{r})-\boldsymbol{B}(\boldsymbol{r})\right]
+\end{array}\tag{59}.$$
+
+Because the field $\mathbf{P}$ is irrotational (its curl is zero), the Fourier components in the expansion of $\mathbf{B}$, $\mathbf{B_w}$ should be defined with an unit vector pointing towards the wavevector $\mathbf{w}$ as:
+
+$$\left.\begin{array}{rl}
+\boldsymbol{B}(\boldsymbol{r}, t) & =\frac{1}{\sqrt{V}} \sum_{\boldsymbol{q}} \frac{\boldsymbol{q}}{|\boldsymbol{q}|} b_{\boldsymbol{q}}(t) e^{i \boldsymbol{q} \cdot \boldsymbol{r}} \\
+\boldsymbol{B}^{\dagger}(\boldsymbol{r}, t) & =\frac{1}{\sqrt{V}} \sum_{\boldsymbol{q}} \frac{\boldsymbol{q}}{|\boldsymbol{q}|} b_{\boldsymbol{q}}^{\dagger}(t) e^{-i \boldsymbol{q} \cdot \boldsymbol{r}}
+\end{array}\right\}\tag{60}.$$
+
+Using the commutation relation of (56) and Eq.(59) it is easy to show that
+
+$$\left[B_{j}(\boldsymbol{r}), B_{j^{\prime}}^{\dagger}\left(\boldsymbol{r}^{\prime}\right)\right]=\delta_{j j^{\prime}} \delta\left(\boldsymbol{r}-\boldsymbol{r}^{\prime}\right)\tag{61}.$$
+
+From Eq(60) and (61) we have
+
+$$\begin{array}{l}
+{\left[b_{w}, b_{w^{\prime}}^{+}\right]=\delta_{w, w^{\prime}}} \\
+{\left[b_{w}, b_{w^{\prime}}\right]=\left[b_{w}^{+}, b_{w^{\prime}}^{+}\right]=0}
+\end{array}\tag{62}.$$
+
+Insert Eq.(59) with the definitions in Eq.(60) into the field Hamiltonian $H_F$ in (51) to give
+
+$$H_{F}=\frac{1}{2} \hbar \omega_{0} \sum_{\mathbf{q}}\left(b_{\mathbf{q}}^{\dagger} b_{\mathbf{q}}+b_{\mathbf{q}} b_{\mathbf{q}}^{\dagger}\right)=\hbar \omega_{} \sum_{\mathbf{q}} b_{\mathbf{q}}^{\dagger} b_{\mathbf{q}}+\frac{1}{2} \sum_{\mathbf{q}} \hbar \omega_{}\tag{63}.$$
+
+because
+
+$$\begin{aligned}
+\int \boldsymbol{B}^{\dagger}(\boldsymbol{r}) \cdot \boldsymbol{B}(\boldsymbol{r}) d \boldsymbol{r} &=\frac{1}{V^{\prime}} \sum_{q^{\prime}} \sum_{q^{\prime \prime}} \frac{\boldsymbol{q}^{\prime} \cdot \boldsymbol{q}^{\prime \prime}}{q^{\prime} q^{\prime \prime}} b_{q^{\prime \prime}}^{\dagger} b_{\boldsymbol{q}^{\prime}} \int e^{-i\left(\boldsymbol{q}^{\prime \prime}-\boldsymbol{q}^{\prime}\right) \cdot \boldsymbol{r}} d \boldsymbol{r} \\
+&=\sum_{\boldsymbol{q}^{\prime}} \sum_{\boldsymbol{q}^{\prime \prime}} \frac{\boldsymbol{q}^{\prime} \cdot \boldsymbol{q}^{\prime \prime}}{q^{\prime} q^{\prime \prime}} b_{\boldsymbol{q}^{\prime \prime}}^{\dagger} b_{\boldsymbol{q}^{\prime}} \delta\left(\boldsymbol{q}^{\prime \prime}-\boldsymbol{q}^{\prime}\right)=\sum_{\boldsymbol{q}^{\prime}} b_{\boldsymbol{q}^{\prime}}^{\dagger} b_{\boldsymbol{q}^{\prime}}
+\end{aligned}.$$
+
+We move on to quantize $H_{int}$ by first noticing that
+
+$$\mathbf{P}(r)=\sqrt{\frac{\hbar}{2 \mu \omega V}} \sum_{q} \frac{\mathbf{q}}{|\mathbf{q}|}\left[b_{\mathbf{q}}^{+} e^{-i \mathbf{q} \cdot r}+b_{\mathbf{q}} e^{i \mathbf{q} \cdot r}\right]\tag{64}$$
+
+Since $\nabla \Phi(r)=4 \pi P(r),$ we see that
+
+$$\Phi(r)=4 \pi \sqrt{\frac{\hbar}{2 \mu \omega V}} i \sum_{q} \frac{1}{|\mathbf{q}|}\left[b_{\mathbf{q}}^{+} e^{-i \mathbf{q\cdot r}}-b_{\mathbf{q}} e^{i \mathbf{q\cdot r}}\right]\tag{65}.$$
+
+Finally, it is instructive to introduce a dimensionless parameter by the following equation:
+
+$$\begin{aligned}
+\frac{\hbar^{2} u^{2}}{2 m} &=\hbar \omega \\
+u &=\left(\frac{2 m \omega}{\hbar}\right)^{1/2}
+\end{aligned}\tag{66}.$$
+
+We then introduce dimensionless electron coordinates, volume parameter, and wave numbers
+\[
+\boldsymbol{x}=u \boldsymbol{r}_{\mathrm{e} 1} ; \quad S=u^{3} V ; \quad \boldsymbol{v}=\boldsymbol{q} / u
+\]
+
+From Eq.(63),(65) and (52), we obtain
+
+$$\frac{H}{\hbar \omega}=\sum_{\boldsymbol{v}} b_{\boldsymbol{v}}^{+} b_{\boldsymbol{v}}-\nabla_{\boldsymbol{x}}^{2}+i \sqrt{\frac{4 \pi \alpha}{S}} \sum_{\boldsymbol{v}} \frac{1}{|\boldsymbol{v}|}\left(b_{\boldsymbol{v}}^{+} e^{-i \boldsymbol{v} \cdot \boldsymbol{x}}-b_{\boldsymbol{v}} e^{i \boldsymbol{v} \cdot \boldsymbol{x}}\right)\tag{67}$$
+
+where
+
+$$\alpha=\frac{2 \pi \varepsilon^{2} u}{\mu \hbar \omega^{3}}=\frac{e^{2}}{\bar{\varepsilon} \hbar} \sqrt{\frac{m}{2 \hbar \omega}}\tag{68}.$$
+
+This paremeter combination $\alpha$ is usually referred in research as the **Coupling constant**.
+
+## Conclusion
+
+Now that the quantized Hamiltonian is derived, I need to use it in some simplified models to find the physical properties of modeled systems. Or maybe not since my ultimate goal is to put the Polaron theory in an *ab initio* calculation framework. Not sure if exactly solved models will help me with that at this point.
 
 ## References
 
@@ -396,3 +602,9 @@ When $\alpha$ is large, $$\left\|\mathcal{U}_{1}\right\|>\left\|\mathcal{U}_{2}\
 [2]https://web.archive.org/web/20010307184808/http://www.psrc.usm.edu/mauritz/dilect.html
 
 [3] Szigeti, Bela. "Polarisability and dielectric constant of ionic crystals." Transactions of the Faraday Society 45 (1949): 155-166.
+
+[4] Chatterjee, Ashok, and Soma Mukhopadhyay. Polarons and Bipolarons: An Introduction. CRC Press, 2018.
+
+[5] Luan, Pi-Gang. "Lagrangian dynamics approach for the derivation of the energy densities of electromagnetic fields in some typical metamaterials with dispersion and loss." Journal of Physics Communications 2.7 (2018): 075016.
+
+[6] Altland, Alexander, and Ben D. Simons. Condensed matter field theory. Cambridge university press, 2010.
