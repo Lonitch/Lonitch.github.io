@@ -469,11 +469,9 @@ $$
 
 and the complete Hamiltonian is
 
-$$\begin{aligned}
-H &=\mathbf{\dot{r}_{e}} \cdot \mathbf{p}_e+\int d^{3} r \mathbf{\dot{q}_{r} \cdot p_{r}}-L \\
-&=\frac{1}{2 m} \mathbf{p}_{e}^{2}+H^{\prime}\\
-&=H_{F}+H_e+H_{int}\tag{50}
-\end{aligned}$$
+$$
+H =\mathbf{\dot{r}_{e}} \cdot \mathbf{p}_e+\int d^{3} r \mathbf{\dot{q}_{r} \cdot p_{r}}-L =\frac{1}{2 m} \mathbf{p}_{e}^{2}+H^{\prime}=H_{F}+H_e+H_{int}\tag{50}
+$$
 
 where $\mathbf{p}_e=m^*\mathbf{\dot{r}}$,
 
