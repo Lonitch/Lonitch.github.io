@@ -575,9 +575,10 @@ u &=\left(\frac{2 m \omega}{\hbar}\right)^{1/2}
 \end{aligned}\tag{66}.$$
 
 We then introduce dimensionless electron coordinates, volume parameter, and wave numbers
-\[
-\boldsymbol{x}=u \boldsymbol{r}_{\mathrm{e} 1} ; \quad S=u^{3} V ; \quad \boldsymbol{v}=\boldsymbol{q} / u
-\]
+
+$$
+\boldsymbol{x}=u \boldsymbol{r}_{\mathrm{e}} ; \quad S=u^{3} V ; \quad \boldsymbol{v}=\boldsymbol{q} / u
+$$
 
 From Eq.(63),(65) and (52), we obtain
 
