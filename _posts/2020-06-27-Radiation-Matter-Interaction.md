@@ -339,8 +339,26 @@ then we can only conclude that **$\hat{B}\mid a \rangle$ is a linear combination
 A brief summary before we proceed. We have at this point laid out the general formalism of QM using mathematical objects in Hilbert space. We start with basic properties and definitions of eigenvectors and operators to prepare our review of axioms of QM. The axiom IV, in particular, help us to recast Schrodinger picture into Heisenberg picture where operators become time-dependent and eigenstates are time-ivariant. In the following section we use this Hilbert-space formalism to solve some simple problems in QM.
 
 ### Spin particle in magnetic field
+Spin is an intrinsic form of angular momentum carried by elementary particles. For a $\frac{1}{2}-$spin particle its **spin operator** is given by
 
+$$
+\mathbf{J}=\frac{\hbar}{2}\vec{\sigma}=\frac{\hbar}{2}(\sigma_x\vec{e}_x+\sigma_y\vec{e}_y+\sigma_z\vec{e}_z) \tag{21}.
+$$
 
+where
+
+$$\sigma_{x}=\left(\begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array}\right), \sigma_{y}=\left(\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}\right), \sigma_{z}=\left(\begin{array}{rr}
+1 & 0 \\
+0 & -1
+\end{array}\right)\tag{22}$$
+
+are called **Pauli metrices**.
 ## Free Electromagnetic Field
 
 ## Interaction of Radiation and Matter
