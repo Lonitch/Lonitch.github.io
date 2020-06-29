@@ -13,7 +13,7 @@ toc: true
 
 ---
 
-## TL:DR
+## TL;DR
 
 This blog introduces the formalism of quantum mechanics in Hilbert space.
 
@@ -35,54 +35,48 @@ $$
 (|a\rangle,|b\rangle)=\langle a|b\rangle
 $$
 
-where $\langle a \|=(\|a\rangle)^{\dagger}.$ According to Schwartz inequality we have
+where $\langle a \|=(\|a\rangle)^{\dagger},$ is an adjoint vector of $\mid a\rangle$. According to Schwartz inequality we have
 
 $$
-\langle\mathbf{f}|\mathbf{f}\rangle\cdot\langle \mathbf{v|v}\rangle\geq\langle\mathbf{f|v}\rangle^2\tag{1}
+\langle\mathbf{f}|\mathbf{f}\rangle\cdot\langle \mathbf{v|v}\rangle\geq\langle\mathbf{f|v}\rangle^2\tag{1}.
 $$
 
 Other important properties of Hilbert space include "completeness" and "separable":
-- **separable**: for any vector $\|f\rangle$ and an arbitrary positive value $\varepsilon$ in Hilbert space there is a set of vectors $\|f_n\rangle$ that satisfy 
+- **separable**: for any vector $\mid f\rangle$ and an arbitrary positive value $\varepsilon$ in Hilbert space there is a set of vectors $\mid f_n\rangle$ that satisfy 
 
 $$
 ||f\rangle-|f_n\rangle|<\varepsilon.
 $$
 
-- **complete**: any Cauchy vector sequence that has the property of 
+- **completeness**: any Cauchy vector sequence that has the property of 
 
 $$
 \lim_{m,n\rightarrow\infty}||f_n\rangle-|f_m\rangle|=0
 $$
 
-defines a unique limit of $$\|f\rangle$$ that satisfies
+defines a unique limit of $\mid f\rangle$ that satisfies
 
 $$\lim _{n \rightarrow \infty} \||f\rangle-\left|f_{n}\right\rangle \|=0.$$
 
-Enough for the properties, let us now define some other useful things in Hilbert space which will be used in our new formalism for quantum mechanics. First, a set $\{\|f_n\rangle\}$ is said to be **orthogonal** if
+Enough for the properties, let us now define some other useful things in Hilbert space which will be used in our new formalism for quantum mechanics. First, a vector set $\{\mid f_n\rangle\}$ is said to be **orthogonal** if
 
 $$
 \langle\mathbf{f}_n|\mathbf{f}_m\rangle=\delta_{nm}
 $$
 
-The set is **complete** if any vector $\|f\rangle$ in Hilbert space can be represented by the set as
+The set is **complete** if any vector $\mid f\rangle$ in Hilbert space can be represented by the set as
 
 $$
 |\mathbf{f}\rangle=\sum_i\alpha_i|\mathbf{f}_i\rangle
 $$
 
-where $\alpha_i$ are complex numbers, and
-
-$$
-\alpha_i=\langle \mathbf{f}_i|\mathbf{f}\rangle
-$$
-
-Sometimes people call $\langle\mathbf{f}_i\|\mathbf{f}\rangle$ as the representives of $\|\mathbf{f}_i\rangle$.
+where $\alpha_i$ are complex numbers, and $\alpha_i=\langle \mathbf{f}_i\mid\mathbf{f}\rangle$. Sometimes people call $\langle\mathbf{f}_i\mid\mathbf{f}\rangle$ as the representives of $\mid\mathbf{f}\rangle$.
 
 ### Operators in Hilbert space
 Mathematically the operators in Hilbert space are mappings to the space itself. We use hatted symbols (e.g. $\hat{A}$) to represent operators in the following derivation. Just like the vectors the operators also have their **adjoint** $\hat{A}^{\dagger}$, and when they are applied to a vector in Hilbert space we have:
 
 $$
-(\hat{A}|\mathbf{f}\rangle)^{\dagger}=\langle\mathbf{f}|\hat{A}^{\dagger}\tag{2}
+(\hat{A}|\mathbf{f}\rangle)^{\dagger}=\langle\mathbf{f}|\hat{A}^{\dagger}\tag{2}.
 $$
 
 The properties of Hermitian adjoint include:
@@ -100,7 +94,7 @@ $$
 \langle\mathbf{f}|\hat{A}|\mathbf{f}\rangle=\langle\mathbf{f}|\hat{A}^{\dagger}|\mathbf{f}\rangle=(\langle\mathbf{f}|\hat{A}|\mathbf{f}\rangle)^*=real.
 $$
 
-In physics Hermitian operators usually represent real-word detectable observables.
+In physics Hermitian operators usually represent real-word detectable observables (e.g. energy, momentum, and total number of particles).
 
 ### Eigenvalues and eigenvectors
 For each operator $\hat{A}$ there exists a non-null vector satisfying
@@ -109,20 +103,20 @@ $$
 \hat{A}|\mathbf{f}\rangle=A|\mathbf{f}\rangle\tag{3}
 $$
 
-with $A$ and $\|\mathbf{f}\rangle$ being a complex eigenvalue and an eigenvector. For Hermitian operators 
+with $A$ and $\mid\mathbf{f}\rangle$ being a complex eigenvalue and an eigenvector. For Hermitian operators 
 
 1. the eigenvalues are real numbers,
-2. if $\|\mathbf{a}\rangle$ and $\|\mathbf{a}^{\prime}\rangle$ are two eigenvectors of $\hat{A}$ we have $\langle\mathbf{a\|a^{\prime}}\rangle=0$
+2. if $\mid\mathbf{a}\rangle$ and $\mid\mathbf{a}^{\prime}\rangle$ are two eigenvectors of $\hat{A}$ we have $\langle\mathbf{a\mid a^{\prime}}\rangle=0$
 3. **The eigenvectors of a bounded Hermitian operator after
 normalization form a denumerably complete orthonormal system**. Consequently, its eigenvalues form a discrete set (discrete spectrum).
 
-Based on the property #3 we now can represent arbitrary vector $\|\psi\rangle$ in Hilbert space using the eigenvectors of a Hermitian operator $\{\|\mathbf{a}_i\rangle\}$ as
+Based on the property #3 we now can represent arbitrary vector $\mid\psi\rangle$ in Hilbert space using the eigenvectors of a Hermitian operator $\{\mid\mathbf{a}_i\rangle\}$ as
 
 $$
 |\psi\rangle=\sum_i |\mathbf{a}_i\rangle\langle\mathbf{a}_i|\psi\rangle\tag{4}
 $$
 
-If we assume that $\|\psi\rangle$ is normalized, then from (4) we have
+If we assume that $\mid\psi\rangle$ is normalized, then from (4) we have
 
 $$
 \langle\psi|\psi\rangle=\langle\psi|(\sum_i|\mathbf{a}_i\rangle\langle\mathbf{a}_i|)|\psi\rangle=1
@@ -134,7 +128,7 @@ $$
 \sum_i|\mathbf{a}_i\rangle\langle\mathbf{a}_i|=1,\tag{5}
 $$
 
-with $\langle\mathbf{a_n\|a_m}\rangle=\delta_{nm}$. Eq.(5) sometimes is called as the **identity operator**. Now the inner products $\langle\mathbf{a}_i\|\psi\rangle$ are the elements of a vector in Hilbert space that itself represent a state. Let's use a daily-life analogy of **Sizhe's state** to understand this. Let's say $\|sizhe\rangle$ represents a personal state of Sizhe, and we can present Sizhe's state in Hilbert space as
+with $\langle\mathbf{a_n\mid a_m}\rangle=\delta_{nm}$. Eq.(5) sometimes is called as the **identity operator**. Now the inner products $\langle\mathbf{a}_i\mid\psi\rangle$ are the elements of a state vector in Hilbert space. Let's use a daily-life analogy of **Sizhe's state** to understand this. Let's say $\mid sizhe\rangle$ represents a personal state of Sizhe, and we can present Sizhe's state from a perspective of characters as
 
 $$
 |sizhe\rangle=\left[
@@ -147,7 +141,7 @@ $$
 \right]
 $$
 
-where $\langle nerdy\mid$,$\langle corky\mid$, and $\langle sloppy\mid$ are the base vectors of our imaginary Hilbert space. With the vector above we can tell how nerdy, corky, and sloppy Sizhe is in the Hilbert space. With this simple picture in mind, we can represent the state $\mid\psi\rangle$ using the set $\{\mathbf{a}_i\}$ as
+where $\langle nerdy\mid$,$\langle corky\mid$, and $\langle sloppy\mid$ are the base vectors in our imaginary Hilbert space. With the vector above we can tell how nerdy, corky, and sloppy Sizhe is in the space. Meanwhile, we can adopt another set of base vectors, $\mid asian\rangle$,$\mid male\rangle$, and $\mid short\rangle$ to represent $\mid sizhe\rangle$ from a perspective of appearance. With this simple picture in mind, we can represent the state $\mid\psi\rangle$ using the set $\{\mathbf{a}_i\}$ as
 
 $$|\psi\rangle=\left[\begin{array}{c}
 \left\langle a_{1} \mid \psi\right\rangle \\
@@ -157,7 +151,7 @@ $$|\psi\rangle=\left[\begin{array}{c}
 \vdots 
 \end{array} \right]=\langle\mathbf{a}_i\mid\psi\rangle=\psi(\mathbf{a}_i)\tag{6}.$$
 
-For an operator $\hat{B}$ we have a matrix instead in Hilbert space:
+We use a matrix instead to present an operator $\hat{B}$ in Hilbert space:
 
 $$\hat{B}=\left[\begin{array}{cccc}
 \langle a_{1}|\hat{B}| a_{1}\rangle & \langle a_{1}|\hat{B}| a_{2}\rangle & \cdots \\
@@ -191,7 +185,7 @@ $$
 
 where the last equivalence is due to the invariance of matrix trace. 
 
-So far we only considered the discrete base sets in our formalism but we must also consider **continuous base sets**. A good example of such base set is the spatial coordinate set $\{\mathbf{x}\}$. And the state in this case is represented as
+So far we only considered the discrete base sets in our formalism but we must also consider **continuous base sets**. A good example of such base set is the spatial coordinate set $\{\mathbf{x}\}$. And a state in ${\mathbf{x}}-$representation is
 
 $$
 \mid \psi\rangle=\int\mid\mathbf{x}\rangle\langle\mathbf{x}\mid\psi\rangle d\mathbf{x}\tag{10}
@@ -203,13 +197,13 @@ $$
 \langle\varphi\mid\psi\rangle=\int\langle\varphi\mid\mathbf{x}\rangle\langle\mathbf{x}\mid\psi\rangle d\mathbf{x}=\int\varphi^{\dagger}(\mathbf{x})\psi(\mathbf{x})d\mathbf{x}\tag{11}.
 $$
 
-In the real-world physical problems, the **operator functions** are also defined as functions that take operators as their arguments. By means of eigenvalues the operator function $f(\hat{A})$ is also defined as
+In the real-world physical problems, the **operator functions** are also defined as functions that take operators as their arguments. By means of eigenvalues the operator function $f(\hat{A})$ is defined as
 
 $$
 f(\hat{A})\mid a_i\rangle=f(a_i)\mid a_i\rangle\tag{12}.
 $$
 
-We conclude this section by defining the **inverse of an operator**:
+We conclude this section by defining the **inverse of an operator** as
 
 $$\hat{A}^{-1}\mid a_i\rangle=\frac{1}{a_i}\mid a_i\rangle\tag{13}.$$
 
@@ -271,7 +265,7 @@ $$|p \uparrow\rangle=\left(\begin{array}{l}
 Thus, **whenever one wish to accommondate more particle attributes in a physical system, the Hilbert space must be expanded.**
 
 ### Axioms of quantum mechanics
-The axioms used in QM are postulates that assume the correspondences between mathematical objects and physical quantities. This section simply serves as a reminder of basic axioms that we will use later. For comprehensive explanations you might need to consult introductory QM textbooks.
+The axioms used in QM are postulations that assume the correspondences between mathematical objects and physical quantities. This section simply serves as a reminder of basic axioms that we will use later. For comprehensive explanations you might need to consult introductory QM textbooks.
 
 >**Axiom I:** The result of any measurement of an observable can only be one of the eigenvalues of the corresponding operator, and the system state is represented by the corresponding eigenvector.
 
@@ -280,15 +274,15 @@ The axioms used in QM are postulates that assume the correspondences between mat
 >**Axiom III:** The operators $\hat{A}$ and $\hat{B}$ that correspond classical dynamic variables satisfy the following commutation rules:
 >
 >$$[\hat{A},\hat{B}]=\hat{A}\hat{B}-\hat{B}\hat{A}=i\hbar\{A,B\}$$
->where $\{\}$ is the Poisson bracket of dynamic variables $A$ and $B$. 
->$$\{A, B\}=\sum_{i}\left\{\frac{\partial A}{\partial q_{i}} \frac{\partial B}{\partial p_{i}}-\frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}}\right\}$$
->and $p_i$ and $q_i$ are classical momenta and coordinates of the system. One could easily find that
+>where $\{\}$ is the Poisson bracket of dynamic variables $A$ and $B$:
+>$$\{A, B\}=\sum_{i}\left\{\frac{\partial A}{\partial q_{i}} \frac{\partial B}{\partial p_{i}}-\frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}}\right\},$$
+>and $p_i$ and $q_i$ are classical momenta and coordinates of the particles in a system. One could easily find that
 >$$\begin{array}{l}
 {\left[q_{i}, q_{j}\right]=\left[p_{i}, p_{j}\right]=0} \\
 {\left[q_{i}, p_{j}\right]=i \hbar \delta_{i j}}
 \end{array}$$
 
-We shall now derive a consequence of **Axiom III** before we proceed. If we define the expectation of observable $A$ when a system is at a state of $\mid \psi\rangle$ as $\langle \psi\mid\hat{A}\mid\psi\rangle$, and the standard deviation as $\Delta A=\langle(A-\langle A\rangle)^2\rangle^{1/2}$, it can be shown that
+We shall now derive a consequence of **Axiom III** before we proceed. If we define the expectation value of observable $A$ of a system at a state of $\mid \psi\rangle$ to be $\langle \psi\mid\hat{A}\mid\psi\rangle$, and its standard deviation as $\Delta A=\langle(A-\langle A\rangle)^2\rangle^{1/2}$, it can be shown that
 
 $$\left(\Delta A\right)^2(\Delta B)^{2} \geq-1 / 4\langle[A, B]\rangle^{2}$$
 
@@ -330,7 +324,7 @@ $$
 \hat{A}\hat{B}\mid a\rangle=\hat{B}\hat{A}\mid a\rangle=a\hat{B}\mid a\rangle\tag{21}.
 $$
 
-Thus $\hat{B}\mid a\rangle$ is also an eigenvector of $\hat{A}$. **If the state $\mid a\rangle$ is non-degenerate, the two states, $\hat{B}\mid a\rangle$ and $\mid a\rangle$, must only differ by a constant**. So $\hat{B}\mid a \rangle=b\mid a\rangle$, and $\mid a\rangle$ is the simultaneous eigenvector of $\hat{A}$ and $\hat{B}$. We can also write this simultaneousness explicitly in the vector as $\mid a,b\rangle$. 
+Thus $\hat{B}\mid a\rangle$ is also an eigenvector of $\hat{A}$. **If the state $\mid a\rangle$ is non-degenerate, the two states, $\hat{B}\mid a\rangle$ and $\mid a\rangle$, must only differ by a constant**. So $\hat{B}\mid a \rangle=b\mid a\rangle$, and $\mid a\rangle$ is the simultaneous eigenvector of $\hat{A}$ and $\hat{B}$. We can also write this simultaneousness explicitly in the state as $\mid a,b\rangle$. 
 
 If the state $\mid a\rangle$ has n-degeneracy, i.e. 
 
@@ -338,13 +332,13 @@ $$
 \hat{A}\mid a,i\rangle=a\mid a,i\rangle\quad i=1,\ldots,n,
 $$
 
-then we can only conclude that **$\hat{B}\mid a \rangle$ is a linear combination of $\mid a,i\rangle$**. For simplicity we usually make $\mid a,i\rangle$ eigenvectors of $\hat{B}$, but they don't need to be.
+then we can only conclude that **$\hat{B}\mid a \rangle$ is a linear combination of $\mid a,i\rangle$**. For simplicity we usually make $\mid a,i\rangle$ eigenvectors of $\hat{B}$ too, but they don't need to be.
 
-A brief summary before we proceed. We have at this point laid out the general formalism of QM using mathematical objects in Hilbert space. We start with basic properties and definitions of eigenvectors and operators to prepare our review of axioms of QM. The axiom IV, in particular, help us to recast Schrodinger picture into Heisenberg picture where operators become time-dependent and eigenstates are time-ivariant. In the following section we use this Hilbert-space formalism to solve some simple problems in QM.
+A brief summary before we proceed. We have at this point laid out the general formalism of QM using mathematical objects in Hilbert space. We start with basic properties and definitions of eigenvectors and operators to prepare our review of axioms of QM. The axiom IV, in particular, help us to recast Schrodinger picture into Heisenberg picture where operators become time-dependent and eigenstates are time-invariant. In the following section we use this Hilbert-space formalism to solve some simple problems in QM.
 
 ## Solved QM Problems 
 ### Spin particle in magnetic field
-Spin is an intrinsic form of angular momentum carried by elementary particles. In this section we use Hilbert-space formalism to derive the expression of general angular momentum operator around an arbitrary axis. For a $\frac{1}{2}-$spin particle its **spin operator** is given by
+Spin is an intrinsic form of angular momentum carried by elementary particles. In this section we use Hilbert-space formalism to derive the expression of general spin operator around an arbitrary axis. For a $\frac{1}{2}-$spin particle its **spin operator** is given by
 
 $$
 \mathbf{J}=\frac{\hbar}{2}\vec{\sigma}=\frac{\hbar}{2}(\sigma_x\vec{e}_x+\sigma_y\vec{e}_y+\sigma_z\vec{e}_z) \tag{21}.
@@ -367,13 +361,13 @@ are called **Pauli metrices**. Now the task is to find the Hamiltonian for a par
 
 $$\mathbf{H}_B=C\sigma_z\tag{23}$$
 
-where $C$ is a constant. The explicit derivation of the total Hamiltonian with magnetic field included can be found [here](https://quantummechanics.ucsd.edu/ph130a/130_notes/node295.html). With $\mathbf{H}_B$ we notice that $J_z$ commutes with $\mathbf{H}_B$, so they share the same eigenvectors. The eigenvectors of $J_z$ are defined as
+where $C$ is a constant. The explicit derivation of the total Hamiltonian with magnetic field included can be found [here](https://quantummechanics.ucsd.edu/ph130a/130_notes/node295.html). We notice that $J_z$ commutes with $\mathbf{H}_B$, so they share the same eigenvectors. The eigenvectors of $J_z$ are defined as
 
 $$
 \begin{aligned}
 J_z\mid\uparrow,z\rangle&=\frac{\hbar}{2}\mid\uparrow,z\rangle=\frac{\hbar}{2}\left[\begin{array}{c}1\\0\end{array}\right]\\
 J_z\mid\downarrow,z\rangle&=-\frac{\hbar}{2}\mid\downarrow,z\rangle=-\frac{\hbar}{2}\left[\begin{array}{c}0\\1\end{array}\right]
-\end{aligned}\tag{24}
+\end{aligned}\tag{24}.
 $$
 
 Note that if we relax the direction of $\mathbf{B}$ to an arbitrary direction $\vec{\mathbf{n}}$ defined as
@@ -454,7 +448,7 @@ By axiom II of QM the probability of finding the up-spin at x-direction at time 
 
 $$\left|\left\langle\uparrow, x \mid \psi_{t}\right\rangle\right|^{2}=\cos ^{2} \frac{C}{\hbar} t.$$
 
-### Free particle
+### Propagator of free particle
 In this section we introduce the concept of **propagator**, the probability amplitude of a free particle trasporting between two coordinates in spacetime. The particle propagator is the building block of quantum perturbation theory, the most important theoretical framework that allows people doing *ab initio* calculations of fermion-boson interactions. We shall appreciate the convenience that our Hilbert-space formalism brings to our derivation of particle propagator. 
 
 For free particles we only care about their dynamic variables:coordinates $x$ and momentum $p$. The eigenvalue equations for corresponding operators are:
@@ -499,7 +493,7 @@ and the famous property of Dirac $\delta-$function that
 
 $$x \frac{d}{d x} \delta(x)=-\delta(x)\tag{33}$$
 
-we obtain from (32)
+so we obtain from (32)
 
 $$\left\langle x^{\prime}|\hat{p}| x^{\prime \prime}\right\rangle=\frac{\hbar}{i} \frac{\partial}{\partial x^{\prime}} \delta\left(x^{\prime}-x^{\prime \prime}\right)\tag{34}.$$
 
@@ -578,7 +572,7 @@ $$G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right)=\i
 
 and
 
-$$\left\langle p^{\prime}\left|e^{-i / \hbar \hat{H}\left(t-t_{0}\right)}\right| \mathbf{p}^{\prime \prime}\right\rangle=e^{-(i / \hbar)\left(p^{\prime 2} / 2 m\right)\left(t-t_{0}\right)} \delta\left(\mathbf{p}^{\prime}-\mathbf{p}^{\prime \prime}\right).$$
+$$\left\langle \mathbf{p}^{\prime}\left|e^{-i / \hbar \hat{H}\left(t-t_{0}\right)}\right| \mathbf{p}^{\prime \prime}\right\rangle=e^{-(i / \hbar)\left(p^{\prime 2} / 2 m\right)\left(t-t_{0}\right)} \delta\left(\mathbf{p}^{\prime}-\mathbf{p}^{\prime \prime}\right).$$
 
 After the substitution of (38) in (42), we find
 
@@ -589,7 +583,7 @@ This integration can be carried out with the result
 $$G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right)=\left(\frac{m}{2 \pi i \hbar\left(t-t_{0}\right)}\right)^{3 / 2} e^{(i m / 2 \hbar)\left[\left(\mathbf{x}^{\prime}-\mathbf{x}^{\prime \prime}\right)^{2} /\left(t-t_{0}\right)\right]}\tag{43}.$$
 
 ### Fermi's golden rule
-We should now be comfortable with the "bra-ket" notation now. Using the first-order approximation in the quantum perturbation theory, we procced to derive the **Fermi's Golden rule** in this section. Since active research of quantum field theory mostly stems from perturbative theory, getting some exposure to it could really help us to appreciate the motives behind modern studies that use quantum field theory to understand the properties of condensed matters. 
+We should now be comfortable with the Hilbert-space formalism. Using the first-order approximation in the quantum perturbation theory, we procced to derive the **Fermi's Golden rule** in this section. Since mordern research of quantum field theory mostly stems from perturbative theory, getting some exposure to it could really help us to appreciate the motives behind modern studies that use quantum field theory to understand the properties of condensed matters. 
 
 In a perturbed system, we are often interested to solve the following equation:
 
@@ -643,4 +637,4 @@ $$\frac{\left|C_{f}(t)\right|^{2}}{t}=\frac{2 \pi}{\hbar}\left|\left\langle\Phi_
 Eq.(52) may be interpreted as the transition probability per unit time for a transition from an initial state $\mid\Phi_{i}\rangle$ to a final state $\mid\Phi_{f}\rangle$. This result is known as **Fermi's golden rule**. Since Eq.(52) contains a Dirac $\delta$ -function, it is clear that **it is meaningful only if an integration over a continuum of final energies or initial energies is ultimately carried out**.
 
 ## Conclusion
-There are some typos in Edward's book and I'm glad I worked it out. In the part II I'll develop a quantum theory of free electromagnetic field.
+There are some typos in Edward's book and I'm glad I worked all of them out. In the part II I'll develop a quantum theory of free electromagnetic field.
