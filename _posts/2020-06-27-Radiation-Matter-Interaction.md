@@ -130,7 +130,7 @@ $$
 \sum_i|\mathbf{a}_i\rangle\langle\mathbf{a}_i|=1,\tag{5}
 $$
 
-with $\langle\mathbf{a_n\|a_m}\rangle=\delta_{nm}$. Now the inner products $\langle\mathbf{a}_i\|\psi\rangle$ are the elements of a vector in Hilbert space that itself represent a state. Let's use a daily-life analogy of **Sizhe's state** to understand this. Let's say $\|sizhe\rangle$ represents a personal state of Sizhe, and we can present Sizhe's state in Hilbert space as
+with $\langle\mathbf{a_n\|a_m}\rangle=\delta_{nm}$. Eq.(5) sometimes is called as the **identity operator**. Now the inner products $\langle\mathbf{a}_i\|\psi\rangle$ are the elements of a vector in Hilbert space that itself represent a state. Let's use a daily-life analogy of **Sizhe's state** to understand this. Let's say $\|sizhe\rangle$ represents a personal state of Sizhe, and we can present Sizhe's state in Hilbert space as
 
 $$
 |sizhe\rangle=\left[
@@ -339,7 +339,7 @@ then we can only conclude that **$\hat{B}\mid a \rangle$ is a linear combination
 A brief summary before we proceed. We have at this point laid out the general formalism of QM using mathematical objects in Hilbert space. We start with basic properties and definitions of eigenvectors and operators to prepare our review of axioms of QM. The axiom IV, in particular, help us to recast Schrodinger picture into Heisenberg picture where operators become time-dependent and eigenstates are time-ivariant. In the following section we use this Hilbert-space formalism to solve some simple problems in QM.
 
 ### Spin particle in magnetic field
-Spin is an intrinsic form of angular momentum carried by elementary particles. For a $\frac{1}{2}-$spin particle its **spin operator** is given by
+Spin is an intrinsic form of angular momentum carried by elementary particles. In this section we use Hilbert-space formalism to derive the expression of general angular momentum operator around an arbitrary axis. For a $\frac{1}{2}-$spin particle its **spin operator** is given by
 
 $$
 \mathbf{J}=\frac{\hbar}{2}\vec{\sigma}=\frac{\hbar}{2}(\sigma_x\vec{e}_x+\sigma_y\vec{e}_y+\sigma_z\vec{e}_z) \tag{21}.
@@ -450,6 +450,141 @@ By axiom II of QM the probability of finding the up-spin at x-direction at time 
 $$\left|\left\langle\uparrow, x \mid \psi_{t}\right\rangle\right|^{2}=\cos ^{2} \frac{C}{\hbar} t.$$
 
 ### Free particle
+In this section we introduce the concept of **propagator**, the probability amplitude of a free particle trasporting between two coordinates in spacetime. The particle propagator is the building block of quantum perturbation theory, the most important theoretical framework that allows people doing *ab initio* calculations of fermion-boson interactions. We shall appreciate the convenience that our Hilbert-space formalism brings to our derivation of particle propagator. 
+
+For free particles we only care about their dynamic variables:coordinates $x$ and momentum $p$. The eigenvalue equations for corresponding operators are:
+
+$$
+\hat{x}\mid x\rangle=x\mid x\rangle,\quad\hat{p}\mid p\rangle=p\mid p \rangle
+$$
+
+In free space a particle can occupy any coordinate or momentum, so the normalization of eigenvectors is:
+
+$$
+\begin{aligned}
+\langle x\mid x^{\prime}\rangle=\delta(x-x^{\prime})\\
+\langle p\mid p^{\prime}\rangle=\delta(p-p^{\prime})
+\end{aligned}\tag{30}.
+$$
+
+From Axiom III of QM we have the commutation rule for $\hat{x}$ and $\hat{p}$ as
+
+$$
+[\hat{x},\hat{p}]=i\hbar\tag{31},
+$$
+
+which determines the matrix element of $p$,$\langle x\mid\hat{p}\mid x^{\prime}\rangle$. To see this we first sandwhich (31) between two coordinate states，i.e.,
+
+$$\begin{aligned}
+\left\langle x^{\prime}|\hat{x} \hat{p}-\hat{p} \hat{x}| x^{\prime \prime}\right\rangle &=\left\langle x^{\prime}|\hat{x} 1\hat{p}-\hat{p}1 \hat{x}| x^{\prime \prime}\right\rangle \\
+&=\int d x^{\prime \prime \prime}\left\{\left\langle x^{\prime}|x| x^{\prime \prime \prime}\right\rangle\left\langle x^{\prime \prime \prime}|p| x^{\prime \prime}\right\rangle-\left\langle x^{\prime}|p| x^{\prime \prime \prime}\right\rangle\left\langle x^{\prime \prime \prime}|x| x^{\prime \prime}\right\rangle\right\} \\
+&=i \hbar \delta\left(x^{\prime}-x^{\prime \prime}\right)
+\end{aligned}\tag{32}.$$
+
+We also know that
+
+$$
+\begin{aligned}
+\langle x^{\prime}|\hat{x} \hat{p}\mid x^{\prime\prime}\rangle&=x^{\prime}\langle x^{\prime}|\hat{p}\mid x^{\prime\prime}\rangle\\
+\langle x^{\prime}|\hat{p}\hat{x} \mid x^{\prime\prime}\rangle&=x^{\prime\prime}\langle x^{\prime}|\hat{p}\mid x^{\prime\prime}\rangle
+\end{aligned},
+$$
+
+and the famous property of Dirac $\delta-$function that
+
+$$x \frac{d}{d x} \delta(x)=-\delta(x)\tag{33}$$
+
+we obtain from (32)
+
+$$\left\langle x^{\prime}|\hat{p}| x^{\prime \prime}\right\rangle=\frac{\hbar}{i} \frac{\partial}{\partial x^{\prime}} \delta\left(x^{\prime}-x^{\prime \prime}\right)\tag{34}.$$
+
+>By similar steps we can also prove that 
+>
+>$$\left\langle p^{\prime}|\hat{x}| p^{\prime \prime}\right\rangle=-\frac{\hbar}{i} \frac{\partial}{\partial p^{\prime}} \delta\left(p^{\prime}-p^{\prime \prime}\right)\tag{35}.$$
+
+By taking a matrix product, we can also find that
+
+$$\begin{aligned}
+\left\langle x^{\prime}\left|\hat{p}^{2}\right| x^{\prime \prime}\right\rangle &=\left\langle x^{\prime}|p 1 p| x^{\prime \prime}\right\rangle \\
+&=\int d^{3} x^{\prime \prime \prime}\left\langle x^{\prime}|p| x^{\prime \prime \prime}\right\rangle\left\langle x^{\prime \prime \prime}|p| x^{\prime \prime}\right\rangle \\
+&=\left(\frac{\hbar}{i} \frac{\partial}{\partial x^{\prime}}\right)^{2} \delta\left(x^{\prime}-x^{\prime \prime}\right)
+\end{aligned}.$$
+
+In general we have
+
+$$\begin{array}{l}
+\left\langle \hat{x}^{\prime}\left|p^{n}\right| x^{\prime \prime}\right\rangle=\left(\frac{\hbar}{i} \frac{\partial}{\partial x^{\prime}}\right)^{n} \delta\left(x-x^{\prime \prime}\right) \\
+\left\langle \hat{p}^{\prime}\left|x^{n}\right| p^{\prime \prime}\right\rangle=\left(-\frac{\hbar}{i} \frac{\partial}{\partial p^{\prime}}\right)^{n} \delta\left(x^{\prime}-x^{\prime \prime}\right)
+\end{array}\tag{36}.$$
+
+With the coordinate representation of momentum operator matrix, we now turn our attention to the eigenvalue problem of $\hat{p}$. We first notice that the format of the coordinate presentation of momentum eigenvector, $\langle x\mid p\rangle$, can be derived using (34),i.e.,
+
+$$\begin{aligned}
+\left\langle x^{\prime}|\hat{p}| p^{\prime}\right\rangle &=\int d x^{\prime \prime}\left\langle x^{\prime}|\hat{p}| x^{\prime \prime}\right\rangle\left\langle x^{\prime \prime} \mid p^{\prime}\right\rangle=\frac{\hbar}{i} \frac{\partial}{\partial x^{\prime}}\left\langle x^{\prime} \mid p^{\prime}\right\rangle \\
+&=p^{\prime}\left\langle x^{\prime} \mid p^{\prime}\right\rangle
+\end{aligned}\tag{37}.$$
+
+Since $x$ and $p$ are continuous variables, the vector $\langle x\mid p\rangle$ essentially represent a smooth wavefucntion $\psi_p(x)$. From (37) we have
+
+$$
+\frac{\hbar}{i}\frac{\partial}{\partial x}\psi_p(x)=p\psi_p(x),
+$$
+
+which indicates that $\psi_p(x)$ takes the form of $Ce^{\frac{i}{\hbar}p\cdot x}$ with $C$ being a complex constant. The normalization of $\psi_p(x)$ gives:
+
+$$
+\int \psi^{\dagger}_{p^{\prime}}(x)\psi_{p}(x)dx=| C|^2\int e^{\frac{\hbar}{i}(p-p^{\prime})x}dx=2\pi\hbar|C|^2 \delta(p-p^{\prime})=\delta(p-p^{\prime}).
+$$
+
+Thus, we can choose $C=1$ and 
+
+$$\psi_p(x)=\frac{1}{\sqrt{2\pi\hbar}}e^{\frac{i}{\hbar}p\cdot x}\tag{38}.$$
+
+The results in (34),(35) and (36) can be easily extended to 3-dimensional space and Eq.(38) in 3D space becomes
+
+$$
+\psi_{\mathbf{p}}(\mathbf{x})=\frac{1}{(2\pi\hbar)^{3/2}}e^{\frac{i}{\hbar}\mathbf{p\cdot x}}\tag{39}.
+$$
+
+We shall now see that the particle propagator arises naturally when we consider time-dependent eigenvectors of the Hamiltonian. For a free particle the Hamiltonian is just the particle's kinetic energy, $\hat{H}=\frac{\hat{p}^2}{2m}$, the coordinate- and momentum-representation of $\hat{H}$ are then
+
+$$\begin{array}{l}
+\left\langle\mathbf{x}^{\prime}|H| \mathbf{x}^{\prime \prime}\right\rangle=-\frac{\hbar^{2}}{2 m} \nabla^{2} \delta\left(\mathbf{x}^{\prime}-\mathbf{x}^{\prime \prime}\right) \\
+\left\langle\mathbf{p}^{\prime}|H| \mathbf{p}^{\prime \prime}\right\rangle=\frac{1}{2 m} p^{\prime 2} \delta\left(\mathbf{p}^{\prime}-\mathbf{p}^{\prime \prime}\right)
+\end{array}\tag{40}$$
+
+from the results in (36). Using Axiom IV of QM we find that the eigenstate of free particle at time $t$ from the state at $t_0$ is just
+
+$$
+\mid \psi_t\rangle=e^{-\frac{i}{\hbar}\hat{H}(t-t_0)}\mid\psi_{t_0}\rangle\tag{41}.
+$$
+
+The eigenvector in coordinate $\mathbf{x}-$representation is then
+
+$$\begin{aligned}
+\psi\left(\mathbf{x}^{\prime}, t\right) &=\left\langle\mathbf{x}^{\prime}\left|e^{-i / \hbar \hat{H}\left(t-t_{0}\right)}\right| \psi_{t_{0}}\right\rangle \\
+&=\int d^{3} x^{\prime \prime}\left\langle\mathbf{x}^{\prime}\left|e^{-i / \hbar \hat{H}\left(t-t_{0}\right)}\right| \mathbf{x}^{\prime \prime}\right\rangle\left\langle\mathbf{x}^{\prime \prime} \mid \psi_{t_{0}}\right\rangle \\
+&=\int d^{3} x^{\prime \prime} G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right) \psi\left(\mathbf{x}^{\prime \prime}, t_{0}\right)
+\end{aligned}$$
+
+where $G(\mathbf{x}^{\prime},t\mid \mathbf{x}^{\prime\prime},t_0)$ is the **particle propagator** we are looking for. Using continuous identity operator we have
+
+$$G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right)=\iint\left\langle\mathbf{x}^{\prime} \mid \mathbf{p}^{\prime}\right\rangle d^{3} p^{\prime} \cdot\left\langle\mathbf{p}^{\prime}\left|e^{-i / \hbar \hat{H}^{\left(t-t_{0}\right)}}\right| \mathbf{p}^{\prime \prime}\right\rangle d^{3} p^{\prime \prime}\left(\mathbf{p}^{\prime \prime}\left|\mathbf{x}^{\prime \prime}\right\rangle\right.\tag{42}$$
+
+and
+
+$$\left\langle p^{\prime}\left|e^{-i / \hbar \hat{H}\left(t-t_{0}\right)}\right| \mathbf{p}^{\prime \prime}\right\rangle=e^{-(i / \hbar)\left(p^{\prime 2} / 2 m\right)\left(t-t_{0}\right)} \delta\left(\mathbf{p}^{\prime}-\mathbf{p}^{\prime \prime}\right).$$
+
+After the substitution of (38) in (42), we find
+
+$$G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right)=\int \frac{d^{3} p^{\prime}}{(2 \pi \hbar)^{3}} e^{i / \hbar\left[\mathbf{p}^{\prime} \cdot\left(\mathbf{x}^{\prime}-\mathbf{x}^{\prime \prime}\right)-\left(p^{\prime 2} / 2 m\right)\left(t-t_{0}\right)\right]}$$
+
+This integration can be carried out with the result
+
+$$G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right)=\left(\frac{m}{2 \pi i \hbar\left(t-t_{0}\right)}\right)^{3 / 2} e^{(i m / 2 \hbar)\left[\left(\mathbf{x}^{\prime}-\mathbf{x}^{\prime \prime}\right)^{2} /\left(t-t_{0}\right)\right]}\tag{43}.$$
+
+### Perturbation theory
+
 
 ## Free Electromagnetic Field
 
