@@ -224,8 +224,9 @@ $$
 
 for operators. Notice that the unitary transformations conserve:
 
-- the eigenvalues of operators,i.e. $\hat{A}_{new}\mid a_i\rangle_{new}=\hat{U}^{\dagger}\hat{A}_{old}\mid a_i\rangle_{old}=a_i\mid a_i\rangle_{new}$
-- and the inner products of states,i.e.${}_{new}\langle b_i\mid a_j\rangle_{new}={}_{old}\langle b_i\mid a_j\rangle_{old}$.
+- the eigenvalues of operators,i.e. 
+$$\hat{A}_{new}\mid a_i\rangle_{new}=\hat{U}^{\dagger}\hat{A}_{old}\mid a_i\rangle_{old}=a_i\mid a_i\rangle_{new}$$
+- and the inner products of states,i.e.$${}_{new}\langle b_i\mid a_j\rangle_{new}={}_{old}\langle b_i\mid a_j\rangle_{old}$$.
 
 ### Direct product space
 Due to the variety of particle states (e.g. spin-up and spin-down states of electrons) sometimes we need to expand our Hilbert space through the direct product method. Here we use a nucleon as an example. A nucleon can be a proton or a neutron. A proton is positively charged but a neutron is neutral. They can be treated as two states of the same particle in the charge space (a specific example of Hilbert space):
