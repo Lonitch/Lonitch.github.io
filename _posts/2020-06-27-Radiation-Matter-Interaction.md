@@ -358,7 +358,99 @@ i & 0
 0 & -1
 \end{array}\right)\tag{22}$$
 
-are called **Pauli metrices**.
+are called **Pauli metrices**. Now the task is to find the Hamiltonian for a particle in magnetic field. If we only focus on magnetic momentum energy, and let the magnetic field strength be $\mathbf{B}$ and the magnetic momentum be $\vec{\mu}$ then the particle energy is just $\mathbf{E}_B=-\vec{\mu}\mathbf{\cdot B}$. We further take the direction of $\mathbf{B}$ as the z-direction, and use the fact that $\vec{\mu}$ is proportional to $\mathbf{J}$ to write the magnetic Hamiltonian as 
+
+$$\mathbf{H}_B=C\sigma_z\tag{23}$$
+
+where $C$ is a constant. The explicit derivation of the total Hamiltonian with magnetic field included can be found [here](https://quantummechanics.ucsd.edu/ph130a/130_notes/node295.html). With $\mathbf{H}_B$ we notice that $J_z$ commutes with $\mathbf{H}_B$, so they share the same eigenvectors. The eigenvectors of $J_z$ are defined as
+
+$$
+\begin{aligned}
+J_z\mid\uparrow,z\rangle&=\frac{\hbar}{2}\mid\uparrow,z\rangle=\frac{\hbar}{2}\left[\begin{array}{c}1\\0\end{array}\right]\\
+J_z\mid\downarrow,z\rangle&=-\frac{\hbar}{2}\mid\downarrow,z\rangle=-\frac{\hbar}{2}\left[\begin{array}{c}0\\1\end{array}\right]
+\end{aligned}\tag{24}
+$$
+
+Note that if we relax the direction of $\mathbf{B}$ to an arbitrary direction $\vec{\mathbf{n}}$ defined as
+
+$$
+\vec{\mathbf{n}}=\sin\theta\cos\phi\vec{e}_x+\sin\theta\sin\phi\vec{e}_y+\cos\theta\vec{e}_z,
+$$
+
+and use Eq.(21), we can obtain a more general representation for angular momentum operator about an axis in the direction of $\vec{\mathbf{n}}$ as
+
+$$
+\mathbf{J}_{n}=\mathbf{J}\cdot\vec{\mathbf{n}}=\frac{\hbar}{2}\left(\begin{array}{cc}
+\cos \theta & \sin \theta e^{-i \phi} \\
+\sin \theta e^{+i \phi} & -\cos \theta
+\end{array}\right)\tag{25}
+$$
+
+which has its two eigenvectors being
+
+$$|\uparrow, \mathbf{n}\rangle=\left(\begin{array}{c}
+\cos \theta / 2 \\
+\sin \theta / 2 e^{i \phi}
+\end{array}\right)\tag{26-a}$$
+
+and
+
+$$|\downarrow, \mathbf{n}\rangle=\left(\begin{array}{c}
+-\sin \theta / 2 e^{-i \phi} \\
+\cos \theta / 2
+\end{array}\right)\tag{26-b}.$$
+
+As in the case of $J_z$, (26-a) and (26-b) also correspond to separate eigenvalues of $\frac{\hbar}{2}$ and $\frac{-\hbar}{2}$. At the limit of $\theta=0$ the equations (26-a) and (26-b) reduce to $\mid\uparrow,z\rangle$ and $\mid \downarrow,z\rangle$.
+
+Next we discuss the dynamics of our system by first defining a particle state as
+
+$$\left|\psi_{t}\right\rangle=\left(\begin{array}{l}
+\psi_{1}(t) \\
+\psi_{2}(t)
+\end{array}\right)\tag{27}$$
+
+Use (27) and (23) in time-dependent Schrodinger's equation, we obtain the equation of motion for the dynamic state,
+
+$$\frac{d}{d t}\left(\begin{array}{l}
+\psi_{1} \\
+\psi_{2}
+\end{array}\right)=-i \frac{C}{\hbar}\left(\begin{array}{rr}
+1 & 0 \\
+0 & -1
+\end{array}\right)\left(\begin{array}{l}
+\psi_{1} \\
+\psi_{2}
+\end{array}\right)\tag{28}$$
+
+from which
+
+$$\left|\psi_{t}\right\rangle=\left(\begin{array}{l}
+\psi_{1}(0) e^{-i \frac{C}{\hbar} t} \\
+\psi_{2}(0) e^{+i \frac{C}{\hbar} t}
+\end{array}\right)\tag{29}.$$
+
+At $t=0$ if the state is measured to be 
+
+$$\mid\uparrow,x\rangle=\left[\begin{array}{c}
+\frac{1}{\sqrt{2}}\\
+\frac{1}{\sqrt{2}}
+\end{array}\right],$$
+
+then (29) becomes
+
+$$\left|\psi_{t}\right\rangle=\frac{1}{\sqrt{2}}\left(\begin{array}{l}
+ e^{-i \frac{C}{\hbar} t} \\
+ e^{+i \frac{C}{\hbar} t}
+\end{array}\right).$$
+
+>we can get $\mid\uparrow,x\rangle$ from $\mid\uparrow,\mathbf{n}\rangle$ by setting $\theta=\pi/2$ and $\phi=0$.
+
+By axiom II of QM the probability of finding the up-spin at x-direction at time $t$ is 
+
+$$\left|\left\langle\uparrow, x \mid \psi_{t}\right\rangle\right|^{2}=\cos ^{2} \frac{C}{\hbar} t.$$
+
+### Free particle
+
 ## Free Electromagnetic Field
 
 ## Interaction of Radiation and Matter
