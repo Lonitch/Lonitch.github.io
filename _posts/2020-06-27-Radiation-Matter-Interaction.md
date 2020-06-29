@@ -1,7 +1,7 @@
 ---
 layout: post
 
-title: A Pedastrian Approach to Radiation-Matter Interaction
+title: A Pedastrian Approach to Radiation-Matter Interaction-Part I
 
 date: 2020-06-28
 
@@ -13,11 +13,15 @@ toc: true
 
 ---
 
+## TL:DR
+
+This blog introduces the formalism of quantum mechanics in Hilbert space.
+
 ## Motivation
 
-While working on my side project of *ab initio* polaron theory, I realize that none of my notes is explicitly related to the radiation-matter interaction (RMI). It's a bit weird at this point that RMI never occur to me as an important thing to learn even though the polaron is a result of interactions between electrons and radiation-excited phonons in crystalline lattice. After a search for proper sources to learn RMI, I laid my eyes on Edward Harris' **A Pedestrian Approach to Quantum Field Theory**. For a guy who just finished Dr. Klauber's excellent **Student Friendly Quantum Field Theory**, I was kinda reluctant to start reading another introductory book on QFT with concerns of wasting too much time. But Edward's book turned out to be a huge page-turner after I scanned through the first chapter. This blog is dedicated to reproduce some of the important conclusions in the first three chapters of Edward's book. All the derivation in this blog is prepared for those who had an introductory non-relativistic quantum mechanics class, but a brief review of axioms of QM is also given somewhere along the derivation.
+While working on my side project of *ab initio* polaron theory, I realize that none of my notes is explicitly related to the radiation-matter interaction (RMI). It's a bit weird at this point that RMI never occur to me as an important thing to learn even though the polaron is a result of interactions between electrons and radiation-excited phonons in crystalline lattice. After a search for proper sources to learn RMI, I laid my eyes on Edward Harris' **A Pedestrian Approach to Quantum Field Theory**. For a guy who just finished Dr. Klauber's excellent **Student Friendly Quantum Field Theory**, I was kinda reluctant to start reading another introductory book on QFT with concerns of wasting too much time. But Edward's book turned out to be a huge page-turner after I scanned through the first chapter. This blog is dedicated to reproduce some of the important conclusions in the first chapter of Edward's book. All the derivation in this blog is prepared for those who had an introductory non-relativistic quantum mechanics class, but a brief review of axioms of QM is also given somewhere along the derivation.
 
-## Hilbert-space Formalism of Quantum Mechanics
+## Quantum Mechanics in Hilbert Space
 ### Properties and definitions in Hilbert space
 Hilbert space is a vector space spanned by a complete set of base vectors. The vector space is similar to the scalar space except that each coordiante in the space corresponds to a vector instead of a scalar. The vectors live in Hilbert space have the following properties:
 
@@ -338,6 +342,7 @@ then we can only conclude that **$\hat{B}\mid a \rangle$ is a linear combination
 
 A brief summary before we proceed. We have at this point laid out the general formalism of QM using mathematical objects in Hilbert space. We start with basic properties and definitions of eigenvectors and operators to prepare our review of axioms of QM. The axiom IV, in particular, help us to recast Schrodinger picture into Heisenberg picture where operators become time-dependent and eigenstates are time-ivariant. In the following section we use this Hilbert-space formalism to solve some simple problems in QM.
 
+## Solved QM Problems 
 ### Spin particle in magnetic field
 Spin is an intrinsic form of angular momentum carried by elementary particles. In this section we use Hilbert-space formalism to derive the expression of general angular momentum operator around an arbitrary axis. For a $\frac{1}{2}-$spin particle its **spin operator** is given by
 
@@ -583,9 +588,59 @@ This integration can be carried out with the result
 
 $$G\left(\mathbf{x}^{\prime}, t \mid \mathbf{x}^{\prime \prime}, t_{0}\right)=\left(\frac{m}{2 \pi i \hbar\left(t-t_{0}\right)}\right)^{3 / 2} e^{(i m / 2 \hbar)\left[\left(\mathbf{x}^{\prime}-\mathbf{x}^{\prime \prime}\right)^{2} /\left(t-t_{0}\right)\right]}\tag{43}.$$
 
-### Perturbation theory
+### Fermi's golden rule
+We should now be comfortable with the "bra-ket" notation now. Using the first-order approximation in the quantum perturbation theory, we procced to derive the **Fermi's Golden rule** in this section. Since active research of quantum field theory mostly stems from perturbative theory, getting some exposure to it could really help us to appreciate the motives behind modern studies that use quantum field theory to understand the properties of condensed matters. 
 
+In a perturbed system, we are often interested to solve the following equation:
 
-## Free Electromagnetic Field
+$$
+-\frac{\hbar}{i}\frac{\partial}{\partial t}\mid\psi\rangle=(\hat{H}_0+\hat{H}^{\prime})\mid\psi\rangle\tag{44}.
+$$
 
-## Interaction of Radiation and Matter
+where we have for non-pertubative Hamiltonian $\hat{H}_0$
+
+$$\hat{H}_{0}\left|\Phi_{n}\right\rangle=E_{n}\left|\Phi_{n}\right\rangle.\tag{45}$$
+
+If we let
+
+$$|\psi\rangle=\sum_{n} C_{n}(t) e^{-i / \hbar E_{n} t}\left|\Phi_{n}\right\rangle\tag{46},$$
+
+and apply a $\langle\psi\mid$ at the both sides of (44), we find a set of coupled equations in a form of 
+
+$$\frac{d}{d t} C_{m}(t)=-\frac{i}{\hbar} \sum_{n}\left\langle\Phi_{m}\left|\hat{H}^{\prime}\right| \Phi_{n}\right\rangle e^{i / \hbar\left(E_{m}-E_{n}\right) t} C_{n}(t)\tag{47}.$$
+
+If we integrate (47) from time $0$ to $t$, we get
+
+$$C_{m}(t)=C_{m}(0)-\frac{i}{\hbar} \sum_{n} \int_{0}^{t} d t^{\prime}\left\langle\Phi_{m}\left|\hat{H}^{\prime}\right| \Phi_{n}\right\rangle e^{i / \hbar\left(E_{m}-E_{n}\right) t^{\prime}} C_{n}\left(t^{\prime}\right)\tag{48}.$$
+
+Eq.(48) is too bulky to handle, so we need to make some approximations to make it easier the calculation of the probability of finding our perturbed system at state $m$ at time $t$, $\|C_m(t)\|^2$. 
+
+The first approximation is that the system is at state $i$ at $t_0$,i.e., $C_m(0)=\delta_{im}$. We further assume that $\hat{H}^{\prime}$ is time-independent, and $C_m(t)$ do not depart from $C_m(0)$ very much. Then for $i\neq f$, Eq.(48) becomes
+
+$$\begin{aligned}
+C_{f}(t) &=-\frac{i}{\hbar}\left\langle\Phi_{f}\left|\hat{H}^{\prime}\right| \Phi_{i}\right\rangle \int_{0}^{t} d t^{\prime} e^{i / \hbar\left(E_{f}-E_{i}\right) t^{\prime}} \\
+&=-\frac{i}{\hbar}\left\langle\Phi_{f}\left|\hat{H}^{\prime}\right| \Phi_{i}\right\rangle\left[\frac{e^{i / \hbar\left(E_{f}-E_{i}\right) t}-1}{i / \hbar\left(E_{f}-E_{i}\right)}\right]
+\end{aligned}\tag{49}.$$
+
+Then the probability of $\|C_m(t)\|^2$ is found to be
+
+$$\left|C_{f}(t)\right|^{2}=\frac{4}{\hbar^{2}}\left|\left\langle\Phi_{f}\left|\hat{H}^{\prime}\right| \Phi_{i}\right\rangle\right|^{2} \frac{\sin ^{2}\left(\omega_{f_{i}} t / 2\right)}{\omega_{f i}^{2}}\tag{50}$$
+
+where $\omega_{f i}=\left(E_{f}-E_{i}\right) / \hbar.$
+
+>Now, regarded as a function of $\omega,$ the function $\sin ^{2}(\omega t / 2) / \omega^{2}$ becomes very sharply peaked about $\omega=0$ when $t$ becomes large. Most of the area under a graph of the function is under the central peak. Also
+>
+>$$\int_{-\infty}^{+\infty} d \omega \frac{\sin ^{2}(\omega t / 2)}{\omega^{2}}=\frac{\pi t}{2}.$$
+>
+>Therefore, we can say that
+>
+>$$\frac{\sin ^{2}(\omega t / 2)}{\omega^{2}} \underset{t \rightarrow \infty}{\longrightarrow} \frac{\pi t}{2} \delta(\omega)\tag{51}$$
+
+If we use (51) in (50) memtioned above, we have
+
+$$\frac{\left|C_{f}(t)\right|^{2}}{t}=\frac{2 \pi}{\hbar}\left|\left\langle\Phi_{f}\left|H^{\prime}\right| \Phi_{i}\right\rangle\right|^{2} \delta\left(E_{f}-E_{i}\right)\tag{52}.$$
+
+Eq.(52) may be interpreted as the transition probability per unit time for a transition from an initial state $\left|\Phi_{i}\right\rangle$ to a final state $\left|\Phi_{f}\right\rangle$. This result is known as **Fermi's golden rule**. Since Eq.(52) contains a Dirac $\delta$ -function, it is clear that **it is meaningful only if an integration over a continuum of final energies or initial energies is ultimately carried out**.
+
+## Conclusion
+There are some typos in Edward's book and I'm glad I worked it out. In the part II I'll develop a quantum theory of free electromagnetic field.
