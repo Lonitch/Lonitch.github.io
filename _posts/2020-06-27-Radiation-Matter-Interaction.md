@@ -640,7 +640,7 @@ If we use (51) in (50) memtioned above, we have
 
 $$\frac{\left|C_{f}(t)\right|^{2}}{t}=\frac{2 \pi}{\hbar}\left|\left\langle\Phi_{f}\left|H^{\prime}\right| \Phi_{i}\right\rangle\right|^{2} \delta\left(E_{f}-E_{i}\right)\tag{52}.$$
 
-Eq.(52) may be interpreted as the transition probability per unit time for a transition from an initial state $\left\mid\Phi_{i}\right\rangle$ to a final state $\left\mid\Phi_{f}\right\rangle$. This result is known as **Fermi's golden rule**. Since Eq.(52) contains a Dirac $\delta$ -function, it is clear that **it is meaningful only if an integration over a continuum of final energies or initial energies is ultimately carried out**.
+Eq.(52) may be interpreted as the transition probability per unit time for a transition from an initial state $\mid\Phi_{i}\rangle$ to a final state $\mid\Phi_{f}\rangle$. This result is known as **Fermi's golden rule**. Since Eq.(52) contains a Dirac $\delta$ -function, it is clear that **it is meaningful only if an integration over a continuum of final energies or initial energies is ultimately carried out**.
 
 ## Conclusion
 There are some typos in Edward's book and I'm glad I worked it out. In the part II I'll develop a quantum theory of free electromagnetic field.
