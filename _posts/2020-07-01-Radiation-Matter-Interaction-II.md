@@ -146,13 +146,14 @@ $$\begin{aligned}
 This is just (1.17) with explicit indices.
 
 ### Gauge invariance
-The potential can be chosen at will by using the following transformation:
+The potentials can be chosen at will by using the following transformation:
 
 $$\boldsymbol{A}^{\prime}=\boldsymbol{A}+\boldsymbol{\nabla} f \quad \text { and } \quad \boldsymbol{\phi}^{\prime}=\boldsymbol{\phi}-\frac{1}{c} \frac{\partial f}{\partial t}\tag{1.23}.$$
 
-It is easy to prove that new potentials in (1.23) automatically satisfy (1.17) if we use (1.2) to calculate $\mathbf{E}^{\prime}$ and $\mathbf{B}^{\prime}$. This property of Hamiltonian equation is called **gauge invariance**. Notice that the form of Hamiltonian $H$ is changed under the transformation (1.23). For instance, we can transform $A=0$ and $\phi=-E x$ into $A^{\prime}=(-c E t, 0,0)$ and $\phi^{\prime}=0$ according to (1.23), but the Hamiltonian function changes from the total energy of the particle to the kinetic energy.
+It is easy to prove that new potentials in (1.23) automatically satisfy (1.17) if we use (1.2) to calculate $\mathbf{E}^{\prime}$ and $\mathbf{B}^{\prime}$. This property of Hamiltonian equation is called **gauge invariance**. Notice that the form of Hamiltonian $H$ is changed under the transformation (1.23). For instance, we can transform $A=0$ and $\phi=-E x$ into $A^{\prime}=(-c E t, 0,0)$ and $\phi^{\prime}=0$ according to (1.23), but the Hamiltonian function changes from the total energy of the particle to the kinetic energy. To make the calculation easier, people usually choose specific $\mathbf{A}$ so the **Coulomb gauge**, $\nabla\cdot\mathbf{A}=0,$ is satisfied.
 
 ## Quantization of the Classical Hamiltonian
+As a continuity of our discussion in the previous section, we proceed to quantize the classical Hamiltonian derived in Eq.(1.15). We start with the momentum of the charged particle.
 
 ## Coherent States of EM Fields
 
