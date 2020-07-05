@@ -153,8 +153,61 @@ $$\boldsymbol{A}^{\prime}=\boldsymbol{A}+\boldsymbol{\nabla} f \quad \text { and
 It is easy to prove that new potentials in (1.23) automatically satisfy (1.17) if we use (1.2) to calculate $\mathbf{E}^{\prime}$ and $\mathbf{B}^{\prime}$. This property of Hamiltonian equation is called **gauge invariance**. Notice that the form of Hamiltonian $H$ is changed under the transformation (1.23). For instance, we can transform $A=0$ and $\phi=-E x$ into $A^{\prime}=(-c E t, 0,0)$ and $\phi^{\prime}=0$ according to (1.23), but the Hamiltonian function changes from the total energy of the particle to the kinetic energy. To make the calculation easier, people usually choose specific $\mathbf{A}$ so the **Coulomb gauge**, $\nabla\cdot\mathbf{A}=0,$ is satisfied.
 
 ## Quantization of the Classical Hamiltonian
-As a continuity of our discussion in the previous section, we proceed to quantize the classical Hamiltonian derived in Eq.(1.15). We start with the momentum of the charged particle.
+As a continuity of our discussion in the previous section, we proceed to quantize the classical Hamiltonian derived in Eq.(1.15). The quantization process will be divided into two parts. The first part comprises only the quantization of particle momentum. We can show that the Schrodinger equation using the half-quantized Hamiltonian has the gauge invariance with eigenfunctions shifted by a phase factor. To maintain the gauge invariance in the expectation values we will see that the momentum operator is no longer corresponding to a classical observable anymore. The second part is the quantization of the potentials, where the creation and annihilation operators become powerful tools to describe a quantum system with the presence of EM fields.
+
+### Momentum first
+If we replace the canonical momentum $\boldsymbol{p}$ with the operator $\hat{p}=(\hbar/i)\nabla$ in the classical Hamiltonian, Eq. (1.15) becomes
+
+$$\hat{H}=\frac{1}{2 m}\left(\frac{\hbar}{\mathrm{i}} \nabla-\frac{e}{c} \boldsymbol{A}\right)^{2}+e \phi\tag{2.1}.$$
+
+Expanding (2.1) gives
+
+$$\hat{H}=-\frac{\hbar^{2}}{2 m} \Delta+\frac{\mathrm{i} e \hbar}{m c} \boldsymbol{A} \cdot \nabla+\frac{\mathrm{i} e \hbar}{2 m c}(\nabla \cdot \boldsymbol{A})+\frac{e^{2}}{2 m c^{2}} \boldsymbol{A}^{2}+e \phi\tag{2.2}.$$
+
+Notice that in (2.1) $\nabla$ and $\mathbf{A}$ are not commuting. Now if we choose a $\mathbf{A}$ that satisfy the Coulomb gauge, $\nabla\cdot\mathbf{A}=0$, eqn.(2.2) can be reduced into 
+
+$$\hat{H}=\frac{\hat{\boldsymbol{p}}^{2}}{2 m}+e \phi-\frac{e}{m c} \boldsymbol{A} \cdot \hat{\boldsymbol{p}}+\frac{e^{2}}{2 m c^{2}} \boldsymbol{A}^{2}\tag{2.3}.$$
+
+Using (2.1) the Shrodinger equation becomes
+
+$$\left\{\frac{[\hat{p}-(e / c)\mathbf{A}]^{2}}{2 m}+e \phi\right\} \psi=\mathrm{i} \hbar \frac{\partial}{\partial t} \psi\tag{2.4}.$$
+
+Eq.(2.4) is gauge invariant. To see this, we first notice that the gauge transformation in (1.23) can be interpreted as an arbitrary shift of "*potential energy reference point*". A gauge-invariant equation must remain its format after the transformation. In the case of (2.4) the replacement of $\mathbf{A}$ and $\phi$ with $\mathbf{A}^{\prime}$ and $\phi^{\prime}$ from (1.23) gives
+
+$$\left\{\frac{[\hat{p}-(e / c)\mathbf{A}^{\prime}]^{2}}{2 m}+e \phi^{\prime}\right\} \psi^{\prime}=\mathrm{i} \hbar \frac{\partial}{\partial t} \psi^{\prime}\tag{2.5}.$$
+
+The task now is to find $\psi^{\prime}$ that satisfies (2.5). If we use the asatz of 
+
+$$\psi^{\prime}=exp(\frac{ie}{\hbar c}f)\psi\tag{2.6},$$
+
+and substitute (1.23) in (2.5), one can show that, after some tedious rearrangements, (2.4) is recovered from (2.5). Thus, we conclude that **the eigenfunction of (2.4) is shifted by a phase factor after the gauge transformation of EM potentials**. In fact, the phase shift in (2.6) does not change the expectation value of operators at all, since those expectations are calaculated using the "sandwhich" formalism. For instance, the expectation of Hamiltonian operator is
+
+$$
+\langle \psi\mid\hat{H}\mid \psi\rangle=\langle\psi^{\prime}\mid\hat{H}\mid\psi^{\prime}\rangle.
+$$
+
+Also from (1.19) we find **the genuine kinetic momentum operator for particle** in EM field is
+
+$$
+\hat{\mathcal{P}}=\frac{\hbar}{i}\nabla-\frac{e}{c}\mathbf{A}\tag{2.7}.
+$$
+
+Applying (2.7) after the gauge transformation on the state (2.6) gives
+
+$$\begin{aligned}
+\left(\hat{\boldsymbol{p}}-\frac{e}{c} \boldsymbol{A}^{\prime}\right) \psi^{\prime} &=\left(\frac{\hbar}{\mathrm{i}} \nabla-\frac{e}{c} \boldsymbol{A}-\frac{e}{c} \nabla f\right) \psi \exp \left(\frac{\mathrm{i} e}{\hbar c} f\right) \\
+&=\exp \left(\frac{\mathrm{i} e}{\hbar c} f\right)\left(\frac{\hbar}{\mathrm{i}} \nabla+\frac{e}{c} \nabla f-\frac{e}{c} \boldsymbol{A}-\frac{e}{c} \nabla f\right) \psi \\
+&=\exp \left(\frac{\mathrm{i} e}{\hbar c} f\right)\left(\frac{\hbar}{\mathrm{i}} \nabla-\frac{e}{c} \boldsymbol{A}\right) \psi
+\end{aligned}\tag{2.8}.$$
+
+Eq.(2.8) implies that the expectation $$\langle\psi^{\prime}\mid\hat{\mathcal{P}}\mid\psi^{\prime}\rangle$$ is invariant under gauge transformation instead of that of $\hat{p}$. Hence, if in a physical problem the momentum operator $\hat{p}$ appears, **the operator $\hat{p}$ must always be replaced by $\hat{\boldsymbol{p}}-(e / c) \boldsymbol{A}$ if electromagnetic fields are present**. *This is the only way to guarantee gauge invariance in quantum theory*[1].
+
+### Quantize the potential $\mathbf{A}$
 
 ## Coherent States of EM Fields
 
 ## Conclusion
+
+## References
+
+[1] Greiner, Walter. Quantum mechanics: an introduction. Springer Science & Business Media, 2011.
