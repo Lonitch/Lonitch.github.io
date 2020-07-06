@@ -276,7 +276,7 @@ $$\begin{aligned}
 &=\boldsymbol{A}_{0} \mathrm{e}^{\mathrm{i}(\boldsymbol{k} \cdot \boldsymbol{r}-\omega t)}+\mathrm{c}.\mathrm{c}
 \end{aligned}\tag{2.19}$$
 
-Here $\boldsymbol{A}_{0}=\left|\boldsymbol{A}_{0}\right| \boldsymbol{\varepsilon} \mathrm{e}^{\mathrm{i} \alpha}$ is the amplitude and "c.c." stands for the "complex conjugate" of the first term. It is easy to see that $\boldsymbol{k}\perp\mathbf{A}_0$ to satify the second equation in (2.18), and 
+Here $\boldsymbol{A}_{0}=\left\mid\boldsymbol{A}_{0}\right\mid \boldsymbol{\varepsilon} \mathrm{e}^{\mathrm{i} \alpha}$ is the amplitude and "c.c." stands for the "complex conjugate" of the first term. It is easy to see that $\boldsymbol{k}\perp\mathbf{A}_0$ to satify the second equation in (2.18), and 
 
 $$\omega=\mid\boldsymbol{k}\mid c\tag{2.20}.$$
 
@@ -332,7 +332,7 @@ $$H=\frac{1}{2} \sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(a_{\boldsymb
 
 Notice that we did not combine the terms in the bracket above, even though they are still scalars. The reason for this will become clear once we introduce creation and annihilation operators.
 
-Now we introduce quantization. The form of (2.28) motivates us to proceed in a manner that is similar to the quantization of phonons of the quantized oscillators, i.e. designating $a_{\boldsymbol{k}\sigma}$ to be $\hat{a}_{\boldsymbol{k}\sigma}$ and $a^*_{\boldsymbol{k}\sigma}$ to be $\hat{a}^{\dagger}_{\boldsymbol{k}\sigma}$. We require that
+Now we introduce quantization. The form of (2.28) motivates us to proceed in a manner that is similar to the quantization of phonons of the quantized oscillators, i.e. designating $a_{\boldsymbol{k}\sigma}$ to be $$\hat{a}_{\boldsymbol{k}\sigma}$$ and $$a^*_{\boldsymbol{k}\sigma}$$ to be $$\hat{a}^{\dagger}_{\boldsymbol{k}\sigma}$$. We require that
 
 $$\left[\hat{a}_{\boldsymbol{k} \sigma}, \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}}^{\dagger}\right]_{-}=\delta_{\boldsymbol{k} \boldsymbol{k}^{\prime}} \delta_{\sigma \sigma^{\prime}}\tag{2.29}.$$
 
