@@ -3,7 +3,7 @@ layout: post
 
 title: A Pedastrian Approach to Radiation-Matter Interaction-Part II
 
-date: 2020-07-08
+date: 2020-07-05
 
 Author: Sizhe
 
@@ -423,7 +423,7 @@ $$\begin{aligned}
 &=\frac{\hbar \omega}{4 L^{3}}\left\langle n\left|2 \hat{a}^{\dagger} \hat{a}+1\right| n\right\rangle=\frac{\hbar \omega}{2 L^{3}}\left(n+\frac{1}{2}\right).
 \end{aligned}\tag{3.5}$$
 
-Clearly the equation (3.4) does not repeat the results we derived in (2.21), but eqn.(3.5) indicates the electric field contributes half of the energy density of EM field, and the other half is from magnetic field. To make the expectation of $\hat{\mathbf{E}}$ ressembles the classical $\mathbf{E}$ field, we introduce the **coherence state** defined as
+Clearly the equation (3.4) does not repeat the results we derived in (2.21), but eqn.(3.5) indicates the electric field contributes half of the energy density of EM field, and the other half is from magnetic field. According to Edward Harris[3] the result in (3.4) is due to the random phase each photon possesses, so the expectation of $\hat{E}$ vanishes if we average over all the phases. To make the expectation of $\hat{\mathbf{E}}$ ressembles the classical $\mathbf{E}$ field, we introduce the **coherence state** defined as
 
 $$|c\rangle=\sum_{n=0}^{\infty} b_{n}|n\rangle\tag{3.6}$$
 
@@ -465,3 +465,5 @@ I did not follow Edward's book strictly in the blog because I found the argument
 [1] Greiner, Walter. Quantum mechanics: an introduction. Springer Science & Business Media, 2011.
 
 [2] Greiner, Walter. Quantum Mechanics: Special Chapters. Berlin-New York: Springer, 1998.
+
+[3] Harris, E. G. "A Pedestrain Approach to Quantum Field Theory". Wiley, Interscience, New York p 99 (1972): 9-19.
