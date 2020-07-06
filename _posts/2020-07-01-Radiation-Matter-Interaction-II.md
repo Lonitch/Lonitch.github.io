@@ -276,7 +276,7 @@ $$\begin{aligned}
 &=\boldsymbol{A}_{0} \mathrm{e}^{\mathrm{i}(\boldsymbol{k} \cdot \boldsymbol{r}-\omega t)}+\mathrm{c}.\mathrm{c}
 \end{aligned}\tag{2.19}$$
 
-Here $$\boldsymbol{A}_{0}=\left\mid\boldsymbol{A}_{0}\right\mid \boldsymbol{\varepsilon} \mathrm{e}^{\mathrm{i} \alpha}$$ is the amplitude and "c.c." stands for the "complex conjugate" of the first term. It is easy to see that $\boldsymbol{k}\perp\mathbf{A}_0$ to satify the second equation in (2.18), and 
+Here $$\boldsymbol{A}_{0}=\mid\boldsymbol{A}_{0}\mid \boldsymbol{\varepsilon} \mathrm{e}^{\mathrm{i} \alpha}$$ is the amplitude and "c.c." stands for the "complex conjugate" of the first term. It is easy to see that $\boldsymbol{k}\perp\mathbf{A}_0$ to satify the second equation in (2.18), and 
 
 $$\omega=\mid\boldsymbol{k}\mid c\tag{2.20}.$$
 
