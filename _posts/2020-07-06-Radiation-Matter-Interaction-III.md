@@ -193,15 +193,15 @@ Applying the trick in (3.8) we recognize that the momentum matrix element $$e\le
 
 Up to this point we neglect the interaction btw particle spin and EM field. To add it in our Hamiltonian, we first realize that the interaction energy of a magnetic momentum $\boldsymbol{\mu}$ and a magnetic field $\mathbf{B}$ is just
 
-$$H^{\prime \prime \prime}=-\boldsymbol{\mu} \cdot \boldsymbol{B}\tag{3.8}$$
+$$H^{\prime \prime \prime}=-\boldsymbol{\mu} \cdot \boldsymbol{B}\tag{3.9}$$
 
-where $\boldsymbol{\mu}=(e \hbar / 2 m c) \boldsymbol{\sigma}$. Since $\mathbf{B}=\nabla\times\mathbf{A}$ we can quantize (3.8) as
+where $\boldsymbol{\mu}=(e \hbar / 2 m c) \boldsymbol{\sigma}$. Since $\mathbf{B}=\nabla\times\mathbf{A}$ we can quantize (3.9) as
 
 $$\hat{H}^{\prime \prime \prime}=-\frac{\mathrm{i} e \hbar}{2 m c} \sum_{\boldsymbol{k}, \sigma} N_{\boldsymbol{k}} \boldsymbol{\sigma} \cdot\left(\hat{\boldsymbol{k}} \times \varepsilon_{\boldsymbol{k} \sigma}\right)\left[\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}\right],$$
 
 where $\hat{\mathbf{k}}=-i\nabla$. Acting $\hat{\mathbf{k}}$ on exponential factors gives
 
-$$\hat{H}^{\prime \prime \prime}=-\frac{\mathrm{i} e \hbar}{2 m c} \sum_{\boldsymbol{k}, \sigma} N_{\boldsymbol{k}} \boldsymbol{\sigma} \cdot\left(\boldsymbol{k} \times \varepsilon_{\boldsymbol{k} \sigma}\right)\left[\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}-\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}\right]\tag{3.9}.$$
+$$\hat{H}^{\prime \prime \prime}=-\frac{\mathrm{i} e \hbar}{2 m c} \sum_{\boldsymbol{k}, \sigma} N_{\boldsymbol{k}} \boldsymbol{\sigma} \cdot\left(\boldsymbol{k} \times \varepsilon_{\boldsymbol{k} \sigma}\right)\left[\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}-\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}\right]\tag{3.10}.$$
 
 ## Adsorption of Photons
 
@@ -263,7 +263,7 @@ $$\begin{aligned}
 \end{aligned}\tag{4.6}$$
 
 ## Photon Scattering from Free Electrons
-In this section we will first prove that **free paritlce in vacuum cannot radiate any photon by borrowing the concept of 4-momentum from special relativity**. We then study the scattering between a photon and a free electron.
+In this section we will first prove that **free paritlce in vacuum cannot radiate any photon by borrowing the concept of 4-momentum from special relativity**. This phenomenon is a result of using eigenstates of free particles. We then study the scattering between a photon and a free electron.
 
 The Hamiltonian for a free particle in vacuum is simply
 
@@ -346,11 +346,11 @@ we finally conclude from (5.13) that $E_{\gamma}=0$, i.e., no photon emission is
 We can also draw the conclusion that **processes of first order caused by $$\hat{H}_{\text {int }}^{\prime}$$ do not exist**. As a consequence we investigate now the processes of first order with $$\hat{H}_{\text {int }}^{\prime \prime}.$$ for the free particles. This part of the interaction contains terms of the form $$\hat{a}_{k \sigma}^{\dagger} \hat{a}_{k^{\prime} \sigma^{\prime}} .$$ Obviously, they describe processes that can be shown in the following sketch.
 
 <p align="center">
-  <img width="256" height="221" src="{{ site.url }}/images/Hint-p-p.PNG">
+  <img width="262" height="158" src="{{ site.url }}/images/Hint-p-p.PNG">
 </p>
 <p style="text-align: center;">Figure 2. Sketch of a two-photon process in k-space</p>
 
-The initial and final states described in Figure 2 are
+In figure 2 the wiggly and solid lines represent photons and particles, respectively. The initial and final states described above are then
 
 $$\begin{array}{l}
 |i\rangle=\left|\boldsymbol{q}_{\mathbf{i}}\right\rangle\left|\ldots, n_{\boldsymbol{k}_{1} \sigma_{1}}, \ldots, n_{\boldsymbol{k}_{f} \sigma_{t}}, \ldots\right\rangle \\
@@ -386,9 +386,111 @@ $$\begin{aligned}
 which indicates the conservation of momenta.
 
 ## Natural linewidth and self-energy
+So far all the transition probability expressions from previous sections have $\delta-$functions to satisfy the momentum/energy conservation. However, the photon emitting from a particle corresponds to a wave of finite length and duration. According to the Heisenberg's uncertainty principle, there must be uncertainty in particle's energy that is related to the lifetime of excited states, i.e. $\Delta E\geq \hbar/\tau$. Therefore, the photon emission spectrum from a particle must be made of lines with finide width rather than a spectrum of infinite peaks of $\delta-$function. This section shows a way to correct such error.
 
+Here we employ a method that is similar to what we have seen in the coherence state section of Part II blog, that is, writing the eigenstates of EM+particle system $\mid\psi\rangle$ as a linear combination of unperturbed states $\mid\phi_n\rangle$,
+
+$$|\psi\rangle=\sum_{n} c_{n}(t) \exp \left(-\frac{\mathrm{i} E_{n}}{\hbar} t\right)\left|\phi_{n}\right\rangle\tag{6.1},$$
+
+where 
+
+$$(\hat{H}_{mp}+\hat{H}_{rad})\left|\phi_{n}\right\rangle=E_{n}\left|\phi_{n}\right\rangle\tag{6.2}.$$
+
+Using (6.1) and (6.2) in the time-dependent Schrodinger equation gives a system of coupled equations
+
+$$\frac{\mathrm{d} c_{m}(t)}{\mathrm{d} t}=-\frac{\mathrm{i}}{\hbar} \sum_{n} c_{n}(t)\left\langle\phi_{m}\left|\hat{H}_{\mathrm{int}}\right| \phi_{n}\right\rangle \exp \left(\frac{\mathrm{i}\left(E_{m}-E_{n}\right) t}{\hbar}\right)\tag{6.3}.$$
+
+We now let $c_{i0}$ to be the amplitude of the initial state with no photon, while $$c_{f\mathbf{k}\sigma}$$ to be the possible final states' amplitudes. Then (6.3) reads
+
+$$\begin{aligned}
+\frac{\mathrm{d} c_{i 0}}{\mathrm{d} t} &=-\frac{\mathrm{i}}{\hbar} \sum_{\boldsymbol{k} \sigma}\left\langle i 0\left|\hat{H}_{i n t}\right| f \boldsymbol{k} \sigma\right\rangle \exp \left(\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right) c_{f k \sigma}, \\
+\frac{\mathrm{d} c_{f k \sigma}}{\mathrm{d} t} &=-\frac{\mathrm{i}}{\hbar}\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}\right| i 0\right\rangle \exp \left(-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right) c_{i 0}.
+\end{aligned}\tag{6.4}$$
+
+Note that the first equation still contains a sum because the initial state could decay into many different states, while each final state has only one initial state from which it is derived. Hence the second equation of (6.4) has no summation. Now we **make the ansatz of**
+
+$$c_{i 0}(t)=\exp \left(-\frac{\mathrm{i}}{\hbar} \Delta E_{\mathrm{i}} t\right)\tag{6.5}$$
+
+where $\Delta E_i$ is a constant needed to be determined. Use(6.5) and integrate the second equation of (6.4) from 0 to $t$ to get
+
+$$c_{f k \sigma}(t)=\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}\right| i 0\right\rangle \frac{\exp \left[-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right]-1}{E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}}\tag{6.6}.$$
+
+We now determine $\Delta E_i$ so that the first equation of (6.4) is satisfied too. Using (6.5) and (6.6) in the first equation of (6.4) we find
+
+$$\begin{aligned}
+&-\frac{\mathrm{i}}{\hbar} \Delta E_{\mathrm{i}} \exp \left(-\frac{\mathrm{i}}{\hbar} \Delta E_{\mathrm{i}} t\right) \\
+=&-\frac{\mathrm{i}}{\hbar} \sum_{k \sigma}\left\langle i 0\left|\hat{H}_{\mathrm{int}}\right| f \boldsymbol{k} \sigma\right\rangle\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}\right| i 0\right\rangle \\
+& \times \frac{\exp \left[-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right]-1}{E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}} \exp \left(\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right) \\
+=&-\frac{\mathrm{i}}{\hbar} \sum_{\boldsymbol{k} \sigma}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}\right| i 0\right\rangle\right|^{2} \frac{1-\exp \left[\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right]}{E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}} \\
+& \times \exp \left(-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t+\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right)
+\end{aligned}$$
+
+Dividing both side by $$(-i / \hbar) \exp \left(-\frac{i}{\hbar} \Delta E_{i} t\right)$$ results in
+
+$$\begin{aligned}
+\Delta E_{\mathrm{i}}=& \sum_{k \sigma}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}\right| i 0\right\rangle\right|^{2} \\
+& \times\left(\frac{1-\exp \left(\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right)}{E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}}\right).
+\end{aligned}\tag{6.7}$$
+
+To further simplify (6.7) we ask mathmatician for help. Here we need the **Plemlj's Formula**,
+
+$$\lim _{t \rightarrow \infty}\left(\frac{1-e^{i x t}}{x}\right)=P\left(\frac{1}{x}\right)-i \pi \delta(x)\tag{6.8},$$
+
+and turn (6.7) into
+
+$$\begin{aligned}
+\Delta E_{\mathrm{i}}=& \sum_{k \sigma} \frac{\left|\left\langle f k \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2}}{E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}} \\
+&-\mathrm{i} \pi \sum_{k \sigma}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2} \delta\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right).
+\end{aligned}\tag{6.9}$$
+
+Hence, $\Delta E_i$ is complex-valued. We write the real part and imaginary part separately to find
+
+$$\begin{array}{l}
+\Re\left(\Delta E_{\mathrm{i}}\right)=\sum_{\boldsymbol{k}, \sigma} \frac{\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2}}{E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}}, \\
+\Im\left(\Delta E_{\mathrm{i}}\right)=-\pi \sum_{\boldsymbol{k}, \sigma}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2} \delta\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right).
+\end{array}\tag{6.10}$$
+
+If there are many final states that the particle could stay after the decay, we need to sum over those states too, and (6.10) is modified into
+
+$$\begin{array}{l}
+\Re\left(\Delta E_{\mathrm{i}}\right)=\sum_{k, \sigma} \sum_{f} \frac{\left|\left\langle f k \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2}}{E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}},\tag{6.11a,b} \\
+\Im\left(\Delta E_{\mathrm{i}}\right)=-\left.\pi \sum_{k, \sigma} \sum_{f}\left|\left\langle f k \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|\right|^{2} \delta\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right).
+\end{array}$$
+
+The summation in (6.11a) is unrestricted, meaning that the final state could not fulfill the energy conservation. This phenomenon is called **virtual process** where the particle is understood as a combination of a bare particle and virtual photon cloud. This phenomenon also indicates that quantum field theory is plagued by the infinities, and the solution to such problem is the renormalization group.
+
+On the other hand (6.11b) can be recasted into a form of 
+
+$$-\frac{2}{\hbar} \Im\left(\Delta E_{\mathrm{i}}\right)=\sum_{k \sigma} \sum_{f} \frac{2 \pi}{\hbar}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2} \delta\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega\right)\tag{6.12}.$$
+
+Comparing (6.12) with (3.1) we can tell that **the imaginary part of $\Delta E_i$ is directly related to the reciprocal lifetime of initial state,** i.e.
+
+$$\frac{1}{\tau_{\mathrm{i}}}=\gamma_{\mathrm{i}}=-\frac{2}{\hbar} \Im\left(\Delta E_{\mathrm{i}}\right)\tag{6.13}.$$
+
+Thus, the initial particle state $\mid a_{i}\rangle$ decays with lifetime $\tau .$ **On the same footing the state obtains a level shift $\Re(\Delta E),$ which results from the emission and reabsorption of (virtual) photons**.
+
+With the calculated $\Delta E_i$ the probability amplitude of finding a final state to be $f$ with wave vector $\mathbf{k}$ and polarization $\sigma$ is then
+
+$$c_{f k \sigma}(t)=\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle \frac{\exp \left(-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Re\left(\Delta E_{\mathrm{i}}\right)-\hbar \omega_{k}\right) t\right) \exp \left(-\gamma_{\mathrm{i}} t / 2\right)-1}{E_{\mathrm{i}}+\Re\left(\Delta E_{\mathrm{i}}\right)-E_{\mathrm{f}}-\hbar \omega_{k}+(\mathrm{i} / 2) \hbar \gamma_{\mathrm{i}}}\tag{6.14},$$
+
+from which the probability of finding a specific final state after a long time is 
+
+$$\begin{aligned}
+\lim _{t \rightarrow \infty}\left|c_{\mathbf{f} k \sigma}\right|^{2}=&\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\text {int }}^{\prime}\right| i 0\right\rangle\right|^{2} \\
+& \times \frac{1}{\left(E_{\mathrm{i}}+\Re\left(\Delta E_{\mathrm{i}}\right)-E_{\mathrm{f}}-\hbar \omega_{k}\right)^{2}+\hbar^{2} \gamma_{\mathrm{i}}^{2} / 4}.
+\end{aligned}\tag{6.15}$$
+
+Eq.(6.15) reflects **the intensity distribution of the emitted line**: The spectral line has a **Breit-Wigner distribution** with center $$\hbar \omega_{k}=E_{\mathrm{i}}+\Re\left(\Delta E_{\mathrm{i}}\right)-E_{\mathrm{f}}$$ and half-width $$\hbar \gamma_{\mathrm{i}} ;$$. Because of the self-energy of the electron, emission and reabsorption of photons results in the spectral line being shifted by $$\Re\left(\Delta E_{\mathrm{i}}\right) .$$ 
+
+<p align="center">
+  <img width="258" height="211" src="{{ site.url }}/images/breit-wigner-distribution.PNG">
+</p>
+<p style="text-align: center;">Figure 3. Breit-Wigner
+form of the spectral line</p>
 
 ## Conclusion
+Let us call a stop to this radiation-matter interaction journey. This is the first time I write a series of blogs for quantum field theory basics. There are still so many aspects we can talk about this amazing starting point towards the general application of QFT. Along the way I learned that a good theory always starts from a basic equation that is not going to breakdown no matter what. To derive useful conclusions from a theory we have to keep coming back to the basics to assure ourselves that the final results are not artificial but can be interpreted using real-world phenomena. I also restrained myself to only focus on the aspects that might be helpful for me to better understand the polaron theory, hopefully more about polaron theory will be finished after my prelim exam. 
+
 
 ## References
 
