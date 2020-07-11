@@ -66,11 +66,11 @@ $$\begin{aligned}
 &\left.+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}} \mathrm{e}^{\mathrm{i}\left(-\boldsymbol{k}+\boldsymbol{k}^{\prime}\right) \cdot \boldsymbol{x}}+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}}^{\dagger} \mathrm{e}^{\mathrm{i}\left(-\boldsymbol{k}-\boldsymbol{k}^{\prime}\right) \cdot \boldsymbol{x}}\right).
 \end{aligned}\tag{1.7}$$
 
-The interaction energy usually only makes a very small portion of the total energy, so we can treat (1.6) and (1.7) as perturbations. And the undistorbed Hamiltonian, $\hat{H}_{mp}+\hat{H}_{rad}$ has the state vectors to be
+The interaction energy usually only makes a very small portion of the total energy, so we can treat (1.6) and (1.7) as perturbations. And the undistorbed Hamiltonian, $$\hat{H}_{mp}+\hat{H}_{rad}$$ has the state vectors to be
 
 $$|m p+r a d\rangle=|m p\rangle\left|\ldots n_{k \sigma} \ldots\right\rangle_{\mathrm{rad}}\tag{1.8}.$$
 
-Several points are worth mentioning regarding $\hat{H}_{int}$ before we proceed to next section. Because we only have one creation/annhilation in each term of eqn.(1.6), then we conclude that $\hat{H}_{int}^{\prime}$ introduces single photon transition. On the other hand, $\hat{H}_{int}^{\prime\prime}$ introduces transtions that involve two photons. 
+Several points are worth mentioning regarding $$\hat{H}_{int}$$ before we proceed to next section. Because we only have one creation/annhilation in each term of eqn.(1.6), then we conclude that $$\hat{H}_{int}^{\prime}$$ introduces single photon transition. On the other hand, $$\hat{H}_{int}^{\prime\prime}$$ introduces transtions that involve two photons. 
 
 ## Emission of Light From An Excited Atom
 
@@ -132,7 +132,7 @@ $$k_iL=2\pi n_i\quad n_i=0,1,2,\ldots\quad i=x,y,z.\tag{3.3}$$
 
 Each vector $\mathbf{n}=\{n_x,n_y,n_z\}$ reprents a normal mode of EM field. So the number of normal modes fall into the volume of $\Delta n_x\Delta n_y\Delta n_z$ at $(n_x,n_y,n_z)$ is just $L^3/(2\pi)^3\Delta k_x\Delta k_y\Delta k_z$. At the limit of $L\rightarrow \infty$, (3.2) holds.
 
-Let us now choose the directions of polarization vectors $\boldsymbol{\varepsilon}_{\mathbf{k}\sigma}$ so that (3.1) can be largely simplified. If we choose the $\boldsymbol{\varepsilon}_{\mathbf{k}1}$ to be a direction perpendicular to $\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$, and $\mathbf{k}$ forms a angle of $\theta$ with $\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$ (see Figure 1), we have
+Let us now choose the directions of polarization vectors $$\boldsymbol{\varepsilon}_{\mathbf{k}\sigma}$$ so that (3.1) can be largely simplified. If we choose the $$\boldsymbol{\varepsilon}_{\mathbf{k}1}$$ to be a direction perpendicular to $$\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$$, and $\mathbf{k}$ forms a angle of $\theta$ with $$\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$$ (see Figure 1), we have
 
 $$\begin{aligned}
 \sum_{\sigma=1,2}\left|\left\langle a_{\mathbf{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle\right|^{2} &=\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \boldsymbol{\varepsilon}_{\boldsymbol{k}_{2}} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot x}\right| a_{\mathrm{i}}\right\rangle\right|^{2} \\
@@ -154,7 +154,7 @@ $$\sum_{\sigma=1,2}\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \
 Eq.(3.5) is often referred as **dipole approximation** for the reasons we will discuss later. Similarly, we also have **magnetic dipole approximation** with $$e^{-i\mathbf{k\cdot x}}\approx 1-i\mathbf{k\cdot x}$$, and **electric quadrupole approximation** with $$e^{-i\mathbf{k\cdot x}}\approx 1-i\mathbf{k\cdot x}-\frac{1}{2}(\mathbf{k\cdot x})^2.$$
 
 <p align="center">
-  <img width="256" height="221" src="{{ site.url }}/images/polarization-vector.PNG">
+  <img width="256" height="221" src="{{ site.url }}/images/polarization-vectors.PNG">
 </p>
 <p style="text-align: center;">Figure 1. The choice of one of the polarization vectors. The angle theta represents the polar angle in k-space.</p>
 
@@ -174,7 +174,7 @@ $$\begin{aligned}
 =& \frac{4}{3} \frac{e^{2}}{m^{2} c^{3} \hbar} \omega_{\mathrm{fi}}\left|\left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle\right|^{2}.
 \end{aligned}\tag{3.7}$$
 
-The matrix element $$\left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle $$ can be cast in another form, i.e. 
+The matrix element $$\left\langle a_{\mathrm{f}}\mid\hat{\boldsymbol{p}}\mid a_{\mathrm{i}}\right\rangle $$ can be cast in another form, i.e. 
 
 $$\begin{aligned}
 \left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle &=\left\langle a_{\mathrm{f}}\left|m \frac{\mathrm{d} \boldsymbol{\hat{x}}}{\mathrm{d} t}\right| a_{\mathrm{i}}\right\rangle \\
@@ -187,7 +187,7 @@ The Heisenberg's equation of motion is used at the second equivalence, that is,
 
 $$\frac{\mathrm{d} \hat{\boldsymbol{x}}}{\mathrm{d} t}=-\frac{\mathrm{i}}{\hbar}\left[\hat{\boldsymbol{x}}, \hat{H}_{\mathrm{mp}}\right]$$
 
-Applying the trick in (3.8) we recognize that the momentum matrix element $$e\left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle$$ can be expressed as a matrix element of the dipole operator $e \hat{\boldsymbol{x}}$. By now the designations *dipole approximation and dipole radiation* introduced earlier should have become clear.
+Applying the trick in (3.8) we recognize that the momentum matrix element $$e\left\langle a_{\mathrm{f}}\mid\hat{\boldsymbol{p}}\mid a_{\mathrm{i}}\right\rangle$$ can be expressed as a matrix element of the dipole operator $e \hat{\boldsymbol{x}}$. By now the designations *dipole approximation and dipole radiation* introduced earlier should have become clear.
 
 ### The Hamiltonian for interaction btw the electron Spin and the EM field
 
@@ -205,9 +205,188 @@ $$\hat{H}^{\prime \prime \prime}=-\frac{\mathrm{i} e \hbar}{2 m c} \sum_{\boldsy
 
 ## Adsorption of Photons
 
-## Photon Scattering from Free Electrons
+The adsorption process is exact opposite to the emission process. Thus, the initial and final states of the phonon+particle system are
 
-## Special Topics
+$$\begin{array}{l}
+|i\rangle=\left|a_{\mathrm{i}}\right\rangle\left|\ldots, n_{k \sigma}, \ldots\right\rangle, \\
+\mid f\rangle=\left|a_{\mathrm{f}}\right\rangle\left|\ldots, n_{k \sigma}-1, \ldots\right\rangle.
+\end{array}\tag{4.1}$$
+
+and the matrix element of $\hat{H}_{int}^{\prime}$ is
+
+$$\begin{aligned}
+\left\langle f\left|\hat{H}_{\text {int }}^{\prime}\right| i\right\rangle=&\left\langle a_{\mathrm{f}}\left|\left\langle\ldots, n_{k \sigma}-1, \ldots\right|\right.\right.\\
+& \times\left(-\frac{e}{m c}\right) \sum_{\boldsymbol{k}, \sigma} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}} \hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma}\left(\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} k^{\prime} \cdot \boldsymbol{x}}+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k}^{\prime} \cdot \boldsymbol{x}}\right) \\
+& \times\left|a_{\mathrm{i}}\right\rangle\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle \\
+=&-\frac{e}{m c} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}}\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} k \cdot \mathbf{x}}\right| a_{\mathrm{i}}\right\rangle \\
+& \times\left\langle\ldots, n_{k \sigma}-1, \ldots\left|\hat{a}_{\boldsymbol{k} \sigma}\right| \ldots, n_{k \sigma}, \ldots\right\rangle \\
+=&-\frac{e}{m c} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}}\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle \sqrt{n_{k \sigma}}
+\end{aligned}\tag{4.2}$$
+
+where we once again only consider one photon with wave vector $\mathbf{k}$ and polarization $\sigma$. The probability of transition per unit time is then
+
+$$\begin{aligned}
+\left(\frac{\text { trans. prob. }}{\text { time }}\right)_{\text {absorption }}=& \frac{2 \pi}{\hbar}\left(\frac{e}{m c}\right)^{2}\left(\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}\right) n_{k \sigma} \\
+& \times\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \boldsymbol{\varepsilon}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle\right|^{2} \delta\left(E_{\mathrm{f}}-E_{\mathrm{i}}\right)
+\end{aligned}\tag{4.3}$$
+
+with
+
+$$\begin{array}{l}
+E_{\mathrm{f}}=E_{a_{\mathrm{f}}}+\left(n_{\boldsymbol{k} \sigma}-1\right) \hbar \omega_{\boldsymbol{k} \sigma} \\
+E_{\mathrm{i}}=E_{a_{\mathrm{i}}}+n_{\boldsymbol{k} \sigma} \hbar \omega_{\boldsymbol{k} \sigma}.
+\end{array}$$
+
+If we make use of the relation
+
+$$\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle=\left\langle a_{\mathrm{i}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{f}}\right\rangle^{*}$$
+
+eqn.(4.3) becomes
+
+$$\begin{array}{l}
+\left(\frac{\text { trans. prob. }}{\text { time }}\right) \\
+\begin{array}{l}
+=\frac{2 \pi}{\hbar}\left(\frac{e}{m c}\right)^{2}\left(\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}\right) n_{\boldsymbol{k} \sigma}\left|\left\langle a_{i}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{f}}\right\rangle\right|^{2} \\
+\quad \times \delta\left(E_{a_{\mathrm{i}}}+\hbar \omega_{\boldsymbol{k} \sigma}-E_{a_{\mathrm{f}}}\right)
+\end{array}
+\end{array}\tag{4.4}$$
+
+which is similar to eqn.(2.4) with $n_{k\sigma}+1$ replaced by $n_{k\sigma}$. We will now calculate the **cross section** $$\sigma_{\mathrm{i} \rightarrow \mathrm{f}}(k \sigma)$$ for the absorption of a photon with momentum $\hbar k$ and polarization $\sigma .$ It is defined as **the transition probability per unit time for the absorption of a photon divided by the incoming photon flux $j_{\text {photon }}$**,
+
+$$j_{\text {photon }}=\frac{n_{k \sigma}}{L^{3}} c\tag{4.5}.$$
+
+We call $\sigma_{i\rightarrow f}$ "cross section" because it has an unit of area. The definition yields that
+
+$$\begin{aligned}
+\sigma_{\mathrm{i} \rightarrow \mathrm{f}}(k \sigma)=& \frac{4 \pi^{2} e^{2}}{m^{2} \omega_{k} c}\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle\right|^{2} \\
+& \times \delta\left(E_{a_{\mathrm{i}}}+\hbar \omega_{k}-E_{a_{\mathrm{f}}}\right).
+\end{aligned}\tag{4.6}$$
+
+## Photon Scattering from Free Electrons
+In this section we will first prove that **free paritlce in vacuum cannot radiate any photon by borrowing the concept of 4-momentum from special relativity**. We then study the scattering between a photon and a free electron.
+
+The Hamiltonian for a free particle in vacuum is simply
+
+$$\hat{H}=\frac{\hat{\mathbf{p}}^2}{2m}\tag{5.1},$$
+
+with normalized eigenstates $\mid\mathbf{q}\rangle$ being
+
+$$\langle \boldsymbol{x}\mid\mathbf{q}\rangle=\psi_{\mathbf{q}}(\mathbf{x})=\frac{1}{\sqrt{L^3}}e^{i\mathbf{q\cdot x}}\tag{5.2}.$$
+
+At first, we consider the process of a free electron absorbing a photon. The initial and final states are given by
+
+$$\begin{array}{l}
+|i\rangle=\left|\boldsymbol{q}_{i}\right\rangle\left|\ldots, n_{k \sigma}, \ldots\right\rangle \\
+|f\rangle=\left|\boldsymbol{q}_{\mathrm{f}}\right\rangle\left|\ldots, n_{k \sigma}-1, \ldots\right\rangle
+\end{array}$$
+
+and from previous section we also have
+
+$$\begin{aligned}
+\left\langle f\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i\right\rangle=&\langle q_{\mathrm{f}}|\left\langle\ldots, n_{k \sigma}-1, \ldots\right|\left(-\frac{e}{m c}\right) \hat{\boldsymbol{p}} \cdot \varepsilon_{k \sigma} \sqrt{\frac{2 \pi \hbar c}{L^{3} \omega_{k}}}\\
+& \times\left(\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot x}\right)\left|\boldsymbol{q}_{\mathrm{i}}\right\rangle\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle \\
+=&-\frac{e}{m c} \sqrt{\frac{2 \pi \hbar c}{L^{3} \omega_{k}}}\left\langle\boldsymbol{q}_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot x}\right| \boldsymbol{q}_{i}\right\rangle \sqrt{n_{k \sigma}} \\
+=&-\frac{e}{m c} \sqrt{\frac{2 \pi \hbar c}{L^{3} \omega_{k}}}\left(-\boldsymbol{q}_{\mathrm{f}} \cdot \varepsilon_{\boldsymbol{k} \sigma}\right) \sqrt{n_{\boldsymbol{k} \sigma}} \\
+& \times \int_{L^{3}} \frac{\mathrm{e}^{-\mathrm{i} \boldsymbol{q}_{\mathrm{f}} \cdot \boldsymbol{x}}}{L^{3 / 2}} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}} \frac{\mathrm{e}^{\mathbf{i} q \cdot \boldsymbol{x}}}{L^{3 / 2}} \mathrm{d}^{3} x.
+\end{aligned}\tag{5.3}$$
+
+Notice that the third equivalence is right because the exponential factor in the "sandwhich" is a constant and the momentum operator $\hat{\mathbf{p}}$ was applied to the $\mid q_i\rangle$ state directly. The integral in (5.3) yields a delta function,i.e.
+
+$$\int_{L^{3}} \frac{\mathrm{e}^{-\mathrm{i} q_{\mathrm{f}} \cdot x}}{\sqrt{L^{3}}} \frac{\mathrm{e}^{\mathrm{i}\left(q_{\mathrm{i}}+k\right) \cdot x}}{\sqrt{L^{3}}} \mathrm{d}^{3} x=\delta_{q_{\mathrm{f}}, q_{\mathrm{i}}+k}\tag{5.4}$$
+
+which indicates the conservation of momentum, 
+
+$$\hbar \boldsymbol{q}_{\mathrm{f}}=\hbar \boldsymbol{q}_{\mathrm{i}}+\hbar \boldsymbol{k}\tag{5.5}.$$
+
+Meanwhile, we also have to satisfy the energy conservation law, which gives
+
+$$E_{\mathrm{f}}=E_{\mathrm{i}} \quad \text { or } \quad \frac{\left(\hbar q_{\mathrm{f}}\right)^{2}}{2 m}=\hbar \omega_{k}+\frac{\left(\hbar q_{\mathrm{i}}\right)^{2}}{2 m}\tag{5.6}.$$
+
+Now we are about to see that we cannot satisfy (5.5) and (5.6) in the case of free particle in vacuum. From special relativity the 4-momentum vector for a paticle, $P^{\mu}_a$, and a photon, $P_{\gamma}^{\mu}$ are
+
+$$P_{a}^{\mu}=\left(\frac{E}{c}, p, 0,0\right),\tag{5.7}$$
+
+and
+
+$$P_{\gamma}^{\mu}=\left(E_{\gamma}/c, \frac{Ev_x}{c^2},\frac{Ev_y}{c^2},\frac{Ev_z}{c^2}\right)\tag{5.8}.$$
+
+Notice that (5.8) gives the massless photon as
+
+$$P^{\mu}_{\gamma}\cdot P_{\mu,\gamma}=m^2=0.$$
+
+where the natural unit is used. Eq.(5.7) alignes the move direction of the particle to x-axis. Let us assume the emitted photon propagates at a direction forming a $\theta$ angle with x-axis, that is
+
+$$P_{\gamma}^{\mu}=\frac{E}{c}\left(1,cos\theta,sin\theta,0\right).\tag{5.9}$$
+
+The 4-momentum of new particle is then
+
+$$P^{\mu}_{a^{\prime}}=(\frac{E^{\prime}}{c},\mathbf{p}^{\prime})\tag{5.10}.$$
+
+and $$P_{a^{\prime}}^{\mu}=P^{\mu}_a-P_{\gamma}^{\mu}\tag{5.11}.$$
+
+If we apply the Lorentz invariance and calculate the 4-vector products using Minkowski metric, we have
+
+$$
+\begin{aligned}
+P_{a}^{\prime \mu} \cdot P_{a,\mu}^{\prime}&=\left(P_{a}^{\mu}-P_{\gamma}^{\mu}\right) \cdot\left(P_{a,\mu}-P_{\gamma,\mu}\right)\\
+m_a^2&=m_a^2+m_{\gamma}^2-2P^{\mu}_{a}P_{\gamma,\mu}
+\end{aligned}\tag{5.12}.
+$$
+
+Because $m_{\gamma}=0$ eqn.(5.12) is found to be
+
+$$P_{a}^{\mu} \cdot P_{\gamma,\mu}=\frac{E \cdot E_{\gamma}}{c^{2}}-\frac{\mathbf{p} \cdot E_{\gamma}}{c} \cos \theta=E_{\gamma}(E-c\mathbf{p}cos\theta)=0\tag{5.13}$$
+
+where we recover the light speed from the natural unit. Remember the identity in special relativity
+
+$$E=\sqrt{m^{2} c^{4}+c^{2} p^{2}} \rightarrow E>p c\tag{5.14}$$
+
+we finally conclude from (5.13) that $E_{\gamma}=0$, i.e., no photon emission is possible. In a similar way, one can also prove that **the free particle in vacuum does not absorb photon too.**
+
+We can also draw the conclusion that **processes of first order caused by $$\hat{H}_{\text {int }}^{\prime}$$ do not exist**. As a consequence we investigate now the processes of first order with $$\hat{H}_{\text {int }}^{\prime \prime}.$$ for the free particles. This part of the interaction contains terms of the form $$\hat{a}_{k \sigma}^{\dagger} \hat{a}_{k^{\prime} \sigma^{\prime}} .$$ Obviously, they describe processes that can be shown in the following sketch.
+
+<p align="center">
+  <img width="256" height="221" src="{{ site.url }}/images/Hint-p-p.PNG">
+</p>
+<p style="text-align: center;">Figure 2. Sketch of a two-photon process in k-space</p>
+
+The initial and final states described in Figure 2 are
+
+$$\begin{array}{l}
+|i\rangle=\left|\boldsymbol{q}_{\mathbf{i}}\right\rangle\left|\ldots, n_{\boldsymbol{k}_{1} \sigma_{1}}, \ldots, n_{\boldsymbol{k}_{f} \sigma_{t}}, \ldots\right\rangle \\
+|f\rangle=\left|\boldsymbol{q}_{\mathrm{f}}\right\rangle\left|\ldots, n_{k_{i} \sigma_{\mathrm{i}}}-1, \ldots, n_{k_{f} \sigma_{\mathrm{f}}}+1, \ldots\right\rangle.
+\end{array}\tag{5.15}$$
+
+The transition probability per unit time is thus,
+
+$$\begin{aligned}
+\left(\frac{\text { trans. prob. }}{\text { time }}\right)&=\frac{2 \pi}{\hbar}\left(\frac{e^{2}}{2 m c^{2}}\right)^{2}\left(\frac{2 \pi \hbar c^{2}}{L^{3}}\right)^{2} \frac{\left|\varepsilon_{k_{1} \sigma_{f}} \cdot \varepsilon_{k_{1} \sigma_{1}}\right|^{2}}{\omega_{k_{1}} \omega_{k_{f}}} \\
+&\times\left|\left\langle q_{\mathrm{f}}\left|\left\langle\ldots, n_{k_{1} \sigma_{1}}-1, \ldots, n_{k_{f} \sigma_{f}}+1, \ldots\right|\right.\right.\right.\\
+&\times\left(\hat{a}_{k_{\mathrm{i}} \sigma_{\mathrm{i}}} \hat{a}_{k_{\mathrm{f}} \sigma_{\mathrm{f}}}^{\dagger} \mathrm{e}^{\mathrm{i}\left(k_{\mathrm{i}}-k_{\mathrm{f}}\right) \cdot x}+\hat{a}_{k_{\mathrm{f}} \sigma_{\mathrm{f}}}^{\dagger} \hat{a}_{k_{\mathrm{i}} \sigma_{\mathrm{i}}} \mathrm{e}^{\mathrm{i}\left(k_{\mathrm{i}}-k_{\mathrm{f}}\right) \cdot x}\right) \\
+&\times\left.\left|q_{\mathrm{i}}\right\rangle\left|\ldots, n_{k_{\mathrm{i}} \sigma_{\mathrm{i}}}, \ldots, n_{k_{\mathrm{f}} \sigma_{\mathrm{f}}}, \ldots\right\rangle\right|^{2} \\
+&\times \delta\left(\hbar \omega_{\mathrm{i}}+\frac{\left(\hbar q_{\mathrm{i}}\right)^{2}}{2 m}-\hbar \omega_{\mathrm{f}}-\frac{\left(\hbar q_{\mathrm{f}}\right)^{2}}{2 m}\right)
+\end{aligned}\tag{5.16}$$
+
+Applying the creation and annhilation operators to the states gives
+
+$$\begin{aligned}
+&\left(\frac{\text { trans. prob. }}{\text { time }}\right)_{\text {photon scattering }} \\
+&=\frac{8 \pi}{\hbar}\left(\frac{e^{2}}{2 m c^{2}}\right)^{2}\left(\frac{2 \pi \hbar c^{2}}{L^{3}}\right)^{2} \frac{\left|\varepsilon_{k_{1} \sigma_{f}} \cdot \varepsilon_{k_{1} \sigma_{1}}\right|^{2}}{\omega_{k_{1}} \omega_{k_{1}}} \\
+&\times\left|\left\langle q_{\mathrm{f}}\left|\mathrm{e}^{\mathrm{i}\left(k_{\mathrm{i}}-k_{\mathrm{f}}\right) \cdot x}\right| q_{\mathrm{i}}\right\rangle\right|^{2} n_{k_{\mathrm{i}} \sigma_{\mathrm{i}}}\left(n_{k_{\mathrm{f}} \sigma_{\mathrm{f}}}+1\right) \\
+&\times \delta\left(\hbar \omega_{k_{\mathrm{i}}}+\frac{\left(\hbar q_{\mathrm{i}}\right)^{2}}{2 m}-\hbar \omega_{k_{\mathrm{f}}}-\frac{\left(\hbar q_{\mathrm{f}}\right)^{2}}{2 m}\right)
+\end{aligned}\tag{5.17}$$
+
+The matrix element in the squred bracket is then
+
+$$\begin{aligned}
+\left\langle\boldsymbol{q}_{f}\left|\mathrm{e}^{\mathrm{i}\left(k_{1}-k_{\mathrm{f}}\right) \cdot \boldsymbol{x}}\right| \boldsymbol{q}_{\mathrm{i}}\right\rangle &=\int \mathrm{d}^{3} x \frac{\mathrm{e}^{-\mathrm{i}\left(q_{\mathrm{f}}+k_{\mathrm{f}}\right) \cdot x}}{\sqrt{L^{3}}} \frac{\mathrm{e}^{\mathrm{i}\left(q_{\mathrm{i}}+k_{\mathrm{i}}\right) \cdot \boldsymbol{x}}}{\sqrt{L^{3}}} \\
+&=\delta_{\boldsymbol{q}_{\mathrm{f}}+\boldsymbol{k}_{\mathrm{t}}, k_{\mathrm{i}}+\boldsymbol{q}_{\mathrm{l}}}
+\end{aligned}$$
+
+which indicates the conservation of momenta.
+
+## Natural linewidth and self-energy
+
 
 ## Conclusion
 
