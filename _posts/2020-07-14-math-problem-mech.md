@@ -18,7 +18,7 @@ The youtuber 3Blue1Brown led me to Prof. Mark Levi's *Mathematical Mechanics*, a
 
 ## From Curvilinear Triangle to Gas Tank
 ### First we say it, formally...
-Let me first state the original problem mathematically. Given a circle centered at point $O$, we draw a tangent line at an arbitrary point $T$ on the circle. We then choose a point $A$ on the tangent line and shoot a laser line from $A$ in a way that the laser intercepts with the circle at points $P$ and $Q$ (see the sketch below). Now, can you prove that $AP^2=AP\cdot AQ$?
+Let me first state the original problem mathematically. Given a circle centered at point $O$, we draw a tangent line at an arbitrary point $T$ on the circle. We then choose a point $A$ on the tangent line and shoot a laser line from $A$ in a way that the laser intercepts with the circle at points $P$ and $Q$ (see the sketch below). Now, can you prove that $AT^2=AP\cdot AQ$?
 
 <p align="center">
   <img width="521" height="431" src="{{ site.url }}/images/AT2APAQ.png">
@@ -30,7 +30,7 @@ Let me first state the original problem mathematically. Given a circle centered 
 Imagine we have a gas tank with its shape being the shadow area in Figure 1 from a bird's view. Next we allow the tank to only rotate around the point $O$, the circle center, without any form of frictional forces applied to the tank. The height of the tank is irrelevant here because we assume no obstable to stop the movement if the tank is rotating. For people who know Newton's theorems, we should conclude that the tank should remain still if we do not apply thrust force to it, i.e. the system is at its equilibirum state. The equilibrium condition indicates that **the torques that the gas applied on the tank walls must be balanced**. 
 
 ### We solved it, intuitively~
-As we shall see now **the torque balance leads to the proof of the statement** in Figure 1. The shaded curvilinear triangle has one arc edge $\overset{\frown}{PT}$ but luckily **the torque applied by gas molecules bombarding the arc is zero**. The reason for that is the force applied on $\overset{\frown}{PT}$ pointing towards the circle point $O$, which gives zero leverage distance. We now only consider the torques on the walls of $AT$ and $AP$, and they are showed in Figure 2.
+As we shall see now **the torque balance leads to the proof of the statement** in Figure 1. The shaded curvilinear triangle has one arc edge $\overset{\frown}{PT}$ but luckily **the torque applied by gas molecules bombarding the arc is zero**. The reason for that is the force applied on $\overset{\frown}{PT}$ pointing towards the circle point $O$, which gives zero leverage distance. We now only consider the torques on the walls of $AT$ and $AP$, as shown in Figure 2.
 
 <p align="center">
   <img width="492" height="504" src="{{ site.url }}/images/AT2APAQ-2.png">
@@ -51,7 +51,7 @@ $$MP+PC=\frac{AQ}{2}\tag{3}.$$
 
 Thus the torque applied by $F_C$ is 
 
-$$q_D=AP\cdot\frac{AQ}{2}\tag{4}.$$
+$$q_C=AP\cdot\frac{AQ}{2}\tag{4}.$$
 
 Using the torque balance $q_C=q_D$, we finally get
 
@@ -63,4 +63,4 @@ Q.E.D.
 
 ## A summary for now
 
-The whole problem solving process is largely based on physical laws, i.e. Newton's firs law of motion and Pascal's law, and yet the physics transformed the problem into a vivid picture of gas tank, and make the solution more creative. People always say that math underspins every branch of science, but people commonly forget that the math subjects like geometry start out with a physical problem in mind. Another example of physics serving math is the [optimal transport theory](https://en.wikipedia.org/wiki/Transportation_theory_(mathematics)).
+The whole problem solving process is largely based on physical laws, i.e. Newton's first law of motion and Pascal's law, and yet the physics transformed the problem into a vivid picture of gas tank, and make the solution more creative. Math has been played the suportive role for every branch of science for so long, making people, even mathematician themselves forget that many math subjects started out with a physical problem in mind. Another Fields-metal-worthy example of physics serving math is the [optimal transport theory](https://en.wikipedia.org/wiki/Transportation_theory_(mathematics)).
