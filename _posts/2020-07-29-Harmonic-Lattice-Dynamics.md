@@ -25,57 +25,57 @@ You can find the binded PDF file [here](https://drive.google.com/file/d/1brhMocl
 
 ## PNG pages (11 pages in total)
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD1.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD1-min.png">
 </p>
 <p style="text-align: center;">Page 1</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD2.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD2-min.png">
 </p>
 <p style="text-align: center;">Page 2</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD3.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD3-min.png">
 </p>
 <p style="text-align: center;">Page 3</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD4.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD4-min.png">
 </p>
 <p style="text-align: center;">Page 4</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD5.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD5-min.png">
 </p>
 <p style="text-align: center;">Page 5</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD6.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD6-min.png">
 </p>
 <p style="text-align: center;">Page 6</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD7.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD7-min.png">
 </p>
 <p style="text-align: center;">Page 7</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD8.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD8-min.png">
 </p>
 <p style="text-align: center;">Page 8</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD9.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD9-min.png">
 </p>
 <p style="text-align: center;">Page 9</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD10.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD10-min.png">
 </p>
 <p style="text-align: center;">Page 10</p>
 
 <p align="center">
-  <img width="578" height="775" src="{{ site.url }}/images/HLD11.png">
+  <img width="578" height="775" src="{{ site.url }}/images/HLD11-min.png">
 </p>
 <p style="text-align: center;">Page 11</p>
 
