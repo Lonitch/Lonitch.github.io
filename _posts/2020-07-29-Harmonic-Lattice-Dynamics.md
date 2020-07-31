@@ -79,3 +79,22 @@ You can find the binded PDF file [here](https://drive.google.com/file/d/1brhMocl
 </p>
 <p style="text-align: center;">Page 11</p>
 
+## Appendix: Several more words on Dynamic Matrix
+
+In the notes we already showed that the dynamic matrix $$\mathcal{D}_{m\alpha,n\beta}(\vec{\boldsymbol{k}})$$ is the Fourier transform of another matrix $$D_{m\alpha,n\beta}(\vec{R}_i-\vec{R}_j)$$, i.e.,
+
+$$
+\mathcal{D}_{m\alpha,n\beta}=\sum_{\vec{R}_j}\frac{1}{\sqrt{m_mm_n}}D_{m\alpha,n\beta}(\vec{R}_i-\vec{R}_j)e^{-i\vec{\boldsymbol{k}}\cdot(\vec{R}_i-\vec{R}_j)}.
+$$
+
+Because the harmonic lattice energy can be represented using $D_{m\alpha,n\beta}$ as,
+
+$$
+\Phi^{ham}=\Phi^0+\frac{1}{2} \sum_{im\alpha,jn\beta}D_{m\alpha,n\beta}(\vec{R}_i-\vec{R}_j)u_{im,\alpha}u_{jn,\beta}
+$$
+
+the matrix $D$ can also be calculated by
+
+$$D_{i m \alpha, j n \beta}=\frac{\partial^{2} \Phi^{ham}}{\partial u_{im, \alpha} \partial u_{jn, \beta}}.\tag{A.1}$$
+
+We can easily calculate elements of matrix $D$ using (A.1) if we know the explicit expression of $\Phi^{ham}$ in terms of $u_{im,\alpha}$.
