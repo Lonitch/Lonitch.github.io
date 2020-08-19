@@ -224,7 +224,7 @@ So
 $$\left[\sum_{\alpha_{\beta}}\left(\frac{\hbar^{2}}{2 m^{*}}\right)_{\alpha{\beta}}\left(-i \frac{\partial}{\partial k_{\alpha}}\right)\left(-i \frac{\partial}{\partial k_{\beta}}\right)+V(\vec{r})\right] F_{n}=(E-E_n(0))F_n\tag{2.11}.$$
 ### Summary
 <p align="center">
-  <img width="307" height="283" src="{{ site.url }}/images/kp.PNG">
+  <img width="550" height="133" src="{{ site.url }}/images/kp.PNG">
 </p>
 <p style="text-align: center;">Summary</p>
 
