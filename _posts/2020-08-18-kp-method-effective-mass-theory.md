@@ -38,7 +38,7 @@ $$ \begin{aligned}\left[\frac{\hat{p}^{2}}{2 m}+U(\vec{r})\right] e^{i \vec{k} \
 \left[\frac{\hat{p}^{2}}{2 m}+\frac{\hbar k \cdot \hat{p}}{m}+U(\vec{r})\right]u_{n\vec{k}}&=\left(E_{n\vec{k}}-\frac{\hbar^{2} k^{2}}{2 m}\right)u_{n\vec{k}}.
 \end{aligned}\tag{1.3}$$
 
-Now we use the information above to derive a secular relation for calculating $E_{nk}$. Assume that we know $u_{n k}(r)$ and $E_{nk}$ for all "$n$" at $\vec{k}_0$, then we can expand $u_{n\vec{k}}$ at $\vec{k}$ in terms of $u_{n\vec{k_0}}$ as
+Now we use the information above to derive a secular relation for calculating $E_{nk}$. Assume that we know $u_{n k}(r)$ and $E_{nk}$ for all "$n$" at $\vec{k_0}$, then we can expand $u_{n\vec{k}}$ at $\vec{k}$ in terms of $u_{n\vec{k_0}}$ as
 
 $$
 u_{n \vec{k}}(\vec{r})=\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \vec{k}_{0}\right) u_{n^{\prime}\vec{k}_{0}}(\vec{r}) \tag{1.4},
