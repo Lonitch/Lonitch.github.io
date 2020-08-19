@@ -7,7 +7,7 @@ date: 2020-08-18
 
 Author: Sizhe
 
-tags: [daily, math]
+tags: [notes, math,quantum-mechanics]
 
 toc: false
 
