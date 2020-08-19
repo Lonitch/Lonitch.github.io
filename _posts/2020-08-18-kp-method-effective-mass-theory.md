@@ -162,8 +162,8 @@ $$
 **Note that $V$ is usually small, so it doesn't cause band mixing.** Thus we can ignore the matrix element where $n\neq n'$ to give
 
 $$
-\begin{align}\sum^{\prime}_{n'\vec{k'}}V_{n\vec{k},n'\vec{k}'}a_{n'\vec{k}'}&\approx\sum^{\prime}_{\vec{k'}}V_{n\vec{k},n\vec{k}'}a_{n\vec{k}'}\\
-&=\sum_{\mathbf{K}}\sum_{\vec{k'}}C_{\mathbf{K}}(n\vec{k},n\vec{k}')V_{\vec{k}-\vec{k'}-\mathbf{K}}a_{n\vec{k'}}.\end{align}\tag{2.4}
+\begin{aligned}\sum^{\prime}_{n'\vec{k'}}V_{n\vec{k},n'\vec{k}'}a_{n'\vec{k}'}&\approx\sum^{\prime}_{\vec{k'}}V_{n\vec{k},n\vec{k}'}a_{n\vec{k}'}\\
+&=\sum_{\mathbf{K}}\sum_{\vec{k'}}C_{\mathbf{K}}(n\vec{k},n\vec{k}')V_{\vec{k}-\vec{k'}-\mathbf{K}}a_{n\vec{k'}}.\end{aligned}\tag{2.4}
 $$
 
 Change summation variable $$\vec{k}^{\prime}\rightarrow\vec{k}^{\prime}+\mathbf{K},$$ we have from (2.4)
