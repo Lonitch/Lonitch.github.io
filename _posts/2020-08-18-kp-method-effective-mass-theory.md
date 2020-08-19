@@ -56,7 +56,7 @@ $$
 &=\sum_{n^{\prime}} C_{n^{\prime}}(\vec{k}, \vec{k}_0)\left(E_{n \vec{k}}-\frac{\hbar^{2} k^{2}}{2 m}\right) u_{n^{\prime}\overrightarrow{k_{0}}}(\vec{r}).
 \end{aligned}$$
 
-Mutiply both sides by $u^*_{n k_{0}}(\vec{r})$ and integrating over $\vec{r}$ yields:
+Mutiply both sides by $u^*_{nk_0}(\vec{r})$ and integrating over $\vec{r}$ yields:
 
 $$\begin{aligned}&\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \vec{k}_{0}\right)\left[\left(E_{n^{\prime}\vec{k}_{0}} -\frac{\hbar^{2} \vec{k}_{0}^{2}}{2 m}\right) \delta_{n n^{\prime}}+\frac{\hbar}{m}\left(\vec{k}-\overrightarrow{k_{0}}\right) \cdot \vec{P}_{n n^{\prime}}\left(k_{0}\right)\right]\\
 &=\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \overrightarrow{k_{0}}\right)\left(E_{n \vec{k}}-\frac{\hbar^{2} \vec{k}^{2}}{2 m}\right) \delta_{n n^{\prime}}.
@@ -64,7 +64,7 @@ $$\begin{aligned}&\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \vec{k}_{0}\rig
 
 where
 
-$$\int d \vec{r} u_{n \vec{k}_{0}}^{*} u_{n^{\prime} k_{0}}=\delta_{n n^{\prime}}$$
+$$\int d \vec{r} u_{n\vec{k}_0}^{*} u_{n^{\prime} k_{0}}=\delta_{n n^{\prime}}$$
 
 and the **momentum matrix element** is
 
@@ -89,7 +89,7 @@ $$det\left|\frac{\hbar}{m}\left(\vec{k}-\vec{k}_{0}\right) \cdot \vec{P}_{n n'}\
 
 **Purpose**: The k-p method above deals with unperturbed single-electron Schrodinger equation. Using effective mass tensor theory, we are able to take into account non-periodic perturbation in the Hamiltonian operator, and study the motion of electron or holes in a perturbed potential.
 
-When $\vec{k}$ approaches an extreme point of an energy band $$\vec{k}_{0}$$, we can expand $$E_{n\vec{k}}$$ as a Taylor series about $$\vec{k}_0$$:
+When $\vec{k}$ approaches an extreme point of an energy band $\vec{k_0}$, we can expand $E_{n\vec{k}}$ as a Taylor series about $\vec{k_0}$:
 
 $$
 \begin{aligned}
@@ -140,7 +140,7 @@ where
 
 $$V_{n\vec{k}n'\vec{k}'}=\left\langle n \vec{k}|V| n^{\prime} \vec{k}^{\prime}\right\rangle=\int d \vec{r} e^{-i (\vec{k}-\vec{k}^{\prime}) \cdot \vec{r}} u_{n \vec{k}}^{*}(\vec{r}) V u_{n^{\prime}\vec{k}'}\tag{2.3}.$$
 
-If we express $$u^*_{nk}u_{n'k'}$$ as a Fourier series w.r.t the reciprocal lattice vector, $\mathbf{K}$,
+If we express $u_{nk}^*u_{n'k'}$ as a Fourier series w.r.t the reciprocal lattice vector, $\mathbf{K}$,
 
 $$
 u_{n \vec{k}}^{*} u_{n^{\prime}\vec{k'}}=\sum_{\mathbf{K}} C_{\mathbf{K}}\left(n \vec{k}, n^{\prime} \vec{k}^{\prime}\right) e^{i \mathbf{K} \cdot \vec{r}}
@@ -166,11 +166,11 @@ $$
 &=\sum_{\mathbf{K}}\sum_{\vec{k'}}C_{\mathbf{K}}(n\vec{k},n\vec{k}')V_{\vec{k}-\vec{k'}-\mathbf{K}}a_{n\vec{k'}}.\end{align}\tag{2.4}
 $$
 
-Change summation variable $$\vec{k}^{\prime} \rightarrow \vec{k}^{\prime}+\mathbf{K},$$ we have from (2.4)
+Change summation variable $$\vec{k}^{\prime}\rightarrow\vec{k}^{\prime}+\mathbf{K},$$ we have from (2.4)
 
 $$ \sum^{\prime}_{n'\vec{k'}}V_{n\vec{k},n'\vec{k}'}a_{n'\vec{k}'}\approx\sum_{\vec{k}^{\prime}} \sum_{\mathbf{K}} C_{\mathbf{K}}\left(n \vec{k}, n \vec{k}^{\prime}\right) V_{\vec{k}-\vec{k'}} a_{n \vec{k}^{\prime}} \tag{2.5},$$
 
-where we applied the periodicity of $$a_{n \vec{k}}$$ and $$C_{K}$$ on reciprocal Latrice. Now we ignore the terms with $C_{K\neq 0}$ to give
+where we applied the periodicity of $a_{n\vec{k}}$ and $C_{K}$ on reciprocal Latrice. Now we ignore the terms with $C_{K\neq0}$ to give
 
 $$\begin{aligned}\sum_{n=1} V_{n \vec{k}n^{\prime} \vec{k}^{\prime}}  a_{n\vec{k}^{\prime}} &\approx \sum_{k^{\prime}} C_{0}\left(n \vec{k}, n \vec{k}^{\prime}\right) V_{k-k^{\prime}} a_{n \vec{k}^{\prime}}\\
 &=\frac{1}{V} \sum_{\vec{k}^{\prime}} V_{\vec{k}-\vec{k}^{\prime}} a_{n \vec{k}^{\prime}}
@@ -182,7 +182,7 @@ $$
 C_{0}(n \vec{k}, n \vec{k})=\frac{1}{N v_{c}}
 $$
 
-with $v_c$ being unit cell volumn. For valence electron $$u_{n \vec{k}}$$ varies slowly with $\vec{k}$, so we have
+with $v_c$ being unit cell volumn. For valence electron $u_{n\vec{k}}$ varies slowly with $\vec{k}$, so we have
 
 $$
 C_{0}\left(n \vec{k}, n \vec{k}^{\prime}\right) \approx C_{0}\left(n\vec{k}, n \vec{k}\right)=\frac{1}{N v_{c}}
@@ -194,7 +194,7 @@ $$
 (E_{n \vec{k}}-E) a_{n \vec{k}}+\frac{1}{N v_{c}} \sum_{\vec{k}^{\prime}} V_{\vec{k}-\vec{k}^{\prime}} a_{n \vec{k}^{\prime}}=0 \tag{2.7}
 $$
 
-To transtiom (2.7) into a form for real space, we multiply both sides With $$e^{i \vec{k} \cdot r}$$ and sum over all $$\vec{k}$$ in reciprocal space to give
+To transtiom (2.7) into a form for real space, we multiply both sides With $e^{i\vec{k}\cdot r}$ and sum over all $\vec{k}$ in reciprocal space to give
 
 $$\sum_{\vec{k}}\left[\left(E_{n k}-E\right) a_{n \vec{k}} e^{i \vec{k} \cdot r}+\frac{1}{Nv_c}\sum_{\vec{k}'}V_{\vec{k}-\vec{k}'}a_{n\vec{k}'}e^{i\vec{k}\cdot\vec{r}}\right]=0\tag{2.8}.$$
 
@@ -202,7 +202,7 @@ where the **envelop function** is defined as
 
 $$F_{n}(\vec{r})=\sum_{\vec{k}} e^{i \vec{k} \cdot \vec{r}} a_{n \vec{k}}.$$
 
-In (2.8) we also rewrite $$E_{n \vec{k}}$$ as $$E_{n}(\vec{k})$$ with the operator being $$E_{n}(-i \nabla)$$. The second term in (2.8) is then
+In (2.8) we also rewrite $E_{n\vec{k}}$ as $E_n(\vec{k})$ with the operator being $E_{n}(-i\nabla)$. The second term in (2.8) is then
 
 $$ \frac{1}{N v_{L}} \int d \vec{r'} \sum_{\vec{k} \vec{k}^{\prime}} e^{i \vec{k} \cdot(\vec{r}-\vec{r'})} e^{i \vec{k'} \cdot \vec{r}^{\prime}} V\left(\vec{r}^{\prime}\right) a_{n \vec{k'}}=V(\vec{r}) F_{n}(\vec{r})$$
 
