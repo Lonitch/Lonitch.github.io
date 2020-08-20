@@ -332,7 +332,11 @@ $$H=\frac{1}{2} \sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(a_{\boldsymb
 
 Notice that we did not combine the terms in the bracket above, even though they are still scalars. The reason for this will become clear once we introduce creation and annihilation operators.
 
-Now we introduce quantization. The form of (2.28) motivates us to proceed in a manner that is similar to the quantization of phonons of the quantized oscillators, i.e. designating $a_{\boldsymbol{k}\sigma}$ to be $$\hat{a}_{\boldsymbol{k}\sigma}$$ and $$a^*_{\boldsymbol{k}\sigma}$$ to be $$\hat{a}^{\dagger}_{\boldsymbol{k}\sigma}$$. We require that
+Now we introduce quantization. The form of (2.28) motivates us to proceed in a manner that is similar to the quantization of phonons of the quantized oscillators, i.e. designating $a_{\boldsymbol{k}\sigma}$ to be 
+
+$$\hat{a}_{\boldsymbol{k}\sigma}$$ and $$a^*_{\boldsymbol{k}\sigma}$$ to be $$\hat{a}^{\dagger}_{\boldsymbol{k}\sigma}.$$ 
+
+We require that
 
 $$\left[\hat{a}_{\boldsymbol{k} \sigma}, \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}}^{\dagger}\right]_{-}=\delta_{\boldsymbol{k} \boldsymbol{k}^{\prime}} \delta_{\sigma \sigma^{\prime}}\tag{2.29}.$$
 
