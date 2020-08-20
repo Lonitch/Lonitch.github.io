@@ -48,8 +48,8 @@ where $b_{1}=b_{2}=\frac{2\pi}{a},$ and $b_{3}=\frac{2\pi}{a}$ for $fcc$ and $bc
 
 $$S_{K}=\sum_{j=1}^{n} e^{i K \cdot d_{j}}$$
 
-for $n$ scatterers at positions $$\boldsymbol{d}_j$$ in a unit cell. For the $fcc$ unit cell, there is a $$C_{60}$$ at position $$\boldsymbol{d}_{1}=0,$$ and on the three faces $$\boldsymbol{d}_{2}=\frac{a}{2}(\hat{x}+\hat{y}),\boldsymbol{d}_{3}=\frac{a}{2}(\hat{x}+\hat{z}),\boldsymbol{d}_{4}=\frac{a}{2}(\hat{y}+\hat{z}).$$ The general vector is
-$$\boldsymbol{K}=\frac{2\pi}{a}(h\hat{x}+k\hat{y}+l\hat{z}).$$ Therefore
+for $n$ scatterers at positions $\mathbf{d_j}$ in a unit cell. For the $fcc$ unit cell, there is a $C_{60}$ at position $\boldsymbol{d_1}=0,$ and on the three faces $\boldsymbol{d_2}=\frac{a}{2}(\hat{x}+\hat{y}),\boldsymbol{d_3}=\frac{a}{2}(\hat{x}+\hat{z}),\boldsymbol{d_4}=\frac{a}{2}(\hat{y}+\hat{z}).$ The general vector is
+$\boldsymbol{K}=\frac{2\pi}{a}(h\hat{x}+k\hat{y}+l\hat{z})$. Therefore
 
 $$\begin{aligned}
 S_{K} &=1+\mathrm{e}^{\mathrm{i} \pi(h+k)}+\mathrm{e}^{\mathrm{i} \pi(h+l)}+\mathrm{e}^{\mathrm{i} \pi(k+l)} \\
@@ -75,8 +75,8 @@ Cobalt has two forms: $\alpha$-Co, with hcp structure (lattice spacing of $a=$ $
 
 To satisfy the powder diffraction condition, the length of the reciprocal lattice vector must be equal to $G=K=4\pi/\lambda\sin\theta$. To calculate the position of the peaks for the $fcc$ structure we use the simple cubic unit cell with four atoms per cell. The reciprocal lattice is cubic, with lattice spacing of $G_{0}=2\pi/a_{cubic}=1.77Å^{-1},$ and the structure factor is nonzero only if the (hkl) indices are all odd or all even. The length of the reciprocal lattice vector is $G=G_{0}\sqrt{h^{2}+k^{2}+l^{2}}$. 
 
-The hcp lattice has two atoms per unit cell. The reciprocal lattice is constructed from a simple hexagonal lattice by assigning a zero structure factor to some of the points, resulting in alternating hexagonal and honeycomb arrays. We will index the reciprocal lattice points in terms of $$\boldsymbol{G}=h\boldsymbol{a}^{\prime}+k\boldsymbol{b}^{\prime}+l\boldsymbol{c}^{\prime},$$ where the angle between $\boldsymbol{a}^{\prime}$ and $\boldsymbol{b}^{*}$ is $120^{\circ}$
-and $\boldsymbol{c}^{\prime}$ is perpendicular to $$\boldsymbol{a}^{\prime}$$ and $$\boldsymbol{b}^{\prime}$$. The lengths of the primitive vectors are calculated as $$a^{\prime}=b^{\prime}=4\pi/\sqrt{3}a=2.89Å^{-1}$$, $$c^{\prime}=2\pi/c=\sqrt{3/8}2\pi/ a=1.53Å^{-1}$$.
+The hcp lattice has two atoms per unit cell. The reciprocal lattice is constructed from a simple hexagonal lattice by assigning a zero structure factor to some of the points, resulting in alternating hexagonal and honeycomb arrays. We will index the reciprocal lattice points in terms of $$\boldsymbol{G}=h\boldsymbol{a^{\prime}}+k\boldsymbol{b^{\prime}}+l\boldsymbol{c^{\prime}}$$, where the angle between $\boldsymbol{a^{\prime}}$ and $\boldsymbol{b^{\prime}}$ is $120^{\circ}$
+and $\boldsymbol{c^{\prime}}$ is perpendicular to $\boldsymbol{a^{\prime}}$ and $\boldsymbol{b^{\prime}}$. The lengths of the primitive vectors are calculated as $$a^{\prime}=b^{\prime}=4\pi/\sqrt{3}a=2.89Å^{-1}$$, $$c^{\prime}=2\pi/c=\sqrt{3/8}2\pi/ a=1.53Å^{-1}$$.
 
 For $\beta-Co$, we have
 
