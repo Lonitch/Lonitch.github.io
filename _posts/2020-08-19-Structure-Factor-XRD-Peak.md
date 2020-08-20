@@ -36,7 +36,7 @@ $$f_{\alpha}(\boldsymbol{G})=\frac{1}{e} \int \rho_{\alpha}(\boldsymbol{r}) \mat
 where $e$ is the electron charge, **the sum is over the atoms in the unit cell, and the integration is over the volume of an atom**. Similar formulae work for electron and neutron scattering, except the form factor integral is different depending on the microscopic interaction at play. Even for $\mathrm{X}$ -rays, the calculation of the form factor as an integral over the charge density works only for the simplest cases. For a realistic calculation of scattered radiation
 intensities one has to perform a *Rietveld analysis*.
 
-## Problem: Structure of $\mathbf{Rb}_{x}\mathbf{C}_{60}$
+## Problem: Structure of $Rb_{x}C_{60}$
 
 Assume you perform a powder X-ray diffraction measurement on a Rb doped $\mathrm{C}_{60}$ material with $\lambda=0.9$ Angstrom $\mathrm{X}$ -rays. What are the positions $(2 \theta,$ in degrees $)$ of the first five diffraction peaks for the three observed structures (doping $x=3,4,$ and 6)?
 
@@ -44,12 +44,12 @@ $Rb_{x}C_{60}$ has an $fcc$ structure for $x=3,bct$ for $x=4,$ and $bcc$ for $x=
 
 $$G=\sqrt{\left(h \cdot \mathbf{b}_{1}\right)^{2}+\left(k \cdot \mathbf{b}_{2}\right)^{2}+\left(l \cdot \mathbf{b}_{3}\right)^{2}}$$
 
-where $b_{1}=b_{2}=\frac{2\pi}{a},$ and $b_{3}=\frac{2\pi}{a}$ for $fcc$ and $bcc$ or $b_{3}=\frac{2\pi}{c}$ for bct. We can then use the condition $2\frac{2\pi}{\lambda\sin\theta=G$ to calculate values of $2\theta$. Since we are using the conventional cubic unit cells, we must calculate the structure factor, Eq. (1), to determine which $(h,k,l)$ values are allowed.
+where $b_{1}=b_{2}=\frac{2\pi}{a},$ and $b_{3}=\frac{2\pi}{a}$ for $fcc$ and $bcc$ or $b_{3}=\frac{2\pi}{c}$ for bct. We can then use the condition $2\frac{2\pi}{\lambda}\sin\theta=G$ to calculate values of $2\theta$. Since we are using the conventional cubic unit cells, we must calculate the structure factor, Eq. (1), to determine which $(h,k,l)$ values are allowed.
 
 $$S_{K}=\sum_{j=1}^{n} e^{i K \cdot d_{j}}$$
 
-for $n$ scatterers at positions $\boldsymbol{d}_{j}$ in a unit cell. For the $fcc$ unit cell, there is a $C_{60}$ at position $\boldsymbol{d}_{1}=0,$ and on the three faces $\boldsymbol{d}_{2}=\frac{a}{2}(\hat{x}+\hat{y}),\boldsymbol{d}_{3}=\frac{a}{2}(\hat{x}+\hat{z}),\boldsymbol{d}_{4}=\frac{a}{2}(\hat{y}+\hat{z}).$ The general vector is
-$\boldsymbol{K}=\frac{2\pi}{a}(h\hat{x}+k\hat{y}+l\hat{z}).$ Therefore
+for $n$ scatterers at positions $$\boldsymbol{d}_j$$ in a unit cell. For the $fcc$ unit cell, there is a $$C_{60}$$ at position $$\boldsymbol{d}_{1}=0,$$ and on the three faces $$\boldsymbol{d}_{2}=\frac{a}{2}(\hat{x}+\hat{y}),\boldsymbol{d}_{3}=\frac{a}{2}(\hat{x}+\hat{z}),\boldsymbol{d}_{4}=\frac{a}{2}(\hat{y}+\hat{z}).$$ The general vector is
+$$\boldsymbol{K}=\frac{2\pi}{a}(h\hat{x}+k\hat{y}+l\hat{z}).$$ Therefore
 
 $$\begin{aligned}
 S_{K} &=1+\mathrm{e}^{\mathrm{i} \pi(h+k)}+\mathrm{e}^{\mathrm{i} \pi(h+l)}+\mathrm{e}^{\mathrm{i} \pi(k+l)} \\
@@ -75,8 +75,8 @@ Cobalt has two forms: $\alpha$-Co, with hcp structure (lattice spacing of $a=$ $
 
 To satisfy the powder diffraction condition, the length of the reciprocal lattice vector must be equal to $G=K=4\pi/\lambda\sin\theta$. To calculate the position of the peaks for the $fcc$ structure we use the simple cubic unit cell with four atoms per cell. The reciprocal lattice is cubic, with lattice spacing of $G_{0}=2\pi/a_{cubic}=1.77Å^{-1},$ and the structure factor is nonzero only if the (hkl) indices are all odd or all even. The length of the reciprocal lattice vector is $G=G_{0}\sqrt{h^{2}+k^{2}+l^{2}}$. 
 
-The hcp lattice has two atoms per unit cell. The reciprocal lattice is constructed from a simple hexagonal lattice by assigning a zero structure factor to some of the points, resulting in alternating hexagonal and honeycomb arrays. We will index the reciprocal lattice points in terms of $$\boldsymbol{G}=h\boldsymbol{a}^{*}+k\boldsymbol{b}^{*}+l\boldsymbol{c}^{*},$$ where the angle between $\boldsymbol{a}^{*}$ and $\boldsymbol{b}^{*}$ is $120^{\circ}$
-and $\boldsymbol{c}^{*}$ is perpendicular to $$\boldsymbol{b}^{*}$$ and $$\boldsymbol{b}^{*}$$. The lengths of the primitive vectors are calculated as $$a^{*}=b^{*}=4\pi/\sqrt{3}a=2.89Å^{-1}$, $c^{*}=2\pi/c=\sqrt{3/8}2\pi/ a=1.53Å^{-1}$$.
+The hcp lattice has two atoms per unit cell. The reciprocal lattice is constructed from a simple hexagonal lattice by assigning a zero structure factor to some of the points, resulting in alternating hexagonal and honeycomb arrays. We will index the reciprocal lattice points in terms of $$\boldsymbol{G}=h\boldsymbol{a}^{\prime}+k\boldsymbol{b}^{\prime}+l\boldsymbol{c}^{\prime},$$ where the angle between $\boldsymbol{a}^{\prime}$ and $\boldsymbol{b}^{*}$ is $120^{\circ}$
+and $\boldsymbol{c}^{\prime}$ is perpendicular to $$\boldsymbol{a}^{\prime}$$ and $$\boldsymbol{b}^{\prime}$$. The lengths of the primitive vectors are calculated as $$a^{\prime}=b^{\prime}=4\pi/\sqrt{3}a=2.89Å^{-1}$$, $$c^{\prime}=2\pi/c=\sqrt{3/8}2\pi/ a=1.53Å^{-1}$$.
 
 For $\beta-Co$, we have
 
