@@ -9,7 +9,7 @@ Author: Sizhe
 
 tags: [handwriting, math]
 
-toc: false
+toc: true
 
 ---
 
@@ -299,4 +299,4 @@ This means if **we have a representation, we can transform it using any non-sing
 
 ## Conclusion
 
-This blog is dry in a sense of the "information density" as I only expect this blog serve as a reminder for a layman like me who first encoutered group theory in a condensed matter QFT book. You might find various application of group theory in Jakob's book *Physics from Symmetry* and detailed proof of important theorems in Prof. John Stillwell's *Naive Lie Theory*.
+This blog is dry in a sense of the "information density" as I only expect this blog serves as a reminder for a layman like me who first encoutered group theory in a condensed matter QFT book. For various applications of group theory you might find Jakob's book *Physics from Symmetry* worth reading. If you're a math-driven head, Prof. John Stillwell's *Naive Lie Theory* is so far the best choice we have to get used to the mathematical language behind the theory.
