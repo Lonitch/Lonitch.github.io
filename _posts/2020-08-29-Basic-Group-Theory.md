@@ -9,7 +9,7 @@ Author: Sizhe
 
 tags: [handwriting, math]
 
-toc: true
+toc: false
 
 ---
 
