@@ -142,9 +142,9 @@ Therefore, the problem of solving K-S equations is expressed in the language of 
 
 The utmost important element of LCAO ansatz described above is the basis functions $\eta_i$. Now we introduce several sets of basis functions. The first type is called *Gaussian-type-orbitals*, and is defined as 
 
-$$\eta^{G T O}=N x^{1} y^{m} z^{n} \exp \left[-\alpha r^{2}\right]\tag{5.6}$$
+$$\eta^{G T O}=N x^{l} y^{m} z^{n} \exp \left[-\alpha r^{2}\right]\tag{5.6}$$
 
-where $L=1+m+n$ is used to classify the GTO as s-functions $(\mathrm{L}=0), \mathrm{p}$ -functions $(\mathrm{L}=1), \mathrm{d}-$ functions $(\mathrm{L}=2),$ etc. The second basis set is called *Slater-type*, i.e.,
+where $L=l+m+n$ is used to classify the GTO as s-functions $(\mathrm{L}=0), \mathrm{p}$ -functions $(\mathrm{L}=1), \mathrm{d}-$ functions $(\mathrm{L}=2),$ etc. The second basis set is called *Slater-type*, i.e.,
 
 $$\eta^{\mathrm{STO}}=\mathrm{N} \mathrm{r}^{\mathrm{n}-1} \exp [-\zeta \mathrm{r}] \mathrm{Y}_{\mathrm{Im}}(\Theta, \phi)\tag{5.7}.$$
 
