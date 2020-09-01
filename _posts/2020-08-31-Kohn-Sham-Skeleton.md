@@ -88,7 +88,7 @@ $$E_{X C}^{h y b r i d}=E_{X C}^{G G A}+0.25\left(E_{X}^{H F}-E_{X}^{G G A}\righ
 
 ## 4. The Failure of Approximate $E_{XC}[\rho]$
 
-The degeneracy of the spin states is the primary reason for the failure of various exchange-correlation functional. Take the ${}^2D$ state of the Scandium dication as an example. Its electron configuration is $[Ne](3s)^2(3p)^6(3d)^1$, and the $3d$ electron could occupy any one of the orbitals: $E_{d(x^2-y^2)}$, $E_{dxz}$, $E_{dz^2}$, $E_{dyz}$, and $E_{dxz}$. The energies of these five different configurations must have the same energy, but the DFT calculations predict different energy values. One of the active unsolved problem in the community of DFT research is: how to deal with degeneracies due to spin or non-Abelian spatial symmetry? 
+The degeneracy of the spin states is the primary reason for the failure of various exchange-correlation functional. Take the ${}^2D$ state of the Scandium dication as an example. Its electron configuration is $Ne(3s)^2(3p)^6(3d)^1$, and the $3d$ electron could occupy any one of the orbitals: $E_{d(x^2-y^2)}$, $E_{dxz}$, $E_{dz^2}$, $E_{dyz}$, and $E_{dxz}$. The energies of these five different configurations must have the same energy, but the DFT calculations predict different energy values. One of the active unsolved problem in the community of DFT research is: how to deal with degeneracies due to spin or non-Abelian spatial symmetry? 
 
 ## 5. Basic Machinery of DFT Programs
 In this section how things in KS scheme are calculated in modern implementation of DFT packages are briefly introduced.
