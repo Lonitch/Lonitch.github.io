@@ -228,7 +228,7 @@ $$\hat{A}_{new}\mid a_i\rangle_{new}=\hat{U}^{\dagger}\hat{A}_{old}\mid a_i\rang
 
 - and the inner products of states,i.e.
 
-$${}_{new}\langle b_i\mid a_j\rangle_{new}={}_{old}\langle b_i\mid a_j\rangle_{old}$$.
+${}_{new}\langle b_i\mid a_j\rangle_{new}={}_{old}\langle b_i\mid a_j\rangle_{old}$.
 
 ### Direct product space
 Due to the variety of particle states (e.g. spin-up and spin-down states of electrons) sometimes we need to expand our Hilbert space through the direct product method. Here we use a nucleon as an example. A nucleon can be a proton or a neutron. A proton is positively charged but a neutron is neutral. They can be treated as two states of the same particle in the charge space (a specific example of Hilbert space):
@@ -279,7 +279,7 @@ The axioms used in QM are postulations that assume the correspondences between m
 >
 >$[\hat{A},\hat{B}]=\hat{A}\hat{B}-\hat{B}\hat{A}=i\hbar\{A,B\}$
 >where $\{\}$ is the Poisson bracket of dynamic variables $A$ and $B$:
->$\{A, B\}=\sum_{i}\left\{\frac{\partial A}{\partial q_{i}} \frac{\partial B}{\partial p_{i}}-\frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}}\right\},$
+>$$\{A, B\}=\sum_{i}\left\{\frac{\partial A}{\partial q_{i}}\frac{\partial B}{\partial p_{i}}-\frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}}\right\}$$,
 >and $p_i$ and $q_i$ are classical momenta and coordinates of the particles in a system. One could easily find that
 >$\begin{array}{l}
 {\left[q_{i}, q_{j}\right]=\left[p_{i}, p_{j}\right]=0} \\
@@ -297,7 +297,7 @@ $$
 $$
 
 >**Axiom IV:** let $\mid\psi_{t_0}\rangle$ and $\mid\psi_{t}\rangle$ be the system state at time $t_0$ and $t$ repectively, then they are related to each other through the unitary transformation: 
->$$\left|\psi_{t}\right\rangle=\hat{U}\left(t-t_{0}\right)\left|\psi_{t_{0}}\right\rangle$$
+>$\left|\psi_{t}\right\rangle=\hat{U}\left(t-t_{0}\right)\left|\psi_{t_{0}}\right\rangle$
 
 Using **Axiom IV** we can recast QM in the **Heisenberg picture** (before this point we derived everything in **Schrodinger's Picture**,SP). To accomplish this we let
 
