@@ -279,14 +279,16 @@ The axioms used in QM are postulations that assume the correspondences between m
 >
 >$[\hat{A},\hat{B}]=\hat{A}\hat{B}-\hat{B}\hat{A}=i\hbar\{A,B\}$
 >where $\{\}$ is the Poisson bracket of dynamic variables $A$ and $B$:
->$$\{A, B\}=\sum_{i}\left\{\frac{\partial A}{\partial q_{i}}\frac{\partial B}{\partial p_{i}}-\frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}}\right\}$$,
+
+$$\{A, B\}=\sum_{i}\left\{\frac{\partial A}{\partial q_{i}}\frac{\partial B}{\partial p_{i}}-\frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}}\right\}$$,
+
 >and $p_i$ and $q_i$ are classical momenta and coordinates of the particles in a system. One could easily find that
 >$\begin{array}{l}
 {\left[q_{i}, q_{j}\right]=\left[p_{i}, p_{j}\right]=0} \\
 {\left[q_{i}, p_{j}\right]=i \hbar \delta_{i j}}
 \end{array}$
 
-We shall now derive a consequence of **Axiom III** before we proceed. If we define the expectation value of observable $A$ of a system at a state of $\mid \psi\rangle$ to be $\langle \psi\mid\hat{A}\mid\psi\rangle$, and its standard deviation as $\Delta A=\langle(A-\langle A\rangle)^2\rangle^{1/2}$, it can be shown that
+We shall now derive a consequence of **Axiom III** before we proceed. If we define the expectation value of observable $A$ of a system at a state of $\mid \psi\rangle$ to be $\langle\psi\mid\hat{A}\mid\psi\rangle$, and its standard deviation as $\Delta A=\langle(A-\langle A\rangle)^2\rangle^{1/2}$, it can be shown that
 
 $$\left(\Delta A\right)^2(\Delta B)^{2} \geq-1 / 4\langle[A, B]\rangle^{2}$$
 
@@ -297,7 +299,8 @@ $$
 $$
 
 >**Axiom IV:** let $\mid\psi_{t_0}\rangle$ and $\mid\psi_{t}\rangle$ be the system state at time $t_0$ and $t$ repectively, then they are related to each other through the unitary transformation: 
->$\left|\psi_{t}\right\rangle=\hat{U}\left(t-t_{0}\right)\left|\psi_{t_{0}}\right\rangle$
+
+$$\left|\psi_{t}\right\rangle=\hat{U}\left(t-t_{0}\right)\left|\psi_{t_{0}}\right\rangle$$
 
 Using **Axiom IV** we can recast QM in the **Heisenberg picture** (before this point we derived everything in **Schrodinger's Picture**,SP). To accomplish this we let
 
