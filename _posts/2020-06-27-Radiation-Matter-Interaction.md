@@ -229,7 +229,7 @@ $$\hat{A}_{new}\mid a_i\rangle_{new}=\hat{U}^{\dagger}\hat{A}_{old}\mid a_i\rang
 - and the inner products of states,i.e.
 
 
-$$\langle b_i \mid a_j \rangle_{new}=\langle b_i \mid a_j \rangle_{old}.$$
+$${}_{new}\langle b_i \mid a_j \rangle_{new}=_{old}\langle b_i \mid a_j \rangle_{old}.$$
 
 
 ### Direct product space
