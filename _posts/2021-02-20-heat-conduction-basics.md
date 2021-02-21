@@ -94,6 +94,7 @@ Using Fourier's law at RHS of (13), we finally arrive at the 1D **heat equation*
 $$\frac{\partial T}{\partial t}=\frac{1}{\rho c_p}\frac{\partial}{\partial x}\left(\kappa\frac{\partial T}{\partial x}\right)\tag{14}.$$
 
 In 3D space, Eq.(14) is generalized as:
+
 $$
 \frac{1}{\alpha} \frac{\partial T}{\partial t}=\left(\frac{\partial^{2} T}{\partial x^{2}}+\frac{\partial^{2} T}{\partial y^{2}}+\frac{\partial^{2} T}{\partial z^{2}}\right)\tag{15}.
 $$
