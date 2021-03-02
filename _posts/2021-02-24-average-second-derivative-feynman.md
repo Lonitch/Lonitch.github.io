@@ -39,10 +39,10 @@ $$
 where $a=(x_a,t_a)$. Also, for an arbitrary wavefunction $f(y,t)$, we have
 
 $$
-\begin{aligned}
+\begin{array}{ll}
 \int_{\infty}K(x,t+\epsilon;y,t)f(y,t)dy&=f(x,t+\epsilon)=f(x,t)+\epsilon\frac{\partial f}{\partial t}\\
 &=f(x,t)-\frac{i\epsilon}{\hbar}\hat{H}f(x,t)\tag{5}
-\end{aligned}
+\end{array}
 $$
 
 Shrodinger's equation of $f(x,t)$ is used at the last line of Eq. (5). The Hamiltonian operator $\hat{H}$ is related to the Lagrangian $\mathcal{L}$ in $S$. Using the first equivalence of eq. (5) in eq. (4) gives
@@ -54,33 +54,42 @@ $$
 Now, if we replace $F$ with a product of coordinates at two different time instances, $x_{k+1}(t+\epsilon)x_k(t)$ in eq.(4), we have
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 \langle\chi|x_{k+1}x_k|\psi\rangle_S&=\int\int\int\int \chi^*(b)K(b;x_{k+1},t+\epsilon)x_{k+1}K(x_{k+1},t+\epsilon;x_k,t)x_k\times\\
 &\quad\quad\quad K(x_k,t;a)\psi(a) dx_{k+1}dx_kdx_adx_b\\
 &=\int\int \chi^*(x_{k+1},t+\epsilon)x_{k+1}K(x_{k+1},t+\epsilon;x_k,t)x_k\psi(x_k,t)dx_{k+1}dx_k.\tag{7}
-\end{aligned}
+ \end{array}
 $$
 
 According to Feynman's argument, if we integrate over $x_k$, we can use eq. (5) to get
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 \int K(x_{k+1},t+\epsilon;x_k,t)x_k\psi(x_k,t)dx_k&=x_{k+1}\psi(x_{k+1},t+\epsilon)\\
 &=(1-\frac{i\epsilon}{\hbar}\hat{H})x_{k+1}\psi(x_{k+1},t)\tag{8},
-\end{aligned}
+ \end{array}
 $$
 
-**From Feynman's argument, $x\psi(x,t)$ and $\psi$ are simultaneously eigenfunctions of $\hat{H}$** as indicated by the second equivalence in Eq.(8). My question is then, **How can we make sure that $\hat{H}$ always satisfies such condition? i.e., having $\psi$ and $x\psi$ as eigenfunctions simultaneously?** 
+Eq.(5) is applied to Eq.(8) directly by replacing $f(y)$ in (5) with $x \psi$ in (8). However, the kernels $K\left(x_{k}, t ; a\right)$ and $K\left(b ; x_{k+1}, t+\epsilon\right)$ in (7) indicates that $\psi \chi$ are states that satisfy
+$$
+i \hbar \frac{\partial \psi}{\partial t}=\hat{H} \psi
+$$ 
+But $K\left(x_{k+1}, t+\epsilon ; x_{k}, t\right)$ in Eq.(7) and (8) implies instead
+$$
+i \hbar \frac{\partial}{\partial t}(x \psi)=\hat{H} x \psi
+$$
+So my question is 
+>**Is it alright to think that $K\left(x_{k+1}, t+\epsilon ; x_{k}, t\right)$ is different from $K\left(x_{k}, t ; a\right)$ and $K\left(b ; x_{k+1}, t+\epsilon\right)$?**
 
 If we ignore this and move forward the eq. (7) now becomes
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 \langle\chi|x_{k+1}x_k|\psi\rangle_S&=\int \chi^*(x_{k+1},t+\epsilon)x_{k+1}(1-\frac{i\epsilon}{\hbar}\hat{H})x_{k+1}\psi(x_{k+1},t)dx_{k+1}\\
 &=\int \chi^*(x,t+\epsilon)x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
 &=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar}\hat{H})x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
 &=\int\chi^*(x)x^2\psi(x)dx+\frac{i\epsilon}{\hbar}\int\chi^*(\hat{H}x-x\hat{H})x\psi(x)dx.\tag{9}
-\end{aligned}
+ \end{array}
 $$
 
 Since $\frac{im}{\hbar}[H,x]=p$, the equation above gives
@@ -94,11 +103,11 @@ $$
 Notice that
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 \langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle&=\frac{m^2}{\epsilon^2}\{\langle\chi|x_{k+1}x_k|\psi\rangle-\langle\chi|x_{k+1}x_{k-1}|\psi\rangle-\\
 &\langle\chi|x_kx_k|\psi\rangle+\langle\chi|x_{k}x_{k-1}|\psi\rangle\}\\
 &=\frac{m^2}{\epsilon^2}\{A-B-C+D\}\tag{11}.
-\end{aligned}
+ \end{array}
 $$
 
 where
@@ -108,10 +117,10 @@ A=\int\chi^*(x)x^2\psi(x)dx+\frac{i\epsilon}{\hbar}\int\chi^*(\hat{H}x-x\hat{H})
 $$
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 B&=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar}\hat{H})x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
 &=\int\chi^*(x,t)(x^2-\frac{i\epsilon}{\hbar}x\hat{H}x+\frac{i\epsilon}{\hbar}\hat{H}xx+\frac{\epsilon^2}{\hbar^2}\hat{H}x\hat{H}x)\psi(x,t)dx,\tag{13}
-\end{aligned}
+ \end{array}
 $$
 
 $$
@@ -128,11 +137,11 @@ Which does not match Feynman's results. I think my erroneous results have someth
 Notice that
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 \langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle&=\frac{m^2}{\epsilon^2}\{\langle\chi|x_{k+1}x_k|\psi\rangle-\langle\chi|x_{k+1}x_{k-1}|\psi\rangle-\\
 &\langle\chi|x_kx_k|\psi\rangle+\langle\chi|x_{k}x_{k-1}|\psi\rangle\}\\
 &=\frac{m^2}{\epsilon^2}\{A-B-C+D\}\tag{11}.
-\end{aligned}
+ \end{array}
 $$
 
 where
@@ -142,10 +151,10 @@ A=\int\chi^*(x)x^2\psi(x)dx+\frac{i\epsilon}{\hbar}\int\chi^*(\hat{H}x-x\hat{H})
 $$
 
 $$
-\begin{aligned}
+ \begin{array}{ll}
 B&=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar}\hat{H})x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
 &=\int\chi^*(x,t)(x^2-\frac{i\epsilon}{\hbar}x\hat{H}x+\frac{i\epsilon}{\hbar}\hat{H}xx+\frac{\epsilon^2}{\hbar^2}\hat{H}x\hat{H}x)\psi(x,t)dx,\tag{13}
-\end{aligned}
+ \end{array}
 $$
 
 $$
