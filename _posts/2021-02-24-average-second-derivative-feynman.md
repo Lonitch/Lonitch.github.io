@@ -126,6 +126,7 @@ $$
 $$
 C=D=\int\chi^*(x)x^2\psi(x)dx\tag{14}
 $$
+
 according to equations(8)-(10). Combining (11)-(12), we have all the $\epsilon$ terms canceled out to give
 
 $$
@@ -133,37 +134,3 @@ $$
 $$
 
 Which does not match Feynman's results. I think my erroneous results have something to do with my understanding of eq. (8). Can anyone tell me which step in my derivation needs to be modified? And help will be appreciated. I really appreciate any help you can provide.
-
-Notice that
-
-$$
- \begin{array}{ll}
-\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle&=\frac{m^2}{\epsilon^2}\{\langle\chi|x_{k+1}x_k|\psi\rangle-\langle\chi|x_{k+1}x_{k-1}|\psi\rangle-\\
-&\langle\chi|x_kx_k|\psi\rangle+\langle\chi|x_{k}x_{k-1}|\psi\rangle\}\\
-&=\frac{m^2}{\epsilon^2}\{A-B-C+D\}\tag{11}.
- \end{array}
-$$
-
-where
-
-$$
-A=\int\chi^*(x)x^2\psi(x)dx+\frac{i\epsilon}{\hbar}\int\chi^*(\hat{H}x-x\hat{H})x\psi(x)dx,\tag{12}
-$$
-
-$$
- \begin{array}{ll}
-B&=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar}\hat{H})x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
-&=\int\chi^*(x,t)(x^2-\frac{i\epsilon}{\hbar}x\hat{H}x+\frac{i\epsilon}{\hbar}\hat{H}xx+\frac{\epsilon^2}{\hbar^2}\hat{H}x\hat{H}x)\psi(x,t)dx,\tag{13}
- \end{array}
-$$
-
-$$
-C=D=\int\chi^*(x)x^2\psi(x)dx\tag{14}
-$$
-according to equastions(8)-(10). Combining (11)-(12), we have all the $\epsilon$ terms cancelled out to give
-
-$$
-\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=-\frac{m^2}{\hbar^2}\int\chi^*(x,t)\hat{H}x\hat{H}x\psi(x,t)dx\tag{15},
-$$
-
-which does not match Feynman's results. I think my erroneous results have something to do with my understanding of eq.(8). Can anyone tell me which step in my derivation needs to be modified? and help will be appreciated. Thanks in advance!
