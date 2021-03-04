@@ -14,7 +14,11 @@ $$
 \langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=\int\int \chi^* \hat{p}\hat{p}\psi dxdy=-\hbar^2\int\int\chi^*\frac{\partial^2}{\partial x^2}\psi dxdy\tag{1}
 $$
 
-with $\hat{p}=-i\hbar\frac{\partial}{\partial x}$ being momentum operator.
+with $\hat{p}=-i\hbar\frac{\partial}{\partial x}$ being momentum operator. There is a misprint in Eqn.(1) as we can see that by verifying the units on both sides. The LHS has a unit of momentum square while the RHS has a unit of momentum squared times length. Note that the unit of wavefunction is $\sqrt{probability/vol.}$. Therefore, Eqn.(1) should really be
+
+$$
+\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=-\hbar^2\int\chi^*(x,t)\frac{\partial^2}{\partial x^2}\psi(x,t) dx\tag{1*}
+$$
 
 ## Equations Developed by Feynman for Later Use
 ---
@@ -70,18 +74,9 @@ $$
  \end{array}
 $$
 
-Eq.(5) is applied to Eq.(8) directly by replacing $f(y)$ in (5) with $x \psi$ in (8). However, the kernels $K\left(x_{k}, t ; a\right)$ and $K\left(b ; x_{k+1}, t+\epsilon\right)$ in (7) indicates that $\psi \chi$ are states that satisfy
-$$
-i \hbar \frac{\partial \psi}{\partial t}=\hat{H} \psi
-$$ 
-But $K\left(x_{k+1}, t+\epsilon ; x_{k}, t\right)$ in Eq.(7) and (8) implies instead
-$$
-i \hbar \frac{\partial}{\partial t}(x \psi)=\hat{H} x \psi
-$$
-So my question is 
->**Is it alright to think that $K\left(x_{k+1}, t+\epsilon ; x_{k}, t\right)$ is different from $K\left(x_{k}, t ; a\right)$ and $K\left(b ; x_{k+1}, t+\epsilon\right)$?**
+It might seem to be that Eq.(5) is applied to Eq.(8) directly by replacing $f(y)$ in (5) with $x \psi$ in (8). However, Feynman was trying to motivate us here to build a relationship between the **conventional operator formalism** and the **path integral formalism**. So the $x$ can be understood as a coordinate operator, or an eigenvalue of the operator. After a time period of $\epsilon$, the eigenvalue of the coordinate operator for the wavefunction becomes $x_{k+1}$, and thus the result in (8). 
 
-If we ignore this and move forward the eq. (7) now becomes
+If we move forward with Eqn.(8), the eq. (7) now becomes
 
 $$
  \begin{array}{ll}
@@ -98,7 +93,7 @@ $$
 \langle\chi|x_{k+1}x_k|\psi\rangle_S=\int\chi^*(x)x^2\psi(x)dx+\frac{\epsilon}{m}\int\chi^*px\psi(x)dx\tag{10}.
 $$
 
-## Coming back to eq. (1)
+## Getting back to eq. (1)
 ---
 Notice that
 
@@ -110,27 +105,60 @@ $$
  \end{array}
 $$
 
-where
+where we let $x_{k+1}=x$ and $x_k=y$ to get
 
 $$
-A=\int\chi^*(x)x^2\psi(x)dx+\frac{i\epsilon}{\hbar}\int\chi^*(\hat{H}x-x\hat{H})x\psi(x)dx,\tag{12}
+\begin{array}{ll}
+A&=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;y,t)y\psi(y,t)dxdy\\
+&=\int\chi^*(x,t+\epsilon)x(1-\frac{i\epsilon}{\hbar}H)x\psi(x,t)dx\\
+&=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar})x(1-\frac{i\epsilon}{\hbar}H)x\psi(x,t)dx\\
+&=\int\chi^*(x,t)(x^2-\frac{i\epsilon}{\hbar}xHx+\frac{i\epsilon}{\hbar}Hxx+\frac{\epsilon^2}{\hbar^2}HxHx)dx.
+\tag{12}
+\end{array}
 $$
+
+Things get complicated for $B$ as we need to converge wavefunctions at $t_{k+1}$ and $t_{k-1}$ to $t_{k}$. So **we use Eqn(8) and its conjugate to calculate $B$**. Let $t_k=t$, $x_{k+1}=x$, $x_k=z$, and $x_{k-1}=y$, we have
 
 $$
  \begin{array}{ll}
-B&=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar}\hat{H})x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
-&=\int\chi^*(x,t)(x^2-\frac{i\epsilon}{\hbar}x\hat{H}x+\frac{i\epsilon}{\hbar}\hat{H}xx+\frac{\epsilon^2}{\hbar^2}\hat{H}x\hat{H}x)\psi(x,t)dx,\tag{13}
+B&=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;y,t-\epsilon)y\psi(y,t-\epsilon)dxdy\\
+&=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;z,t)K(z,t;y,t-\epsilon)y\psi(y,t-\epsilon)dxdydz\\
+&=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;z,t)(1-\frac{i\epsilon}{\hbar})z\psi(z,t-\epsilon)dxdz\\
+&=\int\chi^*(z,t+\epsilon)z(1-\frac{i\epsilon}{\hbar})(1-\frac{i\epsilon}{\hbar})z\psi(z,t-\epsilon)dz\\
+&=\int\chi^*(z,t)(1+\frac{i\epsilon}{\hbar}H)z(1-\frac{i\epsilon}{\hbar})(1-\frac{i\epsilon}{\hbar})z(1+\frac{i\epsilon}{\hbar})\psi(z,t)dz\\
+&=\int\chi^*(z,t)(z^2+\frac{i\epsilon}{\hbar}zzH-2\frac{i\epsilon}{\hbar}zHz+2\frac{\epsilon^2}{\hbar^2}zHzH-\\
+&\frac{\epsilon^2}{\hbar^2}zHHZ+\frac{i\epsilon}{\hbar}Hzz-\frac{\epsilon^2}{\hbar^2}HzzH+2\frac{\epsilon^2}{\hbar^2}HzHz)\psi(z,t)dz
+\tag{13}
  \end{array}
 $$
 
-$$
-C=D=\int\chi^*(x)x^2\psi(x)dx\tag{14}
-$$
+where we used the conjugate of Eqn. (8) at the fourth equivalence. The equations of (7.75) and (7.76) in Feynman's book were used at the fifth equivalence. Notice that we need to eliminate all the terms that have their orders higher than $\epsilon^2$ in the equation above. Because those terms are negligible at the limit of $\epsilon\rightarrow0$. 
 
-according to equations(8)-(10). Combining (11)-(12), we have all the $\epsilon$ terms canceled out to give
+For $C$, it's simply
 
 $$
-\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=-\frac{m^2}{\hbar^2}\int\chi^*(x,t)\hat{H}x\hat{H}x\psi(x,t)dx\tag{15},
+C=\int\chi^*(x,t)x^2\psi(x,t)dx\tag{14}.
 $$
 
-Which does not match Feynman's results. I think my erroneous results have something to do with my understanding of eq. (8). Can anyone tell me which step in my derivation needs to be modified? And help will be appreciated. I really appreciate any help you can provide.
+Finally, for $D$, we again let $x_{k}=x$ and $y=x_{k-1}$ to give
+
+$$
+\begin{array}{ll}
+D&=\int\chi^*(x,t)xK(x,t;y,t-\epsilon)y\psi(y,t-\epsilon)dxdy\\
+&=\int\chi^*(x,t)x(1-\frac{i\epsilon}{\hbar}H)x\psi(x,t-\epsilon)dx\\
+&=\int\chi^*(x,t)x(1-\frac{i\epsilon}{\hbar}H)x(1+\frac{i\epsilon}{\hbar}H)\psi(x,t)dx\\
+&=\int\chi^*(x,t)(x^2+\frac{i\epsilon}{\hbar}xxH-\frac{i\epsilon}{\hbar}xHx+\frac{\epsilon^2}{\hbar^2}xHxH)\psi(x,t)dx\tag{15}.
+\end{array}
+$$
+
+Combining (11)-(15), we have all the $\epsilon$ terms canceled out to give
+
+$$
+\begin{array}{ll}
+\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle&=\frac{m^2}{\hbar^2}\int\chi^*(x,t)(-xHxH\\
+&-HxHx+xHHx+HxxH)\psi(x,t)dx\\
+&=\int\chi^*(x,t)pp\psi(x,t)dx\tag{16}.
+\end{array}
+$$
+
+which does match Feynman's results. Q.E.D.
