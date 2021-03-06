@@ -6,8 +6,12 @@ Author: Sizhe
 tags: [notes, teaching, heat transfer]
 ---
 
-## Newton's Cooling Law: When the Heat Conductor is Exposed
-In lab1, we discussed the basics of heat conduction, where we 
-## Radiation from First Principle
+## Another teaching note for heat transfer class
 
-## Governing Equation
+My love for Tufte-handout style grows over the past week. So I decided to make another teaching notes using Latex. Since I don't have much love left for some of my students, this note might be the last one.
+
+<object data="{{ site.url }}/images/ME320Lab3Note.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="{{ site.url }}/images/ME320Lab3Note.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="{{ site.url }}/images/ME320Lab3Note.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
