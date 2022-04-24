@@ -17,7 +17,12 @@ tags: [daily, Chinese]
 
 我们三人几乎是同时加入导师的团队读博，因此科研的进程大致相当。既是同窗，又是同龄的关系，让我们仨聚在一起的时候，不免扯扯闲话，做做白日梦。博士的最后一年，几乎每天都要在办公室忙到凌晨。思维枯竭而又无处可去的时候，第一个想到的就是从三楼的办公室下到一楼的实验室。（birth control-one night stand-society-mathematics of mate matching）
 
-(逻辑思维-形象思维-现代医疗-传统医疗)
+(逻辑思维-形象思维-现代医疗-传统医疗-think clearly vs. think deeply)
 
-(think clearly vs. think deeply)
+(研究资金的来源困境)
 
+(工作：回国 vs. 留美)
+
+（工作后：micromanagement, digital transformation，age of mass extinction）
+
+(self care-outlook)
