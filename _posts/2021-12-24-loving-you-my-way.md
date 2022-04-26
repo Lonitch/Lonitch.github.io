@@ -5,9 +5,6 @@ date: 2022-04-23
 Author: Sizhe
 tags: [daily, Chinese]
 ---
-<p align="center"><b>
-"I'm not perfect for you, and vice versa."</b>
-</p>
 
 “如果你能给新的PhD一些建议，你会说什么呢？” Aniruddh，这个比我高出一个头，留着一脸络腮胡，咧嘴笑的时候上嘴唇总是微微翘起的印度大男孩，坐在会议室的另一端意味深长地看着我。而我呢，此时刚刚在他面前演习完我的毕业答辩PPT，有气无力地说道：“吃好喝好，发几篇论文然后走人。”(eat well and sleep well, try to publish something and walk away)。他努了努嘴，把头歪向一边，戏谑道：“如果教授在，你绝对不会这么说吧，刘博士！” “so don't tell him.” 我俩不约而同地大笑。同在会议室的Erik,伸了伸脖子，摊出双手，咧着嘴小声说了句 “what?” 
 
