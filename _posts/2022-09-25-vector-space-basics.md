@@ -11,4 +11,4 @@ The objectives of this note are:
 - Introduce the concepts of vector space, subspace, (direct) sum of  subspaces
 - Some nice proof exercises for knowledge testing
 
-Please check the full note[here](vector_space_basics/index.html)
+Please check the full note [here](/index.html)
