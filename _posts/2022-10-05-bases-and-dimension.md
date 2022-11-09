@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Bases and Dimnsion
+title: Bases and Dimensions
 date: 2022-10-05
 Author: Sizhe
 tags: [notes,linear_algebra]
