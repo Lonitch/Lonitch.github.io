@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sizhe's From Summation to Integral, Know Your Continuum Limit</title>
+  <meta name="description" content="Things to sayJust passed my prelim exam. A monumental moment for a Ph.D. student to be officially called as “Ph.D. candidate”. The exam was not as smooth as ...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/articles/Sum-to-Int">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Blog" href="http://localhost:4000/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script>
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="CH"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>From Summation to Integral, Know Your Continuum Limit</h1>
+<p class="subtitle">August 13, 2020</p>
+
+<h2 id="things-to-say">Things to say</h2>
+
+<p>Just passed my prelim exam. A monumental moment for a Ph.D. student to be officially called as “Ph.D. candidate”. The exam was not as smooth as I expected as I did pretty bad during the Q&amp;A section. The questions I got were not unreasonable but from perspectives that I was less prepared for. So there I was, felt abushed while tried my best to answer the questions using my fractured thoughts and vague memories. Apparently my committee was not pleased by my responses. At the end the chair of my committee had to jump into the conversations to prompt me so that some of my answers did not totally go off the lead. This is the first time I feel frustrated after passing an exam, a brand new experience for a Chinese kid, whose entire education experience has embedded an exam machinery into his head. It’s hard for me not to think that I was mistrusted by my advisor, and misunderstood by my committee, and my Ph.D. research is sort of a joke. But I HAVE TO STOP OVERTHINKING! And this blog is a way to keep my mind occupied.<!--more--></p>
+
+<h2 id="motive">Motive</h2>
+
+<p>In statisitical/quantum mechanics, the theorists study complicated solid system through toy models that consider finite systems at discrete limit. To derive any physical law or governing equation, the discrete systems are generalized to its continuum limit where discrete characterisitic parameters are transformed into infinitesimal changes at the continuum limit. The theorists accomplish the transformation by replacing summations of discrete variables with integrals of continuous functions. The discrete-continuum correspondence is pervasive in physics/chemistry textbooks and I have taken it for granted for a long time. But how the correspondence is built? Why are those prefactors in integrals are needed when they are coming from the discrete systems? It comes to my surprise that I’m not able to give reasonable answers to those questions as I don’t have handy method to justify the correspondence. To solve this I will adopt the method I found in Christopher Mudry’s book to show how one can take a bold leap from discrete limit to continuous world using well-known theorems.</p>
+
+<h2 id="the-justification-that-makes-sense-to-me">The Justification that Makes Sense to Me</h2>
+<p>Let $f$ be a function defined on a 1D solid lattice and it varies slowly at a scale of atomic spacing, $\mathfrak{a}$. Particularly, we have</p>
+
+\[f(m\mathfrak{a})=\sum_n\delta_{m,n}f(n\mathfrak{a})=\sum_n\mathfrak{a}\frac{\delta_{m,n}}{\mathfrak{a}}f(n\mathfrak{a})\tag{1}\]
+
+<p>where $m$ and $n$ are integer values. At the continuum limit,</p>
+
+\[n\mathfrak{a}\rightarrow x,\quad m\mathfrak{a}\rightarrow y,\]
+
+<p>and</p>
+
+\[f(m\mathfrak{a})=f(y)=\int dx\delta(y-x)f(x)=\sum_n^{\infty}\mathfrak{a}\frac{\delta_{m,n}}{\mathfrak{a}}f(n\mathfrak{a})\tag{2}.\]
+
+<p>The last equivalence in (2) is valid because of the perperty of the Dirac function,</p>
+
+\[\delta_{m,n}/\mathfrak{a}=\delta(m\mathfrak{a}-n\mathfrak{a}).\]
+
+<p>Therefore, we find the following transformation from disrete to continuous limit,</p>
+
+\[\sum_n\mathfrak{a}\rightarrow\int dx\tag{3}.\]
+
+<p>The transformation above is in the spatial space, we now focus on the reciprocal space. Let $k_l=\frac{2\pi l}{N}$ with $l$ being an integer, and we have the following theorem</p>
+
+\[\sum_{l=1}^N e^{ik_l(m-n)}=N\delta_{m,n}\tag{4}.\]
+
+<p>for even integer $N$. If we define $L=N\mathfrak{a}$, we have</p>
+
+\[\frac{1}{L}\sum^N_{l=1}e^{ik_l(m-n)}=\frac{\delta_{m,n}}{\mathfrak{a}}=\frac{1}{L}\sum^N_{l=1}e^{i\frac{k_l}{\mathfrak{a}}(m-n)\mathfrak{a}}\tag{5}.\]
+
+<p>We write $k=k_l/\mathfrak{a}$ to give the following transformation</p>
+
+\[\frac{1}{L}\sum_{l=1}^{N}\overset{N\rightarrow\infty}{\longrightarrow}\frac{1}{L}\int dl=\int d\frac{k}{2\pi}\tag{6},\]
+
+<p>and</p>
+
+\[\frac{1}{L}\sum_{l=1}^{\infty}e^{ik(m-n)\mathfrak{a}}\rightarrow \int^{2\pi/\mathfrak{a}}_0\frac{dk}{2\pi}e^{ik(y-x)}=\delta(y-x)\tag{7}.\]
+
+<p>For slowly varying function $f(x)$ at atomic spacing scale, we can also choose $l=0,\pm1,\pm2,\dots$, and the Fourier expansion of $f(x)$ in the reciprocal space is then</p>
+
+\[f(x)=\frac{1}{L}\sum^N_{l=1}\hat{f}(k_l)\rightarrow\int^{\pi/\mathfrak{a}}_{-\pi/\mathfrak{a}}\frac{dk}{2\pi}\hat{f}(k)\tag{8}.\]
+
+<p>If $\hat{f}$ vanishes when $\mid k\mid\gg\frac{1}{\mathfrak{a}}$, we can replace the integral limits in (8) with $\infty$ and $-\infty$. Thus,</p>
+
+\[\delta(x)=\int_{-\infty}^{\infty}\frac{dk}{2\pi}e^{ikx}\tag{9}\]
+
+<p>and</p>
+
+\[2\pi\delta(k)=L\delta_{k,0}=\int^{\infty}_{-\infty}dxe^{-ikx}\tag{10}.\]
+
+<p>Generalizing the results above to 3D space we have</p>
+
+\[\frac{1}{V}\sum_{l=1}^{N}\overset{N\rightarrow\infty}{\longrightarrow}\int\frac{dk}{(2\pi)^3}\tag{11}\]
+
+<p>and</p>
+
+\[\frac{1}{V}\sum_{l=1}^{N}e^{i\boldsymbol{k}\cdot(m-n)\vec{\mathfrak{a}}}=\delta(y-x),\quad\int_{-\infty}^{\infty}dx e^{-i\boldsymbol{k\cdot x}}=V\delta_{\boldsymbol{k},0}.\tag{12}\]
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Like what Saitama said to Genus in <em>One Punch Man</em>,</p>
+
+<p>“<em>It’s not like I need fans, it just feels good to have some people know what I’m doing.</em>”</p>
+
+<p>And he also said:</p>
+
+<p>“<em>If you really want to become strong, stop caring about what others think about you. Living your life has nothing to do with what others think.</em>”</p>
+
+
+
+    </article>
+    <span class="print-footer">From Summation to Integral, Know Your Continuum Limit - August 13, 2020 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2023 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

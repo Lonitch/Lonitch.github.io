@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sizhe's Structure Factor and X-ray Diffraction Peaks</title>
+  <meta name="description" content="Laue condition, Miller Index, and Structure FactorLaue condition needs to be satisfied to have constructive X-ray diffraction interference (i.e., the peaks o...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/articles/Structure-Factor-XRD-Peak">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Blog" href="http://localhost:4000/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script>
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="CH"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Structure Factor and X-ray Diffraction Peaks</h1>
+<p class="subtitle">August 19, 2020</p>
+
+<h2 id="laue-condition-miller-index-and-structure-factor">Laue condition, Miller Index, and Structure Factor</h2>
+
+<p><strong>Laue condition</strong> needs to be satisfied to have constructive X-ray diffraction interference (i.e., the peaks on X-ray spectrum). Using the reciprocal lattice, the condition states that<!--more--></p>
+
+<blockquote>
+  <p>If the difference between the incident $(\boldsymbol{k})$ and scattered $\left(\boldsymbol{k}^{\prime}\right)$ wave vectors is equal to a reciprocal lattice vector, the diffracted intensity may be nonzero. This is the Laue condition. With $\boldsymbol{K}=\boldsymbol{k}^{\prime}-\boldsymbol{k},$ this leads to the simple equation $\boldsymbol{K}=\boldsymbol{G}$, where $\boldsymbol{G}$ is the vectors on reciprocal lattice.</p>
+</blockquote>
+
+<p>Let the base vectors of the reciprocal space be $\boldsymbol{g}_i$, then the <strong>Miller index</strong> is the <em>coordinates</em> on the reciprocal space, i.e.,</p>
+
+\[\boldsymbol{G}=h \boldsymbol{g}_{1}+k \boldsymbol{g}_{2}+l \boldsymbol{g}_{3}\]
+
+<p>where $h,k,l$ are integers. For any family of lattice planes separated by a distance $d$, there is a reciprocal vector with length $|\boldsymbol{G}|=2\pi/d$, and this vector is perpendicular to the lattice planes.</p>
+
+<p><strong>The Laue condition is based solely on the Bravais lattice</strong>, so the positions of the diffraction peaks are independent of the atomic basis. However, <strong>the intensities of the peaks are strongly influenced by the basis.</strong> The structure factor, $S(\boldsymbol{G}),$ and the form factor, $f_{\alpha},$ tell us how the intensities of the peaks depend on the atoms making up the crystals. These quantities are calculated as a sum (or integral) within the unit cell. In the simplest approximation the scattering depends on the atomic charge distribution $\rho_{\alpha}(r),$ and the intensity is proportional to the absolute value squared of</p>
+
+\[S(\boldsymbol{G})=\sum_{\alpha} f_{\alpha} \mathrm{e}^{-i \boldsymbol{G} \cdot \boldsymbol{r}_{\alpha}}\tag{1}\]
+
+<p>and</p>
+
+\[f_{\alpha}(\boldsymbol{G})=\frac{1}{e} \int \rho_{\alpha}(\boldsymbol{r}) \mathrm{e}^{-i \boldsymbol{G} \cdot \boldsymbol{r}} \mathrm{d}^{3} \boldsymbol{r}\tag{2}\]
+
+<p>where $e$ is the electron charge, <strong>the sum is over the atoms in the unit cell, and the integration is over the volume of an atom</strong>. Similar formulae work for electron and neutron scattering, except the form factor integral is different depending on the microscopic interaction at play. Even for $\mathrm{X}$ -rays, the calculation of the form factor as an integral over the charge density works only for the simplest cases. For a realistic calculation of scattered radiation
+intensities one has to perform a <em>Rietveld analysis</em>.</p>
+
+<h2 id="problem-structure-of-rb_xc_60">Problem: Structure of $Rb_{x}C_{60}$</h2>
+
+<p>Assume you perform a powder X-ray diffraction measurement on a Rb doped $\mathrm{C}_{60}$ material with $\lambda=0.9$ Angstrom $\mathrm{X}$ -rays. What are the positions $(2 \theta,$ in degrees $)$ of the first five diffraction peaks for the three observed structures (doping $x=3,4,$ and 6)?</p>
+
+<p>$Rb_{x}C_{60}$ has an $fcc$ structure for $x=3,bct$ for $x=4,$ and $bcc$ for $x=6.$ To calculate the X-ray peak positions, $2\theta,$ we must use</p>
+
+\[G=\sqrt{\left(h \cdot \mathbf{b}_{1}\right)^{2}+\left(k \cdot \mathbf{b}_{2}\right)^{2}+\left(l \cdot \mathbf{b}_{3}\right)^{2}}\]
+
+<p>where $b_{1}=b_{2}=\frac{2\pi}{a},$ and $b_{3}=\frac{2\pi}{a}$ for $fcc$ and $bcc$ or $b_{3}=\frac{2\pi}{c}$ for bct. We can then use the condition $2\frac{2\pi}{\lambda}\sin\theta=G$ to calculate values of $2\theta$. Since we are using the conventional cubic unit cells, we must calculate the structure factor, Eq. (1), to determine which $(h,k,l)$ values are allowed.</p>
+
+\[S_{K}=\sum_{j=1}^{n} e^{i K \cdot d_{j}}\]
+
+<p>for $n$ scatterers at positions $\mathbf{d_j}$ in a unit cell. For the $fcc$ unit cell, there is a $C_{60}$ at position $\boldsymbol{d_1}=0,$ and on the three faces $\boldsymbol{d_2}=\frac{a}{2}(\hat{x}+\hat{y}),\boldsymbol{d_3}=\frac{a}{2}(\hat{x}+\hat{z}),\boldsymbol{d_4}=\frac{a}{2}(\hat{y}+\hat{z}).$ The general vector is
+$\boldsymbol{K}=\frac{2\pi}{a}(h\hat{x}+k\hat{y}+l\hat{z})$. Therefore</p>
+
+\[\begin{aligned}
+S_{K} &amp;=1+\mathrm{e}^{\mathrm{i} \pi(h+k)}+\mathrm{e}^{\mathrm{i} \pi(h+l)}+\mathrm{e}^{\mathrm{i} \pi(k+l)} \\
+&amp;=1+(-1)^{h+k}+(-1)^{h+l}+(-1)^{k+l}
+\end{aligned}\]
+
+<p><strong>When $S_{K}\neq0$, the Bragg peak associated with the reciprocal lattice vector $\boldsymbol{K}$ at scattering angle $2\theta$ is allowed.</strong> Similarly we can look at the two-molecule per unit cell bet and bee structures to determine that their structure factors are given by</p>
+
+\[S_{K}=1+(-1)^{h+k+l}.\]
+
+<p>The resultant calculated values for the first five allowed diffraction peaks for the fcc structures is shown below</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>h</th>
+      <th>k</th>
+      <th>l</th>
+      <th>G</th>
+      <th>2$\theta$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.7694637</td>
+      <td>6.318201</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.088186</td>
+      <td>8.939824</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.33275</td>
+      <td>10.95458</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1.538927</td>
+      <td>12.65571</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1.720573</td>
+      <td>14.15675</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="problem-powder-diffraction-of-hcp-and-fcc-crystals">Problem: Powder Diffraction of hcp and fcc Crystals</h2>
+<p>Cobalt has two forms: $\alpha$-Co, with hcp structure (lattice spacing of $a=$ $2.51)$Å and $\beta-$ Co, with $fcc$ structure (lattice spacing of $a_{cubic}=3.55$Å). Assume that the $hcp$ structure has an ideal $c/a$ ratio. Calculate and compare the position of the first five X-ray powder diffraction peaks. The quantity $K=4\pi/\lambda\sin\theta$ can be used to characterize the peak positions (here $\lambda$ is the wavelength of the X-ray radiation and $2 \theta$ is the scattering angle).</p>
+
+<p>To satisfy the powder diffraction condition, the length of the reciprocal lattice vector must be equal to $G=K=4\pi/\lambda\sin\theta$. To calculate the position of the peaks for the $fcc$ structure we use the simple cubic unit cell with four atoms per cell. The reciprocal lattice is cubic, with lattice spacing of $G_{0}=2\pi/a_{cubic}=1.77Å^{-1},$ and the structure factor is nonzero only if the (hkl) indices are all odd or all even. The length of the reciprocal lattice vector is $G=G_{0}\sqrt{h^{2}+k^{2}+l^{2}}$.</p>
+
+<p>The hcp lattice has two atoms per unit cell. The reciprocal lattice is constructed from a simple hexagonal lattice by assigning a zero structure factor to some of the points, resulting in alternating hexagonal and honeycomb arrays. We will index the reciprocal lattice points in terms of $\boldsymbol{G}=h\boldsymbol{a^{\prime}}+k\boldsymbol{b^{\prime}}+l\boldsymbol{c^{\prime}}$, where the angle between $\boldsymbol{a^{\prime}}$ and $\boldsymbol{b^{\prime}}$ is $120^{\circ}$ and $\boldsymbol{c^{\prime}}$ is perpendicular to $\boldsymbol{a^{\prime}}$ and $\boldsymbol{b^{\prime}}$. The lengths of the primitive vectors are calculated as $a^{\prime}=b^{\prime}=4\pi/\sqrt{3}a=2.89Å^{-1}$, $c^{\prime}=2\pi/c=\sqrt{3/8}2\pi/a=1.53Å^{-1}$.</p>
+
+<p>For $\beta-Co$, we have</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>$hkl$</th>
+      <th>$h^{2}+k^{2}+l^{2}$</th>
+      <th>$G$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>111</td>
+      <td>3</td>
+      <td>3.07</td>
+    </tr>
+    <tr>
+      <td>002</td>
+      <td>4</td>
+      <td>3.54</td>
+    </tr>
+    <tr>
+      <td>220</td>
+      <td>8</td>
+      <td>5.01</td>
+    </tr>
+    <tr>
+      <td>311</td>
+      <td>11</td>
+      <td>5.87</td>
+    </tr>
+    <tr>
+      <td>222</td>
+      <td>12</td>
+      <td>6.13</td>
+    </tr>
+    <tr>
+      <td>400</td>
+      <td>16</td>
+      <td>7.08</td>
+    </tr>
+    <tr>
+      <td>331</td>
+      <td>19</td>
+      <td>7.71</td>
+    </tr>
+    <tr>
+      <td>420</td>
+      <td>20</td>
+      <td>7.92</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For $\alpha-Co$,</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>$hkl$</th>
+      <th>$G$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>2.89</td>
+    </tr>
+    <tr>
+      <td>002</td>
+      <td>3.07</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>3.27</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>4.21</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>5.01</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>5.43</td>
+    </tr>
+    <tr>
+      <td>200</td>
+      <td>5.78</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>5.87</td>
+    </tr>
+    <tr>
+      <td>004</td>
+      <td>6.13</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The nearest-neighbor distance is the same for the two structures. This is why some of the X-ray diffraction peak positions coincide.</p>
+
+
+
+    </article>
+    <span class="print-footer">Structure Factor and X-ray Diffraction Peaks - August 19, 2020 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2023 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

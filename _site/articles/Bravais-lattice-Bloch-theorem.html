@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sizhe's Reciprocal Lattice and Bloch's Theorem</title>
+  <meta name="description" content="BackgroundI’ve been reading stuff for quite some time, now it’s the time to dive into some real-world problems. One of my current research interests is the m...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/articles/Bravais-lattice-Bloch-theorem">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Blog" href="http://localhost:4000/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script>
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="CH"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Reciprocal Lattice and Bloch's Theorem</h1>
+<p class="subtitle">May 17, 2020</p>
+
+<h2 id="background">Background</h2>
+
+<p>I’ve been reading stuff for quite some time, now it’s the time to dive into some real-world problems. One of my current research interests is the many-body effects to conductivity properties of electroactive materials, like the electrode materials used in rechargeable battery and Faradaic desalination cell. More specifically, recent studies proved that the dynamics of polarons, quasi-particles made of a bare electron dressed by its interactions with positive charges and phonons, could be used to explain variation of electronic conductivity in various materials<a href="#1">[1]</a>. To study many-body effects in periodic potential environment (i.e., crystal lattice), I will prepare blog articles to refresh and develop a solid understanding of condensed state physics first, then review related concepts/methods from quantum field theory (QFT), and finally hit the details of polaron dynamics. This article is the first step of my possibly long journey to fully understand the polarons.<!--more--></p>
+
+<p>As an outsider of physics research community, my goal of writing blogs is to make things crystal clear mathematically and physically intuitive. Comments and corrections are equally welcomed.</p>
+
+<h2 id="bravais-lattice-one-more-time">Bravais Lattice One More Time</h2>
+<p>First thing is first, Bravais lattice is not crystal lattice. Crystal lattice is atomic base superimposed on one specific kind of Bravais lattice. In other words, Bravais lattice is the bone of crystal lattice while atomic base is the flesh.</p>
+
+<blockquote>
+  <p>For example, the Bravais lattice of NaCl crystal is fcc but the atom base in each primitive cell of fcc lattice contains two atoms: one Na and one Cl.</p>
+</blockquote>
+
+<p>As a part of material science or physics crriculum, students must’ve learned how to represent points in Bravais lattice, $\mathbf{R}$, using base vectors $\mathbf{a}_i$:</p>
+
+\[\mathbf{R}=\{\mathbf{R}|\mathbf{R}=n_1\mathbf{a}_1+n_2\mathbf{a}_2+n_3\mathbf{a}_3;n_i\in\mathbb{Z}\}\tag{1}\]
+
+<p>The primitive cell of a Bravais lattice is the basic volume that encloses single point of the lattice. We can reproduce the whole lattice by duplicating the primitive cell along the directions of three base vectors without overlapping the cells. When an atomic base is used to describe crystal, the real atoms are occupying the positions that are usually off the point in the Bravais primitive cell. Thus, we need another set of vector, ${\mathbf{r}_i}$, to represent locations of real atoms. Because $\mathbf{r}_i$ is defined within the primitive cell $\mathcal{B}$ some people call such vector as “relative coordinates”. Thus, the coordinate of atom “X” in a crystal lattice, $\mathbf{X}$, is:</p>
+
+\[\mathbf{X}=\mathbf{R}+\mathbf{r}_i\tag{2}\]
+
+<p>From here, the mass distribution of the lattice is given by:</p>
+
+\[\rho(\mathbf{X})=\sum_{\mathbf{R}\in\mathcal{BL}}\sum_{\mathbf{r}\in\mathcal{B}}m_i\delta(\mathbf{X}-\mathbf{R}-\mathbf{r}_i)\]
+
+<p>where $m_i$ is the mass of ith atom. In a perfect crystal lattice where defects and impurity are negligible, the mass distribution is a periodic function, i.e.:</p>
+
+\[\rho(\mathbf{X})=\rho(\mathbf{X+R})\]
+
+<h2 id="reciprocal-lattice-starting-from-fourier-expansion">Reciprocal Lattice: Starting from Fourier Expansion</h2>
+<p>Let $f(\mathbf{X})$ be a function exhibiting the same periodicity as a Bravais lattice, i.e.</p>
+
+\[f(\mathbf{X})=f(\mathbf{X+R}).\]
+
+<p>The Fourier expansion of $f(X)$ is:</p>
+
+\[f(\mathbf{X})=\sum_Qf(\mathbf{Q})e^{i\mathbf{Q}\cdot\mathbf{X}}=\sum_{\mathbf{Q}}f(\mathbf{Q})e^{i\mathbf{Q}\cdot(\mathbf{X+R})}
+\tag{3}\]
+
+<p>Eqn.(3) indicates that</p>
+
+\[e^{i\mathbf{k}\cdot\mathbf{R}}=1\rightarrow\mathbf{k}\cdot\mathbf{R}=2\pi n
+\tag{4}\]
+
+<p>where $n\in\mathbb{Z}$. To solve for $\mathbf{k}$ we first define vectors $\mathbf{b}_i$ that is related to Bravais base vectors $a_i$ by</p>
+
+\[\mathbf{a}_i\mathbf{b}_j=2\pi\delta_{ij}
+\tag{5}\]
+
+<p>If we let</p>
+
+\[\mathbf{k}=\sum_j l_j\mathbf{b}_j,\quad l_j\in\mathbb{Z}\tag{6}\]
+
+<p>substitute (6) into (4) and use (1),(5) we find</p>
+
+\[\mathbf{k\cdot R}=\sum_i2\pi (n_i l_i)\]
+
+<p>Because $(n_i l_i)$ are definitely integers, we just proved the definition in (6) satisifies (4). The lattice $\mathbf{Q}$ defined by base vectors $\mathbf{b}_i$ is the “<strong>reciprocal lattice</strong>”:</p>
+
+\[\tag{7}\{\mathbf{Q}|\mathbf{Q}=\sum_in_i\mathbf{b}_i;n_i\in\mathbb{Z}\}\]
+
+<p>The volume of the Bravais primitive cell is $V_0=\mathbf{a_1\cdot(a_2\times a_3)}$, from this and (5) we have</p>
+
+\[\mathbf{b}_1=\frac{2\pi}{V_0}(\mathbf{a_2\times a_3})\tag{8}\]
+
+<p>Similar things happen to $\mathbf{b}_2$ and $\mathbf{b}_3$. One of the most profound properties of reciprocal lattice is that <strong>the Fourier component of a periodic function on a Bravais lattice is also periodic on reciprocal lattice except that the periodicity $\mathbf{R}$ is replaced with reciprocal lattice vecotor $\mathbf{Q}$</strong>. This fact has deep consequences, as we shall see. For instance,we Fourier transform the periodic function $f(\mathbf{r})$ as:</p>
+
+\[\begin{align}
+f(\mathbf{Q})&amp;=\int_{V}d\mathbf{r}f(\mathbf{r})e^{-i\mathbf{Q}\cdot\mathbf{r}}\\
+&amp;=\int_{V}d\mathbf{r}f(\mathbf{r+R})e^{-i\mathbf{Q}\cdot\mathbf{r}}\\
+&amp;=\sum_{\mathbf{R}}\int_{V_0}d\mathbf{r}f(\mathbf{r+R})e^{-i\mathbf{Q}\cdot\mathbf{r}}
+\end{align}\tag{9}\]
+
+<p>Now we let $\mathbf{r}^{\prime}=\mathbf{r+R}$ and give:</p>
+
+\[f(\mathbf{Q})=\sum_{\mathbf{R}}e^{i\mathbf{Q}\cdot\mathbf{R}}\int_{V_0}d\mathbf{r}^{\prime}f(\mathbf{r}^{\prime})e^{-i\mathbf{Q}\cdot\mathbf{r}^{\prime}}=N\int_{V_0}d\mathbf{r}f(\mathbf{r})e^{-i\mathbf{Q}\cdot\mathbf{r}}
+\tag{10}\]
+
+<p>where in second step we used $\mathbf{Q\cdot R}=2\pi n$. Another famous theorem of the complex exponential sum is:</p>
+
+\[\frac{1}{V}\sum_ke^{i\mathbf{r\cdot k}}=\delta(\mathbf{r})\tag{11}\]
+
+<p>and <strong>$N$ is the number of points in Bravais lattice</strong>. We now let $\mathbf{G}$ as vectors on reciprocal lattice and $\mathbf{R}$ as vectos on Bravais lattice. From the figure blow, we derive the following relation between the two:</p>
+
+\[\mathbf{R}\cdot\frac{\mathbf{G}}{|\mathbf{G}|}=nd\quad n\in\mathbb{Z}\tag{12}\]
+
+<p>where $d$ is the distance between the lattice planes in the same plane family shown in the figure.</p>
+<p align="center">
+  <img width="260" height="260" src="http://localhost:4000/images/R-G-lattice.png" />
+</p>
+<p style="text-align: center;">Figure 1. R and G on Bravais Lattice</p>
+
+<p>If we choose $|\mathbf{G}|=\frac{2\pi}{d}$, Eq.(12) is recovered to Eq. (4). Each $\mathbf{Q}$ in Eq.(7) therefore determines a family of lattice planes with plane interval equal to $d=\frac{2\pi}{|\mathbf{Q}|}$.</p>
+
+<h3 id="first-brillouin-zone">First Brillouin Zone</h3>
+<p>To understand first Brillouin zone, we first introduce the concept of Wigner-Seitz primitive unit cell. Imagine now we select a point,A, in Bravais lattice and its nearest neighbors. We then draw straight lines from A to its nearest neighbors and find the middle points of these lines. In a 3D Bravais lattice let’s further imagine that planes passing through the middle points and perpendicular to the lines enclose a region around point A. This region is called <strong>Wigner-Seitz primitive cell</strong>. It is not a surprise that the minimum sum of distances from vertices of Bravais primitive unit cell to point A is obtained when the primitive cell is Wigner-Seitz cell. Similarly, the space enclosed by Wigner-Seitz primitive cell on reciprocal lattice is called “<strong>First Brillouin zone</strong>”.  See Fig. 2 for the First Brillouin zone (FBZ) on a 2D reciprocal lattice.</p>
+<p align="center">
+  <img width="260" height="260" src="http://localhost:4000/images/FBZ.PNG" />
+</p>
+<p style="text-align: center;">Figure 2. FBZ on a 2D reciprocal lattice</p>
+
+<p>FBZ also plays an important role in understanding X-ray scattering pattern. According to Bragg’s theorem, the wavelength of X-ray is related to the distance between lattice planes by:</p>
+
+\[2dsin(\theta)=n\lambda\quad n\in\mathbb{Z}\tag{13}\]
+
+<p>The reflection of electromagnetic wave in X-ray scattering process may be described as the incoming photon at state $|\mathbf{k}_i\rangle$ interacts with periodic potential $V(\mathbf{r})$ in crystal lattice and results in the outcoming photon at state $|\mathbf{k}_f\rangle$.</p>
+
+<blockquote>
+  <p>For those who have no experience with Dirac notation, $|X\rangle$ is used to represent an eigenstate of an Hamiltonian and is called “ket”. Its Hermitian adjoint, $\langle X|$ is called “bra”. To give an example of their use, let’s recall the time-independent Schrodinger equation (TISE) as $(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))\psi(r)=E\psi(r)$, where $E$ is the eigenvalue corresponding to the eigenstate $\psi(r)$. To make TISE more compact, we call $\mathbf{H}=(-\hbar^2\frac{\nabla^2}{2m}+V(\mathbf{r}))$ as the “Hamiltonian” and now TISE becomes $\mathbf{H}|\psi\rangle=E|\psi\rangle$. Using Dirac notation, the possibility amplitude of transforming state $\psi_1$ to $\psi_2$ is simply $\langle\psi_2|\mathbf{H|\psi_1}\rangle$. Note that this amplitude is not a product of eigenstate, Hamiltonian, and another eigenstate, it is a integral. If eigenstates are coordinate-based ($\psi=\psi(\mathbf{r})$), $\langle\psi_2|\mathbf{H|\psi_1}\rangle=\int d\mathbf{r}\phi^{\dagger}_2(r)\mathbf{H}\psi_1(r)$, where ${^{\dagger}}$ means Hermitian transpose operation.</p>
+</blockquote>
+
+<p>Thus, the posibility amplitude of obtaining photon at state $|k_f\rangle$ from $|k_i\rangle$ through periodic potential field $V(\mathbf{R})$ is:</p>
+
+\[\left\langle\mathbf{k}_{f}|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle=\int d^{3} r e^{-i\left(\mathbf{k}_{f}-\mathbf{k}_{i}\right) \cdot \mathbf{r}} V(\mathbf{r})\tag{14}\]
+
+<p>as the coordinate-based wavefunctions that satisfy non-relativistic Schrodinger equation has the form of $e^{i\mathbf{k\cdot r}}$. Because potential function $V(r)$ is periodic on Bravais lattice, <strong>its Fourier transformation (14) must be periodic on reciprocal lattice</strong>. Based on the discussion in the previous section, we must have:</p>
+
+\[\mathbf{k_f-k_i=Q}\tag{15}\]
+
+<p>which is the “<strong>von Laue condition</strong>“Let $\mathcal{BL}$ and $\mathcal{B}$ represent the point colletions in Bravais lattice and in atom base, respectively. We can write potential function $V(r)$ as:</p>
+
+\[V(\mathbf{r})=\sum_{\mathbf{R} \in \mathcal{B} \mathcal{L}} \sum_{i \in \mathcal{B}} v_{i}\left(\mathbf{r}-\mathbf{R}-\mathbf{r}_{i}\right)\tag{16}\]
+
+<p>substitute (15), (16) into (14), we have:</p>
+
+<p>\(\left\langle\mathbf{k}_{f}|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle=\int d^{3} r e^{-i\mathbf{Q}\cdot \mathbf{r}} \sum_{\mathbf{R} \in \mathcal{B} \mathcal{L}} \sum_{i \in \mathcal{B}} v_{i}\left(\mathbf{r}-\mathbf{R}-\mathbf{r}_{i}\right)\tag{17}\)
+Let $\mathbf{r^{\prime}}=\mathbf{r}-\mathbf{R}-\mathbf{r}_{i}$, and (17) becomes</p>
+
+\[\begin{align}
+ \left\langle\mathbf{k}_{f}|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle&amp;=\sum_{\mathbf{R} \in \mathcal{BL}}e^{-i\mathbf{Q\cdot R}} \sum_{i \in \mathcal{B}} v_{i}\left(\mathbf{r}^{\prime}\right)\int d^{3} \mathbf{r}^{\prime} e^{-i\mathbf{Q}\cdot (\mathbf{r}^{\prime}+\mathbf{r}_i)}\\
+ &amp;=N\sum_{i \in \mathcal{B}} v_{i}\left(\mathbf{r}^{\prime}\right)\int d^{3} \mathbf{r}^{\prime} e^{-i\mathbf{Q}\cdot (\mathbf{r}^{\prime}+\mathbf{r}_i)}\\
+ &amp;=N\sum_{i\in\mathcal{B}}v_i(\mathbf{Q})e^{-i\mathbf{Q\cdot r_i}}
+\end{align}\tag{18}\]
+
+<p>where (10) and (11) are used in the second step of (18). (Don’t be scared by the minus sign in the exponential term, you can treat $e^{-i\mathbf{QR}}$ as $e^{i(-\mathbf{Q})\cdot\mathbf{R}}$)</p>
+
+<p>If atom base $\mathcal{B}$ is constituted by identical atoms, (18) is simply:</p>
+
+\[\left\langle\mathbf{k}_{f}|V(\mathbf{r})| \mathbf{k}_{i}\right\rangle=N v(\mathbf{Q}) \sum_{i \in \mathcal{B}} e^{-i \mathbf{Q} \cdot \mathbf{r}_{i}} \equiv N v(\mathbf{Q}) S(\mathbf{Q})\tag{19}\]
+
+<p>where $S(Q)$ is the famous “<strong>geometric form factor</strong>”. In an x-ray experiment, the peaks in the reflected beam will occur right at $\mathbf{k_i +Q}$, with an intensity proportional to $|v(\mathbf{Q})|^2$, with a possible additional modulation by the geometrical form factor.</p>
+
+<h2 id="blochs-theorem">Bloch’s Theorem</h2>
+<p>This section is all about Bloch’s theorem, the first symmetry-flavored theorem appears in condensed matter physics textbook, which gives general from of wavefunction for fermions in periodic lattice. We first restate it here and then prove it using three different but related ways in latter subsections.</p>
+
+<p><strong>Bloch’s Theorem: An electron in a periodic potential has eigenstates of the form</strong></p>
+
+\[\Psi_{\mathbf{k}}=e^{i\mathbf{k\cdot r}}u_{\mathbf{k}}(\mathbf{r})\]
+
+<h3 id="an-intuitive-proof">An intuitive proof</h3>
+
+<p>The proof of Bloch’s theorem given in this section is inspired by Jordan Edmounds’ incredible youtube lecture<a href="#2">[2]</a>. Let’s start with a 1D lattice shown below, where atoms are aligned with a interval of $a$.</p>
+
+<p align="center">
+<img width="340" height="130" src="http://localhost:4000/images/lattice-1D-actor.png" />
+</p>
+<p style="text-align: center;">Figure 3. Indistinguishable atom on 1D  lattice</p>
+
+<p>Because the identical atoms on a sufficiently long 1D lattice are indistinguishable, the wavefunction of electron $\Psi(\mathbf{r})$ on such lattice must be periodic:</p>
+
+\[\Psi(\mathbf{r})=\Psi(\mathbf{r+a})=C\Psi(\mathbf{r})\]
+
+<p>where $C$ is the modulation to $\Psi$. To make sure that $|\Psi(\mathbf{r})|^2=|\Psi(\mathbf{r+a})|^2$, we must have $C^2\equiv1$. We now impose the <strong>“periodic boundary condition”</strong>(PBC), hence for finite 1D lattice, the PBC indicates the linear lattice becomes a circular lattice shown below:</p>
+
+<p align="center">
+<img width="300" height="310" src="http://localhost:4000/images/lattice-1D-circle.png" />
+</p>
+<p style="text-align: center;">Figure 4. Circular 1D  lattice</p>
+
+<blockquote>
+  <p>The use of PBC might sound weird here, but if we think of a real crystal lattice,the dimensions of crystal lattice are infinite comparing to atomic interval. The PBC then indicates an enormous hyperspherical lattice structure and is valid for the parts that are sufficiently far away from the crystal surface.</p>
+</blockquote>
+
+<p>Using the circular lattice in Fig. 4, we can translate the original wavefunction $\Psi$ by $N$ times to go back to the original wavefunction. That is:</p>
+
+\[\Psi(r)=\Psi(r+Na)=C^N\Psi(r)\]
+
+<p>Thus, <strong>$C$ must be the Nth root unity</strong>. One of the options for $C$ is $e^{i2\pi\frac{S}{N}}$, where $S\in\mathbb{Z}$. Recall that $\Psi$ is also a function of coordinate on our 1D lattice, so we must have</p>
+
+\[\Psi(r)=e^{i2\pi S/N(r/a)}\tag{20}\]
+
+<p>since</p>
+
+\[C\Psi(r)=e^{i2\pi S/N}e^{i\frac{2\pi S}{N}\frac{r}{a}}=e^{i2\pi S/N(r+a/a)}=\Psi(r+a)\tag{21}\]
+
+<p>We now define a <strong>crystal momentum</strong> $k$ as $k=\frac{2\pi S}{Na}$, and the wavefunction becomes:</p>
+
+\[\Psi(r)=e^{ikr}\quad k=\frac{2\pi S}{Na}\tag{22}\]
+
+<p>Now the question we have is: <strong>is this the only option for $\Psi$?</strong> Probably not,so we still need to cover the possibility of <strong>using other periodic function to construct the wavefunction</strong>. To this end, we append a periodic function in (22) and get:</p>
+
+\[\Psi_k(r)=e^{ikr}u_k(r)\tag{23}\]
+
+<p>where $u(r+a)=u(r)$. We use the subscript here to emphasize the use of crystal momentum. (23) can be generalized to high dimension space, and gives:</p>
+
+\[\Psi_{\mathbf{k}}=e^{i\mathbf{k\cdot r}}u_{\mathbf{k}}(\mathbf{r})\]
+
+<p>which is just Bloch’s theorem, Q.E.D.</p>
+
+<blockquote>
+  <p>An Probably important side note: nitice that the crystal momentum of a 1D
+lattice is defined as $k=2\pi S/Na$, and the dimension of our hypothetical 1D lattice is $L=Na$. Thus, the product of $kr=2\pi Sr/L$ is only important when it is in FBZ. In other words, when $2\pi Sr/L$ is outside of FBZ, that is $kr=2\pi n+k^{\prime}r$, we always have a factor of $e^{i2\pi n}=1$, and the wavefunction essentially corresponds to a crystal momentum $k^{\prime}$ in FBZ. Similar arguments can be easily applied to high dimensional wavefunction.</p>
+</blockquote>
+
+<h3 id="proof-using-fourier-transformed-schrodinger-equation">Proof using Fourier transformed Schrodinger equation</h3>
+<p>The proof introduced in this section starts from time-independent Schrodinger equation:</p>
+
+\[(-\hbar^2\nabla^2/2m+V(\mathbf{r}))\Psi(\mathbf{r})=E\Psi(\mathbf{r})\]
+
+<p>We now write $V$ and $\Psi$ in its Fourier expansions:</p>
+
+\[\begin{align}
+V(r)&amp;=\sum_G V_Ge^{iG\cdot r}\\
+\Psi(r)&amp;=\sum_kc_ke^{i\mathbf{k\cdot r}}
+\end{align}\tag{24}\]
+
+<p>Substitute (24) in Schrodinger equation, we have</p>
+
+\[\sum_k\frac{\hbar^2k^2}{2m}c_ke^{ikr}+\sum_G\sum_kc_kV_Ge^{i(k+G)r}=E\sum_kc_ke^{ikr} \tag{25}\]
+
+<p>Next, we multiply (25) with $e^{-ik^{\prime}r}$ and integrate (25) over $r$ to obtain:</p>
+
+\[\int d^3r\left(\sum_k\frac{\hbar^2k^2}{2m}c_ke^{i(k-k')r}+\sum_G\sum_kc_kV_Ge^{i(k+G-k')r}\right)=\int d^3rE\sum_kc_ke^{i(k-k')r} \tag{26}\]
+
+<p>Using the orthogonality of periodic functions, similar to (11):</p>
+
+\[\int d^3r e^{i(k-k')r}=V\delta_{k,k'}\tag{27}\]
+
+<p>Cancelling $V$ we obtain from (26) the Fourier transformation of Schrodinger equation:</p>
+
+\[\frac{\hbar^2|k'|^2}{2m}c_{k'}+\sum_Gc_{k'-G}V_G=Ec_{k'}\tag{28}\]
+
+<p>In order to solve (28) for eigenvalue $E$, we have to know all the values of $c_{k’-G}$. Compare the Fourier expansion with (28), we then conclude that <strong>$\Psi$ can only be related to $c_{k-G}$ if its Fourier expansion is:</strong></p>
+
+<p>\(\Psi=\sum_{G}c_{k-G}e^{i(k-G)r}=e^{ikr}\sum_Gc_{k-G}e^{-iGr}=e^{ikr}u_k(r)\)
+Q.E.D.</p>
+
+<h3 id="proof-using-translational-operators">Proof using translational operators</h3>
+<p>The proof in this section is prepared for those who know something about quantum-mechanical operators and their embeddied symmetries, more specifically, translation operators and their commutation rules with Hamiltonian. Let’s start with a free electron, whose Hamiltonian is just its kinetic energy:</p>
+
+\[H_0=\hbar^2\frac{\mathbf{P}^2}{2m} \tag{29}\]
+
+<p>(29) is obviously invariant under translational transformation as it is not dependent on coordinates. As a consequence, the translational operator</p>
+
+\[T(\mathbf{a})=e^{i \frac{\mathbf{P}}{\hbar} \cdot \mathbf{a}}\tag{30}\]
+
+<p>commutes with Hamiltonian. However, when the electron is in a periodic potential $V(r)=V(r+R)$, such global translational symmetry is broken. But the Hamiltonian now commutes with $T(\mathbf{R})$. When $T(R)$ is applied to wavefunction $\Psi(r)$, we find:</p>
+
+\[T(R)\Psi(r)=e^{i\mathbf{q\cdot R}}\Psi(\mathbf{r})=\Psi(r+R)\tag{31}\]
+
+<p>Note that we can let</p>
+
+\[\mathbf{q=Q+k}\tag{32}\]
+
+<p>where $\mathbf{k}$ is in FBZ. Substitute (32) in (31), we find:</p>
+
+\[\Psi(\mathbf{r+R})=e^{i\mathbf{k\cdot r}}\Psi(\mathbf{r})\tag{33}\]
+
+<p>We conclude that, <strong>for a periodic potential, all the conserved electron wave-vectors belong to the first Brillouin zone.</strong> (33) is sometimes called as “<strong>Floquet’s Theorem</strong>”. Using Floquet’s theorem, it is followed that</p>
+
+\[\Psi(r+R)=\Psi(r)=\Psi_k(r) = \sum_Qc_{k+Q}e^{i(k+Q)r}=e^{ikr}u_k(r)\]
+
+<p>Q.E.D.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Some drunk undergrads are fighting outside when I’m finishing. Please don’t get me wrong, I am indeed hate undergrads and am not willing to teach them any of these things. I write this only to embark a journey that kills my weekend time and fulfills my curiosity.</p>
+
+<h2 id="references">References</h2>
+
+<p><a id="1">[1]</a> Sio, Weng Hong, et al. “Ab initio theory of polarons: Formalism and applications.” Physical Review B 99.23 (2019): 235139.</p>
+
+<p><a id="2">[2]</a> https://www.youtube.com/watch?v=8EOReuCrNuE</p>
+
+
+
+    </article>
+    <span class="print-footer">Reciprocal Lattice and Bloch's Theorem - May 17, 2020 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2023 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

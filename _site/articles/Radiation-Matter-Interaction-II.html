@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sizhe's A Pedastrian Approach to Radiation-Matter Interaction-Part II</title>
+  <meta name="description" content="TL;DRThis blog introduces the quantum theory of free electromagnetic field, a sequel to my QM in Hilbert space blog.">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/articles/Radiation-Matter-Interaction-II">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Blog" href="http://localhost:4000/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script>
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="CH"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>A Pedastrian Approach to Radiation-Matter Interaction-Part II</h1>
+<p class="subtitle">July 5, 2020</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>This blog introduces the quantum theory of free electromagnetic field, a sequel to my QM in Hilbert space blog.<!--more--></p>
+
+<h2 id="motivationbirds-view">Motivation/Bird’s view</h2>
+
+<p>Needless to say, the Maxwell’s equation set for electromagnetism is one of the most fundamental pillars that underspins so many branches of mordern physics. CERN has proven experimentally that Maxwell is right even at quantum-scale. However, we cannot apply classical Maxwell’s equation in quantum field theory. Instead, we need to quantize the classical electromagnetic field in order to use the Hilbert-space formalism we developed in the part I. I should also admit that the quantization of electromagnetic fields could become nasty once we also take into account the interactions between different fields. Therefore, let us do one thing at a time and quantize the free electromagnetic field (free EM field) here.</p>
+
+<p>We will start with the derivation of classical Hamiltonian of a free charge in a free electromagnetic field. We will then prove that the Hamiltonian gives classical equation of motions for the free charge using Hamiltonian equations. The <strong>gauge invariance</strong> will briefly be discussed along the way. When we are comfortable with the classical Hamiltonian, we can quantize the classical terms into operators to get quantum Hamiltonian. By solving the Schrodinger equation with the quantized Hamiltonian, we can show that the <strong>gauge transformation</strong> causes a phase change in the eigenfunctions/wavefunctions. To continue the discussion started in my previous blog, I will also show how the quantized EM field and Hilbert-space formalism could dance together with one caveat: the vanishing expectation value of the electric field operator $\hat{\mathbf{E}}$. We will solve this problem in the last part of this blog using the <strong>coherent states</strong> as the eigenstates to the free EM field. It turns out that the coherent state is also a convenient tool to solve simple problems related to the polaron theory.</p>
+
+<h2 id="classical-hamiltonian-of-free-em-field">Classical Hamiltonian of Free EM Field</h2>
+<h3 id="lagrangian-and-hamiltonian-of-a-charged-particle">Lagrangian and Hamiltonian of a charged particle</h3>
+<p>For a particle carrying charge $e$  in a free EM field, the force it experiences is described by Lorentz’s law:</p>
+
+\[\boldsymbol{F}=e\left(\boldsymbol{E}+\frac{\boldsymbol{v}}{c} \times \boldsymbol{B}\right)\tag{1.1}\]
+
+<p>where $\mathbf{E}$ and $\mathbf{B}$ are electric and magnetic fields, respectively. Both fields in (1) are derivatives of potentials. Sometimes one finds it is more convenient to represent $\mathbf{E}$ and $\mathbf{B}$ using the potentials directly:</p>
+
+\[\boldsymbol{E}=-\nabla \phi-\frac{1}{c} \frac{\partial \boldsymbol{A}}{\partial t}, \quad \boldsymbol{B}=\nabla \times \boldsymbol{A}\tag{1.2}\]
+
+<p>where $\phi$ is electric potential and $\mathbf{A}$ is the magnetic potential. We should notice that $\phi$ is a <strong>position-dependent potential</strong>, i.e. $\phi=\phi(\mathbf{r},t)$, while $\mathbf{A}$ is a <strong>velocity-dependent potential</strong>. More on this later. $c$ is the light speed in (1.2). Putting (1.2) back into (1.1) we find</p>
+
+\[\boldsymbol{F}=e\left(-\nabla \phi-\frac{1}{c} \frac{\partial \boldsymbol{A}}{\partial t}+\frac{1}{c} \boldsymbol{v} \times(\boldsymbol{\nabla} \times \boldsymbol{A})\right)\tag{1.3}.\]
+
+<p>The task now is to rearrange (1.3) so that a derivative form of a potential becomes apparent at RHS. But (1.3) is a bit too bulky, and can simplify it using the following relation,</p>
+
+\[\boldsymbol{B} \times(\boldsymbol{\nabla} \times \boldsymbol{C})=\boldsymbol{\nabla}(\boldsymbol{B} \cdot \boldsymbol{C})-(\boldsymbol{B} \cdot \boldsymbol{\nabla}) \boldsymbol{C}-(\boldsymbol{C} \cdot \boldsymbol{\nabla}) \boldsymbol{B}-\boldsymbol{C} \times(\boldsymbol{\nabla} \times \boldsymbol{B})\tag{1.4}.\]
+
+<p>The relation (1.4) transforms the last term at RHS of (1.3) into</p>
+
+\[\boldsymbol{v} \times(\nabla \times \boldsymbol{A})=\nabla(\boldsymbol{v} \cdot \boldsymbol{A})-(\boldsymbol{v} \cdot \nabla) \boldsymbol{A}\tag{1.5}\]
+
+<p>since $\boldsymbol{v}$ is not explicit function of position. Also the total derivative of $\mathbf{A}$ is</p>
+
+\[\frac{d\mathbf{A}}{dt}=\frac{\partial \mathbf{A}}{\partial t}+\frac{\partial \mathbf{A}}{\partial r_i}\frac{\partial r_i}{\partial t}=\frac{\partial \mathbf{A}}{\partial t}+(\boldsymbol{v}\cdot\nabla)\mathbf{A}\tag{1.6}.\]
+
+<p>We can now use (1.5) and (1.6) to simplify (1.3) into</p>
+
+\[\boldsymbol{F}=e\left[-\nabla \phi+\frac{1}{c} \nabla(\boldsymbol{v} \cdot \boldsymbol{A})-\frac{1}{c} \frac{\mathrm{d} \boldsymbol{A}}{\mathrm{d} t}\right]\tag{1.7}.\]
+
+<p>Naively one might want to rearrange the RHS of (1.7) in to a from of $-\partial U/\partial x$ since that is what we learned from conservative forces. However, as I mentioned earlier $\mathbf{A}$ is a velocity-dependent potential, and $\mathbf{F}$ is dependent on particle’s velocity too. Therefore, the Lorentz force $\mathbf{F}$ is <strong>not a conservative force</strong>. In classical mechanics, a non-conservative force $Q_j$ is related to its generating potential $U$ by</p>
+
+\[Q_{j}\left(q_{1}, \ldots, q_{n} ; \dot{q}_{1}, \ldots, \dot{q}_{n} ; t\right)=-\frac{\partial U}{\partial q_{j}}+\frac{d}{d t} \frac{\partial U}{\partial \dot{q}_{j}}\tag{1.8},\]
+
+<p>with $q_i$ being the generalized coordinates of a classical system. The Lagrangian $L$ of a particle in $U$ is then $L=T-U$ with $T$ being the kinetic energy of the particle.</p>
+
+<p>We shall now cast (1.8) into a form similiar to (1.8) to get $U$ for Lorentz forces so that we later derive an expression for the Lagrangian. To do this, let us first use a trick to rewrite $\frac{d\mathbf{A}}{dt}$ as</p>
+
+\[\frac{d\mathbf{A}}{dt}=\frac{d}{dt}\nabla_{\boldsymbol{v}}(\mathbf{A}\cdot\boldsymbol{v})\tag{1.9}.\]
+
+<p>Using (1.9) it is obvious now that (1.7) can be written as</p>
+
+\[\mathbf{F}=-\nabla\left(e \phi-\frac{e}{c} \boldsymbol{v} \cdot \mathbf{A}\right)+\frac{\mathrm{d}}{\mathrm{d} t} \nabla_{\boldsymbol{v}}\left(e \phi-\frac{e}{c} \boldsymbol{v} \cdot \mathbf{A}\right)\tag{1.10}.\]
+
+<p>The addition of $e\phi$ in the last term at the RHS of (1.9) is right because $\phi$ is not velocity-dependent. Comparing (1.10) with (1.8) we conclude that the generating potential of Lorentz forces is</p>
+
+\[U=e\phi-\frac{e}{c}\boldsymbol{v}\cdot\mathbf{A}\tag{1.11}.\]
+
+<p>Consequently, the Lagrangian for a charge particle in free EM field is just</p>
+
+\[L=\frac{1}{2} m \boldsymbol{v}^{2}-e \phi+\frac{e}{c} \boldsymbol{v} \cdot \mathbf{A}\tag{1.12}.\]
+
+<p>If we use generalized coordinates $q_i$(=$r_i$ in this case) in (1.12), we obtain</p>
+
+\[L=\frac{1}{2}m\sum_i\dot{q}_i^2-e\phi(q_i,t)+\frac{e}{c}\sum_i \dot{q}_iA_i\tag{1.13}.\]
+
+<p>From (1.13) we immediately get the generalized momentum $p_i$ to be</p>
+
+\[p_i=\frac{\partial L}{\partial \dot{q}_i}=m\dot{q_i}+\frac{e}{c}A_i\tag{1.14}.\]
+
+<p>Now we convert the Lagrangian into Hamiltonian using Legendre transformation,i.e.</p>
+
+\[H=\sum_ip_i\dot{q}_i-L=\frac{1}{2}m\boldsymbol{v}^2+e\phi=\frac{1}{2m}(\boldsymbol{p}-\frac{e}{c}\mathbf{A})^2+e\phi\tag{1.15}\]
+
+<p>where (1.14) is used at the third equivelence of (1.15).</p>
+
+<h3 id="hamiltonian-equations-in-em-field">Hamiltonian equations in EM field</h3>
+<p>We are now ready to write down the Hamiltinian equations using (1.15) and the relations below
+\(\begin{aligned}
+\frac{\mathrm{d} p_{x}}{\mathrm{d} t} &amp;=-\frac{\partial H}{\partial x}, \quad \frac{\mathrm{d} p_{y}}{\mathrm{d} t}=-\frac{\partial H}{\partial y}, \quad \frac{\mathrm{d} p_{z}}{\mathrm{d} t}=-\frac{\partial H}{\partial z} \\
+\frac{\mathrm{d} x}{\mathrm{d} t} &amp;=\frac{\partial H}{\partial p_{x}}, \quad \frac{\mathrm{d} y}{\mathrm{d} t}=\frac{\partial H}{\partial p_{y}}, \quad \frac{\mathrm{d} z}{\mathrm{d} t}=\frac{\partial H}{\partial p_{z}}.
+\end{aligned}\tag{1.16}\)</p>
+
+<p>We will show in this section that (1.16) produces Newton’s equations of motion for charged particle in free EM field,i.e.</p>
+
+\[m \frac{\mathrm{d}^{2} \boldsymbol{r}}{\mathrm{d} t^{2}}=e\left(\boldsymbol{E}+\frac{1}{c} \boldsymbol{v} \times \boldsymbol{B}\right)\tag{1.17},\]
+
+<p>where $\boldsymbol{r}=(x,y,z)$. Substituting (1.15) into (1.16) we find for x-component of momentum $\boldsymbol{p}$</p>
+
+\[\begin{aligned}
+\frac{\mathrm{d} p_{x}}{\mathrm{d} t}=&amp; \frac{e}{m c}\left[\left(p_{x}-\frac{e}{c} A_{x}\right) \frac{\partial A_{x}}{\partial x}+\left(p_{y}-\frac{e}{c} A_{y}\right) \frac{\partial A_{y}}{\partial x}\right.\\
+&amp;\left.+\left(p_{z}-\frac{e}{c} A_{z}\right) \frac{\partial A_{z}}{\partial x}\right]-e \frac{\partial \phi}{\partial x}
+\end{aligned}\tag{1.18}\]
+
+<p>and</p>
+
+\[\frac{\mathrm{d} \mathbf{r}}{\mathrm{d} t}=\frac{1}{m}\left(\boldsymbol{p}-\frac{e}{c} \mathbf{A}\right)\tag{1.19}.\]
+
+<p>The equation (1.19) implies that</p>
+
+\[\frac{\mathrm{d} p_{x}}{\mathrm{d} t}=m \frac{\mathrm{d}^{2} x}{\mathrm{d} t^{2}}+\frac{e}{c} \frac{\mathrm{d} A_{x}}{\mathrm{d} t}\tag{1.20}.\]
+
+<p>Substituting (1.19) and (1.20) back into (1.18) gives</p>
+
+\[m \frac{\mathrm{d}^{2} x}{\mathrm{d} t^{2}}+\frac{e}{c} \frac{\mathrm{d} A_{x}}{\mathrm{d} t}=\frac{e}{c} \frac{\mathrm{d} x}{\mathrm{d} t} \frac{\partial A_{x}}{\partial x}+\frac{e}{c} \frac{\mathrm{d} y}{\mathrm{d} t} \frac{\partial A_{y}}{\partial x}+\frac{e}{c} \frac{\mathrm{d} z}{\mathrm{d} t} \frac{\partial A_{z}}{\partial x}-e \frac{\partial \phi}{\partial x}\tag{1.21}.\]
+
+<p>In the equation (1.21) the coordinate variables (i.e. $x,y,z$) are only dependent on $t$, thus we have</p>
+
+\[\frac{\mathrm{d} A_{x}}{\mathrm{d} t}=\frac{\partial A_{x}}{\partial t}+\frac{\partial A_{x}}{\partial x} \frac{\mathrm{d} x}{\mathrm{d} t}+\frac{\partial A_{x}}{\partial y} \frac{\mathrm{d} y}{\mathrm{d} t}+\frac{\partial A_{x}}{\partial z} \frac{\mathrm{d} z}{\mathrm{d} t}\]
+
+<p>and</p>
+
+\[\begin{aligned}
+&amp;m \frac{\mathrm{d}^{2} x}{\mathrm{d} t^{2}} \\
+&amp;=-\frac{e}{c} \frac{\partial A_{x}}{\partial t}-e \frac{\partial \phi}{\partial x}+\frac{e}{c}\left[\frac{\mathrm{d} y}{\mathrm{d} t}\left(\frac{\partial A_{y}}{\partial x}-\frac{\partial A_{x}}{\partial y}\right)+\frac{\mathrm{d} z}{\mathrm{d} t}\left(\frac{\partial A_{z}}{\partial x}-\frac{\partial A_{x}}{\partial z}\right)\right]\\
+&amp;=e E_{x}+\frac{e}{c}\left(\frac{\mathrm{d} y}{\mathrm{d} t} B_{z}-\frac{\mathrm{d} z}{\mathrm{d} t} B_{y}\right)
+\end{aligned}\tag{1.22}\]
+
+<p>This is just (1.17) with explicit indices.</p>
+
+<h3 id="gauge-invariance">Gauge invariance</h3>
+<p>The potentials can be chosen at will by using the following transformation:</p>
+
+\[\boldsymbol{A}^{\prime}=\boldsymbol{A}+\boldsymbol{\nabla} f \quad \text { and } \quad \boldsymbol{\phi}^{\prime}=\boldsymbol{\phi}-\frac{1}{c} \frac{\partial f}{\partial t}\tag{1.23}.\]
+
+<p>It is easy to prove that new potentials in (1.23) automatically satisfy (1.17) if we use (1.2) to calculate $\mathbf{E}^{\prime}$ and $\mathbf{B}^{\prime}$. This property of Hamiltonian equation is called <strong>gauge invariance</strong>. Notice that the form of Hamiltonian $H$ is changed under the transformation (1.23). For instance, we can transform $A=0$ and $\phi=-E x$ into $A^{\prime}=(-c E t, 0,0)$ and $\phi^{\prime}=0$ according to (1.23), but the Hamiltonian function changes from the total energy of the particle to the kinetic energy. To make the calculation easier, people usually choose specific $\mathbf{A}$ so the <strong>Coulomb gauge</strong>, $\nabla\cdot\mathbf{A}=0,$ is satisfied.</p>
+
+<h2 id="quantization-of-classical-hamiltonian">Quantization of Classical Hamiltonian</h2>
+<p>As a continuity of our discussion in the previous section, we proceed to quantize the classical Hamiltonian derived in Eq.(1.15). The quantization process will be divided into two parts. The first part comprises only the quantization of particle momentum. We can show that the Schrodinger equation using the half-quantized Hamiltonian has the gauge invariance with eigenfunctions shifted by a phase factor. To maintain the gauge invariance in the expectation values we will see that the momentum operator is no longer corresponding to a classical observable anymore. The second part is the quantization of the EM fields (not charged particles!!), where the creation and annihilation operators become powerful tools to describe a quantum system with the presence of EM fields.</p>
+
+<h3 id="quantize-particle-hamiltonian">Quantize particle Hamiltonian</h3>
+<p>If we replace the canonical momentum $\boldsymbol{p}$ with the operator $\hat{p}=(\hbar/i)\nabla$ in the classical Hamiltonian, Eq. (1.15) becomes</p>
+
+\[\hat{H}=\frac{1}{2 m}\left(\frac{\hbar}{\mathrm{i}} \nabla-\frac{e}{c} \boldsymbol{A}\right)^{2}+e \phi\tag{2.1}.\]
+
+<p>Expanding (2.1) gives</p>
+
+\[\hat{H}=-\frac{\hbar^{2}}{2 m} \Delta+\frac{\mathrm{i} e \hbar}{m c} \boldsymbol{A} \cdot \nabla+\frac{\mathrm{i} e \hbar}{2 m c}(\nabla \cdot \boldsymbol{A})+\frac{e^{2}}{2 m c^{2}} \boldsymbol{A}^{2}+e \phi\tag{2.2}.\]
+
+<p>Notice that in (2.1) $\nabla$ and $\mathbf{A}$ are not commuting. Now if we choose a $\mathbf{A}$ that satisfy the Coulomb gauge, $\nabla\cdot\mathbf{A}=0$, eqn.(2.2) can be reduced into</p>
+
+\[\hat{H}=\frac{\hat{\boldsymbol{p}}^{2}}{2 m}+e \phi-\frac{e}{m c} \boldsymbol{A} \cdot \hat{\boldsymbol{p}}+\frac{e^{2}}{2 m c^{2}} \boldsymbol{A}^{2}\tag{2.3}.\]
+
+<p>Using (2.1) the Shrodinger equation becomes</p>
+
+\[\left\{\frac{[\hat{p}-(e / c)\mathbf{A}]^{2}}{2 m}+e \phi\right\} \psi=\mathrm{i} \hbar \frac{\partial}{\partial t} \psi\tag{2.4}.\]
+
+<p>Eq.(2.4) is gauge invariant. To see this, we first notice that the gauge transformation in (1.23) can be interpreted as an arbitrary shift of “<em>potential energy reference point</em>”. A gauge-invariant equation must remain its format after the transformation. In the case of (2.4) the replacement of $\mathbf{A}$ and $\phi$ with $\mathbf{A}^{\prime}$ and $\phi^{\prime}$ from (1.23) gives</p>
+
+\[\left\{\frac{[\hat{p}-(e / c)\mathbf{A}^{\prime}]^{2}}{2 m}+e \phi^{\prime}\right\} \psi^{\prime}=\mathrm{i} \hbar \frac{\partial}{\partial t} \psi^{\prime}\tag{2.5}.\]
+
+<p>The task now is to find $\psi^{\prime}$ that satisfies (2.5). If we use the asatz of</p>
+
+\[\psi^{\prime}=exp(\frac{ie}{\hbar c}f)\psi\tag{2.6},\]
+
+<p>and substitute (1.23) in (2.5), one can show that, after some tedious rearrangements, (2.4) is recovered from (2.5). Thus, we conclude that <strong>the eigenfunction of (2.4) is shifted by a phase factor after the gauge transformation of EM potentials</strong>. In fact, the phase shift in (2.6) does not change the expectation value of operators at all, since those expectations are calaculated using the “sandwhich” formalism. For instance, the expectation of Hamiltonian operator is</p>
+
+\[\langle \psi\mid\hat{H}\mid \psi\rangle=\langle\psi^{\prime}\mid\hat{H}\mid\psi^{\prime}\rangle=\langle\psi\mid e^{-\frac{ie}{\hbar c}f}\hat{H}e^{\frac{ie}{\hbar c}f}\mid \psi\rangle.\]
+
+<p>Also from (1.19) we find <strong>the genuine kinetic momentum operator for particle</strong> in EM field is</p>
+
+\[\hat{\mathcal{P}}=\frac{\hbar}{i}\nabla-\frac{e}{c}\mathbf{A}\tag{2.7}.\]
+
+<p>Applying (2.7) after the gauge transformation on the state (2.6) gives</p>
+
+\[\begin{aligned}
+\left(\hat{\boldsymbol{p}}-\frac{e}{c} \boldsymbol{A}^{\prime}\right) \psi^{\prime} &amp;=\left(\frac{\hbar}{\mathrm{i}} \nabla-\frac{e}{c} \boldsymbol{A}-\frac{e}{c} \nabla f\right) \psi \exp \left(\frac{\mathrm{i} e}{\hbar c} f\right) \\
+&amp;=\exp \left(\frac{\mathrm{i} e}{\hbar c} f\right)\left(\frac{\hbar}{\mathrm{i}} \nabla+\frac{e}{c} \nabla f-\frac{e}{c} \boldsymbol{A}-\frac{e}{c} \nabla f\right) \psi \\
+&amp;=\exp \left(\frac{\mathrm{i} e}{\hbar c} f\right)\left(\frac{\hbar}{\mathrm{i}} \nabla-\frac{e}{c} \boldsymbol{A}\right) \psi
+\end{aligned}\tag{2.8}.\]
+
+<p>Eq.(2.8) implies that the expectation \(\langle\psi^{\prime}\mid\hat{\mathcal{P}}\mid\psi^{\prime}\rangle\) is invariant under gauge transformation instead of that of $\hat{p}$. Hence, if in a physical problem the momentum operator $\hat{p}$ appears, <strong>the operator $\hat{p}$ must always be replaced by $\hat{\boldsymbol{p}}-(e / c) \boldsymbol{A}$ if electromagnetic fields are present</strong>. <em>This is the only way to guarantee gauge invariance in quantum theory</em>[1].</p>
+
+<h3 id="quantize-the-em-field">Quantize the EM field</h3>
+<p>To quantize the EM field we take a step back to the classical world where we first solve for $\mathbf{A}$ in the classical Maxwell’s equations. The solution will be a Fourier series with each Fourier coefficient being the <strong>field coordiantes</strong>. This classical $\mathbf{A}$ will be later used to calculate the energy of EM fields. The calculated classical energy is then quantized into <strong>field Hamiltonian operator</strong> by introducing the creation and annihilation operators. With quantized Hamiltonian, it is trivial to derive quantized $\mathbf{A}$.</p>
+
+<p>Let us reproduce Maxwell’s equations once again in SI units to start our journey:</p>
+
+\[\begin{aligned}
+\boldsymbol{\nabla} \times \boldsymbol{E}+\frac{1}{c} \frac{\partial \boldsymbol{B}}{\partial t} &amp;=0 \\
+\boldsymbol{\nabla} \cdot \boldsymbol{D} &amp;=4 \pi \varrho \\
+\boldsymbol{\nabla} \times \boldsymbol{H}-\frac{1}{c} \frac{\partial \boldsymbol{D}}{\partial t} &amp;=\frac{4 \pi}{c} \boldsymbol{j} \\
+\boldsymbol{\nabla} \cdot \boldsymbol{B} &amp;=0.
+\end{aligned}\tag{2.9}\]
+
+<p>Taking time derivative of the second equation and divergence of the third equation gives the continuity equation,</p>
+
+\[\frac{\partial \rho}{\partial t}+\nabla\cdot\boldsymbol{j}=0\tag{2.10}.\]
+
+<p>In a free EM field, $\mathbf{H=B}$ and $\mathbf{E=D}$. So using (1.2) in the second and the third equation of (.9) gives</p>
+
+\[\begin{aligned}
+\nabla \times(\nabla \times \boldsymbol{A})+\frac{1}{c^{2}} \frac{\partial^{2} \boldsymbol{A}}{\partial t^{2}}+\frac{1}{c} \boldsymbol{\nabla} \frac{\partial \phi}{\partial t} &amp;=\frac{4 \pi}{c} \boldsymbol{j}, \\
+\frac{1}{c} \frac{\partial}{\partial t} \boldsymbol{\nabla} \cdot \boldsymbol{A}+\boldsymbol{\nabla}^{2} \phi &amp;=-4 \pi \varrho.
+\end{aligned}\tag{2.11}\]
+
+<p>Because the EM field is free, we have $\boldsymbol{j}=\rho=0$. Further we can simplify (2.11) by using the following relation,</p>
+
+\[\boldsymbol{\nabla} \times(\boldsymbol{\nabla} \times \boldsymbol{A})=\boldsymbol{\nabla}(\boldsymbol{\nabla} \cdot \boldsymbol{A})-\boldsymbol{\nabla}^{2} \boldsymbol{A},\tag{2.12}\]
+
+<p>and (2.11) becomes</p>
+
+\[\begin{aligned}
+\boldsymbol{\nabla}(\boldsymbol{\nabla} \cdot \boldsymbol{A})-\boldsymbol{\nabla}^{2} \boldsymbol{A}+\frac{1}{c^{2}} \frac{\partial^{2} \boldsymbol{A}}{\partial t^{2}}+\frac{1}{c} \boldsymbol{\nabla} \frac{\partial \phi}{\partial t} &amp;=0, \\
+\frac{1}{c} \frac{\partial}{\partial t} \boldsymbol{\nabla} \cdot \boldsymbol{A}+\boldsymbol{\nabla}^{2} \phi &amp;=0.
+\end{aligned}\tag{2.13}\]
+
+<p>The (2.13) is still too bulky. Remember that Maxwell’s equation set is gauge invariant with $\mathbf{A}$ and $\phi$ being non-unique. We can perform a gauge transformation to reduce (2.13) to a simpler form. In this case we choose a gauge $f$ to fulfill the <strong>Lorentz gauge</strong>,</p>
+
+\[\nabla \cdot \boldsymbol{A}^{\prime}+\frac{1}{c} \frac{\partial \phi^{\prime}}{\partial t}=0.\tag{2.14}\]
+
+<p>Using (1.23) in (2.14) to give the equation to solve for $f$,</p>
+
+\[\nabla^{2} f-\frac{1}{c^{2}} \frac{\partial^{2}}{\partial t^{2}} f=-\left(\nabla \cdot \mathbf{A}+\frac{1}{c} \frac{\partial \phi}{\partial t}\right)\tag{2.15}.\]
+
+<p>Since (2.15) is pretty much always solvable, we are not going to give the explicit form of $f$ here. Replace $\mathbf{A}$ and $\phi$ with the primed ones and use (2.14) in (2.13) to give</p>
+
+\[\begin{aligned}
+-\boldsymbol{\nabla}^{2} \boldsymbol{A}^{\prime}+\frac{1}{c^{2}} \frac{\partial^{2} \boldsymbol{A}^{\prime}}{\partial t^{2}} &amp;=0, \\
+(\boldsymbol{\nabla}^{2}-\frac{1}{c^2}\frac{\partial^2}{\partial t^2})\phi^{\prime} &amp;=0.
+\end{aligned}\tag{2.16}\]
+
+<p>We can get rid of $\phi$ by using a gauge that is more strict than Lorentz gauge, <strong>Coulomb gauge</strong>,</p>
+
+\[\begin{aligned}
+\boldsymbol{\nabla} \cdot \boldsymbol{A}^{\prime}(\boldsymbol{r}, t) &amp;=0 \\
+\phi^{\prime}(\boldsymbol{r}, t) &amp;=0.
+\end{aligned}\tag{2.17}\]
+
+<p>Thus, (2.16) is reduced to</p>
+
+\[\begin{aligned}
+\nabla^{2} \mathbf{A}-\frac{1}{c^{2}} \frac{\partial^{2} \mathbf{A}}{\partial t^{2}} &amp;=0 \\
+\nabla \cdot \mathbf{A} &amp;=0 \\
+\phi &amp;=0,
+\end{aligned}\tag{2.18}\]
+
+<p>where the prime signs are dropped for convenience. For people who have some experiences with PDE, the first equation of (2.18) is a “wave equation” and its solution has a form of</p>
+
+\[\begin{aligned}
+\boldsymbol{A}(\boldsymbol{r}, t) &amp;=2 \boldsymbol{\varepsilon}\left|\boldsymbol{A}_{0}\right| \cos (\boldsymbol{k} \cdot \boldsymbol{r}-\omega t+\alpha) \\
+&amp;=\boldsymbol{A}_{0} \mathrm{e}^{\mathrm{i}(\boldsymbol{k} \cdot \boldsymbol{r}-\omega t)}+\boldsymbol{A}_{0}^{*} \mathrm{e}^{-\mathrm{i}(\boldsymbol{k} \cdot \boldsymbol{r}-\omega t)} \\
+&amp;=\boldsymbol{A}_{0} \mathrm{e}^{\mathrm{i}(\boldsymbol{k} \cdot \boldsymbol{r}-\omega t)}+\mathrm{c}.\mathrm{c}
+\end{aligned}\tag{2.19}\]
+
+<p>Here \(\boldsymbol{A}_{0}=\mid\boldsymbol{A}_{0}\mid \boldsymbol{\varepsilon} \mathrm{e}^{\mathrm{i} \alpha}\) is the amplitude and “c.c.” stands for the “complex conjugate” of the first term. It is easy to see that $\boldsymbol{k}\perp\mathbf{A}_0$ to satify the second equation in (2.18), and</p>
+
+\[\omega=\mid\boldsymbol{k}\mid c\tag{2.20}.\]
+
+<p>$\boldsymbol{\varepsilon}$ is sometimes called as the “transverse vector”, because it represents the directions at which EM waves vibrate, and is perpendicular to the propagation direction $\boldsymbol{k}$. The corresponding electric and magnetic fields are then</p>
+
+\[\begin{array}{l}
+\boldsymbol{E}=-2 k\left|\boldsymbol{A}_{0}\right| \boldsymbol{\varepsilon} \sin (\boldsymbol{k} \cdot \boldsymbol{r}-\omega t+\alpha) \\
+\boldsymbol{B}=-2\left|\boldsymbol{A}_{0}\right| \boldsymbol{k} \times \boldsymbol{\varepsilon} \sin (\boldsymbol{k} \cdot \boldsymbol{r}-\omega t+\alpha)
+\end{array}\tag{2.21}.\]
+
+<p>Up to this point we are only dealing with the classical picture of the field $\mathbf{A}$, but the quantized picuture must come into play if we consider the field in a finite space with periodic boundary condition (similar situation is found when we put a free quantum particle into a 3D box). Imagine we confine the free EM field in a 3D box with edge length being $L$, <strong>the field $\mathbf{A}$ is the superposition of various normal modes</strong> $\mathbf{A}_{\mathbf{k}\sigma}$ with their wave vectors being</p>
+
+\[\boldsymbol{k}=\left(k_{x}, k_{y}, k_{z}\right)=\frac{2 \pi}{L}\left\{n_{1}, n_{2}, n_{3}\right\}, \quad n_{1}, n_{2}, n_{3} \in \mathbf{Z}\tag{2.22}\]
+
+<p>due to the periodic boundary condition. Inspired by (2.19) the solution for a <strong>normal mode</strong> should have a form of</p>
+
+\[\boldsymbol{A}_{\boldsymbol{k} \sigma}=N_{k} \boldsymbol{\varepsilon}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}} \quad(\sigma=1,2)\tag{2.23},\]
+
+<p>where $N_k$ is a normalization constant, and $\sigma$ represents the transverse directions, which are perpendicular to each other,i.e.</p>
+
+\[\boldsymbol{\varepsilon}_{\boldsymbol{k} \sigma} \cdot \boldsymbol{\varepsilon}_{\boldsymbol{k} \sigma^{\prime}}=\delta_{\sigma \sigma^{\prime}}.\]
+
+<p>With (2.23) we can write $\mathbf{A}$ in the form of</p>
+
+\[\mathbf{A}=\sum_{\boldsymbol{k}} \sum_{\sigma=1,2} N_{k} \varepsilon_{\boldsymbol{k} \sigma}\left(a_{\boldsymbol{k} \sigma}(t) \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}+a_{\boldsymbol{k} \sigma}^{*}(t) \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right)\tag{2.24},\]
+
+<p>with</p>
+
+\[a_{\boldsymbol{k} \sigma}(t)=a_{\boldsymbol{k} \sigma}(0) \mathrm{e}^{-\mathrm{i} \omega_{k} t}\tag{2.25a},\]
+
+\[\frac{\mathrm{d} a_{\boldsymbol{k} \sigma}(t)}{\mathrm{d} t}=-\mathrm{i} \omega_{\boldsymbol{k}} a_{\boldsymbol{k} \sigma}(t)\tag{2.25b}.\]
+
+<p>There are some nuances to derive (2.24) and (2.25), but we are not going to discuss them since they are off the topic here. A good reference for that is Prof. Walter’s <em>Quantum Mechanics: Special Chapters</em>[2]. However, pay close attention to the signs in front of $i$ in (2.24), the sequence of which avoids the double counting of wave vectors. The factor of $e^{-i\omega_k t}$ in (2.25) is a result of transverse vibrations of each normal mode vibrate with the same frequency.</p>
+
+<p>From the classical electrodynamics we know the energy of EM field is given by</p>
+
+\[\begin{aligned}
+H &amp;=\frac{1}{8 \pi} \int_{L^{3}} \mathrm{d}^{3} x\left(\boldsymbol{E}^{2}+\boldsymbol{B}^{2}\right) \\
+&amp;=\frac{1}{8 \pi} \int_{L^{3}} \mathrm{d}^{3} x\left[\frac{1}{c^{2}} \frac{\partial \boldsymbol{A}}{\partial t} \cdot \frac{\partial \boldsymbol{A}^{*}}{\partial t}+(\boldsymbol{\nabla} \times \boldsymbol{A}) \cdot\left(\boldsymbol{\nabla} \times \boldsymbol{A}^{*}\right)\right].
+\end{aligned}\tag{2.26}\]
+
+<p>Substituing (2.24) into (2.26) gives</p>
+
+\[H=\sum_{\boldsymbol{k}, \sigma} \frac{\omega_{k}^{2}}{4 \pi c^{2}} N_{k}^{2} L^{3}\left(a_{\boldsymbol{k} \sigma} a_{\boldsymbol{k} \sigma}^{*}+a_{\boldsymbol{k} \sigma}^{*} a_{\boldsymbol{k} \sigma}\right)\tag{2.27}.\]
+
+<p>If we let the normalization constant $N_k$ to be</p>
+
+\[N_{k}=\sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}},\]
+
+<p>We find (2.27) becomes equal to a sum of energies corresponding to uncoupled “<strong>harmonic field oscillators</strong>”,</p>
+
+\[H=\frac{1}{2} \sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(a_{\boldsymbol{k} \sigma} a_{\boldsymbol{k} \sigma}^{*}+a_{\boldsymbol{k} \sigma}^{*} a_{\boldsymbol{k} \sigma}\right)\tag{2.28}.\]
+
+<p>Notice that we did not combine the terms in the bracket above, even though they are still scalars. The reason for this will become clear once we introduce creation and annihilation operators.</p>
+
+<p>Now we introduce quantization. The form of (2.28) motivates us to proceed in a manner that is similar to the quantization of phonons of the quantized oscillators, i.e. designating $a_{\boldsymbol{k}\sigma}$ to be</p>
+
+<p>\(\hat{a}_{\boldsymbol{k}\sigma}\) and \(a^*_{\boldsymbol{k}\sigma}\) to be \(\hat{a}^{\dagger}_{\boldsymbol{k}\sigma}.\)</p>
+
+<p>We require that</p>
+
+\[\left[\hat{a}_{\boldsymbol{k} \sigma}, \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}}^{\dagger}\right]_{-}=\delta_{\boldsymbol{k} \boldsymbol{k}^{\prime}} \delta_{\sigma \sigma^{\prime}}\tag{2.29}.\]
+
+<p>and</p>
+
+\[\left[\hat{a}_{\boldsymbol{k} \sigma}, \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}}\right]_{-}=\left[\hat{a}_{\boldsymbol{k} \sigma}^{\dagger}, \hat{a}_{\boldsymbol{k}^{\prime} \sigma^{\prime}}^{\dagger}\right]_{-}=0.\]
+
+<p>Then the Hamiltonian becomes</p>
+
+\[\begin{aligned}
+\hat{H} &amp;=\sum_{\boldsymbol{k}, \sigma} \frac{\hbar \omega_{k}}{2}\left(\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \hat{a}_{\boldsymbol{k} \sigma}+\hat{a}_{\boldsymbol{k} \sigma} \hat{a}_{\boldsymbol{k} \sigma}^{\dagger}\right) \\
+&amp;=\sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \hat{a}_{\boldsymbol{k} \sigma}+\frac{1}{2}\right),
+\end{aligned}\tag{2.30}\]
+
+<p>with the <strong>zero-point energy of EM field</strong> defined as</p>
+
+\[\sum_{k, \sigma} \frac{\hbar \omega_{k}}{2}.\]
+
+<p>This zero-point energy is infinite but it plays no role in many physical problems.</p>
+
+<h3 id="eigenstates-of-em-fields">Eigenstates of EM Fields</h3>
+<p>We are now equipped with quantized EM field and ready to use the Hamiltonian operator derived in (2.30) with Hilber-space formalism (bra-ket formalism). To start with we first define the eigenstate to $\hat{H}$ using the direct product method developed in the part I. Let $\mid n_{\boldsymbol{k}\sigma}\rangle$ represent the state of $n_{\boldsymbol{k}\sigma}$ <em>EM field oscillator</em>, or <strong>photons</strong>. Because the EM field is a superposition of <em>normal modes</em> of field oscillator, we can represent the eigenstates of EM field as a direct product of <em>field oscillator states</em>, i.e.</p>
+
+\[\left|\ldots, n_{k \sigma}, \ldots, n_{k^{\prime} \sigma^{\prime}}, \ldots\right\rangle=\ldots\left|n_{k \sigma}\right\rangle \ldots\left|n_{k^{\prime} \sigma^{\prime}}\right\rangle \ldots\tag{2.31}\]
+
+<p>With the following two relations,</p>
+
+\[\begin{array}{l}
+\hat{a}_{\boldsymbol{k} \sigma}\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle=\sqrt{n_{\boldsymbol{k} \sigma}}\left|\ldots, n_{\boldsymbol{k} \sigma}-1, \ldots\right\rangle \\
+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger}\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle=\sqrt{n_{\boldsymbol{k} \sigma}+1}\left|\ldots, n_{k \sigma}+1, \ldots\right\rangle
+\end{array}\tag{2.32}\]
+
+<p>we derive that</p>
+
+\[\begin{aligned}
+\hat{H}\left|\ldots, n_{k \sigma}, \ldots\right\rangle &amp;=\sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(\hat{a}_{k \sigma}^{\dagger} \hat{a}_{\boldsymbol{k} \sigma}+\frac{1}{2}\right)\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle \\
+&amp;=\sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(\hat{n}_{\boldsymbol{k} \sigma}+\frac{1}{2}\right)\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle \\
+&amp;=\sum_{\boldsymbol{k}, \sigma} \hbar \omega_{k}\left(n_{\boldsymbol{k} \sigma}+\frac{1}{2}\right)\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle \\
+&amp;=E\left|\ldots, n_{\boldsymbol{k} \sigma}, \ldots\right\rangle.
+\end{aligned}\tag{2.33}\]
+
+<p>Therefore, we can define a “<strong>particle number opperator</strong>” $\hat{N}_{\mathbf{k}\sigma}$ as</p>
+
+\[\begin{aligned}
+\hat{N}_{\boldsymbol{k} \sigma}\left|n_{\boldsymbol{k} \sigma}\right\rangle &amp; \equiv \hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \hat{a}_{\boldsymbol{k} \sigma}\left|n_{\boldsymbol{k} \sigma}\right\rangle \\
+&amp;=n_{\boldsymbol{k} \sigma}\left|n_{\boldsymbol{k} \sigma}\right\rangle \quad\left(n_{k \sigma}=0,1,2, \ldots\right).
+\end{aligned}\tag{2.34}\]
+
+<p>The detailed derivation of (2.32) could be found in my second quantization blog <a href="https://lonitch.github.io/First-Second-Quantization/">here</a>. The particle number operator could further help us to define the <strong>momentum operator of EM field</strong> as</p>
+
+\[\hat{\boldsymbol{p}}=\sum_{\boldsymbol{k}, \sigma} \hbar \boldsymbol{k} \hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \hat{a}_{\boldsymbol{k} \sigma}=\sum_{\boldsymbol{k}, \sigma} \hbar \boldsymbol{k} \hat{n}_{\boldsymbol{k} \sigma}\tag{2.35},\]
+
+<p>which is derived from the classical momentum of EM field,</p>
+
+\[\boldsymbol{p}=\int_{L^{3}} \mathrm{d}^{3} x \frac{1}{4 \pi c} \boldsymbol{E} \times \boldsymbol{B}.\]
+
+<h2 id="coherent-states-of-em-fields">Coherent States of EM Fields</h2>
+<p>With the Hamiltonian of EM field quantized it is trivial to quantize the classical electric and magnetic fields, $\hat{\mathbf{E}}$ and $\hat{\mathbf{B}}$. However, we shall now see that the expectation of $\hat{\mathbf{E}}$ is not the classical results shown in (2.21) using the “occupation number” states desribed in the previous subsection.</p>
+
+<p>Eq.(2.24) (1.2), and Coulomb gauge condition indicate that</p>
+
+\[\begin{aligned}
+\boldsymbol{E} &amp;=-\frac{1}{c} \frac{\partial \boldsymbol{A}}{\partial t}=-\frac{1}{c} \frac{\partial}{\partial t} \sum_{\boldsymbol{k}, \sigma} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}} \varepsilon_{\boldsymbol{k} \sigma}\left[a_{\boldsymbol{k} \sigma}(t) \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot x}+a_{\boldsymbol{k} \sigma}^{*}(t) \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot x}\right] \\
+&amp;=+\mathrm{i} \sum_{\boldsymbol{k}, \sigma} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}} \frac{\omega_{k}}{c} \varepsilon_{\boldsymbol{k} \sigma}\left[a_{\boldsymbol{k} \sigma}(t) \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-a_{\boldsymbol{k} \sigma}^{*}(t) \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right].
+\end{aligned}\tag{3.1}\]
+
+<p>If we only focus on one specific wave vector $\mathbf{k}$ and transverse direction $\sigma$, we can drop the subscripts and have</p>
+
+\[\boldsymbol{E}=+\mathrm{i} \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \boldsymbol{\varepsilon}\left[a(t) \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-a^{*}(t) \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right]\tag{3.2}.\]
+
+<p>We can turn (3.2) easily by replacing $a$,$a^*$ with $\hat{a}$ and $\hat{a}^{\dagger}$,i.e.</p>
+
+\[\hat{\boldsymbol{E}}(\boldsymbol{x}, t)=+\mathrm{i} \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \boldsymbol{\varepsilon}\left[\hat{a}(t) \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-\hat{a}^{\dagger}(t) \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right]\tag{3.3}.\]
+
+<p>We can also derive (3.3) using Heisenberg’s equation of motion[2] if we don’t want to be lazy. In order to calculate the classical value of electric field $\hat{\mathbf{E}}$, we can calculate its expectation with a $n$-photon state $\mid n_{\mathbf{k}\sigma}\rangle=\mid n\rangle$ as</p>
+
+\[\langle n|\hat{\boldsymbol{E}}| n\rangle=\mathrm{i} \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \varepsilon\left\langle n\left|\hat{a} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-\hat{a}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| n\right\rangle=0\tag{3.4}\]
+
+<p>due to (2.32). On the other hand the energy density of the electric field is given by</p>
+
+\[\begin{aligned}
+\left\langle n\left|\frac{\hat{\boldsymbol{E}} \hat{\boldsymbol{E}}^{\dagger}}{8 \pi}\right| n\right\rangle &amp;=\frac{2 \pi \hbar \omega}{8 \pi L^{3}} \boldsymbol{\varepsilon} \cdot \boldsymbol{\varepsilon}\langle n|\left(\hat{a} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-\hat{a}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right) \\
+&amp; \times\left(\hat{a}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-\hat{a} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right)|n\rangle \\
+&amp;=\frac{2 \pi \hbar \omega}{8 \pi L^{3}}\left\langle n\left|\hat{a} \hat{a}^{\dagger}+\hat{a}^{\dagger} \hat{a}\right| n\right\rangle \\
+&amp;=\frac{\hbar \omega}{4 L^{3}}\left\langle n\left|2 \hat{a}^{\dagger} \hat{a}+1\right| n\right\rangle=\frac{\hbar \omega}{2 L^{3}}\left(n+\frac{1}{2}\right).
+\end{aligned}\tag{3.5}\]
+
+<p>Clearly the equation (3.4) does not repeat the results we derived in (2.21), but eqn.(3.5) indicates the electric field contributes half of the energy density of EM field, and the other half is from magnetic field. According to Edward Harris[3] the result in (3.4) is due to the random phase each photon possesses, so the expectation of $\hat{E}$ vanishes if we average over all the phases. To make the expectation of $\hat{\mathbf{E}}$ ressembles the classical $\mathbf{E}$ field, we introduce the <strong>coherence state</strong> defined as</p>
+
+\[|c\rangle=\sum_{n=0}^{\infty} b_{n}|n\rangle\tag{3.6}\]
+
+<p>with</p>
+
+\[b_{n}=\frac{c^{n} \mathrm{e}^{-\frac{1}{2}|c|^{2}}}{\sqrt{n !}}.\tag{3.7}\]
+
+<p>The $c$ in (3.7) is a complex number and the probability of finding $n$ photons in the coherence state is then</p>
+
+\[\left|b_{n}\right|^{2}=\frac{|c|^{2 n} \mathrm{e}^{-|c|^{2}}}{n !}\tag{3.8}.\]
+
+<p>Indeed, the sum of (3.8) gives unity,i.e.</p>
+
+\[\sum_{n=0}^{\infty}\left|b_{n}\right|^{2}=\mathrm{e}^{-|c|^{2}} \sum_{n=0}^{\infty} \frac{|c|^{2 n}}{n !}=\mathrm{e}^{-|c|^{2}} \mathrm{e}^{+|c|^{2}}=1.\]
+
+<p>Unlike the $n-$state used before, the coherence state introduces the uncertainty in the number of photons. It is easy to prove that</p>
+
+\[\langle c\mid \hat{a}\mid c\rangle=c\quad\langle c\mid\hat{a}^{\dagger}\mid c\rangle=c^{*}\tag{3.9},\]
+
+<p>and the expectation of $\hat{E}$ becomes</p>
+
+\[\begin{aligned}
+\langle c|\hat{\boldsymbol{E}}| c\rangle &amp;=+\mathrm{i} \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \varepsilon\left\langle c\left|\hat{a} \mathrm{e}^{\mathrm{i} k \cdot x}-\hat{a}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot x}\right| c\right\rangle \\
+&amp;=+\mathrm{i} \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \varepsilon\left[c \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}-c^{*} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right] \\
+&amp;=+\mathrm{i} \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \varepsilon 2 \mathrm{i}|c| \sin \left(\boldsymbol{k} \cdot \boldsymbol{x}+\delta_{c}\right) \\
+&amp;=-2|c| \sqrt{\frac{2 \pi \hbar \omega}{L^{3}}} \varepsilon \sin \left(\boldsymbol{k} \cdot \boldsymbol{x}+\delta_{c}\right)
+\end{aligned}\tag{3.10}\]
+
+<p>with $c=\mid c\mid e^{i\delta_c}$.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I did not follow Edward’s book strictly in the blog because I found the arguments in Prof. Walter’s books are more appealing and easier to understand. In the last part of this series of blogs we will dive into some real examples of radiation-matter interactions.</p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Greiner, Walter. Quantum mechanics: an introduction. Springer Science &amp; Business Media, 2011.</p>
+
+<p>[2] Greiner, Walter. Quantum Mechanics: Special Chapters. Berlin-New York: Springer, 1998.</p>
+
+<p>[3] Harris, E. G. “A Pedestrain Approach to Quantum Field Theory”. Wiley, Interscience, New York p 99 (1972): 9-19.</p>
+
+
+
+    </article>
+    <span class="print-footer">A Pedastrian Approach to Radiation-Matter Interaction-Part II - July 5, 2020 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2023 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

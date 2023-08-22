@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sizhe's Basics of Heat Conduction, Inductively</title>
+  <meta name="description" content="A Bit Self-reflectionBeen a while since my last post. A new semester has begun for about 4 weeks now, and my job as teaching assistant to a heat transfer cla...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://localhost:4000/articles/heat-conduction-basics">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Blog" href="http://localhost:4000/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script>
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="CH"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Basics of Heat Conduction, Inductively</h1>
+<p class="subtitle">February 20, 2021</p>
+
+<h2 id="a-bit-self-reflection">A Bit Self-reflection</h2>
+<p>Been a while since my last post. A new semester has begun for about 4 weeks now, and my job as teaching assistant to a heat transfer class has to continue despite of the rampage of COVID. My research does not even remotely relate to heat transfer, but here I am, decide to summarize basics of heat conduction using inductive logics. By doing so I may not forget to mention important things during incoming classes. Hopefully, Delivering the content inductively can make the students feel that we are building a tunnel together from nowhere to a place where things can be understood in terms of temperature gradient, Fourier’s law, and heat flux.<!--more--></p>
+
+<h2 id="two-concepts-thermal-energy-and-specific-heat">Two concepts: Thermal energy and Specific Heat</h2>
+<p>We first deduce a relationship between thermal energy and specific heat. In a heat transfer analysis we essentially deal with thermal energy flow from hot regions to cold regions. Such energy transfer process is manifested by time-(in)dependent temperature distributions. Inspired by these facts, we conclude that there must be a relationship between heat energy and temperature. Like many other physical problems, we don’t have an “absolute reference” to define the zero point of thermal energy. Instead, we only care about the differences in thermal energy between two objects/regions. So it is most likely that difference in thermal energy is directly related to temperature difference. In other words, the thermal energy difference $\Delta Q$, is a function of temperature difference $\Delta T$, i.e.,</p>
+
+\[\Delta Q = f(\Delta T)\tag{1}\]
+
+<p>To figure out the exact form of the function in eq.(1), we need help from Joseph Black, a scottish experimentalist who found that</p>
+<blockquote>
+  <p><strong>“equal masses of different substances require different among of heating time to reach a preset target temperature.”</strong></p>
+</blockquote>
+
+<p>Let’s assume that the heater Joseph used had a steady power output, $P$, then, the thermal energy injected into each substance in Joseph’s experiment can be calculated as the product of $P$ and heating time $t$, i.e., $\Delta Q=P\times t$. By plotting $\Delta Q$ versus $\Delta T$ of each substance, Joseph found a linear relation which says</p>
+
+\[\Delta Q = \alpha\Delta T,\tag{2}\]
+
+<p>with $\alpha$ being a constant, different for each substance. Because two objects made of identical substance but differring in masses require different amount of thermal energy to achieve a given temperature, we know $\alpha$ varies with mass $m$. If we fix $\Delta T$ in eq.(2) and vary the sample mass in Joseph’s experiment, we can further plot $\Delta Q$ versus $m$ to find that</p>
+
+\[\Delta Q = mc_p\Delta T\tag{3},\]
+
+<p>where $c_p$ is a coefficient called <strong>specific heat</strong>, and has an unit of energy per mass. In 1819, French chemist Pierre-Louis Dulong and the French physicist Alexis-Thérèse Petit found that</p>
+
+<blockquote>
+  <p><strong>“atomic weight times specific heat of an element is a constant”, i.e., Dulong–Petit law.</strong></p>
+</blockquote>
+
+<p>Since then, people use such law to measure atomic weights for different elements. During the first decade of 20th century, Dulong-Petit law was found broken as specific heat of any substance exponentially decreases when environmental temperature drops to a extremely low value. The deviation from Dulong-Petit Law inspired Einstein and Debye to understand the root of specific heat in terms of <strong>lattice vibrations</strong>. It was Debye who first treated lattice vibrations as bosonic particles, called <strong><a href="https://en.wikipedia.org/wiki/Debye_model">phonons</a></strong>. Debye’s model, along with Planck’s law of black body radiation, marked the beginning of quantum mechanics.</p>
+
+<p>Obviously, eq.(3) is not handy to use as we are not excited to know the mass of the substance on which we observe heat transfer phenomena. To make eq.(3) more general, we normalize both sides of the equation by a characteristic volume to give</p>
+
+\[\Delta\mathcal{Q}=\rho c_p\Delta T\tag{4}.\]
+
+<p>We now have the mass density $\rho$ in eq.(4), and we will use this equation later to derive heat equation in 1D media.</p>
+
+<h2 id="fouriers-law-governing-equation-for-heat-transport-in-materials">Fourier’s Law: Governing Equation for Heat Transport in Materials</h2>
+
+<p>As what alluded above, the capacity of a material storing thermal energy can be attributed to lattice vibrations. However, <strong>it is electrons that transport thermal energy within a material</strong>. People know this because of the Seebeck effect where a potential difference is built between two ends of a wire because of heat transport. From this point of view, we need a new equation to describe the rate of heat transport. To derive such a equation, we first define the concept of “<strong>heat flux</strong>”,$q$, as <strong>flow of thermal energy per unit area per unit time. It has a unit of watts/area</strong>. In his experimental paper published in 1822, Fourier concluded that</p>
+
+<blockquote>
+  <p><strong>“the heat flux resulting from thermal conduction is proportional to the magnitude of the temperature gradient and opposite to it in sign”.</strong></p>
+</blockquote>
+
+<p>From this conclustion, Fourier’s law can be written as:</p>
+
+\[q=-\kappa\nabla T\tag{5},\]
+
+<p>where $\kappa$ is a coefficient called <strong>thermal conductivity</strong>. Eq.(5), along with the concept of thermal flux, sets up a stage for us to make an <strong>analogy between heat conduction and electric current</strong>. In an electric circuit, we have a relationship among resistance $R$, voltage $V$, current density $i$, and cross-section area $A$, as</p>
+
+\[\Delta V=i\times A\times R\tag{6}.\]
+
+<p>The current density $i$ is defined as the amount of electrons passing through per unit area per unit time. Now, if we imagine the heat conduction as a process of energy flowing through a material, we can replace current $i$ in (6) with heat flux $q$, and replace potential difference $\Delta V$ with $\Delta T$ to give,</p>
+
+\[\Delta T = q\times A\times R_t\tag{7}.\]
+
+<p>Eq.(7) gives the definition of “<strong>thermal resistance</strong>”. For an isotropic 1D material of length $L$, if temperatures at two ends are $T_2$ and $T_1$, eq.(5) can be written as</p>
+
+\[q=-\kappa\nabla T=-\kappa\frac{T_2-T_1}{L}\tag{8},\]
+
+<p>under the steady-state condition. Substituting (8) into (7) gives the explicit expression for $R_t$ as</p>
+
+\[R_t=\frac{(T_1-T_2)}{-\kappa(T_2-T_1)A/L}=\frac{L}{\kappa A}\tag{9}.\]
+
+<p>With this current-heat flux analogy, we can easily apply rules of serial/parallel resistance in electric circuit to our thermal circuit.</p>
+
+<h3 id="contact-thermal-resistance">Contact thermal resistance</h3>
+
+<p>We can treat heat conduction at an interface between two bodies as heat flow through a contact thermal resistance. Let lengths of body A and B be $L_A$ and $L_B$, and their cross sections be $A$, so their thermal resistances are $R_{t,A}=\frac{L}{\kappa_AA}$ and $R_{t,B}=\frac{L_B}{\kappa_BA}$. At the interface between A and B, we don’t have the concept of thermal conductivity well defined, instead, we define the <strong>thermal conductance coefficient</strong>, $h_c$, by writting the contact thermal resistance $R_{t,c}$ as $\frac{1}{h_cA}$. Therefore, the heat flow between the two bodies in contact, bodies A and B, is found as</p>
+
+\[q=\frac{T_{1}-T_{2}}{\Delta x_{A} /\left(k_{A} A\right)+1 /\left(h_{c} A\right)+\Delta x_{B} /\left(k_{B} A\right)}\tag{10},\]
+
+<p>where $T_1$ and $T_2$ are temperatures at two ends.</p>
+
+<h2 id="heat-equation-thermal-energy-specific-heat-and-fouriers-law-in-one-place">Heat Equation: Thermal Energy, Specific Heat, and Fourier’s Law in one Place</h2>
+
+<p>Let’s imagine an 1D rod of cross section area $A$. If we only focus on a thin slice of the rod with a thickness of $dx$, we know, from eq.(3) and (4), that the change rate of thermal energy in the slice is</p>
+
+\[\frac{\partial Q}{\partial t}=\rho c_pA(dx)\frac{\partial T}{\partial t}\tag{11}.\]
+
+<p>On the other hand, the heat flux at the right and left faces of the slice are $q_l$ and $q_r$. By applying the conservation law of energy, we have</p>
+
+\[\frac{\partial Q}{\partial t}=(q_l-q_r)A\tag{12}.\]
+
+<p>Equating the RHS of equations (11) and (12) gives:</p>
+
+\[\rho c_p\frac{\partial T}{\partial t}=-\frac{\partial q}{\partial x}\tag{13}.\]
+
+<p>Using Fourier’s law at RHS of (13), we finally arrive at the 1D <strong>heat equation</strong>:</p>
+
+\[\frac{\partial T}{\partial t}=\frac{1}{\rho c_p}\frac{\partial}{\partial x}\left(\kappa\frac{\partial T}{\partial x}\right)\tag{14}.\]
+
+<p>In 3D space, Eq.(14) is generalized as:</p>
+
+\[\frac{1}{\alpha} \frac{\partial T}{\partial t}=\left(\frac{\partial^{2} T}{\partial x^{2}}+\frac{\partial^{2} T}{\partial y^{2}}+\frac{\partial^{2} T}{\partial z^{2}}\right)\tag{15}.\]
+
+<p>where $\alpha=\frac{\kappa}{\rho c_p}$ is the thermal diffusivity. Here we assume thermal conductivity $\kappa$ to be constant. To investigate temperature distribution on a disk, we need to write eq.(15) in a cylindrical coordinate as</p>
+
+\[\frac{1}{r} \frac{\partial}{\partial r}\left(r \cdot k \frac{\partial T}{\partial r}\right)+\frac{1}{r^{2}} \frac{\partial}{\partial \phi}\left(k \frac{\partial T}{\partial \phi}\right)+\frac{\partial}{\partial z}\left(k \frac{\partial T}{\partial z}\right)=\rho c_p \frac{\partial T}{\partial t}\tag{16}.\]
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Things are not always derived from fist principles. Fourier’s law has no rigorous root in mathematical physics, even though people have tried to derive it from basic axioms of quantum mechanics (see <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.79.042101">here</a>). But as long as people are satisfied with the concept of energy flow and heat flux, we as human being should have no problem of using it. That is, we use things before we know what they really are. Looks like that’s just basics of how to build mordern civilizations.</p>
+
+
+
+    </article>
+    <span class="print-footer">Basics of Heat Conduction, Inductively - February 20, 2021 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2023 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
