@@ -5,8 +5,8 @@
     <description>A Jekyll theme for content-rich sites</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Aug 2023 16:55:07 -0500</pubDate>
-    <lastBuildDate>Tue, 22 Aug 2023 16:55:07 -0500</lastBuildDate>
+    <pubDate>Tue, 22 Aug 2023 18:11:33 -0500</pubDate>
+    <lastBuildDate>Tue, 22 Aug 2023 18:11:33 -0500</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -111,7 +111,7 @@ t.bindTo([p1, p2]);
 &lt;/figure&gt;
 &lt;p&gt;In every paper of quantum algorithm, it always starts with how classical computer would solve a problem. Here we take the same route just to fool people that classical algorithms are dumb. We then explain that they are not unbearably bad, just polynomially slower than the quantum algorithm. Without losing the generality, let’s first focus on a function \(f(x)\) whose input \(x\) is an integer in a range \((-N,N)\), with \(N\) being an arbitrary number. Classically, We check if such a function is constant or not by evaluating the function N+1 times. If the evaluated values are all identical, it’s a constant function. Deutsch’s algorithm achieves this by ensuring a specific quantum state’s probability becomes unity while excluding other possibilities, as we’ll see.&lt;/p&gt;
 
-&lt;p&gt;The classical method above is never used in real life. Instead, we usually want to keep the probability of guessing the wrong function type to a small value, \(\epsilon\). In the case above, we need to evaluate the function \((1-\epsilon)N\) times so that the possiblity of guessing wrong is no higher than \(\epsilon\). Thus, the problem described here has a complexity of \(O(N)\).&lt;/p&gt;
+&lt;p&gt;The classical method above is never used in real life. Instead, we usually want to keep the probability of guessing the wrong function type to a small value, \(\epsilon\). &lt;label for=&quot;sd-1&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sd-1&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;the \(\epsilon\) here can be very small. &lt;/span&gt;In the case above, we need to evaluate the function \((1-\epsilon)N\) times so that the possiblity of guessing wrong is no higher than \(\epsilon\). Thus, the problem described here has a complexity of \(O(N)\).&lt;/p&gt;
 &lt;h2 id=&quot;quantum-circuit-behind-deutschs-algorithm&quot;&gt;Quantum Circuit behind Deutsch’s Algorithm&lt;/h2&gt;
 
 &lt;h2 id=&quot;extend-deutschs-algorithm&quot;&gt;Extend Deutsch’s Algorithm&lt;/h2&gt;
