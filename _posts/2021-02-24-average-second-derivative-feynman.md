@@ -13,6 +13,7 @@ Let $x_i$ be coordinates at different time instances, prove that
 $$
 \langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=\int\int \chi^* \hat{p}\hat{p}\psi dxdy=-\hbar^2\int\int\chi^*\frac{\partial^2}{\partial x^2}\psi dxdy\tag{1}
 $$
+<!--more-->
 
 with $\hat{p}=-i\hbar\frac{\partial}{\partial x}$ being momentum operator. There is a misprint in Eqn.(1) as we can see that by verifying the units on both sides. The LHS has a unit of momentum square while the RHS has a unit of momentum squared times length. Note that the unit of wavefunction is $\sqrt{probability/vol.}$. Therefore, Eqn.(1) should really be
 

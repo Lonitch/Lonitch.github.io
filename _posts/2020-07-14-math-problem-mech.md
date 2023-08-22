@@ -14,7 +14,7 @@ toc: false
 ---
 
 ## Why
-The youtuber 3Blue1Brown led me to Prof. Mark Levi's *Mathematical Mechanics*, a collection of math problems solved by using mechanical intuitions. It is an eye-opening work, because I could never imagine that physics could be a perfect sevant for mathematics before. Solving problems using physics enpowers us to understand well-known theorems in an intuitive way, and the physical instinct embedded in the understanding really sheds lights in the ways of using the theorems efficiently. I will give my solutions to the exercise problems in the book here by transforming them into simple physical systems. Do not worry about too much *Solving Hamiltonian* in this blog, it is written in a more casual style comparing to my previous blog series, with the joy of problem solving being the primary focus. 
+The youtuber 3Blue1Brown led me to Prof. Mark Levi's *Mathematical Mechanics*, a collection of math problems solved by using mechanical intuitions. It is an eye-opening work, because I could never imagine that physics could be a perfect sevant for mathematics before. Solving problems using physics enpowers us to understand well-known theorems in an intuitive way, and the physical instinct embedded in the understanding really sheds lights in the ways of using the theorems efficiently. I will give my solutions to the exercise problems in the book here by transforming them into simple physical systems. Do not worry about too much *Solving Hamiltonian* in this blog, it is written in a more casual style comparing to my previous blog series, with the joy of problem solving being the primary focus.<!--more--> 
 
 ## From Curvilinear Triangle to Gas Tank
 ### First we say it, formally...

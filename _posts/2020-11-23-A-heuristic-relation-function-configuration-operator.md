@@ -16,7 +16,7 @@ toc: false
 
 ## Transform handwriting notes in oneNote to multiple-page PDF
 
-If you're like me who has long been irritated by the flawed PDF-exporting function in oneNote, and embarrased by lengthy one-page PDF file generated from your handwriting notes, now it's the time to work around these problems using the following method. For Windows users, the method transforms your trapped long notes into nicely formatted multiple-page PDF file. The method is made of two steps:
+If you're like me who has long been irritated by the flawed PDF-exporting function in oneNote, and embarrased by lengthy one-page PDF file generated from your handwriting notes, now it's the time to work around these problems using the following method. For Windows users, the method transforms your trapped long notes into nicely formatted multiple-page PDF file. The method is made of two steps:<!--more-->
 
 1. Go to one of your long handwriting note and print it using the option of "**Microsoft XPS document writer**"
 2. You will see a ".xps" file is generated on your computer. Search "**XPS2PDF**" in your browser and use web app to transform ".xps" into ".pdf" file.

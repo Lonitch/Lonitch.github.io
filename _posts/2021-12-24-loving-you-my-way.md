@@ -4,9 +4,10 @@ title: 我的罗曼蒂克消亡史
 date: 2022-04-26
 Author: Sizhe
 tags: [daily, Chinese]
+categories: post
 ---
 
-“如果你能给新的PhD一些建议，你会说什么呢？” Aniruddh，这个比我高出一个头，留着一脸络腮胡，咧嘴笑的时候上嘴唇总是微微翘起的印度大男孩，坐在会议室的另一端意味深长地看着我。而我呢，此时刚刚在他面前演习完我的毕业答辩PPT，有气无力地说道：“吃好喝好，发几篇论文然后走人。”(eat well and sleep well, try to publish something and walk away)。他努了努嘴，把头歪向一边，戏谑道：“如果教授在，你绝对不会这么说吧，刘博士！” “so don't tell him.” 我俩不约而同地大笑。同在会议室的Erik,伸了伸脖子，摊出双手，咧着嘴小声说了句 “what?” 
+“如果你能给新的PhD一些建议，你会说什么呢？” Aniruddh，这个比我高出一个头，留着一脸络腮胡，咧嘴笑的时候上嘴唇总是微微翘起的印度大男孩，坐在会议室的另一端意味深长地看着我。而我呢，此时刚刚在他面前演习完我的毕业答辩PPT，有气无力地说道：“吃好喝好，发几篇论文然后走人。”(eat well and sleep well, try to publish something and walk away)。他努了努嘴，把头歪向一边，戏谑道：“如果教授在，你绝对不会这么说吧，刘博士！” “so don't tell him.” 我俩不约而同地大笑。同在会议室的Erik,伸了伸脖子，摊出双手，咧着嘴小声说了句 “what?” <!--more-->
 
 印象里的Erik总是沉默寡言。每到夏天他就早早戴上墨镜，搭配着从不打理微微卷起的棕发，让人一看就知道此人对流行文化充满意见。一次Aniruddh兴奋地描绘着新版蝙蝠侠电影会如何酷炫并富有哲学意味时，Erik低着头显得不为所动。待Aniruddh言毕，我试着问他是否想跟我们一块去电影院观影。他掰着手指，不紧不慢地说着：“people plaud for the death of a criminal who is killed by a hero above all the laws. I don't think I want to live with that message in my mind”。政治不那么正确的我，本该讥他一句装逼犯。但奇妙的是，在那一刻，我和Aniruddh都心照不宣地接受了这样的人物设定。从此也不在他面前谈论电影。作为组里唯一一个只做实验的PhD，Erik做事总有点一根筋。导师盼星星盼月亮用项目经费买来的新设备，在他手里，常常能变成一只困兽：一顿操作猛如虎，一看结果二百五。旁人好几次提醒可能存在操作错误，他愣是坚决不改，下次再犯。久而久之，我们也只能劝之导之，实在不行，听之任之。不过好歹，每每犯了错被导师苛责，他也能悬崖勒马，不再负隅顽抗。
 

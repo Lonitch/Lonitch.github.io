@@ -15,7 +15,7 @@ toc: true
 *For Uzi.*
 ## **Introduction**
 
-This note is dedicated to the derivation of chemical potential of water molecule at vapor state. The final result in this note can be used in the thermodynamic analysis of hydrated lattice systems where the interstitial and external H2O molecules are at phase equilibrium. Before we start the derivation, three important postulates are listed below and they will appear later in our derivation:
+This note is dedicated to the derivation of chemical potential of water molecule at vapor state. The final result in this note can be used in the thermodynamic analysis of hydrated lattice systems where the interstitial and external H2O molecules are at phase equilibrium. <!--more-->Before we start the derivation, three important postulates are listed below and they will appear later in our derivation:
 
 1. The energy difference between two electronic states of single H2O molecule is so big that only the ground state is available within the temperature range of interest.
 2. The H2O vapor behaves ideally, and follows ideal gas law: $PV=Nk_B T$, where is $k_B$ Boltzmann constants and other symbols take their normal meanings.

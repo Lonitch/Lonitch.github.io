@@ -13,7 +13,7 @@ toc: false
 
 ---
 
-The "hole" in density functional theory (DFT) refers to **the depletion of electron density around a reference spatial point**, as a result of exchange-correlation effects among electrons. To see how the holes emerge in the formulation of DFT, let us start with the definition of charge/electron density:
+The "hole" in density functional theory (DFT) refers to **the depletion of electron density around a reference spatial point**, as a result of exchange-correlation effects among electrons. To see how the holes emerge in the formulation of DFT, let us start with the definition of charge/electron density:<!--more-->
 
 $$\rho(\vec{x_1})=N \int d \vec{x_2} \dots d \vec{x_N}|\psi(\vec{x_1} \dots \vec{x_N})|^{2}\tag{1}$$
 

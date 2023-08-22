@@ -15,7 +15,7 @@ toc: true
 
 ## TL;DR
 
-This blog introduces the quantum theory of free electromagnetic field, a sequel to my QM in Hilbert space blog.
+This blog introduces the quantum theory of free electromagnetic field, a sequel to my QM in Hilbert space blog.<!--more-->
 
 ## Motivation/Bird's view
 

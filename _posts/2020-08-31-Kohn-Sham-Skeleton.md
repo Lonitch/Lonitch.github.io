@@ -14,7 +14,7 @@ toc: false
 ---
 
 ## 1. Non-interacting Reference System
-From Hartrr-Fock approach we know that the Slater determinant is the wavefunction of non-interacting fermion system, where the Hamiltonian is given by
+From Hartrr-Fock approach we know that the Slater determinant is the wavefunction of non-interacting fermion system, where the Hamiltonian is given by<!--more-->
 
 $$\hat{\mathrm{H}}_{\mathrm{s}}=-\frac{1}{2} \sum_{\mathrm{i}}^{\mathrm{N}} \nabla_{\mathrm{i}}^{2}+\sum_{\mathrm{i}}^{\mathrm{N}} \mathrm{V}_{\mathrm{s}}\left(\mathrm{r}_{\mathrm{i}}\right)\tag{1.1},$$
 

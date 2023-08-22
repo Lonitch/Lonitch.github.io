@@ -14,7 +14,7 @@ toc: true
 ---
 
 ## Background
-We have discussed what an eigenstate might look like mathematically for an electron in periodic potential using Bloch's theorem. In this blog we move forward with a closer look on the operators that could be applied to electron eigenstates. After an introduction to two important evolution operators, we will use the information we have so far to examine the energy band structure of electrons in a simple case: tight-binding model.
+We have discussed what an eigenstate might look like mathematically for an electron in periodic potential using Bloch's theorem. In this blog we move forward with a closer look on the operators that could be applied to electron eigenstates. After an introduction to two important evolution operators, we will use the information we have so far to examine the energy band structure of electrons in a simple case: tight-binding model.<!--more-->
 
 ## Time and space evolution operator
 ### Time evolution operator

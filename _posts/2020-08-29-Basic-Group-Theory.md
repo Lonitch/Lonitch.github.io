@@ -15,7 +15,7 @@ toc: false
 
 ## Background
 
-These notes are made based on the purpose of quick exposure to basic concepts of group theory, a pervasive tool used in the research of condensed-matter QFT. The following text will function as a lookup table or a prelude for my possible future application of group theory in QFT problems.
+These notes are made based on the purpose of quick exposure to basic concepts of group theory, a pervasive tool used in the research of condensed-matter QFT. The following text will function as a lookup table or a prelude for my possible future application of group theory in QFT problems.<!--more-->
 
 ## Transformation in the Special Relativity
 

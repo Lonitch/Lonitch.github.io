@@ -14,7 +14,7 @@ toc: true
 ---
 
 ## Motivation
-The Kronecker product is widely used in Dirac notation, a basic tool for second quantization formulation. People who learned the basics of quantum field theory from Mattuck and Klauber is not fluent with Dirac notation, and could easily mistake Kronecker product with outer product. This blog clarifies the definition of Kronecker product and its application in the formulation of two-body state.
+The Kronecker product is widely used in Dirac notation, a basic tool for second quantization formulation. People who learned the basics of quantum field theory from Mattuck and Klauber is not fluent with Dirac notation, and could easily mistake Kronecker product with outer product. This blog clarifies the definition of Kronecker product and its application in the formulation of two-body state.<!--more-->
 
 ## Definition of Kronecker Product
 Let $A$ be a matrix with dimensions of $m\times n$, and $B$ with dimensions of $p\times q$. And the Kronecker product of $A$ and $B$ is:

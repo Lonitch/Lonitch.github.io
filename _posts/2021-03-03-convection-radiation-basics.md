@@ -8,7 +8,7 @@ tags: [notes, teaching, heat transfer]
 
 ## Another teaching note for heat transfer class
 
-My love for Tufte-handout style grows over the past week. So I decided to make another teaching notes using Latex. Since I don't have much love left for some of my students, this note might be the last one.
+My love for Tufte-handout style grows over the past week. So I decided to make another teaching notes using Latex. Since I don't have much love left for some of my students, this note might be the last one.<!--more-->
 
 <object data="{{ site.url }}/images/ME320Lab3Note.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="{{ site.url }}/images/ME320Lab3Note.pdf">

@@ -15,7 +15,7 @@ toc: true
 
 ## Background
 
-My humble knowledge of dielectric materials seems to be a big barrier between me and an sound understanding of the dependence of dielectric constant $\varepsilon$ on alternating field frequency $\omega$ and wave vector $\mathbf{k}$. The question of what are the reasonable assumptions needed to construct a dielectric constant function $\varepsilon(\omega)$ is the primary focus of this article.
+My humble knowledge of dielectric materials seems to be a big barrier between me and an sound understanding of the dependence of dielectric constant $\varepsilon$ on alternating field frequency $\omega$ and wave vector $\mathbf{k}$. The question of what are the reasonable assumptions needed to construct a dielectric constant function $\varepsilon(\omega)$ is the primary focus of this article.<!--more-->
 
 ## Only When They are Constants
 

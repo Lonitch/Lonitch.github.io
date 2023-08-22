@@ -14,7 +14,7 @@ toc: false
 
 ---
 ## Link to my notes
-The handwriting notes are based on a seminar series on the topic of electron-phonon interaction (EPI) from first principle, hosted at ICTP, Italy, 2018. You can download it by using the link [here](https://drive.google.com/file/d/1nDtVoIOdJ6E3Ar0jskQhkcvHemC8yCqv/view?usp=sharing). These notes might be some preliminaries for my next paper.
+The handwriting notes are based on a seminar series on the topic of electron-phonon interaction (EPI) from first principle, hosted at ICTP, Italy, 2018. You can download it by using the link [here](https://drive.google.com/file/d/1nDtVoIOdJ6E3Ar0jskQhkcvHemC8yCqv/view?usp=sharing). These notes might be some preliminaries for my next paper.<!--more-->
 
 ## Updates on my life
 

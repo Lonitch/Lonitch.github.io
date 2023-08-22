@@ -15,7 +15,7 @@ toc: false
 
 ## Laue condition, Miller Index, and Structure Factor
 
-**Laue condition** needs to be satisfied to have constructive X-ray diffraction interference (i.e., the peaks on X-ray spectrum). Using the reciprocal lattice, the condition states that 
+**Laue condition** needs to be satisfied to have constructive X-ray diffraction interference (i.e., the peaks on X-ray spectrum). Using the reciprocal lattice, the condition states that<!--more--> 
 
 >If the difference between the incident $(\boldsymbol{k})$ and scattered $\left(\boldsymbol{k}^{\prime}\right)$ wave vectors is equal to a reciprocal lattice vector, the diffracted intensity may be nonzero. This is the Laue condition. With $\boldsymbol{K}=\boldsymbol{k}^{\prime}-\boldsymbol{k},$ this leads to the simple equation $\boldsymbol{K}=\boldsymbol{G}$, where $\boldsymbol{G}$ is the vectors on reciprocal lattice.
 

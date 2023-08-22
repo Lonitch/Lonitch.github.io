@@ -15,7 +15,7 @@ toc: false
 
 
 ## $\vec{k} \cdot \vec{p} $ method
-**Purpose**: derive analytical expressions for the band dispersion and the effective masses in the immediate vicinity of a $k-$point at which all the single-electron states are known.
+**Purpose**: derive analytical expressions for the band dispersion and the effective masses in the immediate vicinity of a $k-$point at which all the single-electron states are known.<!--more-->
 
 In other words, $\vec{k} \cdot \vec{p}$ method $ \rightarrow $ extrapolation method applied to compute valence bands of SEMICONDUCTOR! 
 

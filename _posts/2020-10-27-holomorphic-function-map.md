@@ -14,7 +14,7 @@ toc: false
 
 ---
 ## Cauchy alarmed
-Get obssessed with mindmap, just made one for holomorphic function as a brief summary for dummies...
+Get obssessed with mindmap, just made one for holomorphic function as a brief summary for dummies...<!--more-->
 
 <p align="center">
   <img width="677" height="725" src="{{ site.url }}/images/holomorphic-function.png">

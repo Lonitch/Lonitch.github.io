@@ -10,7 +10,7 @@ tags: [notes, daily]
 - Recognize that you're not going to have **perfect** draft after your first try, so stop being stressed when you prepare your manuscript. Simply put together everything you want to say, no need to use super academic language.
 - There is no limit on total number of words for academic paper, so try to **delete redundant materials ruthlessly**. Short sentences give stronger information anyway.
 - Writing a academic paper is hard, you should try to make it meaningful. Quit the writing-for-publication logic.
-- Good writing communicates an idea clearly and effectively. It matters the least writing your words in elegant style.
+- Good writing communicates an idea clearly and effectively. It matters the least writing your words in elegant style.<!--more-->
 
 ## 2. Tips for cutting the redundant
 ### 2.1. Use verbs instead of nouns
