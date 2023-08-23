@@ -21,7 +21,7 @@ This blog summarizes the quantized systems introduced in the previous two parts 
 We will start with the derivation of the Hamiltonian for a system composed of EM field and free particles. The resulted Hamiltonian will be devided into three parts that describe particles' energy, EM field energy/radiation energy, and the interaction energy. We then use the Hamiltonian to discuss the examples of light emission from an excited atom, lifetime of excited states, adsorption of photons, photon scattering from free electrons, and some special topics.
 
 ## Hamiltonian of The EM Field+Paticles System
-The system we are interested in here is composed of matters and EM fields, or photons. Usually we would like to think the matter is built up by particles with various masses $m_i$ and charges $e_i$. The interactions of these particles are always treated in a form of $V(\ldots,\mathbf{x}_i,\ldots)$. The Coulombic interaction is one example of such interaction,
+The system we are interested in here is composed of matters and EM fields, or photons. Usually we would like to think the matter is built up by particles with various masses $$m_i$$ and charges $$e_i$$. The interactions of these particles are always treated in a form of $$V(\ldots,\mathbf{x}_i,\ldots)$$. The Coulombic interaction is one example of such interaction,
 
 $$V_{\text {Coulomb }}\left(\ldots, \boldsymbol{x}_{i}, \ldots, \boldsymbol{x}_{j}, \ldots\right)=\frac{1}{2} \sum_{i, j \atop i \neq j} \frac{e_{i} e_{j}}{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|}\tag{1.1}.$$
 
@@ -41,7 +41,7 @@ and the "mp" stands for "many particles". The interaction Hamiltonian is then
 
 $$\hat{H}_{\mathrm{int}}=\sum_{i}\left[-\frac{e_{i}}{m_{i} c} \hat{\mathbf{p}}_{i} \cdot \hat{\mathbf{A}}\left(x_{i}\right)+\frac{e_{i}^{2}}{2 m_{i} c^{2}} \hat{\mathbf{A}}^{2}\left(x_{i}\right)\right]\tag{1.4}.$$
 
-where we use the Coulomb gauge $\nabla\cdot\mathbf{A}=0$ and **Ehrenfest Theorem**
+where we use the Coulomb gauge $$\nabla\cdot\mathbf{A}=0$$ and **Ehrenfest Theorem**
 
 $$\begin{array}{l}
 {\left[x_{i}, F(\mathbf{x}, \mathbf{p})\right]=\mathrm{i} \hbar \frac{\partial F}{\partial p_{i}}} \\
@@ -74,14 +74,14 @@ Several points are worth mentioning regarding $$\hat{H}_{int}$$ before we procee
 
 ## Emission of Light From An Excited Atom
 
-In this section we study the transition from an initial particle state, $\mid a_i\rangle$, to a final particle state, $\mid a_f\rangle$ by emitting a photon. The the initial and final states for the photon-particle system are then
+In this section we study the transition from an initial particle state, $$\mid a_i\rangle$$, to a final particle state, $$\mid a_f\rangle$$ by emitting a photon. The the initial and final states for the photon-particle system are then
 
 $$\begin{array}{l}
 \mid i\rangle=\left|a_{i}\right\rangle\left|\ldots, n_{k \sigma}, \ldots\right\rangle \\
 \mid f\rangle=\left|a_{f}\right\rangle\left|\ldots, n_{k \sigma}+1, \ldots\right\rangle
 \end{array}\tag{2.1}.$$
 
-The corresponding energy levels  follow the relation of $E_i>E_f$. In Part I we developed Fermi's golden rule based on perturbation theory, which states that the probability of $i\rightarrow f$ transition per unit time is given by
+The corresponding energy levels  follow the relation of $$E_i>E_f$$. In Part I we developed Fermi's golden rule based on perturbation theory, which states that the probability of $$i\rightarrow f$$ transition per unit time is given by
 
 $$\begin{aligned}
 \left(\frac{\text { trans. prob. }}{\text { time }}\right)=& \frac{2 \pi}{\hbar}\left|M_{\mathrm{fi}}\right|^{2} \delta\left(E_{\mathrm{f}}-E_{\mathrm{i}}\right) \\
@@ -89,7 +89,7 @@ M_{\mathrm{fi}}=&\left\langle f\left|\hat{H}^{\prime}\right| i\right\rangle+\sum
 &+\sum_{I, I I} \frac{\left\langle f\left|\hat{H}^{\prime}\right| I\right\rangle\left\langle I\left|\hat{H}^{\prime}\right| I I\right\rangle\left\langle I I\left|\hat{H}^{\prime}\right| i\right\rangle}{\left(E_{\mathrm{i}}-E_{\mathrm{I}}+i \eta\right)\left(E_{\mathrm{i}}-E_{\mathrm{II}}+i \eta\right)}+\ldots
 \end{aligned}\tag{2.2}$$
 
-where $\hat{H}^{\prime}$ is the perturbation Hamiltonian, and $I/II$ are complete sets of states. The terms other than the first term of $M_{fi}$ are called higher-order transition rate. But here we only consider the fist-order perturbation caused by $\hat{H}^{\prime}_{int}$, i.e.
+where $$\hat{H}^{\prime}$$ is the perturbation Hamiltonian, and $$I/II$$ are complete sets of states. The terms other than the first term of $$M_{fi}$$ are called higher-order transition rate. But here we only consider the fist-order perturbation caused by $$\hat{H}^{\prime}_{int}$$, i.e.
 
 $$\begin{aligned}
 \left\langle f\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i\right\rangle & \\
@@ -101,7 +101,7 @@ $$\begin{aligned}
 =&-\frac{e}{m c} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}}\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \boldsymbol{\varepsilon}_{\boldsymbol{k} \sigma} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{i}\right\rangle \sqrt{n_{\boldsymbol{k} \sigma}+1}.
 \end{aligned}\tag{2.3}$$
 
-Notice that in the second equivalence above, we only take into account the contribution of the photon with wave vector $\boldsymbol{k}$ and polarization $\sigma$. Since the newly emitted photon has an energy of $\hbar \omega_{\boldsymbol{k}}$, eqn.(2.2) *to the first order* now becomes
+Notice that in the second equivalence above, we only take into account the contribution of the photon with wave vector $$\boldsymbol{k}$$ and polarization $$\sigma$$. Since the newly emitted photon has an energy of $$\hbar \omega_{\boldsymbol{k}}$$, eqn.(2.2) *to the first order* now becomes
 
 $$\begin{aligned}
 \left(\frac{\text { trans. prob. }}{\text { time }}\right)_{\text {emission }}=& \frac{2 \pi}{\hbar}\left|\left\langle f\left|\hat{H}_{\text {int }}^{\prime}\right| i\right\rangle\right|^{2} \delta\left(E_{\mathrm{f}}-E_{\mathrm{i}}\right) \\
@@ -110,11 +110,11 @@ $$\begin{aligned}
 & \times \delta\left(E_{a_{\mathrm{f}}}-E_{a_{\mathrm{i}}}+\hbar \omega_{k}\right).
 \end{aligned}\tag{2.4}$$
 
-Notice that when there is no photon in our system (i.e. $n_{k\sigma}=0$), the transition can still happen. This phenomenon is then referred as **spontaneous emission**. The $1$ in $n_{k\sigma}+1$ is the result of commutation rule; this is for the same reason we have $\frac{1}{2}$ in the zero-point energy of EM field[1].
+Notice that when there is no photon in our system (i.e. $$n_{k\sigma}=0$$), the transition can still happen. This phenomenon is then referred as **spontaneous emission**. The $$1$$ in $$n_{k\sigma}+1$$ is the result of commutation rule; this is for the same reason we have $$\frac{1}{2}$$ in the zero-point energy of EM field[1].
 
 ## Lifetime of Excited States
 
-Now we consider all the possible $\boldsymbol{k}$ and $\sigma$ in (2.3) to give an expression for the lifetime of state $i$, $\tau$, as
+Now we consider all the possible $$\boldsymbol{k}$$ and $$\sigma$$ in (2.3) to give an expression for the lifetime of state $$i$$, $$\tau$$, as
 
 $$\begin{aligned}
 \left(\frac{1}{\tau}\right)_{\mathrm{i} \rightarrow \mathrm{f}}=& \frac{2 \pi}{\hbar} \sum_{\boldsymbol{k}, \sigma}\left|\left\langle f\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i\right\rangle\right|^{2} \delta\left(E_{a_{f}}-E_{a_{1}}+\hbar \omega_{k}\right) \\
@@ -122,7 +122,7 @@ $$\begin{aligned}
 & \times \delta\left(E_{a_{\mathrm{f}}}-E_{a_{1}}+\hbar \omega_{k}\right).
 \end{aligned}\tag{3.1}$$
 
-At the limit of $L\rightarrow\infty$, we can replace the summation of wave vector with a integral by
+At the limit of $$L\rightarrow\infty$$, we can replace the summation of wave vector with a integral by
 
 $$\sum_{\mathbf{k}}=\frac{L^3}{(2\pi)^3}\int d\boldsymbol{k}\tag{3.2}.$$
 
@@ -130,16 +130,16 @@ The factor in front of the integral is a result from the periodic boundary condi
 
 $$k_iL=2\pi n_i\quad n_i=0,1,2,\ldots\quad i=x,y,z.\tag{3.3}$$
 
-Each vector $\mathbf{n}=\{n_x,n_y,n_z\}$ reprents a normal mode of EM field. So the number of normal modes fall into the volume of $\Delta n_x\Delta n_y\Delta n_z$ at $(n_x,n_y,n_z)$ is just $L^3/(2\pi)^3\Delta k_x\Delta k_y\Delta k_z$. At the limit of $L\rightarrow \infty$, (3.2) holds.
+Each vector $$\mathbf{n}=\{n_x,n_y,n_z\}$$ reprents a normal mode of EM field. So the number of normal modes fall into the volume of $$\Delta n_x\Delta n_y\Delta n_z$$ at $$(n_x,n_y,n_z)$$ is just $$L^3/(2\pi)^3\Delta k_x\Delta k_y\Delta k_z$$. At the limit of $$L\rightarrow \infty$$, (3.2) holds.
 
-Let us now choose the directions of polarization vectors $$\boldsymbol{\varepsilon}_{\mathbf{k}\sigma}$$ so that (3.1) can be largely simplified. If we choose the $$\boldsymbol{\varepsilon}_{\mathbf{k}1}$$ to be a direction perpendicular to $$\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$$, and $\mathbf{k}$ forms a angle of $\theta$ with $$\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$$ (see Figure 1), we have
+Let us now choose the directions of polarization vectors $$\boldsymbol{\varepsilon}_{\mathbf{k}\sigma}$$ so that (3.1) can be largely simplified. If we choose the $$\boldsymbol{\varepsilon}_{\mathbf{k}1}$$ to be a direction perpendicular to $$\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$$, and $$\mathbf{k}$$ forms a angle of $$\theta$$ with $$\langle a_i\mid\hat{\mathbf{p}}\mid a_f\rangle$$ (see Figure 1), we have
 
 $$\begin{aligned}
 \sum_{\sigma=1,2}\left|\left\langle a_{\mathbf{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle\right|^{2} &=\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \boldsymbol{\varepsilon}_{\boldsymbol{k}_{2}} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot x}\right| a_{\mathrm{i}}\right\rangle\right|^{2} \\
 &\substack{(1.5)\\=}\left|\boldsymbol{\varepsilon}_{\boldsymbol{k} 2} \cdot\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot x}\right| a_{\mathrm{i}}\right\rangle\right|^{2}
 \end{aligned}\tag{3.4}$$
 
-where the second equation in (1.5) is used again to swap the place of $\boldsymbol{\varepsilon}$ and $\boldsymbol{k}$. We also notice that the light emitted from an atom has energies of $\hbar \omega\approx10eV$, giving that 
+where the second equation in (1.5) is used again to swap the place of $$\boldsymbol{\varepsilon}$$ and $$\boldsymbol{k}$$. We also notice that the light emitted from an atom has energies of $$\hbar \omega\approx10eV$$, giving that 
 
 $$\begin{aligned}
 \boldsymbol{k} \cdot \boldsymbol{x} \approx \frac{2 \pi}{\lambda} a_{\mathrm{Bohr}} &=\frac{\hbar \omega}{\hbar c} a_{\mathrm{Bohr}} \\
@@ -147,7 +147,7 @@ $$\begin{aligned}
 &=2.7 \times 10^{-3} \ll 1.
 \end{aligned}$$
 
-As a result the exponential factor $e^{-i\mathbf{k\cdot x}}\approx 1$, and eq.(3.4) reduces to
+As a result the exponential factor $$e^{-i\mathbf{k\cdot x}}\approx 1$$, and eq.(3.4) reduces to
 
 $$\sum_{\sigma=1,2}\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{k \sigma} \mathrm{e}^{-\mathrm{i} k \cdot x}\right| a_{\mathrm{i}}\right\rangle\right|^{2} \approx\left|\boldsymbol{\varepsilon}_{k 2} \cdot\left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle\right|^{2}\tag{3.5}.$$
 
@@ -166,7 +166,7 @@ and finally
 
 $$\left(\frac{1}{\tau}\right)_{\mathrm{i} \rightarrow \mathrm{f}}=\frac{e^{2}}{2 \pi m^{2}} \int \mathrm{d}^{3} k \frac{1}{\omega_{k}}\left|\left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle\right|^{2} \sin ^{2} \vartheta \delta\left(E_{a_{\mathrm{f}}}-E_{a_{\mathrm{i}}}+\hbar \omega_{k}\right)\tag{3.6}.$$
 
-If we use spherical coordinate to do the integral and let $\omega_{fi}$ be the photon frequence that conserve energy, then
+If we use spherical coordinate to do the integral and let $$\omega_{fi}$$ be the photon frequence that conserve energy, then
 
 $$\begin{aligned}
 \left(\frac{1}{\tau}\right)_{\mathrm{i} \rightarrow \mathrm{f}}=& \frac{e^{2} 2 \pi}{2 \pi m^{2} c^{3}} \int \mathrm{d} \omega_{k} \omega_{k}\left|\left\langle a_{\mathrm{f}}|\hat{\boldsymbol{p}}| a_{\mathrm{i}}\right\rangle\right|^{2} \\
@@ -187,19 +187,19 @@ The Heisenberg's equation of motion is used at the second equivalence, that is,
 
 $$\frac{\mathrm{d} \hat{\boldsymbol{x}}}{\mathrm{d} t}=-\frac{\mathrm{i}}{\hbar}\left[\hat{\boldsymbol{x}}, \hat{H}_{\mathrm{mp}}\right]$$
 
-Applying the trick in (3.8) we recognize that the momentum matrix element $$e\left\langle a_{\mathrm{f}}\mid\hat{\boldsymbol{p}}\mid a_{\mathrm{i}}\right\rangle$$ can be expressed as a matrix element of the dipole operator $e \hat{\boldsymbol{x}}$. By now the designations *dipole approximation and dipole radiation* introduced earlier should have become clear.
+Applying the trick in (3.8) we recognize that the momentum matrix element $$e\left\langle a_{\mathrm{f}}\mid\hat{\boldsymbol{p}}\mid a_{\mathrm{i}}\right\rangle$$ can be expressed as a matrix element of the dipole operator $$e \hat{\boldsymbol{x}}$$. By now the designations *dipole approximation and dipole radiation* introduced earlier should have become clear.
 
 ### The Hamiltonian for interaction btw the electron Spin and the EM field
 
-Up to this point we neglect the interaction btw particle spin and EM field. To add it in our Hamiltonian, we first realize that the interaction energy of a magnetic momentum $\boldsymbol{\mu}$ and a magnetic field $\mathbf{B}$ is just
+Up to this point we neglect the interaction btw particle spin and EM field. To add it in our Hamiltonian, we first realize that the interaction energy of a magnetic momentum $$\boldsymbol{\mu}$$ and a magnetic field $$\mathbf{B}$$ is just
 
 $$H^{\prime \prime \prime}=-\boldsymbol{\mu} \cdot \boldsymbol{B}\tag{3.9}$$
 
-where $\boldsymbol{\mu}=(e \hbar / 2 m c) \boldsymbol{\sigma}$. Since $\mathbf{B}=\nabla\times\mathbf{A}$ we can quantize (3.9) as
+where $$\boldsymbol{\mu}=(e \hbar / 2 m c) \boldsymbol{\sigma}$$. Since $$\mathbf{B}=\nabla\times\mathbf{A}$$ we can quantize (3.9) as
 
 $$\hat{H}^{\prime \prime \prime}=-\frac{\mathrm{i} e \hbar}{2 m c} \sum_{\boldsymbol{k}, \sigma} N_{\boldsymbol{k}} \boldsymbol{\sigma} \cdot\left(\hat{\boldsymbol{k}} \times \varepsilon_{\boldsymbol{k} \sigma}\right)\left[\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}+\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}\right],$$
 
-where $\hat{\mathbf{k}}=-i\nabla$. Acting $\hat{\mathbf{k}}$ on exponential factors gives
+where $$\hat{\mathbf{k}}=-i\nabla$$. Acting $$\hat{\mathbf{k}}$$ on exponential factors gives
 
 $$\hat{H}^{\prime \prime \prime}=-\frac{\mathrm{i} e \hbar}{2 m c} \sum_{\boldsymbol{k}, \sigma} N_{\boldsymbol{k}} \boldsymbol{\sigma} \cdot\left(\boldsymbol{k} \times \varepsilon_{\boldsymbol{k} \sigma}\right)\left[\hat{a}_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}-\hat{a}_{\boldsymbol{k} \sigma}^{\dagger} \mathrm{e}^{-\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{r}}\right]\tag{3.10}.$$
 
@@ -212,7 +212,7 @@ $$\begin{array}{l}
 \mid f\rangle=\left|a_{\mathrm{f}}\right\rangle\left|\ldots, n_{k \sigma}-1, \ldots\right\rangle.
 \end{array}\tag{4.1}$$
 
-and the matrix element of $\hat{H}_{int}^{\prime}$ is
+and the matrix element of $$\hat{H}_{int}^{\prime}$$ is
 
 $$\begin{aligned}
 \left\langle f\left|\hat{H}_{\text {int }}^{\prime}\right| i\right\rangle=&\left\langle a_{\mathrm{f}}\left|\left\langle\ldots, n_{k \sigma}-1, \ldots\right|\right.\right.\\
@@ -223,7 +223,7 @@ $$\begin{aligned}
 =&-\frac{e}{m c} \sqrt{\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}}\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle \sqrt{n_{k \sigma}}
 \end{aligned}\tag{4.2}$$
 
-where we once again only consider one photon with wave vector $\mathbf{k}$ and polarization $\sigma$. The probability of transition per unit time is then
+where we once again only consider one photon with wave vector $$\mathbf{k}$$ and polarization $$\sigma$$. The probability of transition per unit time is then
 
 $$\begin{aligned}
 \left(\frac{\text { trans. prob. }}{\text { time }}\right)_{\text {absorption }}=& \frac{2 \pi}{\hbar}\left(\frac{e}{m c}\right)^{2}\left(\frac{2 \pi \hbar c^{2}}{L^{3} \omega_{k}}\right) n_{k \sigma} \\
@@ -251,11 +251,11 @@ $$\begin{array}{l}
 \end{array}
 \end{array}\tag{4.4}$$
 
-which is similar to eqn.(2.4) with $n_{k\sigma}+1$ replaced by $n_{k\sigma}$. We will now calculate the **cross section** $$\sigma_{\mathrm{i} \rightarrow \mathrm{f}}(k \sigma)$$ for the absorption of a photon with momentum $\hbar k$ and polarization $\sigma .$ It is defined as **the transition probability per unit time for the absorption of a photon divided by the incoming photon flux $j_{\text {photon }}$**,
+which is similar to eqn.(2.4) with $$n_{k\sigma}+1$$ replaced by $$n_{k\sigma}$$. We will now calculate the **cross section** $$\sigma_{\mathrm{i} \rightarrow \mathrm{f}}(k \sigma)$$ for the absorption of a photon with momentum $$\hbar k$$ and polarization $$\sigma .$$ It is defined as **the transition probability per unit time for the absorption of a photon divided by the incoming photon flux $$j_{\text {photon }}$$**,
 
 $$j_{\text {photon }}=\frac{n_{k \sigma}}{L^{3}} c\tag{4.5}.$$
 
-We call $\sigma_{i\rightarrow f}$ "cross section" because it has an unit of area. The definition yields that
+We call $$\sigma_{i\rightarrow f}$$ "cross section" because it has an unit of area. The definition yields that
 
 $$\begin{aligned}
 \sigma_{\mathrm{i} \rightarrow \mathrm{f}}(k \sigma)=& \frac{4 \pi^{2} e^{2}}{m^{2} \omega_{k} c}\left|\left\langle a_{\mathrm{f}}\left|\hat{\boldsymbol{p}} \cdot \varepsilon_{\boldsymbol{k} \sigma} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}}\right| a_{\mathrm{i}}\right\rangle\right|^{2} \\
@@ -269,7 +269,7 @@ The Hamiltonian for a free particle in vacuum is simply
 
 $$\hat{H}=\frac{\hat{\mathbf{p}}^2}{2m}\tag{5.1},$$
 
-with normalized eigenstates $\mid\mathbf{q}\rangle$ being
+with normalized eigenstates $$\mid\mathbf{q}\rangle$$ being
 
 $$\langle \boldsymbol{x}\mid\mathbf{q}\rangle=\psi_{\mathbf{q}}(\mathbf{x})=\frac{1}{\sqrt{L^3}}e^{i\mathbf{q\cdot x}}\tag{5.2}.$$
 
@@ -290,7 +290,7 @@ $$\begin{aligned}
 & \times \int_{L^{3}} \frac{\mathrm{e}^{-\mathrm{i} \boldsymbol{q}_{\mathrm{f}} \cdot \boldsymbol{x}}}{L^{3 / 2}} \mathrm{e}^{\mathrm{i} \boldsymbol{k} \cdot \boldsymbol{x}} \frac{\mathrm{e}^{\mathbf{i} q \cdot \boldsymbol{x}}}{L^{3 / 2}} \mathrm{d}^{3} x.
 \end{aligned}\tag{5.3}$$
 
-Notice that the third equivalence is right because the exponential factor in the "sandwhich" is a constant and the momentum operator $\hat{\mathbf{p}}$ was applied to the $\mid q_i\rangle$ state directly. The integral in (5.3) yields a delta function,i.e.
+Notice that the third equivalence is right because the exponential factor in the "sandwhich" is a constant and the momentum operator $$\hat{\mathbf{p}}$$ was applied to the $$\mid q_i\rangle$$ state directly. The integral in (5.3) yields a delta function,i.e.
 
 $$\int_{L^{3}} \frac{\mathrm{e}^{-\mathrm{i} q_{\mathrm{f}} \cdot x}}{\sqrt{L^{3}}} \frac{\mathrm{e}^{\mathrm{i}\left(q_{\mathrm{i}}+k\right) \cdot x}}{\sqrt{L^{3}}} \mathrm{d}^{3} x=\delta_{q_{\mathrm{f}}, q_{\mathrm{i}}+k}\tag{5.4}$$
 
@@ -302,7 +302,7 @@ Meanwhile, we also have to satisfy the energy conservation law, which gives
 
 $$E_{\mathrm{f}}=E_{\mathrm{i}} \quad \text { or } \quad \frac{\left(\hbar q_{\mathrm{f}}\right)^{2}}{2 m}=\hbar \omega_{k}+\frac{\left(\hbar q_{\mathrm{i}}\right)^{2}}{2 m}\tag{5.6}.$$
 
-Now we are about to see that we cannot satisfy (5.5) and (5.6) in the case of free particle in vacuum. From special relativity the 4-momentum vector for a paticle, $P^{\mu}_a$, and a photon, $P_{\gamma}^{\mu}$ are
+Now we are about to see that we cannot satisfy (5.5) and (5.6) in the case of free particle in vacuum. From special relativity the 4-momentum vector for a paticle, $$P^{\mu}_a$$, and a photon, $$P_{\gamma}^{\mu}$$ are
 
 $$P_{a}^{\mu}=\left(\frac{E}{c}, p, 0,0\right),\tag{5.7}$$
 
@@ -314,7 +314,7 @@ Notice that (5.8) gives the massless photon as
 
 $$P^{\mu}_{\gamma}\cdot P_{\mu,\gamma}=m^2=0.$$
 
-where the natural unit is used. Eq.(5.7) alignes the move direction of the particle to x-axis. Let us assume the emitted photon propagates at a direction forming a $\theta$ angle with x-axis, that is
+where the natural unit is used. Eq.(5.7) alignes the move direction of the particle to x-axis. Let us assume the emitted photon propagates at a direction forming a $$\theta$$ angle with x-axis, that is
 
 $$P_{\gamma}^{\mu}=\frac{E}{c}\left(1,cos\theta,sin\theta,0\right).\tag{5.9}$$
 
@@ -333,7 +333,7 @@ m_a^2&=m_a^2+m_{\gamma}^2-2P^{\mu}_{a}P_{\gamma,\mu}
 \end{aligned}\tag{5.12}.
 $$
 
-Because $m_{\gamma}=0$ eqn.(5.12) is found to be
+Because $$m_{\gamma}=0$$ eqn.(5.12) is found to be
 
 $$P_{a}^{\mu} \cdot P_{\gamma,\mu}=\frac{E \cdot E_{\gamma}}{c^{2}}-\frac{\mathbf{p} \cdot E_{\gamma}}{c} \cos \theta=E_{\gamma}(E-c\mathbf{p}cos\theta)=0\tag{5.13}$$
 
@@ -341,7 +341,7 @@ where we recover the light speed from the natural unit. Remember the identity in
 
 $$E=\sqrt{m^{2} c^{4}+c^{2} p^{2}} \rightarrow E>p c\tag{5.14}$$
 
-we finally conclude from (5.13) that $E_{\gamma}=0$, i.e., no photon emission is possible. In a similar way, one can also prove that **the free particle in vacuum does not absorb photon too.**
+we finally conclude from (5.13) that $$E_{\gamma}=0$$, i.e., no photon emission is possible. In a similar way, one can also prove that **the free particle in vacuum does not absorb photon too.**
 
 We can also draw the conclusion that **processes of first order caused by $$\hat{H}_{\text {int }}^{\prime}$$ do not exist**. As a consequence we investigate now the processes of first order with $$\hat{H}_{\text {int }}^{\prime \prime}.$$ for the free particles. This part of the interaction contains terms of the form $$\hat{a}_{k \sigma}^{\dagger} \hat{a}_{k^{\prime} \sigma^{\prime}} .$$ Obviously, they describe processes that can be shown in the following sketch.
 
@@ -386,9 +386,9 @@ $$\begin{aligned}
 which indicates the conservation of momenta.
 
 ## Natural linewidth and self-energy
-So far all the transition probability expressions from previous sections have $\delta-$functions to satisfy the momentum/energy conservation. However, the photon emitting from a particle corresponds to a wave of finite length and duration. According to the Heisenberg's uncertainty principle, there must be uncertainty in particle's energy that is related to the lifetime of excited states, i.e. $\Delta E\geq \hbar/\tau$. Therefore, the photon emission spectrum from a particle must be made of lines with finide width rather than a spectrum of infinite peaks of $\delta-$function. This section shows a way to correct such error.
+So far all the transition probability expressions from previous sections have $$\delta-$$functions to satisfy the momentum/energy conservation. However, the photon emitting from a particle corresponds to a wave of finite length and duration. According to the Heisenberg's uncertainty principle, there must be uncertainty in particle's energy that is related to the lifetime of excited states, i.e. $$\Delta E\geq \hbar/\tau$$. Therefore, the photon emission spectrum from a particle must be made of lines with finide width rather than a spectrum of infinite peaks of $$\delta-$$function. This section shows a way to correct such error.
 
-Here we employ a method that is similar to what we have seen in the coherence state section of Part II blog, that is, writing the eigenstates of EM+particle system $\mid\psi\rangle$ as a linear combination of unperturbed states $\mid\phi_n\rangle$,
+Here we employ a method that is similar to what we have seen in the coherence state section of Part II blog, that is, writing the eigenstates of EM+particle system $$\mid\psi\rangle$$ as a linear combination of unperturbed states $$\mid\phi_n\rangle$$,
 
 $$|\psi\rangle=\sum_{n} c_{n}(t) \exp \left(-\frac{\mathrm{i} E_{n}}{\hbar} t\right)\left|\phi_{n}\right\rangle\tag{6.1},$$
 
@@ -400,7 +400,7 @@ Using (6.1) and (6.2) in the time-dependent Schrodinger equation gives a system 
 
 $$\frac{\mathrm{d} c_{m}(t)}{\mathrm{d} t}=-\frac{\mathrm{i}}{\hbar} \sum_{n} c_{n}(t)\left\langle\phi_{m}\left|\hat{H}_{\mathrm{int}}\right| \phi_{n}\right\rangle \exp \left(\frac{\mathrm{i}\left(E_{m}-E_{n}\right) t}{\hbar}\right)\tag{6.3}.$$
 
-We now let $c_{i0}$ to be the amplitude of the initial state with no photon, while $$c_{f\mathbf{k}\sigma}$$ to be the possible final states' amplitudes. Then (6.3) reads
+We now let $$c_{i0}$$ to be the amplitude of the initial state with no photon, while $$c_{f\mathbf{k}\sigma}$$ to be the possible final states' amplitudes. Then (6.3) reads
 
 $$\begin{aligned}
 \frac{\mathrm{d} c_{i 0}}{\mathrm{d} t} &=-\frac{\mathrm{i}}{\hbar} \sum_{\boldsymbol{k} \sigma}\left\langle i 0\left|\hat{H}_{i n t}\right| f \boldsymbol{k} \sigma\right\rangle \exp \left(\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right) c_{f k \sigma}, \\
@@ -411,11 +411,11 @@ Note that the first equation still contains a sum because the initial state coul
 
 $$c_{i 0}(t)=\exp \left(-\frac{\mathrm{i}}{\hbar} \Delta E_{\mathrm{i}} t\right)\tag{6.5}$$
 
-where $\Delta E_i$ is a constant needed to be determined. Use(6.5) and integrate the second equation of (6.4) from 0 to $t$ to get
+where $$\Delta E_i$$ is a constant needed to be determined. Use(6.5) and integrate the second equation of (6.4) from 0 to $$t$$ to get
 
 $$c_{f k \sigma}(t)=\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}\right| i 0\right\rangle \frac{\exp \left[-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right) t\right]-1}{E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}}\tag{6.6}.$$
 
-We now determine $\Delta E_i$ so that the first equation of (6.4) is satisfied too. Using (6.5) and (6.6) in the first equation of (6.4) we find
+We now determine $$\Delta E_i$$ so that the first equation of (6.4) is satisfied too. Using (6.5) and (6.6) in the first equation of (6.4) we find
 
 $$\begin{aligned}
 &-\frac{\mathrm{i}}{\hbar} \Delta E_{\mathrm{i}} \exp \left(-\frac{\mathrm{i}}{\hbar} \Delta E_{\mathrm{i}} t\right) \\
@@ -443,7 +443,7 @@ $$\begin{aligned}
 &-\mathrm{i} \pi \sum_{k \sigma}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2} \delta\left(E_{\mathrm{i}}+\Delta E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}\right).
 \end{aligned}\tag{6.9}$$
 
-Hence, $\Delta E_i$ is complex-valued. We write the real part and imaginary part separately to find
+Hence, $$\Delta E_i$$ is complex-valued. We write the real part and imaginary part separately to find
 
 $$\begin{array}{l}
 \Re\left(\Delta E_{\mathrm{i}}\right)=\sum_{\boldsymbol{k}, \sigma} \frac{\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2}}{E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega_{k}}, \\
@@ -463,13 +463,13 @@ On the other hand (6.11b) can be recasted into a form of
 
 $$-\frac{2}{\hbar} \Im\left(\Delta E_{\mathrm{i}}\right)=\sum_{k \sigma} \sum_{f} \frac{2 \pi}{\hbar}\left|\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle\right|^{2} \delta\left(E_{\mathrm{i}}-E_{\mathrm{f}}-\hbar \omega\right)\tag{6.12}.$$
 
-Comparing (6.12) with (3.1) we can tell that **the imaginary part of $\Delta E_i$ is directly related to the reciprocal lifetime of initial state,** i.e.
+Comparing (6.12) with (3.1) we can tell that **the imaginary part of $$\Delta E_i$$ is directly related to the reciprocal lifetime of initial state,** i.e.
 
 $$\frac{1}{\tau_{\mathrm{i}}}=\gamma_{\mathrm{i}}=-\frac{2}{\hbar} \Im\left(\Delta E_{\mathrm{i}}\right)\tag{6.13}.$$
 
-Thus, the initial particle state $\mid a_{i}\rangle$ decays with lifetime $\tau .$ **On the same footing the state obtains a level shift $\Re(\Delta E),$ which results from the emission and reabsorption of (virtual) photons**.
+Thus, the initial particle state $$\mid a_{i}\rangle$$ decays with lifetime $$\tau .$$ **On the same footing the state obtains a level shift $$\Re(\Delta E),$$ which results from the emission and reabsorption of (virtual) photons**.
 
-With the calculated $\Delta E_i$ the probability amplitude of finding a final state to be $f$ with wave vector $\mathbf{k}$ and polarization $\sigma$ is then
+With the calculated $$\Delta E_i$$ the probability amplitude of finding a final state to be $$f$$ with wave vector $$\mathbf{k}$$ and polarization $$\sigma$$ is then
 
 $$c_{f k \sigma}(t)=\left\langle f \boldsymbol{k} \sigma\left|\hat{H}_{\mathrm{int}}^{\prime}\right| i 0\right\rangle \frac{\exp \left(-\frac{\mathrm{i}}{\hbar}\left(E_{\mathrm{i}}+\Re\left(\Delta E_{\mathrm{i}}\right)-\hbar \omega_{k}\right) t\right) \exp \left(-\gamma_{\mathrm{i}} t / 2\right)-1}{E_{\mathrm{i}}+\Re\left(\Delta E_{\mathrm{i}}\right)-E_{\mathrm{f}}-\hbar \omega_{k}+(\mathrm{i} / 2) \hbar \gamma_{\mathrm{i}}}\tag{6.14},$$
 

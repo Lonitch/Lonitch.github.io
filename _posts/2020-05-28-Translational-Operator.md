@@ -60,7 +60,7 @@ $$
 A_{IP}(t)=e^{iH_0t/\hbar}Ae^{-iH_0t/\hbar}
 $$
 
-For the Hamiltonian operator itself, the time-independent/solvable part $H_{0,IP}$ is:
+For the Hamiltonian operator itself, the time-independent/solvable part $$H_{0,IP}$$ is:
 
 $$
 H_{0,IP}=e^{iH_0t/\hbar}H_{0}e^{-iH_0t/\hbar}=H_0
@@ -74,7 +74,7 @@ $$
 
 ### Space evolution operator
 
-Just like the time evolution, our quantum states can evolve in the real space also. Let's say we have a state at coordinate x, $$\|x\rangle$$, and we apply a space evolution operator $\hat{T}$ on it to change its coordinate by $\epsilon$:
+Just like the time evolution, our quantum states can evolve in the real space also. Let's say we have a state at coordinate x, $$\|x\rangle$$, and we apply a space evolution operator $$\hat{T}$$ on it to change its coordinate by $$\epsilon$$:
 
 $$
 \hat{T}(\epsilon)|x\rangle=|x+\epsilon\rangle\tag{2}
@@ -90,37 +90,37 @@ $$
 \end{aligned}\tag{3}
 $$
 
-We then multiply (3) with $\|x\rangle$, and notice that $$\langle x\|x^{\prime}\rangle=\delta(x-x^{\prime})$$, we arrive at
+We then multiply (3) with $$\|x\rangle$$, and notice that $$\langle x\|x^{\prime}\rangle=\delta(x-x^{\prime})$$, we arrive at
 
 $$
 \langle x|\hat{T}(\epsilon)|\psi\rangle=\langle x-\epsilon|\psi\rangle=\psi(x-\epsilon)\tag{4}
 $$
 
-Thus, Eq. (4) tells us that the translation operator $$\hat{T}(\epsilon)$$ **transfers the states to their right by $\epsilon$**. In a periodic potential, the energy eigenvalue is also periodic, i.e.
+Thus, Eq. (4) tells us that the translation operator $$\hat{T}(\epsilon)$$ **transfers the states to their right by $$\epsilon$$**. In a periodic potential, the energy eigenvalue is also periodic, i.e.
 
 $$
 E(\mathbf{r+R})=E(\mathbf{r})
 $$
 
-please see the arguments around Eq.(9) below for proof of this. Using what we learned from Eq.(4), the expectation value of Hamiltonian operator $\hat{H}$ is
+please see the arguments around Eq.(9) below for proof of this. Using what we learned from Eq.(4), the expectation value of Hamiltonian operator $$\hat{H}$$ is
 
 $$
 \langle \phi|\hat{H}|\phi\rangle=\langle \phi|\hat{T}^{\dagger}(\mathbf{R})\hat{H}\hat{T}(\mathbf{R})|\phi\rangle\tag{5}
 $$
 
-Since $\mathbf{R}=0$ corresponds to no translation, and $\hat{T}$ must be an unitary operator, we postulate that:
+Since $$\mathbf{R}=0$$ corresponds to no translation, and $$\hat{T}$$ must be an unitary operator, we postulate that:
 
 $$
 \hat{T}(\mathbf{R})=e^{i\mathbf{R}\cdot\hat{G}/\hbar}
 $$
 
-where $\hat{G}$ is called generator operator. We now can derive the format of $\hat{G}$. But first, we need to prove that $\hat{T}$ is Hermitian to make sure it is indeed an "observable". To do so, we use the following equation:
+where $$\hat{G}$$ is called generator operator. We now can derive the format of $$\hat{G}$$. But first, we need to prove that $$\hat{T}$$ is Hermitian to make sure it is indeed an "observable". To do so, we use the following equation:
 
 $$
 \langle x|T^{\dagger}(\epsilon)\hat{T}(\epsilon)|x\rangle=\langle x+\epsilon|x+\epsilon\rangle=1
 $$
 
-Thus,$$\hat{T}^{\dagger}=\hat{T}^{-1}$$, and we just proved that our translational operator is Hermitian. Now we use Eq. (4) and expand it to the first order of $\epsilon$ and get:
+Thus,$$\hat{T}^{\dagger}=\hat{T}^{-1}$$, and we just proved that our translational operator is Hermitian. Now we use Eq. (4) and expand it to the first order of $$\epsilon$$ and get:
 
 $$
 \begin{aligned}
@@ -135,20 +135,20 @@ $$
 \hat{G}=i\hbar\frac{\partial}{\partial r}=-\hat{p}
 $$
 
-that is, $-\hat{G}$ is just momentum operator! In 3D space the form of translational operator is:
+that is, $$-\hat{G}$$ is just momentum operator! In 3D space the form of translational operator is:
 
 $$
 \hat{T}(\mathbf{r})=e^{-i\mathbf{R}\cdot\hat{p}/\hbar}\tag{6}
 $$
 
-Using (6) we can easily prove that $\hat{H}$ commutes with Hamiltonian: $[\hat{H},\hat{T}]=0$. This closes our derivations for time and translation evolution operators. With these operators, we can now dive into the "tight-binding" approach.
+Using (6) we can easily prove that $$\hat{H}$$ commutes with Hamiltonian: $$[\hat{H},\hat{T}]=0$$. This closes our derivations for time and translation evolution operators. With these operators, we can now dive into the "tight-binding" approach.
 
 ## Tight-binding approach
 
 The tight-binding model is one of the earliest models for electrons in periodic potential environment. It assumes that electrons are strongly bounded to the static ions in the lattice, and have limited possibility of hopping between two adjacent ions in a perfect lattice. To explain the basic tight-binding formalism we start with [Bloch's theorem](https://lonitch.github.io/Bravais-lattice-Bloch-theorem) and **tight-binding Hamiltonian** operator to first find the energy eigenstates, and energy eigenvalues. Then we discuss the relationship between the **Fermi surface** and **First Brillouin Zone** (FBZ). The reason we care so much about the energy eigenvalues is that the distribution of energy levels tells intrinsic properties of different materials.
 
 ### "umklapp": flip over in FBZ
-The topic discussed in section is commonly seen in solid state textbook. The "umklapp" of electron momentum vector emphsizes the importance of FBZ and is benefitial for our discussion of Fermi surface later. To understand "umklapp", we recall that from Bloch's theorem, the wavefunction of an electron with momentum $\mathbf{k}$ in periodic potential has a form of:
+The topic discussed in section is commonly seen in solid state textbook. The "umklapp" of electron momentum vector emphsizes the importance of FBZ and is benefitial for our discussion of Fermi surface later. To understand "umklapp", we recall that from Bloch's theorem, the wavefunction of an electron with momentum $$\mathbf{k}$$ in periodic potential has a form of:
 
 $$
 \phi_{\mathbf{k}}(\mathbf{r})=e^{i\mathbf{k\cdot r}}u_{\mathbf{k}}(\mathbf{r})\tag{7}
@@ -163,7 +163,7 @@ $$
 \end{aligned}\tag{8}
 $$
 
-where $\mathbf{K}$ represents vectors connecting points on reciprocal lattice because of the periocity of $V(\mathbf{r})$. Recall that from Schrodinger's equation we have:
+where $$\mathbf{K}$$ represents vectors connecting points on reciprocal lattice because of the periocity of $$V(\mathbf{r})$$. Recall that from Schrodinger's equation we have:
 
 $$
 \left(\frac{-\hbar^2\nabla^2}{2m}+V(\mathbf{r})\right)\phi_{\mathbf{k}}(\mathbf{r})=E\phi_{\mathbf{k}}(\mathbf{r})\tag{9}
@@ -175,7 +175,7 @@ $$
 \frac{-\hbar^2\mathbf{q}^2}{2m}\phi(\mathbf{q})+\sum_{\mathbf{K}}\phi(\mathbf{q-K})V(\mathbf{K})=E\phi(\mathbf{q})\tag{10}
 $$
 
-Notice that the reciprocal vector $\mathbf{q}$ can always be represented by a sum of two vectors with one of them being inside FBZ, i.e.
+Notice that the reciprocal vector $$\mathbf{q}$$ can always be represented by a sum of two vectors with one of them being inside FBZ, i.e.
 
 $$
 \mathbf{q=k+Q}
@@ -187,19 +187,19 @@ $$
 \left(\frac{-\hbar^2\mathbf{|k+Q|}^2}{2m}-E\right)\phi(\mathbf{k+Q})+\sum_{\mathbf{K}}\phi(\mathbf{k+Q-K})V(\mathbf{K})=0\tag{11}
 $$
 
-Eq. (11) implied that the energy eigenvalue $E$ is not changed by translating $\mathbf{k}$ by a reciprocal lattice vector, i.e.
+Eq. (11) implied that the energy eigenvalue $$E$$ is not changed by translating $$\mathbf{k}$$ by a reciprocal lattice vector, i.e.
 
 $$
 E(\mathbf{k+Q})=E(\mathbf{k})
 $$
 
-Eq. (11) also indicated that if the effect of lattice potential is transforming the electron eigenstate from $\mathbf{k}_i$ to $\mathbf{k}_j$, then by following the **von Laue condition** (check [here](https://lonitch.github.io/Bravais-lattice-Bloch-theorem) for more details) we must have 
+Eq. (11) also indicated that if the effect of lattice potential is transforming the electron eigenstate from $$\mathbf{k}_i$$ to $$\mathbf{k}_j$$, then by following the **von Laue condition** (check [here](https://lonitch.github.io/Bravais-lattice-Bloch-theorem) for more details) we must have 
 
 $$
 \mathbf{k_i-k_f=Q_0}
 $$
 
-where $\mathbf{Q}_0$ is the reciprocal lattice vector connecting two nearest neighboring points on reciprocal lattice because $\mathbf{k}_i$ and $\mathbf{k}_f$ are in FBZ. Now, if we let
+where $$\mathbf{Q}_0$$ is the reciprocal lattice vector connecting two nearest neighboring points on reciprocal lattice because $$\mathbf{k}_i$$ and $$\mathbf{k}_f$$ are in FBZ. Now, if we let
 
 $$\mathbf{k}_i=\frac{\mathbf{Q}_0}{2}$$
 
@@ -212,13 +212,13 @@ $$
 Visualize these two vectors on reciprocal lattice, we can tell that the effect of periodic potential in lattice is to flip the electron momentum back to FBZ. And this phenomenon is called "umklapp" in German. With this in mind, let's now turn to the explicit determination of energy eigenvalues in a tight-binding lattice.
 
 ### Tight-binding Hamiltonian
-As we previously mentioned, tight-binding approach assumes limited rate of electron hopping between two adjacent static ions in a perfect lattice. Based on this idea, the relevant Hamiltonian for electrons at $n$th bound state can be written as:
+As we previously mentioned, tight-binding approach assumes limited rate of electron hopping between two adjacent static ions in a perfect lattice. Based on this idea, the relevant Hamiltonian for electrons at $$n$$th bound state can be written as:
 
 $$
 \hat{H}_{tb}=\sum_{\mathbf{R}_i}\epsilon_n|n\mathbf{;R_i}\rangle\langle n\mathbf{;R_i}|-t\sum_{\langle \mathbf{R}_i\mathbf{R}_j\rangle}|n\mathbf{;R_j}\rangle\langle n\mathbf{;R_i}|\tag{12}
 $$
 
-where $$\|n;\mathbf{R}_i\rangle$$ is an electron state at $\mathbf{R}_i$ and $n$th binding energy level. The seond term in (12) represents the hopping event and sums over the nearest neighbors around each location. The $t$ is a hopping parameter, representing the hopping intensity.
+where $$\|n;\mathbf{R}_i\rangle$$ is an electron state at $$\mathbf{R}_i$$ and $$n$$th binding energy level. The seond term in (12) represents the hopping event and sums over the nearest neighbors around each location. The $$t$$ is a hopping parameter, representing the hopping intensity.
 
 The eigenstates to the Hamiltonian (12) can be represented by the so-called "**Wannier states**:
 
@@ -226,7 +226,7 @@ $$
 |n;\mathbf{k}\rangle=\frac{1}{\sqrt{N}} \sum_{\mathbf{R}_{i}} e^{i \mathbf{k} \cdot \mathbf{R}_{i}}\left|n ; \mathbf{R}_{i}\right\rangle\tag{13}
 $$
 
-We can see (13) is really the eigenstate of $\hat{H}$ by checking if it is the eigenstate of $\hat{T}$, because the two operators commute. Using the fact that
+We can see (13) is really the eigenstate of $$\hat{H}$$ by checking if it is the eigenstate of $$\hat{T}$$, because the two operators commute. Using the fact that
 
 $$
 \hat{T}(\mathbf{R})\left|n ; \mathbf{R}_{i}\right\rangle=\left|n ; \mathbf{R}_{i}-\mathbf{R}\right\rangle
@@ -238,7 +238,7 @@ $$
 T(\mathbf{R})|n ; \mathbf{k}\rangle=e^{i \mathbf{k} \cdot \mathbf{R}}|n ; \mathbf{k}\rangle
 $$
 
-which makes the "Wannier states" eigenstates of $\hat{H}_{tb}$. Applying (12) to (13) we have
+which makes the "Wannier states" eigenstates of $$\hat{H}_{tb}$$. Applying (12) to (13) we have
 
 $$
 \begin{aligned}
@@ -246,7 +246,7 @@ H_{tb}|n ; \mathbf{k}\rangle&=E_{n}(\mathbf{k})|n ; \mathbf{k}\rangle\\
 E_{n}(\mathbf{k})&=\epsilon_{n}-t \sum_{\mathbf{R}_{i} \in \mathbf{R}} e^{i \mathbf{k} \cdot \mathbf{R}_{i}}
 \end{aligned}\tag{14}
 $$
-where the sum runs over all nearest neighbors of a given Bravais lattice point $\mathbf{R}$.To derive (14) we put (13) into (12) and make the variable transformation $$\mathbf{R^{\prime}=R_i-R_j}$$ to give
+where the sum runs over all nearest neighbors of a given Bravais lattice point $$\mathbf{R}$$.To derive (14) we put (13) into (12) and make the variable transformation $$\mathbf{R^{\prime}=R_i-R_j}$$ to give
 
 $$
 \begin{aligned}
@@ -256,7 +256,7 @@ H_{tb}|n ; \mathbf{k}\rangle&=\epsilon_n|n ; \mathbf{k}\rangle-t\sum_{\langle R_
 \end{aligned}
 $$
 
-For a one-dimensional lattice with spacing $a$, Eq. (14) becomes
+For a one-dimensional lattice with spacing $$a$$, Eq. (14) becomes
 
 $$
 E_{n}(\mathbf{k})=\epsilon_{n}-2 t \cos k a
@@ -268,7 +268,7 @@ $$
 E_{n}(\mathbf{k})=\epsilon_{n}-2 t\left[\cos k_{x} a+\cos k_{y} a\right]\tag{15}
 $$
 
-With the closed-form of energy eigenvalues, our next task will be finding the region in FBZ that is occupied by electrons' states, or equivalently, what is the surface/line that separates occupied and unoccupied states. For 2D space we find from Eq.(15) that energies are distributed symmetrically around $\epsilon_n$. Thus, $\epsilon_n$ must be the Fermi energy level. The reciprocal lattice points on Fermi surface(lines) therefore satisfy the relation:
+With the closed-form of energy eigenvalues, our next task will be finding the region in FBZ that is occupied by electrons' states, or equivalently, what is the surface/line that separates occupied and unoccupied states. For 2D space we find from Eq.(15) that energies are distributed symmetrically around $$\epsilon_n$$. Thus, $$\epsilon_n$$ must be the Fermi energy level. The reciprocal lattice points on Fermi surface(lines) therefore satisfy the relation:
 
 $$
 E_n(\mathbf{k})=\epsilon_n
