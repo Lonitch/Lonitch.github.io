@@ -5,9 +5,10 @@ date:   2023-08-22 11:35:00
 categories: post
 ---
 
-- [Is Your Function Constant?](#is-your-function-constant)
-- [Quantum Circuit behind Deutsch's Algorithm](#quantum-circuit-behind-deutschs-algorithm)
-- [Extend Deutsch's Algorithm](#extend-deutschs-algorithm)
+- [1. Is Your Function Constant?](#1-is-your-function-constant)
+- [1.1 The Chernoff bound](#11-the-chernoff-bound)
+- [2. Quantum Circuit behind Deutsch's Algorithm](#2-quantum-circuit-behind-deutschs-algorithm)
+- [3. Extend Deutsch's Algorithm](#3-extend-deutschs-algorithm)
 
 The plan for the prequel of qubit has been shelved for a long time, and for a while, there was uncertainty about what to write in the next installment. Upon closer examination, the reason lies in the author's constant daydreaming that they could emulate the way Feynman, several decades ago, seamlessly bridged the logical chain from arithmetic to calculus using just four pages. Could one achieve a similar feat of bridging the logical chain from linear algebra to quantum mechanics in just four pages? At least for now, I cannot. Until I'm capable enough, please allow me to write something of academic value.<!--more-->
 
@@ -44,7 +45,7 @@ t.bindTo([p1, p2]);
 </script> -->
 The Deutsch algorithm can be considered an introductory-level quantum algorithm. Its creation was aimed at demonstrating the indisputable superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch's algorithm and its extended versions.
 
-## Is Your Function Constant?
+## 1. Is Your Function Constant?
 The problems efficiently solvable by the Deutsch algorithm can be described as follows: Given a function $$f(x)$$, if we do not know its explicit expression, how can we determine whether this function always outputs a constant value? The left diagram of <a href="#fig1">Fig 1.</a> represents a simple constant function, where $$f(x) = 1$$ for all values in its domain. The right diagram of <a href="#fig1">Fig 1.</a> represents a balanced function, where $$f(x) = -1$$ when $$x < 0$$, and $$f(x) = 1$$ otherwise.
 <figure class="fullwidth">
 <div id="fig1"></div>
@@ -101,9 +102,44 @@ The problems efficiently solvable by the Deutsch algorithm can be described as f
 </script>
 <figcaption id="fig1">Fig 1. Two function types</figcaption>
 </figure>
-In every paper of quantum algorithm, it always starts with how classical computer would solve a problem. Here we take the same route just to fool people that classical algorithms are dumb. We then explain that they are not unbearably bad, just polynomially slower than the quantum algorithm. Without losing the generality, let's first focus on a function $$f(x)$$ whose input $$x$$ is an integer in a range $$(-N,N)$$, with $$N$$ being an arbitrary number. Classically, We check if such a function is constant or not by evaluating the function N+1 times. If the evaluated values are all identical, it's a constant function. Deutsch's algorithm achieves this by ensuring a specific quantum state's probability becomes unity while excluding other possibilities, as we'll see.
+In every paper of quantum algorithm, scholars always start with a discussion of how classical computer would solve a problem. Here we take the same route just to fool people that classical algorithms are dumb. We then explain that they are not unbearably bad, just polynomially slower than the quantum algorithm. Without losing the generality, let's first focus on a function $$f(x)$$ whose input $$x$$ is an integer in a range $$(-N,N)$$, with $$N$$ being an arbitrary number. Classically, We check if such a function is constant or not by evaluating the function N+1 times. If the evaluated values are all identical, it's a constant function. Deutsch's algorithm achieves this by ensuring a specific quantum state's probability becomes unity while excluding other possibilities, as we'll see.
 
-The classical method above is never used in real life. Instead, we usually want to keep the probability of guessing the wrong function type to a small value, $$\epsilon$$. {% sidenote 'sd-1' 'the $$\epsilon$$ here can be very small.'%}In the case above, we need to evaluate the function $$(1-\epsilon)N$$ times so that the possiblity of guessing wrong is no higher than $$\epsilon$$. Thus, the problem described here has a complexity of $$O(N)$$.
-## Quantum Circuit behind Deutsch's Algorithm
+## 1.1 The Chernoff bound
+The classical method above is never used in real life as it's usually hard to enumerate all possible inputs for discrete or continuous functions. Instead, we want to keep the probability of guessing the wrong function type to a low level, $$\epsilon$${% sidenote 'sd-0' 'the $$\epsilon$$ here should be diminishingly small.'%}. In the case above, we have a function producing non-deterministic binary output $$f(x_i)$$, and we're facing a decision problem, i.e., how probable we will guess the function type wrong after $$k\ll N/2+1$$ function evaluation? Let's assume, without any loss of generality, that the correct answer is $$f_i=1$$ if $$f(x_i)=1$$(constant function), and $$f_i=0$$ otherwise. After k evaluations by randomly choosing $$\{x_0,x_1,...,x_k\}$$, the majority voting fails when $$s_k=\sum_i^k f_i<k$$. {% sidenote 'sd-1' 'we need only one wrong answer to tell the function is not constant'%} There are $$C^q_k$$ k-sequences $$\{f_1,f_2,...,f_k\}$$ that have $$q$$ correct answers, and
 
-## Extend Deutsch's Algorithm
+$$
+p(s_k=q)=C^q_k(1/2+\delta)^q(1/2-\delta)^{k-q},
+$$ 
+
+in which $$p(f_i=1)=\frac{1}{2}+\delta$$ and $$p(f_i=0)=\frac{1}{2}-\delta$$.{% sidenote 'sd-2' 'we introduce $$\delta$$ here for the sake of generality. Note that for a balanced function $$\delta=0$$, and $$\delta=1/2$$ for constant function. Any other function type will have its $$\delta\in(0,1/2)$$.'%} It is clear that $$p(s_k=q)$$ follows [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) and the expectation value $$E(s_k)=k(1/2+\delta)$$. Therefore, the most probable $$s_k$$ that yields a failed majority voting should be as close to $$k(1/2+\delta)$$ as possible. However, we don't know how to choose $$\delta$$ as the explicit expression of $$f(x)$$ is unknow to us. An educated guess could be $$\delta\cong 0$$, that is, assuming that correct or wrong answers are **almost equally possible**. If we take such an assumption, then each $$\{f_1,f_2,...,f_k\}$$ with its $$s_k=k/2$$ can occur with the probability
+<div id='eqn1'></div>
+
+$$
+p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.\tag{1}
+$$
+
+Since there are $$2^k$$ possible squences $$\{f_1,f_2,...,f_k\}$$, we can conclude from <a href="#eqn1">Eqn 1.</a> that 
+<div id='eqn2'></div>
+
+$$
+p(s_k\leq k-1)<2^k(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}=(1-4\delta^2)^{k/2}, \tag{2}
+$$
+
+Note that $$1-x\leq \exp(-x)$$, we obtain the **Chernoff bound**:
+
+$$
+p(s_k\leq k-1)<\exp(-2\delta^2k).
+$$
+
+Let $$\epsilon=p(s_k\leq k-1)$$, we have the error drops below $$\epsilon$$ when the number of function evaluations,
+
+$$
+k>\frac{1}{2\delta^2}\ln(\frac{1}{\epsilon}).
+$$
+
+
+ $$p(s_k\leq k-1)$$ is simply the function $$(1-\epsilon)N$$ times so that the possiblity of guessing wrong is no higher than $$\epsilon$$. Thus, the problem described here has a classical complexity of $$O(\ln(1/\epsilon))$$.
+ 
+## 2. Quantum Circuit behind Deutsch's Algorithm
+
+## 3. Extend Deutsch's Algorithm
