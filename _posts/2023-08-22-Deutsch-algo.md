@@ -12,14 +12,6 @@ categories: post
 - [2. Quantum Circuit behind Deutsch's Algorithm](#2-quantum-circuit-behind-deutschs-algorithm)
 - [3. Extend Deutsch's Algorithm](#3-extend-deutschs-algorithm)
 
-
-<!-- <ul class="toc">
-  <li><a href="#1-is-your-function-constant">1. Is Your Function Constant?</a></li>
-  <li><a href="#11-the-chernoff-bound-and-exponential-envelope">1.1 The Chernoff bound and exponential envelope</a></li>
-  <li><a href="#2-quantum-circuit-behind-deutschs-algorithm">2. Quantum Circuit behind Deutsch's Algorithm</a></li>
-  <li><a href="#3-extend-deutschs-algorithm">3. Extend Deutsch's Algorithm</a></li>
-</ul> -->
-
 The Deutsch algorithm can be considered an introductory-level quantum algorithm. Its creation was aimed at demonstrating the indisputable superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch's algorithm and its extended versions.
 
 ## 1. Is Your Function Constant?
@@ -58,15 +50,13 @@ $$
 p(s_k=q)=C^q_k(1/2+\delta)^q(1/2-\delta)^{k-q},
 $$ 
 
+
 in which $$p(f_i=1)=\frac{1}{2}+\delta$$ and $$p(f_i=0)=\frac{1}{2}-\delta$$.{% sidenote 'sd-2' 'we introduce $$\delta$$ here for the sake of generality. Note that for a balanced function $$\delta=0$$, and $$\delta=1/2$$ for constant function. Any other function type will have its $$\delta\in(0,1/2)$$.'%} It is clear that $$p(s_k=q)$$ follows [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) and the expectation value $$E(s_k)=k(1/2+\delta)$$. Therefore, the most probable $$s_k$$ that yields a failed majority voting should be as close to $$k(1/2+\delta)$$ as possible. However, we don't know how to choose $$\delta$$ as the explicit expression of $$f(x)$$ is unknow to us. An educated guess could be $$\delta\cong 0$$, that is, assuming that correct or wrong answers are **almost equally possible**. If we take such an assumption, then each $$\{f_1,f_2,...,f_k\}$$ with its $$s_k=k/2$$ can occur with the probability
-<div id='eqn1'></div>
 
-$$
-p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.\tag{1}
-$$
+{%eqn 'p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.' 'psk'%}
 
-Since there are $$2^k$$ possible squences $$\{f_1,f_2,...,f_k\}$$, we can conclude from <a href="#eqn1">Eqn 1.</a> that the possibility of guessing function type wrong after $$k$$ evaluations is
-<div id='eqn2'></div>
+Since there are $$2^k$$ possible squences $$\{f_1,f_2,...,f_k\}$$, we can conclude from <a href="#eqn-1">Eqn 1.</a> that the possibility of guessing function type wrong after $$k$$ evaluations is {ref 'div' 'psk'}
+
 
 $$
 p(s_k\leq k-1)<2^k(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}=(1-4\delta^2)^{k/2}, \tag{2}

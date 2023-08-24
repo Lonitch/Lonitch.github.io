@@ -6,3 +6,29 @@ layout: default
 
 {{ content }}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var content = document.body.innerHTML;
+      var regex = /\{ref[^}]*\}/g;
+      var matches = content.match(regex);
+    
+      if (matches) {
+            matches.forEach(function(match) {
+            var parts = match.match(/'([^']+)'/g);
+            if (parts && parts.length >= 2) {
+                var referenceText = parts[0].slice(1, -1); // Remove single quotes
+                var elementId = parts[1].slice(1, -1); // Remove single quotes
+                
+                var referencedElement = document.getElementById(elementId);
+                if (referencedElement) {
+                var count = referencedElement.getAttribute("count");
+                var link = "<a href='#" + elementId + "'>Reference " + count + ": " + referenceText + "</a>";
+                content = content.replace(match, link);
+                }
+            }
+            });
+        }
+
+    document.body.innerHTML = content;
+    });
+</script>
