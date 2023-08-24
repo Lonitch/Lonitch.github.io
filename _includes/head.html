@@ -39,7 +39,19 @@
 
   <link rel="stylesheet" type="text/css" href="{{ "/css/tufte.css" | prepend: site.baseurl }}">
   <!-- <link rel="stylesheet" type="text/css" href="{{ "/css/print.css" | prepend: site.baseurl }}" media="print"> -->
-
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
