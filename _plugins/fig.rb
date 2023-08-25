@@ -23,23 +23,23 @@ module Jekyll
         baseurl = context.registers[:site].config['baseurl']
         if @text[0] == 'img'
             if @text.length == 5
-                renderType, figType, link, cap, figId = @text[0], @text[1], @text[2], @text[3], @text[4]
+                renderType, figType, link, cap, figId = @text[0], @text[1], @text[2], @text[3].gsub('\\', '\\\\'), @text[4]
             elsif @text.length == 4
-                renderType, figType, link, cap = @text[0], @text[1], @text[2], @text[3]
-                figId = "fig-#{@@fig_count}"
+                renderType, link, cap, figId = @text[0], @text[1], @text[2].gsub('\\', '\\\\'), @text[3]
+                figType = "marginnote"
             elsif @text.length == 3
-                renderType, link, cap = @text[0], @text[1], @text[2]
+                renderType, link, cap = @text[0], @text[1], @text[2].gsub('\\', '\\\\')
                 figType = "marginnote"
                 figId = "fig-#{@@fig_count}"
             end
         else
             if @text.length == 4
-                renderType, figType, cap, figId = @text[0], @text[1], @text[2], @text[3]
+                renderType, figType, cap, figId = @text[0], @text[1], @text[2].gsub('\\', '\\\\'), @text[3]
             elsif @text.length == 3
-                renderType, figType, cap = @text[0], @text[1], @text[2]
-                figId = "fig-#{@@fig_count}"
+                renderType, cap, figId = @text[0], @text[1].gsub('\\', '\\\\'), @text[2]
+                figType = "marginnote"
             elsif @text.length == 2
-                renderType, cap = @text[0], @text[1], @text[2]
+                renderType, cap = @text[0], @text[1].gsub('\\', '\\\\')
                 figType = "marginnote"
                 figId = "fig-#{@@fig_count}"
             end
@@ -54,9 +54,9 @@ module Jekyll
 
         if renderType == 'jsx'
             if figType == 'fullwidth'
-                "<div id='#{figId}' render_count='#{@@fig_count}' class='jxgbox shadow' style='aspect-ratio: 2 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
+                "<div id='#{figId}' class='jxgbox shadow' render_count='#{@@fig_count}' style='aspect-ratio: 2 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
             else
-                "<div id='#{figId}' render_count='#{@@fig_count}' class='jxgbox shadow marginnote' style='aspect-ratio: 1 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
+                "<div id='#{figId}' class='jxgbox shadow marginnote' render_count='#{@@fig_count}' style='aspect-ratio: 1 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
             end
         else
             if figType == 'fullwidth'

@@ -129,7 +129,7 @@ p .subtitle { font-style: italic;
 p, ol, ul { font-size: 1.18rem; }
 
 /* Add ToC title before the first list */
-article {
+article.group {
   > ul:first-of-type::before {
     content: "Table of Contents"; 
     font-weight: bold;

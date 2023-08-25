@@ -13,16 +13,17 @@ layout: default
     
       if (refs) {
             refs.forEach(function(ref) {
-                var refId = ref.getAttribute("id");
+                var refId = ref.getAttribute("fig")||ref.getAttribute("eqn");
+
                 divs.forEach(function(div) {
                     var divId = div.getAttribute("id");
                     if (divId==refId){
                         var count = div.getAttribute("render_count");
                         var link = document.createElement("a");
                         link.href = "#" + divId;
-                        if (divId.toLowerCase().includes('eqn')){
+                        if (ref.hasAttribute('eqn')){
                             link.textContent = "Eqn. " + count;
-                        } else if(divId.toLowerCase().includes('fig')){
+                        } else if(ref.hasAttribute('fig')){
                             link.textContent = "Fig. " + count;
                         } else{
                             link.textContent = divId;
