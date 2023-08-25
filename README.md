@@ -26,7 +26,7 @@ The information in this section explains how to make a customized copy of this p
 - Please edit the ```_sass/_settings.scss``` file if you want to customize base styles.
 - Use the ```_data/social.yml``` file to put in your own information for the footer links
 
-## Latex-like Elements
+## LaTeX-like Elements
 You can take a look at the posts created recently in the `_post` folder to learn how to use the classes introduced here. The general principles are:
 
 - Jekyll Liquid tag is employed for things that require display environments. This includes images, interactive graphs, equations with indices, and possibly animations.
@@ -115,5 +115,6 @@ Perhaps the most unique feature of the Tufte style is its sidenotes and marginno
 {%marginnote 'note content'%}
 ```
 
-
-
+## Q.js applications
+### Quantum gates
+### Quantum circuit
