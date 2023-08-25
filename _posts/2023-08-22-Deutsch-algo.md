@@ -46,58 +46,43 @@ In every paper of quantum algorithm, scholars always start with a discussion of 
 ### 1.1 The Chernoff bound and exponential envelope
 The classical method above is never used in real life as it's usually hard to enumerate all possible inputs for discrete or continuous functions. Instead, we want to keep the probability of guessing the wrong function type to a low level, $$\epsilon$${% sidenote 'sd-0' 'the $$\epsilon$$ here should be diminishingly small.'%}. In the case above, we have a function producing non-deterministic binary output $$f(x_i)$$, and we're facing a decision problem, i.e., how probable we will guess the function type wrong after $$k\ll N/2+1$$ function evaluation? Let's assume, without any loss of generality, that the correct answer is $$f_i=1$$ if $$f(x_i)=1$$(constant function), and $$f_i=0$$ otherwise. With this assumption, the question becomes: **what is the possibility of the k evaluations telling me that the function is not constant?** After k evaluations by randomly choosing $$\{x_0,x_1,...,x_k\}$$, the majority voting fails when $$s_k=\sum_i^k f_i<k$$. {% sidenote 'sd-1' 'we need only one wrong answer to tell the function is not constant'%} There are $$C^q_k$$ k-sequences $$\{f_1,f_2,...,f_k\}$$ that have $$q$$ correct answers, and the probability of $$s_k=q$$ is
 
-$$
-p(s_k=q)=C^q_k(1/2+\delta)^q(1/2-\delta)^{k-q},
-$$ 
-
+{%eqn 'p(s_k=q)=C^q_k(1/2+\delta)^q(1/2-\delta)^{k-q},'%}
 
 in which $$p(f_i=1)=\frac{1}{2}+\delta$$ and $$p(f_i=0)=\frac{1}{2}-\delta$$.{% sidenote 'sd-2' 'we introduce $$\delta$$ here for the sake of generality. Note that for a balanced function $$\delta=0$$, and $$\delta=1/2$$ for constant function. Any other function type will have its $$\delta\in(0,1/2)$$.'%} It is clear that $$p(s_k=q)$$ follows [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) and the expectation value $$E(s_k)=k(1/2+\delta)$$. Therefore, the most probable $$s_k$$ that yields a failed majority voting should be as close to $$k(1/2+\delta)$$ as possible. However, we don't know how to choose $$\delta$$ as the explicit expression of $$f(x)$$ is unknow to us. An educated guess could be $$\delta\cong 0$$, that is, assuming that correct or wrong answers are **almost equally possible**. If we take such an assumption, then each $$\{f_1,f_2,...,f_k\}$$ with its $$s_k=k/2$$ can occur with the probability
 
-{%eqn 'p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.' 'psk'%}
+{%eqn 'p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.' 'eqn-psk'%}
 
-Since there are $$2^k$$ possible squences $$\{f_1,f_2,...,f_k\}$$, we can conclude from <a href="#eqn-1">Eqn 1.</a> that the possibility of guessing function type wrong after $$k$$ evaluations is {ref 'div' 'psk'}
+Since there are $$2^k$$ possible squences $$\{f_1,f_2,...,f_k\}$$, we can conclude from <ref id='eqn-psk'/> that the possibility of guessing function type wrong after $$k$$ evaluations is
 
-
-$$
-p(s_k\leq k-1)<2^k(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}=(1-4\delta^2)^{k/2}, \tag{2}
-$$
+{% eqn 'p(s_k\leq k-1)<2^k(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}=(1-4\delta^2)^{k/2},' 'eqn-psk-leq-k-1'%}
 
 Note that $$1-x\leq \exp(-x)$$, we obtain the **Chernoff bound**:
 
-$$
-p(s_k\leq k-1)<\exp(-2\delta^2k).
-$$
+{% eqn 'p(s_k\leq k-1)<\exp(-2\delta^2k).'%}
 
 Let $$\epsilon=p(s_k\leq k-1)$$, we have the error drops below $$\epsilon$$ when the number of function evaluations exceeds the following limit:
 
-$$
-k>\frac{1}{2\delta^2}\ln(\frac{1}{\epsilon}).
-$$
+{% eqn 'k>\frac{1}{2\delta^2}\ln(\frac{1}{\epsilon}).' %}
 
 Thus, the problem described here has a classical complexity of $$O(\ln(1/\epsilon))$$.
 
 There is a another way to calculate the classical complexity using the exponential envolop of $$p(s_k\leq k-1)$$.{%sidenote 'sn-3' 'this discussion is for people(including me) who are not comfortable with the assumed value of $$\delta$$ above'%} Because there is only one sequence that has $$s_k=k$$ with $$\{f_1,f_2,...f_k\}=\{1,1,...,1\}$$, we have the probability of such a sequence being
 
-$$
-p(s_k=k)=(\frac{1}{2}+\delta)^k
-$$
+{% eqn 'p(s_k=k)=(\frac{1}{2}+\delta)^k'%}
 
 and hence,
 
-$$
-p(s_k\leq k-1)=1-p(s_k=k)=1-(\frac{1}{2}+\delta)^k<e^{-k\delta^3}
-$$
+
+{% eqn 'p(s_k\leq k-1)=1-p(s_k=k)=1-(\frac{1}{2}+\delta)^k<e^{-k\delta^3}' %}
 
 where the last inequality gives an exponential envelope for $$p(s_k\leq k-1)$$. Repeat the analysis above, we have
-<div id="eqn3"></div>
 
-$$
-\epsilon<e^{-k\delta^3}\rightarrow k>\frac{1}{\delta^3}\ln(1/\epsilon),\tag{3}
-$$
+{% eqn '\epsilon<e^{-k\delta^3}\rightarrow k>\frac{1}{\delta^3}\ln(1/\epsilon)' 'eqn-envelop'%}
 
-giving the same classical complexity as the Chernoff bound. <a href="#fig2">Fig 2.</a> below shows how $$p(s_k\leq k-1)$$, Chernoff bound, and the exponential envelope in <a href="#eqn3">Eqn. 3.</a> vary with the $$\delta$$. As we increase the $$k$$ value, the Chernoff bound breaks at $$\lfloor k\rfloor>3$$, and the envelope breaks as well when $$\lfloor k\rfloor\geq8$$. In summary, both bounds hold for the full range of $$\delta\in(0,1/2)$$ when limited function evaluations are performed.
+giving the same classical complexity as the Chernoff bound. <a href="#fig2">Fig 2.</a> below shows how $$p(s_k\leq k-1)$$, Chernoff bound, and the exponential envelope in <ref id='eqn-envelop'/> vary with the $$\delta$$. As we increase the $$k$$ value, the Chernoff bound breaks at $$\lfloor k\rfloor>3$$, and the envelope breaks as well when $$\lfloor k\rfloor\geq8$$. In summary, both bounds hold for the full range of $$\delta\in(0,1/2)$$ when limited function evaluations are performed.
 
 <div id="fig2" class="jxgbox shadow" style="aspect-ratio: 2 / 1; width: 70%; user-select: none; overflow: hidden; position: relative; touch-action: none;"></div>
+{%marginnote 'figcap2' 'Fig. 2 Interactive plot of $$p(s_k\leq k-1)$$, Chernoff bound, and exponential envelope varying with $$\delta$$. Use the slider to see how the $$p(s_k\leq k-1)$$ goes above the two bounds as k increases.'%}
 <script>
   JXG.Options.text.useMathJax = true;
   const board2 = JXG.JSXGraph.initBoard("fig2", {
@@ -130,7 +115,8 @@ color:'blue',straightFirst:false, straightLast:false});
 board2.create('text',[1.45,0.4,"\\[1-(1/2+\\delta)^k\\]"],{color:'blue',fontSize:14});
 </script>
 
-{%marginnote 'figcap2' 'Fig. 2 Interactive plot of $$p(s_k\leq k-1)$$, Chernoff bound, and exponential envelope varying with $$\delta$$. Use the slider to see how the $$p(s_k\leq k-1)$$ goes above the two bounds as k increases.'%}<a href="#fig2">Fig 2.</a> wraps up our problem statement in the context of classical computation. Next we will quickly go through some basics of quantum gates and draft the first quantum circuit for solving the problem here.
+<a href="#fig2">Fig 2.</a> wraps up our problem statement in the context of classical computation. Next we will quickly go through some basics of quantum gates and draft the first quantum circuit for solving the problem here.
+
 ## 2. Quantum Circuit behind Deutsch's Algorithm
 Transistors give rise to logic circuits by regulating the flow of electric current through varying voltage levels, so the binary states, 1 and 0, are represented physically by voltage levels. Because the voltage is always controllable by logic gates, signals passing through the logic circuit are deterministic. Quantum circuit, on the other hand, is never deterministic as its basic unit is "qubit", the quantum counterpart of the classical "bit". Qubits are physical realizations of quantum two-state systems.{% marginfigure 'mf-1' 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Schrodingers_cat.svg/1024px-Schrodingers_cat.svg.png' 'Schrodinger’s cat on Wikipedia' %} For people who are not familiar with quantum mechanics, you can think of qubit as a blackbox containing Schrodinger's cat and . We can only know if the cat is dead or alive by opening the box. Here, dead and alive are the two "**quantum states**"{%sidenote 'sn-5' 'here we use Dirac notation to represent quantum states. In this case, the cat has two possible states:$$\ket{alive}$$ or $$\ket{dead}$$'%}, and the behavior of opening box is our "**measurement**" of the cat's states{%sidenote 'sn-6' 'for now, let’s naively use the following notation to represent the measurement:$$\bra{M}$$'%}. Before the "measurement", the cat can either be dead or alive. Such a state uncertainty is captured by the concept of **superposition**. We can use Dirac representation to represent superposition in this case as $$\ket{alive}+\ket{dead}$$. At the moment of opening the blackbox, we apply the "measurement" to the superposed state, $$\bra{M}(\ket{alive}+\ket{dead})$$, which results in  $$\ket{alive}$$ if the cat jumps out of the box, or $$\ket{dead}$$ if the cat stays there forever.
 
