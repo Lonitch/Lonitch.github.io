@@ -1,6 +1,6 @@
 ---
 layout: post
-title: $$\langle\frac{\partial^2}{\partial x^2}\rangle$$ Derived from Path Integral
+title: Derive $\langle\frac{\partial^2}{\partial x^2}\rangle$ with Path Integral
 date: 2021-02-24
 Author: Sizhe
 tags: [notes, quantum-mechanics, path-integral]

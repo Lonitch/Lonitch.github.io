@@ -5,8 +5,5 @@ permlink: /about/
 ---
 
 <p>
-  Hey there! This is Sizhe Liu. Glad to E-meet you!
+  Hey there! Glad to E-meet you! Hope you find something useful here.
 </p>
-
-
-Thanks for reading my blogs!

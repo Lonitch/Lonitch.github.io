@@ -644,9 +644,9 @@ Object.assign( Q.Circuit.prototype, {
 			return text +'\n'
 				+ ( i + 1 ).toString().padStart( Math.ceil( Math.log10( Math.pow( 2, circuit.qubits.length ))), ' ' ) +'  '
 				+ outcome.state +'  '
-				+ ''.padStart( probabilityPositive, '█' )
-				+ ''.padStart( probabilityNegative, '░' )
-				+ Q.round( Math.round( 100 * outcome.probability ), 8 ).toString().padStart( 4, ' ' ) +'% chance'
+				+ ''.padStart( probabilityPositive, '=')//'█' )
+				+ ''.padStart( probabilityNegative, '|')//'░' )
+				+ Q.round( Math.round( 100 * outcome.probability ), 8 ).toString().padStart( 4, ' ' ) +'%'
 
 		}, '' ) + '\n'
 		return text
@@ -1006,7 +1006,7 @@ because there’s another stand-alone X there tripping the logic!!!
 
 			const y3 = q * 3
 			output[ y3 + 1 ] += '        '
-			output[ y3 + 2 ] += 'r'+ ( q + 1 ) +'  |'+ qubit.beta.toText().trim() +'⟩─'
+			output[ y3 + 2 ] += 'q'+ ( q + 1 ) +'  |'+ qubit.beta.toText().trim() +'⟩─'
 			output[ y3 + 3 ] += '        '
 		})
 		for( let x = 0; x < table.timewidth; x ++ ){
@@ -2033,3 +2033,17 @@ Q.Circuit.createConstants(
 
 
 
+// helper functions
+eval_draw = function(qc, qc_id, use_palette){
+	if(!use_palette){
+		qc.setName$( qc_id )
+		qc.evaluate$()
+		var canvas = document.getElementById(qc_id)
+		diagram = qc.toDiagram().replace(/^\n+/, "")
+		canvas.textContent = diagram
+	}else{
+		qc.setName$(qc_id)
+		.toDom(qc_id)
+		.circuit.evaluate$()
+	}
+}

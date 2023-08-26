@@ -32,6 +32,17 @@ module Jekyll
                 figType = "marginnote"
                 figId = "fig-#{@@fig_count}"
             end
+        elsif @text[0]== 'qc'
+            if @text.length == 4
+                renderType, cap, use_palette, figId = @text[0], @text[1], @text[2]=='palette', @text[3]
+            elsif @text.length == 3
+                renderType, cap, use_palette= @text[0], @text[1], @text[2]=='palette'
+                figId = "fig-#{@@fig_count}"
+            elsif @text.length == 2
+                renderType, cap= @text[0], @text[1]
+                use_palette=false
+                figId = "fig-#{@@fig_count}"
+            end
         else
             if @text.length == 4
                 renderType, figType, cap, figId = @text[0], @text[1], @text[2].gsub('\\', '\\\\'), @text[3]
@@ -58,7 +69,13 @@ module Jekyll
             else
                 "<div id='#{figId}' class='jxgbox shadow marginnote' render_count='#{@@fig_count}' style='aspect-ratio: 1 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
             end
-        else
+        elsif renderType == 'qc'
+            if use_palette
+                "<div class='Q-circuit-palette'></div><div class='qc-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='margin-right: 10%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
+            else
+                "<div class='qc-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
+            end
+        elsif renderType == 'img'
             if figType == 'fullwidth'
                 if link.start_with?('http://', 'https://','//')
                 "<figure id='#{figId}' render_count='#{@@fig_count}' class='fullwidth'><img src='#{link}'/><br><figurecaption>Fig. #{@@fig_count} #{cap}</figurecaption></figure>"

@@ -46,7 +46,7 @@ To add a new equation with a numbered tag(automatically ordered), you can do the
 which will create a `div` element that wraps the equation. Note that if the last argument is omitted, the `id` of `<div>` is automatically set as `eqn-x`, in which `x` is a post-wise count of equation rendering.
 
 ### Images
-So far we only support two rendering types: static `img` and dynamic `jsx` graph. For each rendering type you can set the figure type as `fullwidth` or `marginnote`. Like the display equation, defining image id is not required but it is recommended to give your images meaningful IDs. Here image ID is defined by default as `fig-x`.  Finally, you're required to define its caption.
+So far we only support three rendering types: static `img`, dynamic `jsx` graph, and quantum circuit diagram `qc`. For each rendering type you can set the figure type as `fullwidth` or `marginnote`. Like the display equation, defining image id is not required but it is recommended to give your images meaningful IDs. Here image ID is defined by default as `fig-x`.  Finally, you're required to define its caption.
 
 To show a static image, please use the following two commands in your markdown:
 
@@ -58,7 +58,7 @@ To show a static image, please use the following two commands in your markdown:
 <!-- margin image with automatic id definition -->
 {%fig `img` `url/to/your/img` `dumb figure caption`%}
 ```
-If you need to add a methematical graph, then please follow the conventions below:
+If you need to add a mathematical graph, then please follow the conventions below:
 
 ```html
 <!-- fullwidth graph -->
@@ -95,14 +95,43 @@ board.create('line', [[1,0.8],[1.4,0.8]],
 
 When you have multiple `jsx` graphs in one post, it is required to assign returned values of `JXG.JSXGraph.initBoard` to `const` variables of distinct names.
 
+For quantum circuits, we only provide one figure type: fullwidth circuit diagram with its title and probability distribution in a marginnote. To show preformatted diagram, you can use the following syntax:
+
+```html
+{%fig 'qc' 'circuit caption' 'no_palette' 'qc-dumb-id'%}
+<script>
+qc=Q`
+      I H I 
+`
+eval_draw(qc,'qc-dumb-id',use_palette=false)
+</script>
+```
+
+The example `<script>` above defines a simple circuit using the string of 
+```js
+qc=Q`
+    I H I
+`
+```
+which has one qubit(one row) to which a identity gate, a Hadamard, and another idensity gate are applied. The last command in `<script>` above tells Q.js to draw diagram in a `<div>` with its ID being `qc-dumb-id`. Also, it turns down the interactive palette. The palette is a simple web-GUI for you to change circuit cnfiguration. And change made in the circuit will update its probability distribution, which will reflect right below the circuit caption in real time. You can turn on the palette using the syntax below:
+```html
+{%fig 'qc' 'circuit caption' 'palette' 'qc-dumb-id'%}
+<script>
+qc=Q`
+      I H I 
+`
+eval_draw(qc,'qc-dumb-id',use_palette=true)
+</script>
+```
+
 ### Create references
 For big fans of Latex, the lack of references in MD documents is unfortunate. Here we provide a simple solution by adding `<ref/>` flags at the places where you need to refer to figures or equations. However, **please Do NOT use the flag at the beginning of a paragraph. It will breaks the format.** To refer to a figure, please use
 ```html
-<ref fig='dumb-fig-id'>
+<ref fig='dumb-fig-id'/>
 ```
 which create a link to the figure with its ID being `dumb-fig-id`. Both `jsx` graphs and `img` pictures can be referred this way. To refer to an equation, simply use the following.
 ```html
-<ref eqn='dumb-eqn-id'>
+<ref eqn='dumb-eqn-id'/>
 ```
 Note that this only supports the equations created by the `eqn` plugin introduced above.
 
@@ -114,7 +143,3 @@ Perhaps the most unique feature of the Tufte style is its sidenotes and marginno
 <!-- marginnode -->
 {%marginnote 'note content'%}
 ```
-
-## Q.js applications
-### Quantum gates
-### Quantum circuit

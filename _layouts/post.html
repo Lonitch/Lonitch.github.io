@@ -3,11 +3,43 @@ layout: default
 ---
 <h1>{{ page.title}}</h1>
 <p class="subtitle">{{ page.date | date: "%B %-d, %Y" }}</p>
+<script>
+window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
+    const circuit = event.detail.circuit
+    if( circuit.name !== undefined ){
+        const el = document.getElementById( circuit.name +'-report' )
+        if( el ) {
+            var divChildren = el.querySelectorAll("div");
+            divChildren.forEach(function(divChild) {
+                el.removeChild(divChild);
+            });
+            lines = circuit.report$().replace(/^\n+/, "").split('\n')
+            lines.forEach(function(line) {
+                var lineElement = document.createElement("div");
+                lineElement.textContent = line;
+                el.appendChild(lineElement);
+            });
+
+            // el.innerText = circuit.report$().replace(/^\n+/, "")
+        }
+    }
+})
+window.addEventListener( 'Q gui altered circuit', function( event ){
+    event.detail.circuit.evaluate$()
+})
+</script>
 
 {{ content }}
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
+        Array
+        .from( document.querySelectorAll( '.Q-circuit-palette' ))
+        .forEach( function(el){
+            Q.Circuit.Editor.createPalette(el)
+    })
+
         var divs = document.querySelectorAll("div[render_count]");
         var refs = document.querySelectorAll("ref");
     

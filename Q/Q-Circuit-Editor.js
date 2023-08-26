@@ -349,10 +349,10 @@ Q.Circuit.Editor = function( circuit, targetEl ){
 
 	const referenceEl = document.createElement( 'p' )
 	circuitEl.appendChild( referenceEl )
-	referenceEl.innerHTML = `
-		This circuit is accessible in your 
-		<a href="https://quantumjavascript.app/#Open_your_JavaScript_console" target="_blank">JavaScript console</a>
-		as <code>document.getElementById('${ this.domId }').circuit</code>`
+	// referenceEl.innerHTML = `
+	// 	This circuit is accessible in your 
+	// 	<a href="https://quantumjavascript.app/#Open_your_JavaScript_console" target="_blank">JavaScript console</a>
+	// 	as <code>document.getElementById('${ this.domId }').circuit</code>`
 	//document.getElementById('Q-Editor-0').circuit
 	//$('#${ this.domId }')
 
