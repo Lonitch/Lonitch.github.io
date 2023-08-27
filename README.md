@@ -113,7 +113,7 @@ qc=Q`
     I H I
 `
 ```
-which has one qubit(one row) to which a identity gate, a Hadamard, and another idensity gate are applied. The last command in `<script>` above tells Q.js to draw diagram in a `<div>` with its ID being `qc-dumb-id`. Also, it turns down the interactive palette. The palette is a simple web-GUI for you to change circuit cnfiguration. And change made in the circuit will update its probability distribution, which will reflect right below the circuit caption in real time. You can turn on the palette using the syntax below:
+which has one qubit(one row) to which a identity gate, a Hadamard, and another idensity gate are applied. The last command in `<script>` above tells Q.js to draw diagram in a `<div>` with its ID being `qc-dumb-id`. Also, it turns down the interactive palette. The palette is a simple web-GUI for you to change circuit cnfiguration. And change made in the circuit will modify its probability distribution, which is updated right below the circuit caption in real time. You can turn on the palette using the syntax below:
 ```html
 {%fig 'qc' 'circuit caption' 'palette' 'qc-dumb-id'%}
 <script>
@@ -123,6 +123,7 @@ qc=Q`
 eval_draw(qc,'qc-dumb-id',use_palette=true)
 </script>
 ```
+Notice how the `no_palette` argument is replaced with the `palette` above.
 
 ### Create references
 For big fans of Latex, the lack of references in MD documents is unfortunate. Here we provide a simple solution by adding `<ref/>` flags at the places where you need to refer to figures or equations. However, **please Do NOT use the flag at the beginning of a paragraph. It will breaks the format.** To refer to a figure, please use
