@@ -134,4 +134,16 @@ qc=Q`
 eval_draw(qc,'qc-hadamard',use_palette=false)
 </script>
 
+The circuit in <ref fig="qc-hadamard"/> has one qubit set to $$\ket{0}$$ at the beginning. Along the wire, we have three intermediate points: `m1`, `m2`, and `m3`, and they represent the first identity operator $$\hat{I}$$, a Hadamard gate $$\hat{H}$$, and the second identity operator, respectively. Identity operator $$\hat{I}$$ has no effect on the qubit, and we need them to write multi-qubit operations easier, as we shall see later. The caption of <ref fig="qc-hadamard"/> also gives the probability distribution of state of `q1` at the end of the circuit. Because the Hadamard gate turns `q1` into a superposed state, i.e., $$1/\sqrt{2}\ket{0}+1/\sqrt{2}\ket{1}$${%sidenote '$$\alpha=\beta=1/\sqrt{2}$$'%}. Therefore, we have $$(1/\sqrt{2})^2=1/2$$ possibility of getting $$\ket{0}$$ or $$\ket{1}$$ at the end of the circuit.
+
+Now, let's consider two qubits, and formulate a Hadamard gate to both of them. The corresponding circuit is shown in 
+{%fig 'qc' 'Two Hadamard gate' 'no_palette' 'qc-twoh'%}
+<script>
+qc=Q`
+      I H I 
+      I H I
+`
+eval_draw(qc,'qc-twoh',use_palette=false)
+</script>
+
 ## 3. Extend Deutsch's Algorithm

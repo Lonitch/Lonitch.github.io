@@ -71,9 +71,9 @@ module Jekyll
             end
         elsif renderType == 'qc'
             if use_palette
-                "<div class='Q-circuit-palette'></div><div class='qc-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='margin-right: 10%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
+                "<div class='Q-circuit-palette'></div><div class='qc-container' id='#{figId}-container' render_count='#{@@fig_count}'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='margin-right: 10%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
             else
-                "<div class='qc-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
+                "<div class='qc-container' id='#{figId}-container' render_count='#{@@fig_count}'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
             end
         elsif renderType == 'img'
             if figType == 'fullwidth'

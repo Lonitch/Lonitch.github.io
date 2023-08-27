@@ -49,7 +49,7 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
 
                 divs.forEach(function(div) {
                     var divId = div.getAttribute("id");
-                    if (divId==refId){
+                    if (divId==refId || divId==refId+"-container"){
                         var count = div.getAttribute("render_count");
                         var link = document.createElement("a");
                         link.href = "#" + divId;
