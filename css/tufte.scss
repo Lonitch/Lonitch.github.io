@@ -393,6 +393,18 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
                             figcaption.maincolumn-figure, figure.fullwidth figcaption { float:none; text-align: center;}
                             figure.fullwidth figcaption { margin-left: 0; }
                           }
+// for side figures in small windows
+@media (max-width: 760px) {
+  .marginnote { display: block;
+                float: left;
+                left: 0rem;
+                right:1rem;
+                clear: both;
+                width: 80%;
+                margin: 1rem 2.5%;
+                vertical-align: baseline;
+                position: relative; }
+}
 /*--- End of Basic Layout stuff from tufte.css ---*/
 
 /* -- Jekyll specific styling --*/

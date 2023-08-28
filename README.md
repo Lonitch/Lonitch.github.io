@@ -2,6 +2,18 @@
 
 This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/) and [Q.js](https://quantumjavascript.app/), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall quality of the content.
 
+- [Github Pages of tufte-jekyll theme](#github-pages-of-tufte-jekyll-theme)
+  - [Installation](#installation)
+  - [Customize to Your Needs](#customize-to-your-needs)
+  - [Create a New Blog](#create-a-new-blog)
+    - [Some caveats when writing blogs](#some-caveats-when-writing-blogs)
+  - [LaTeX-like Elements for Blog Posts](#latex-like-elements-for-blog-posts)
+    - [1. Generate table of Contents](#1-generate-table-of-contents)
+    - [2. Display equations](#2-display-equations)
+    - [3. Images](#3-images)
+    - [4. Create references](#4-create-references)
+    - [5. Sidenote and Marginnote](#5-sidenote-and-marginnote)
+
 
 ## Installation
 Before running the steps below, make sure you have [ruby/gem and jekyll](https://jekyllrb.com/docs/installation/) ready. 
@@ -25,18 +37,40 @@ The information in this section explains how to make a customized copy of this p
 
 - Please edit the ```_sass/_settings.scss``` file if you want to customize base styles.
 - Use the ```_data/social.yml``` file to put in your own information for the footer links
+- Change ```_includes/header.html``` and ```_includes/footer.html``` for header and footer formats
 
-## LaTeX-like Elements
+## Create a New Blog
+Blogs are markdown files stored at `_posts` folder with their names formatted as `year-mm-dd-post-name.md`. Each markdown file starts with a head that specifies its name, date, layout type, and tags. An example of such head is shown below. Notice how the information starts and ends with `---` and each tag has words separated by `-`.
+```
+---
+layout: post
+title:  "Your awesome blog title"
+date:   2023-08-22 11:35:00
+categories: post
+tags: [quantum-mechanics, quantum-algorithms]
+---
+
+*THE EXCERPT OF YOUR ARTICLE GOES HERE*<!--more-->
+
+Your main content starts here.
+```
+It is recommended to create an **excerpt** before the main content of your blog article. The example above shows that your excerpt should ALWAYS ends with `<!--more-->`. The content before the symbol will be shown on the main list of articles.
+
+### Some caveats when writing blogs
+- BE CAREFUL when using `|` in your MathJax expression. If you find a paragraph formulated like a table near a math expression, you should consider remove `|` in the expression.
+- Side figures are floating at the left side if you blog is rendered on mobile devices or the browser window width is smaller than 760px. Sidenotes can be made visible by clicking the superscript numbers. 
+
+## LaTeX-like Elements for Blog Posts
 You can take a look at the posts created recently in the `_post` folder to learn how to use the classes introduced here. The general principles are:
 
 - Jekyll Liquid tag is employed for things that require display environments. This includes images, interactive graphs, equations with indices, and possibly animations.
 - Things that are only used inline include references(`<ref>`) and  mathjax expressions(`$$`)
 - The LaTeX `\label` finds its counterpart in HTML with the `id` attribute of the `<div>` element here.
 
-### Table of Contents
+### 1. Generate table of Contents
 If you're using VS code as your post editor, then just install the `Markdown All in One` extension to generate a list of links to sections in your post. the settings in `tufte.css` will convert the list into a `fullwidth` formulated table of contents, with subsections indented.
 
-### Display equations
+### 2. Display equations
 To add a new equation with a numbered tag(automatically ordered), you can do the following
 
 ```
@@ -45,7 +79,7 @@ To add a new equation with a numbered tag(automatically ordered), you can do the
 
 which will create a `div` element that wraps the equation. Note that if the last argument is omitted, the `id` of `<div>` is automatically set as `eqn-x`, in which `x` is a post-wise count of equation rendering.
 
-### Images
+### 3. Images
 So far we only support three rendering types: static `img`, dynamic `jsx` graph, and quantum circuit diagram `qc`. For each rendering type you can set the figure type as `fullwidth` or `marginnote`. Like the display equation, defining image id is not required but it is recommended to give your images meaningful IDs. Here image ID is defined by default as `fig-x`.  Finally, you're required to define its caption.
 
 To show a static image, please use the following two commands in your markdown:
@@ -125,7 +159,7 @@ eval_draw(qc,'qc-dumb-id',use_palette=true)
 ```
 Notice how the `no_palette` argument is replaced with the `palette` above.
 
-### Create references
+### 4. Create references
 For big fans of Latex, the lack of references in MD documents is unfortunate. Here we provide a simple solution by adding `<ref/>` flags at the places where you need to refer to figures or equations. However, **please Do NOT use the flag at the beginning of a paragraph. It will breaks the format.** To refer to a figure, please use
 ```html
 <ref fig='dumb-fig-id'/>
@@ -136,7 +170,7 @@ which create a link to the figure with its ID being `dumb-fig-id`. Both `jsx` gr
 ```
 Note that this only supports the equations created by the `eqn` plugin introduced above.
 
-### Sidenote and Marginnote
+### 5. Sidenote and Marginnote
 Perhaps the most unique feature of the Tufte style is its sidenotes and marginnotes. The only difference between the two is that `sidenote` is preceded by numbered index while `marginnote` has no index. We simplified the original implementation, and provides the following ways to create sidenotes and marginnotes:
 ```html
 <!-- sidenote -->
