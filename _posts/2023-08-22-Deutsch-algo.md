@@ -140,7 +140,7 @@ The qubit in <ref fig="qc-hadamard"/> is set to $$\ket{0}$$ at the beginning. Th
 
 where subscripts indicate middle points' locations. They are written in a reversed order as it's conventional to apply operators from right to left to qubits.
 
-Now, let's consider two qubits, and formulate a Hadamard gate to both of them. The corresponding circuit is shown in 
+Now, let's consider two qubits, and add a Hadamard gate to both of them. The corresponding circuit is shown in <ref fig='qc-twoh'>, and its caption gives 4 possible two-qubit states upon measurement. 
 {%fig 'qc' 'Two Hadamard gate' 'no_palette' 'qc-twoh'%}
 <script>
 qc=Q`
