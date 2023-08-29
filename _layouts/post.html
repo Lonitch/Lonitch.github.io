@@ -16,7 +16,15 @@ window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
             lines = circuit.report$().replace(/^\n+/, "").split('\n')
             lines.forEach(function(line) {
                 var lineElement = document.createElement("div");
-                lineElement.textContent = line;
+                var ket1 = line.indexOf("|")
+                var ket2 = line.indexOf("⟩")
+                var state = line.substring(ket1+1,ket2).split('').reverse().join('')
+                if(state.length > 0) {
+                    lineElement.textContent = line.substring(0,ket1)+"|"+state+line.substring(ket2,line.length);
+                }
+                else{
+                    lineElement.textContent= line
+                }
                 el.appendChild(lineElement);
             });
 

@@ -11,6 +11,7 @@ tags: [quantum-mechanics, quantum-algorithms]
 - [1. Is Your Function Constant?](#1-is-your-function-constant)
   - [1.1 The Chernoff bound and exponential envelope](#11-the-chernoff-bound-and-exponential-envelope)
 - [2. Quantum Circuit Basics](#2-quantum-circuit-basics)
+  - [2.1 Single- and multi-qubit gates](#21-single--and-multi-qubit-gates)
 - [3. Quantum Circuit for Deutsch's Algorithm](#3-quantum-circuit-for-deutschs-algorithm)
 
 The Deutsch algorithm can be considered an introductory-level quantum algorithm. Its creation was aimed at demonstrating the indisputable superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch's algorithm and its extended versions.
@@ -122,6 +123,7 @@ Transistors give rise to logic circuits by regulating the flow of electric curre
 {% fig 'img' 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Schrodingers_cat.svg/1024px-Schrodingers_cat.svg.png' 'Schrodinger’s cat on Wikipedia' 'fig-cartoon' %} 
 For people who are not familiar with quantum mechanics, you can think of qubit as a blackbox containing Schrodinger's cat and . We can only know if the cat is dead or alive by opening the box. Here, dead and alive are the two "**quantum states**"{%sidenote 'here we use Dirac notation to represent quantum states. In this case, the cat has two possible states:$$\ket{alive}$$ or $$\ket{dead}$$'%}, and the behavior of opening box is our "**measurement**" of the cat's states{%sidenote 'for now, let’s naively use $$\hat{M}$$ to represent the measurement. In the language of linear algebra, this is an operator applicable to the vector space spanned by basis vectors of $$\ket{alive}$$ and $$\ket{dead}$$'%}. Before the "measurement", the cat can either be dead or alive. Such a state uncertainty is captured by the concept of **superposition**. Let's first use Dirac notation to represent superposition in this case as $$\ket{alive}+\ket{dead}$$. Notice the ressemblance here between the superposition and the linear combination{%sidenote 'If we treat $$\ket{alive}$$ and $$\ket{dead}$$ as two linearly independent vectors, then all of the linear combinations, $$\alpha\ket{alive}+\beta\ket{dead}$$ forms a vector space.'%} pervasive in linear algebra. At the moment of opening the blackbox, we apply the "measurement" to the superposed state, $$\hat{M}(\ket{alive}+\ket{dead})$$, which results in  $$\ket{alive}$$ if the cat jumps out of the box, or $$\ket{dead}$$ if the cat stays there forever. Before the measurement, we can only predict the cat's state using probabilities. For example, if we place a bottle of poison with the cat in the box, and we know cats like to topple small things. Then the probability of cat being alive at time $$t$$, $$p(\ket{\psi(t)}=\ket{alive})$$ should be lower than 1{%sidenote '$$\ket{\psi(t)}$$ represents the cat state at time $$t$$'%}. Note that $$p(\ket{\psi(t)}=\ket{alive})+p(\ket{\psi(t)}=\ket{dead})=1$$ at any time instance. To reflect this fact in the superposed state, we need to normalize the "length" of the linear combination $$\alpha\ket{alive}+\beta\ket{dead}$$ to one, i.e., $$\alpha^2+\beta^2=1$$. Due to their relations to probabilities, $$\alpha$$ and $$\beta$$ are called probability amplitudes, and they are generally complex numbers.
 
+### 2.1 Single- and multi-qubit gates
 So a qubit can be thought of a blackbox containing a cat whose state could be superposed. The cat has two possible states analogous to the classical bit, $$\ket{0}$$ and $$\ket{1}$$. If we first set the qubit at the state of $$\ket{0}$$ and do nothing(e.g. no poison bottle in the box){%sidenote 'Doing nothing is an oversimplified statement. Huge amount of efforts is required to protect a quantum system from noises that break state coherence before measurement.'%}, next time when we measure the qubit, it will still be at the state of $$\ket{0}$$ just like what we would expect on a classical computer. However, we can turn the qubit state into a superposed one by applying quantum gate to it{%sidenote 'there are only two effects of classical gates to bits: flip the bit or remain bit state.'%}. Such a gate is call Hadamard gate, and is represented as $$\fbox{H}$$ in quantum circuit.
 
 The following circuit shows one Hadamard gate applied to one qubit(the horizontal line). 
@@ -140,7 +142,7 @@ The qubit in <ref fig="qc-hadamard"/> is set to $$\ket{0}$$ at the beginning. Th
 
 where subscripts indicate middle points' locations. They are written in a reversed order as it's conventional to apply operators from right to left to qubits.
 
-Now, let's consider two qubits, and add a Hadamard gate to both of them. The corresponding circuit is shown in <ref fig='qc-twoh'>, and its caption gives 4 possible two-qubit states upon measurement. 
+Now, let's consider two qubits, and add a Hadamard gate to both of them. The corresponding circuit is shown in <ref fig='qc-twoh'/>, and its caption gives 4 possible two-qubit states upon measurement. 
 {%fig 'qc' 'Two Hadamard gate' 'no_palette' 'qc-twoh'%}
 <script>
 qc=Q`
@@ -149,5 +151,40 @@ qc=Q`
 `
 eval_draw(qc,'qc-twoh',use_palette=false)
 </script>
+As the symbols indicate, $$\ket{00}$$ represents the measurement where both `q1` and `q2` are at $$\ket{0}$$ while $$\ket{01}$$ has `q1` at $$\ket{1}$$ and `q2` at $$\ket{0}$${%sidenote 'For multi-qubit states, we count indices of individual qubits from right to left.'%}. We can be mathematically rigorous by writting the multi-qubit states using Kronecker products, e.g., $$\ket{10}=\ket{1}\oplus\ket{0}$$. A more detailed discussion of Kronecker products can be found in [my previous post](./Kronecker-product). Kronecker product also enables us to write multi-qubit gates by combining single-qubit gates. For example, the quantum circuit in <ref fig='qc-twoh'/> can be written as
+
+{%eqn '\hat{H}_{q2}\oplus\hat{H}_{q1}\ket{0}_{q2}\oplus\ket{0}_{q1}=\hat{H}_{q2}\ket{0}_{q2}\oplus\hat{H}_{q1}\ket{0}_{q1}' 'eqn-twoh'%}
+
+where subscripts are qubits' indices. Because we always follow the 'right-first' convention, <ref eqn='eqn-twoh'/> can be simlified and expanded as follows:
+
+{%eqn '\hat{H}\ket{0}\oplus\hat{H}\ket{0}=\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\oplus\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{2}\left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)' 'eqn-twoh-result'%}
+
+The probability amplitudes in <ref eqn='eqn-twoh'/> are identical for all possible states, and they all correspond to $$(1/2)^2=1/4$$ possiblity of measured state being one of the four options, agreeing with the result in the caption of <ref fig='qc-twoh'>.
+
+Another distinct feature of quantum circuits is **Controlled gates**, which apply quantum gates to a qubit when its **control qubit** is at state $$\ket{1}$$. The circuit in <ref fig='qc-ch'/> shows that $$\fbox{H#1}$$ is only applied to `q1` when the control qubit `q2` has a state of $$\ket{1}$$.
+{%fig 'qc' 'Controlled Hadamard gate' 'no_palette' 'qc-ch'%}
+<script>
+qc=Q`
+      I H#1 I 
+      I H#0 I
+`
+eval_draw(qc,'qc-ch',use_palette=false)
+</script>
+Nothing happens to `q1` as the state of `q2` remains at $$\ket{0}$$ and the $$\fbox{H#1}$$ is never triggered. We can use the **Pauli-X** gate $$\fbox{X}$$ to flip `q2` state at `m1`, and the result is shown in <ref fig='qc-xch'/>. With `q2` state flipped from $$\ket{0}$$ to $$\ket{1}$$ at `m1`, the circuit above applies $$\fbox{H#1}$$ to `q1`, resulting two possible states: $$\ket{10}$$ and $$\ket{11}$$.
+{%fig 'qc' 'Controlled Hadamard gate' 'no_palette' 'qc-xch'%}
+<script>
+qc=Q`
+      I H#1 I 
+      X H#0 I
+`
+eval_draw(qc,'qc-xch',use_palette=false)
+</script>
+
+We can prove that $$p(\ket{01})=p(\ket{11})=0.5$$ by progressively following the circuit from left to right. 
+- At `m1`, we flip `q2`'s state, $$\hat{X}\oplus\hat{I}\ket{00}=\ket{10}$$;
+- At `m2`, the Hadamard gate is triggered, 
+{%eqn '\widehat{CH}\ket{10}=\ket{1}\oplus\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{\sqrt{2}}(\ket{10}+\ket{11}),' 'eqn-ch'%}
+where $$\widehat{CH}$$ is the controlled Hadamard gate. 
+- Because the probability amplitudes of two possible states in <ref eqn='eqn-ch'/> are $$\frac{1}{\sqrt{2}}$$, the probabilities of getting $$\ket{10}$$ or $$\ket{11}$$ are 50% at `m3`, as the caption of <ref fig='qc-xch'> indicates.
 
 ## 3. Quantum Circuit for Deutsch's Algorithm

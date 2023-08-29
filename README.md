@@ -1,10 +1,11 @@
-# Github Pages of tufte-jekyll theme
+# JeTBLE: Jekyll-Tufte themed Blog with Latex-like Elements
 
 This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/) and [Q.js](https://quantumjavascript.app/), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall quality of the content.
 
-- [Github Pages of tufte-jekyll theme](#github-pages-of-tufte-jekyll-theme)
+- [JeTBLE: Jekyll-Tufte themed Blog with Latex-like Elements](#jetble-jekyll-tufte-themed-blog-with-latex-like-elements)
   - [Installation](#installation)
   - [Customize to Your Needs](#customize-to-your-needs)
+  - [Create Comment Section](#create-comment-section)
   - [Create a New Blog](#create-a-new-blog)
     - [Some caveats when writing blogs](#some-caveats-when-writing-blogs)
   - [LaTeX-like Elements for Blog Posts](#latex-like-elements-for-blog-posts)
@@ -38,6 +39,20 @@ The information in this section explains how to make a customized copy of this p
 - Please edit the ```_sass/_settings.scss``` file if you want to customize base styles.
 - Use the ```_data/social.yml``` file to put in your own information for the footer links
 - Change ```_includes/header.html``` and ```_includes/footer.html``` for header and footer formats
+
+## Create Comment Section
+Our comment section is powered by [uteranc.es](http://www.uteranc.es). To make comments visible after each post, please replace `repo` attribute with your own repository name in the following element that you can find at ```_layouts/post.html```:
+
+```html
+<script src="https://utteranc.es/client.js"
+        repo="[GITHUB-USERNAME/REPO-NAME]"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+```
 
 ## Create a New Blog
 Blogs are markdown files stored at `_posts` folder with their names formatted as `year-mm-dd-post-name.md`. Each markdown file starts with a head that specifies its name, date, layout type, and tags. An example of such head is shown below. Notice how the information starts and ends with `---` and each tag has words separated by `-`.
