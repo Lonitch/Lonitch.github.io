@@ -74,6 +74,7 @@ It is recommended to create an **excerpt** before the main content of your blog 
 ### Some caveats when writing blogs
 - BE CAREFUL when using `|` in your MathJax expression. If you find a paragraph formulated like a table near a math expression, you should consider remove `|` in the expression.
 - Side figures are floating at the left side if you blog is rendered on mobile devices or the browser window width is smaller than 760px. Sidenotes can be made visible by clicking the superscript numbers. 
+- Make sure you have at least one empty line before section/subsection titles.
 
 ## LaTeX-like Elements for Blog Posts
 You can take a look at the posts created recently in the `_post` folder to learn how to use the classes introduced here. The general principles are:

@@ -12,6 +12,7 @@ tags: [quantum-mechanics, quantum-algorithms]
   - [1.1 The Chernoff bound and exponential envelope](#11-the-chernoff-bound-and-exponential-envelope)
 - [2. Quantum Circuit Basics](#2-quantum-circuit-basics)
   - [2.1 Single- and multi-qubit gates](#21-single--and-multi-qubit-gates)
+  - [2.2 Introduction to entanglement](#22-introduction-to-entanglement)
 - [3. Quantum Circuit for Deutsch's Algorithm](#3-quantum-circuit-for-deutschs-algorithm)
 
 The Deutsch algorithm can be considered an introductory-level quantum algorithm. Its creation was aimed at demonstrating the indisputable superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch's algorithm and its extended versions.
@@ -186,5 +187,17 @@ We can prove that $$p(\ket{01})=p(\ket{11})=0.5$$ by progressively following the
 {%eqn '\widehat{CH}\ket{10}=\ket{1}\oplus\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{\sqrt{2}}(\ket{10}+\ket{11}),' 'eqn-ch'%}
 where $$\widehat{CH}$$ is the controlled Hadamard gate. 
 - Because the probability amplitudes of two possible states in <ref eqn='eqn-ch'/> are $$\frac{1}{\sqrt{2}}$$, the probabilities of getting $$\ket{10}$$ or $$\ket{11}$$ are 50% at `m3`, as the caption of <ref fig='qc-xch'> indicates.
+
+### 2.2 Introduction to entanglement
+Now that we have sufficient understanding of single- and multi-qubit operators{%sidenote 'we have used operators and gates interchangeably.'%}, we can move a step furter to see how quantum circuit can create entangled quantum states. Before we give the concept of entanglement, let us take a look at the following circuit:
+{%fig 'qc' 'Making Bell state$$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$' 'no_palette' 'qc-bell-simple'%}
+<script>
+qc=Q`
+      H X#0 I 
+      I X#1 I
+`
+eval_draw(qc,'qc-bell-simple',use_palette=false)
+</script>
+The caption of <ref fig='qc-bell-simple'/> shows that there are only two possibilities: $$\ket{00}$$ and $$\ket{11}$$.
 
 ## 3. Quantum Circuit for Deutsch's Algorithm
