@@ -1,8 +1,8 @@
-# JeTBLE: Jekyll-Tufte themed Blog with Latex-like Elements
+# TuBTLE: Tufte Blog Theme with Latex-like Elements
 
 This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/) and [Q.js](https://quantumjavascript.app/), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall quality of the content.
 
-- [JeTBLE: Jekyll-Tufte themed Blog with Latex-like Elements](#jetble-jekyll-tufte-themed-blog-with-latex-like-elements)
+- [TuBTLE: Tufte Blog Theme with Latex-like Elements](#tubtle-tufte-blog-theme-with-latex-like-elements)
   - [Installation](#installation)
   - [Customize to Your Needs](#customize-to-your-needs)
   - [Create Comment Section](#create-comment-section)

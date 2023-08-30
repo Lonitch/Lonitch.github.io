@@ -190,14 +190,16 @@ where $$\widehat{CH}$$ is the controlled Hadamard gate.
 
 ### 2.2 Introduction to entanglement
 Now that we have sufficient understanding of single- and multi-qubit operators{%sidenote 'we have used operators and gates interchangeably.'%}, we can move a step furter to see how quantum circuit can create entangled quantum states. Before we give the concept of entanglement, let us take a look at the following circuit:
-{%fig 'qc' 'Making Bell state$$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$' 'no_palette' 'qc-bell-simple'%}
+{%fig 'qc' 'Making Bell state$$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$' 'palette' 'qc-bell-simple'%}
 <script>
 qc=Q`
-      H X#0 I 
-      I X#1 I
+      I H X#0 I 
+      I I X#1 I
 `
-eval_draw(qc,'qc-bell-simple',use_palette=false)
+eval_draw(qc,'qc-bell-simple',use_palette=true);
 </script>
-The caption of <ref fig='qc-bell-simple'/> shows that there are only two possibilities: $$\ket{00}$$ and $$\ket{11}$$.
+The caption of <ref fig='qc-bell-simple'/> shows that there are only two possible states: $$\ket{00}$$ and $$\ket{11}$${%sidenote 'reader can prove this using the progressive method introduced above.'%} with 50% probability for each state. Now, let's say the measured state of `q1` is $$\ket{0}$$, according to the probability distribution, the two-qubit state must be $$\ket{00}$$, i.e., `q2` must be $$\ket{0}$$ as well. On the other hand, if `q1` is $$\ket{1}$$, we must have `q2` being $$\ket{1}$$. Thus, states of the two qubits are coupled, and we can confirm the states of both qubits by measuring only one of them. Such a correlation is called quantum entanglement. As a matter of fact, the entangled state $$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$ is one of the four **Bell states**. Because <ref fig='qc-bell-simple'/> is an interactive circuit to which you can add and delete gates, you apply $$\fbox{X}$$ at `m1` to `q1` to get another Bell state: $$\frac{1}{\sqrt{2}}(\ket{00}-\ket{11})$$, resulting the same probability distribution. On the other hand, if $$\fbox{X}$$ is applied at `m2` to `q2`, you get $$\frac{1}{\sqrt{2}}(\ket{01}+\ket{10})$$. If two $$\fbox{X}$$ are applied at `m1` to `q2` and `q1`, we get the last Bell state $$\frac{1}{\sqrt{2}}(\ket{01}-\ket{10})$$. 
+
+Bell states introduced here belong to a class of entangled qubit states, called **maximally entangled states**. The name is due to the 100% certainty of one qubit's state if we know the state of the other one. There are states **partially entangled**. As an example, consider the state of $$\frac{1}{10}\ket{01}+\frac{\sqrt{99}}{10}\ket{00}$$. Kronecker product allows us to factor the state into a form of $$\ket{0}(\frac{1}{10}\ket{1}+\frac{\sqrt{99}}{10}\ket{0})$$. The measurement of `q2` will always gives $$\ket{0}$$, but we have 1% chance of getting $$\ket{1}$$ and 99% chance of getting $$\ket{0}$$ for `q1`.
 
 ## 3. Quantum Circuit for Deutsch's Algorithm
