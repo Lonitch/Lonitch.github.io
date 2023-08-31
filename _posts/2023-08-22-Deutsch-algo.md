@@ -159,9 +159,9 @@ As the symbols indicate, $$\ket{00}$$ represents the measurement where both `q1`
 
 where subscripts are qubits' indices. Because we always follow the 'right-first' convention, <ref eqn='eqn-twoh'/> can be simlified and expanded as follows:
 
-{%eqn '\hat{H}\ket{0}\oplus\hat{H}\ket{0}=\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\oplus\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{2}\left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)' 'eqn-twoh-result'%}
+{%eqn '\begin{align}\hat{H}\ket{0}\oplus\hat{H}\ket{0}&=\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\oplus\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\\&=\frac{1}{2}\left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)\end{align}' 'eqn-twoh-result'%}
 
-The probability amplitudes in <ref eqn='eqn-twoh'/> are identical for all possible states, and they all correspond to $$(1/2)^2=1/4$$ possiblity of measured state being one of the four options, agreeing with the result in the caption of <ref fig='qc-twoh'>.
+The probability amplitudes in <ref eqn='eqn-twoh-result'/> are identical for all possible states, and they all correspond to $$(1/2)^2=1/4$$ possiblity of measured state being one of the four options, agreeing with the result in the caption of <ref fig='qc-twoh'>.
 
 Another distinct feature of quantum circuits is **Controlled gates**, which apply quantum gates to a qubit when its **control qubit** is at state $$\ket{1}$$. The circuit in <ref fig='qc-ch'/> shows that $$\fbox{H#1}$$ is only applied to `q1` when the control qubit `q2` has a state of $$\ket{1}$$.
 {%fig 'qc' 'Controlled Hadamard gate' 'no_palette' 'qc-ch'%}
@@ -207,4 +207,16 @@ Bell states introduced here belong to a class of entangled qubit states, called 
 Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it's constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs{%sidenote "let's hope this happens in the near future." %}, and you can still use Deutsch's algorithm to decide function type without sacrificing computational efficiency.
 
 ### 3.1 Construct a function in quantum circuit
-A function is a map from a set of inputs to a set of outputs. 
+A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is a segment between two intermediate points that transform one set of multi-qubit states into another set. For example, If we treat `q3` and `q4` as **ancilla qubits**{%sidenote "ancilla qubit: qubits used for storing partial results, and we generally don't care their final states."%} in <ref fig="qc-simple-func"/> guarantees the `q1-q2` state being $$\ket{00}$$, no matter what state is prepared at `m1`. Readers can verify this statement by adding gates to `q1` and `q2` at `m1` and `m2`.
+{%fig 'qc' 'A function that always gives $$\ket{00}$$ at q1 and q2' 'palette' 'qc-simple-func'%}
+<script>
+var qc = Q`
+      I I X#0 I    X#1 I  
+      I I I   X#0  I   X#1
+      I I X#1 I    X#0 I  
+      I I I   X#1  I   X#0
+`
+eval_draw(qc,'qc-simple-func',use_palette=true);
+</script>
+
+The circuit in <ref fig="qc-simple-func"/> is a constant function that uses only `q1` and `q2` as input and output. 
