@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Qubit Saga: Deutsch's Algorithm"
-date:   2023-08-22 11:35:00
+title:  "Qubit Saga: Deutsch's Algorithm 2"
+date:   2023-08-29 11:35:00
 categories: post
 tags: [quantum-mechanics, quantum-algorithms]
 ---
@@ -204,7 +204,7 @@ The caption of <ref fig='qc-bell-simple'/> shows that there are only two possibl
 Bell states introduced here belong to a class of entangled qubit states, called **maximally entangled states**. The name is due to the 100% certainty of one qubit's state if we know the state of the other one. There are states **partially entangled**. As an example, consider the state of $$\frac{1}{10}\ket{01}+\frac{\sqrt{99}}{10}\ket{00}$$. Kronecker product allows us to factor the state into a form of $$\ket{0}(\frac{1}{10}\ket{1}+\frac{\sqrt{99}}{10}\ket{0})$$. The measurement of `q2` will always gives $$\ket{0}$$, but we have 1% chance of getting $$\ket{1}$$ and 99% chance of getting $$\ket{0}$$ for `q1`.
 
 ## 3. Quantum Circuit for Deutsch's Algorithm
-Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it's constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs{%sidenote "let's hope this happens in the near future." %}, and you can still use Deutsch's algorithm to decide function type without sacrificing computational efficiency.
+Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it's constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs, and you can still use Deutsch's algorithm to decide function type without sacrificing computational efficiency.
 
 ### 3.1 Construct a function in quantum circuit
 A function is a map from a set of inputs to a set of outputs. 

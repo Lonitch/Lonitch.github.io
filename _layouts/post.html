@@ -48,13 +48,41 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-
+        // add interactive circuit to all elements with class "Q-circuit-palette"
         Array
         .from( document.querySelectorAll( '.Q-circuit-palette' ))
         .forEach( function(el){
             Q.Circuit.Editor.createPalette(el)
-    })
+        })
+        
+        // Get all the div elements with the class 'numbered-equation'
+        var equationDivs = document.querySelectorAll('.numbered-equation');
+        var eqnNumber = 1
+        // Loop through the equation divs and add/update the 'render_count' attribute
+        equationDivs.forEach(function(div) {
+            var label = document.createElement('span');
+            label.className = 'equation-label';
+            label.textContent = '(' + eqnNumber + ')';
+            div.insertBefore(label, div.firstChild.nextSibling);
+            div.setAttribute('render_count', eqnNumber);
+            eqnNumber+=1;
+        });
 
+        // Get all the div elements with the class 'numbered-fig'
+        // var figDivs = document.querySelectorAll('.numbered-fig');
+        // var figNumber = 1
+        // figDivs.forEach(function(fig) {
+        //     var spanChild = fig.querySelector('span'); // Find <span> child
+            
+        //     if (fig.classList.contains('jxgbox')) {
+        //         spanChild = fig.nextElementSibling;
+        //         var spanChild = spanChild.querySelector('span.marginnote');
+        //     }
+            
+            
+        // });
+
+        // create references to equations or figures
         var divs = document.querySelectorAll("div[render_count]");
         var refs = document.querySelectorAll("ref");
     

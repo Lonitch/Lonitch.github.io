@@ -13,7 +13,7 @@ module Jekyll
         @@equation_count += 1
         equation_id = @text[1] || "eqn-#{@@equation_count}"
         equation_content = @text[0].gsub('\\', '\\\\')
-      "<div id='#{equation_id}' render_count='#{@@equation_count}'>\n$$\\large #{equation_content}\\tag{#{@@equation_count}}$$\n</div>"
+      "<div id='#{equation_id}' class='numbered-equation'>\n$$\\large #{equation_content}$$\n</div>"
       end
     end
   end

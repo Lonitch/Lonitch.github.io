@@ -157,7 +157,7 @@ ul li {
 }
 
 article.group ul:not(:first-of-type) li {
-  width: 120%; /* make list width 120% after the first list*/
+  width: 110%; /* make list width 120% after the first list*/
 }
 
 article.group ul:not(:first-of-type) li a {
@@ -307,6 +307,20 @@ img { max-width: 100%; }
   flex-direction : row;
 }
 
+.numbered-equation {
+  display : flex;
+  flex-direction : row;
+  align-items: center;
+}
+
+/* Apply styles for smaller window sizes */
+@media (max-width: 800px) {
+  .numbered-equation {
+      flex-direction: column; /* Stack items vertically on small screens */
+      align-items: flex-start; /* Align items to the start on small screens */
+  }
+}
+
 .sidenote, .marginnote { float: right;
                          clear: right;
                          margin-right: -60%;
@@ -340,7 +354,8 @@ blockquote .sidenote, blockquote .marginnote { margin-right: -79% }
                    color: $contrast-color;
                    top: 0rem; } //removed superscripting for numerical reference in sidenote
 
-p, footer, div.table-wrapper,  .MJXc-display, .MathJax { width: 55%; }
+p, footer, div.table-wrapper { width: 55%; }
+.MJXc-display, .MathJax {width: 55%;}
 
 div.table-wrapper, table { overflow-x: auto; } //changed all overflow values to 'auto' so scroll bars appear only as needed
 

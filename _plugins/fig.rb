@@ -65,28 +65,28 @@ module Jekyll
 
         if renderType == 'jsx'
             if figType == 'fullwidth'
-                "<div id='#{figId}' class='jxgbox shadow' render_count='#{@@fig_count}' style='aspect-ratio: 2 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
+                "<div id='#{figId}' class='jxgbox shadow numbered-fig' style='aspect-ratio: 2 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'> #{cap}</span>"
             else
-                "<div id='#{figId}' class='jxgbox shadow marginnote' render_count='#{@@fig_count}' style='aspect-ratio: 1 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'>Fig. #{@@fig_count} #{cap}</span>"
+                "<div id='#{figId}' class='jxgbox shadow marginnote numbered-fig' style='aspect-ratio: 1 / 1; width: #{width}; user-select: none; overflow: hidden; position: relative; touch-action: none;'></div><span class='marginnote'> #{cap}</span>"
             end
         elsif renderType == 'qc'
             if use_palette
-                "<div class='Q-circuit-palette'></div><div class='qc-container' id='#{figId}-container' render_count='#{@@fig_count}'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='margin-right: 10%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
+                "<div class='Q-circuit-palette'></div><div class='qc-container numbered-fig' id='#{figId}-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='margin-right: 10%;'> #{cap}, and its probability distribution is shown below</span></div>"
             else
-                "<div class='qc-container' id='#{figId}-container' render_count='#{@@fig_count}'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'>Fig. #{@@fig_count} #{cap}, and its probability distribution is shown below</span></div>"
+                "<div class='qc-container numbered-fig' id='#{figId}-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'> #{cap}, and its probability distribution is shown below</span></div>"
             end
         elsif renderType == 'img'
             if figType == 'fullwidth'
                 if link.start_with?('http://', 'https://','//')
-                "<figure id='#{figId}' render_count='#{@@fig_count}' class='fullwidth'><img src='#{link}'/><br><figurecaption>Fig. #{@@fig_count} #{cap}</figurecaption></figure>"
+                "<figure id='#{figId}' class='fullwidth numbered-fig'><img src='#{link}'/><br><span> #{cap}</span></figure>"
                 else
-                "<figure id='#{figId}' render_count='#{@@fig_count}' class='fullwidth'><img src='#{baseurl}/#{link}'/><br><figurecaption>Fig. #{@@fig_count} #{cap}</figurecaption></figure>"
+                "<figure id='#{figId}' class='fullwidth numbered-fig'><img src='#{baseurl}/#{link}'/><br><span> #{cap}</span></figure>"
                 end
             else
                 if link.start_with?('http://', 'https://','//')
-                    "<span id='#{figId}' render_count='#{@@fig_count}' class='marginnote'><img src='#{link}'/><br>Fig. #{@@fig_count} #{cap}</span>"
+                    "<span id='#{figId}' class='marginnote numbered-fig'><img src='#{link}'/><br><span> #{cap}</span></span>"
                 else
-                    "<span id='#{figId}' render_count='#{@@fig_count}' class='marginnote'><img src='#{baseurl}/#{link}'/><br>Fig. #{@@fig_count} #{cap}</span>"
+                    "<span id='#{figId}' class='marginnote numbered-fig'><img src='#{baseurl}/#{link}'/><br><span> #{cap}</span></span>"
                 end
             end
         end
