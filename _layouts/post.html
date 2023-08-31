@@ -69,18 +69,20 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
         });
 
         // Get all the div elements with the class 'numbered-fig'
-        // var figDivs = document.querySelectorAll('.numbered-fig');
-        // var figNumber = 1
-        // figDivs.forEach(function(fig) {
-        //     var spanChild = fig.querySelector('span'); // Find <span> child
+        var figDivs = document.querySelectorAll('.numbered-fig');
+        var figNumber = 1
+        figDivs.forEach(function(fig) {
+            var spanChild = fig.querySelector('span'); // Find <span> child
             
-        //     if (fig.classList.contains('jxgbox')) {
-        //         spanChild = fig.nextElementSibling;
-        //         var spanChild = spanChild.querySelector('span.marginnote');
-        //     }
+            if (fig.classList.contains('jxgbox')) {
+                spanChild = fig.nextElementSibling;
+                var spanChild = spanChild.querySelector('span.marginnote');
+            }
+            spanChild.insertAdjacentHTML("afterbegin",'Fig. ' + figNumber.toString() + ' ');
+            fig.setAttribute('render_count', figNumber);
+            figNumber+=1;
             
-            
-        // });
+        });
 
         // create references to equations or figures
         var divs = document.querySelectorAll("div[render_count]");
