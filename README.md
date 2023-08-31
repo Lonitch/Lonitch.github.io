@@ -1,6 +1,6 @@
 # TuBTLE: Tufte Blog Theme with Latex-like Elements
 
-This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/) and [Q.js](https://quantumjavascript.app/), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall quality of the content.
+This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/), [Q.js](https://quantumjavascript.app/), and [Quirk](https://algassert.com/quirk), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall quality of the content.
 
 - [TuBTLE: Tufte Blog Theme with Latex-like Elements](#tubtle-tufte-blog-theme-with-latex-like-elements)
   - [Installation](#installation)
@@ -75,6 +75,7 @@ It is recommended to create an **excerpt** before the main content of your blog 
 - BE CAREFUL when using `|` in your MathJax expression. If you find a paragraph formulated like a table near a math expression, you should consider remove `|` in the expression.
 - Side figures are floating at the left side if you blog is rendered on mobile devices or the browser window width is smaller than 760px. Sidenotes can be made visible by clicking the superscript numbers. 
 - Make sure you have at least one empty line before section/subsection titles.
+- `Q.js` does NOT support gates that apply to more than two qubits, and `SWAP` gate is also not implemented correctly. See the issure [here](https://github.com/stewdio/q.js/issues/18).
 
 ## LaTeX-like Elements for Blog Posts
 You can take a look at the posts created recently in the `_post` folder to learn how to use the classes introduced here. The general principles are:
