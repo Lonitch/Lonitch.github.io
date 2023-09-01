@@ -130,30 +130,28 @@ So a qubit can be thought of a blackbox containing a cat whose state could be su
 
 The following circuit shows one Hadamard gate applied to one qubit(the horizontal line). 
 
-{%fig 'qc' 'One Hadamard gate' 'no_palette' 'qc-hadamard'%}
+{%fig 'qcsvg' 'One Hadamard gate' 'qc-hadamard'%}
 <script>
-qc=Q`
-      I H I 
-`
-eval_draw(qc,'qc-hadamard',use_palette=false)
+qc=new QuantumCircuit(1);
+qc.addGate('h',0,0);
+run_and_render_svg(qc,'qc-hadamard');
 </script>
 
-The qubit in <ref fig="qc-hadamard"/> is set to $$\ket{0}$$ at the beginning. The wire represents evolution of the qubit in time, along which we have three intermediate points: `m1`, `m2`, and `m3`. They represent the first identity operator $$\hat{I}$$, a Hadamard gate $$\hat{H}$$, and the second identity operator, respectively. Identity operator $$\hat{I}$$ has no effect on the qubit, and we need them to write multi-qubit operators more conveniently, as we shall see later. The caption of <ref fig="qc-hadamard"/> also gives the probabilities of getting different states of `q1` at the end. Because the Hadamard gate turns `q1` into a superposed state, $$1/\sqrt{2}\ket{0}+1/\sqrt{2}\ket{1}$${%sidenote '$$\alpha=\beta=1/\sqrt{2}$$'%}, we have $$(1/\sqrt{2})^2=1/2$$ possibility of getting $$\ket{0}$$ or $$\ket{1}$$ when measuring the state of `q1`. The full qubit evolution introduced in <ref fig="qc-hadamard"/> can be expressed in Dirac's notation as
+The qubit in <ref fig="qc-hadamard"/> is set to $$\ket{0}$$ at the beginning. The wire represents evolution of the qubit in time, along which we have one intermediate point: `m1`. The caption of <ref fig="qc-hadamard"/> also gives the probabilities of getting different states of `q0` at the end. Because the Hadamard gate turns `q0` into a superposed state, $$1/\sqrt{2}\ket{0}+1/\sqrt{2}\ket{1}$${%sidenote '$$\alpha=\beta=1/\sqrt{2}$$'%}, we have $$(1/\sqrt{2})^2=1/2$$ possibility of getting $$\ket{0}$$ or $$\ket{1}$$ when measuring the state of `q0`. The full qubit evolution introduced in <ref fig="qc-hadamard"/> can be expressed in Dirac's notation as
 
 {%eqn '\hat{I}_{m3}\hat{H}_{m2}\hat{I}_{m1}\ket{0}=\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})' 'eqn-Hevolve'%} 
 
 where subscripts indicate middle points' locations. They are written in a reversed order as it's conventional to apply operators from right to left to qubits.
 
 Now, let's consider two qubits, and add a Hadamard gate to both of them. The corresponding circuit is shown in <ref fig='qc-twoh'/>, and its caption gives 4 possible two-qubit states upon measurement. 
-{%fig 'qc' 'Two Hadamard gate' 'no_palette' 'qc-twoh'%}
+{%fig 'qcsvg' 'Two Hadamard gate' 'qc-twoh'%}
 <script>
-qc=Q`
-      I H I 
-      I H I
-`
-eval_draw(qc,'qc-twoh',use_palette=false)
+var circuit = new QuantumCircuit(2);
+circuit.addGate("h", 0, 0);
+circuit.addGate("h", 0, 1);
+run_and_render_svg(circuit,'qc-twoh')
 </script>
-As the symbols indicate, $$\ket{00}$$ represents the measurement where both `q1` and `q2` are at $$\ket{0}$$ while $$\ket{01}$$ has `q1` at $$\ket{1}$$ and `q2` at $$\ket{0}$${%sidenote 'For multi-qubit states, we count indices of individual qubits from right to left.'%}. We can be mathematically rigorous by writting the multi-qubit states using Kronecker products, e.g., $$\ket{10}=\ket{1}\oplus\ket{0}$$. A more detailed discussion of Kronecker products can be found in [my previous post](./Kronecker-product). Kronecker product also enables us to write multi-qubit gates by combining single-qubit gates. For example, the quantum circuit in <ref fig='qc-twoh'/> can be written as
+As the symbols indicate, $$\ket{00}$$ represents the measurement where both `q0` and `q1` are at $$\ket{0}$$ while $$\ket{01}$$ has `q0` at $$\ket{1}$$ and `q1` at $$\ket{0}$${%sidenote 'For multi-qubit states, we count indices of individual qubits from right to left.'%}. We can be mathematically rigorous by writting the multi-qubit states using Kronecker products, e.g., $$\ket{10}=\ket{1}\oplus\ket{0}$$. A more detailed discussion of Kronecker products can be found in [my previous post](./Kronecker-product). Kronecker product also enables us to write multi-qubit gates by combining single-qubit gates. For example, the quantum circuit in <ref fig='qc-twoh'/> can be written as
 
 {%eqn '\hat{H}_{q2}\oplus\hat{H}_{q1}\ket{0}_{q2}\oplus\ket{0}_{q1}=\hat{H}_{q2}\ket{0}_{q2}\oplus\hat{H}_{q1}\ket{0}_{q1}' 'eqn-twoh'%}
 
@@ -163,31 +161,30 @@ where subscripts are qubits' indices. Because we always follow the 'right-first'
 
 The probability amplitudes in <ref eqn='eqn-twoh-result'/> are identical for all possible states, and they all correspond to $$(1/2)^2=1/4$$ possiblity of measured state being one of the four options, agreeing with the result in the caption of <ref fig='qc-twoh'>.
 
-Another distinct feature of quantum circuits is **Controlled gates**, which apply quantum gates to a qubit when its **control qubit** is at state $$\ket{1}$$. The circuit in <ref fig='qc-ch'/> shows that $$\fbox{H#1}$$ is only applied to `q1` when the control qubit `q2` has a state of $$\ket{1}$$.
-{%fig 'qc' 'Controlled Hadamard gate' 'no_palette' 'qc-ch'%}
-<script>
-qc=Q`
-      I H#1 I 
-      I H#0 I
-`
-eval_draw(qc,'qc-ch',use_palette=false)
+Another distinct feature of quantum circuits is **Controlled gates**, which apply quantum gates to a qubit when its **control qubit** is at state $$\ket{1}$$. The circuit in <ref fig='qc-ch'/> shows that $$\fbox{H#1}$$ is only applied to `q0` when the control qubit `q1` has a state of $$\ket{1}$$.
+{%fig 'qcsvg' 'Controlled Hadamard gate' 'qc-ch'%}
+<script type="text/javascript">
+    var circuit = new QuantumCircuit(2);
+    circuit.addGate("ch", 0, [1, 0]);
+    run_and_render_svg(circuit, 'qc-ch');
 </script>
-Nothing happens to `q1` as the state of `q2` remains at $$\ket{0}$$ and the $$\fbox{H#1}$$ is never triggered. We can use the **Pauli-X** gate $$\fbox{X}$$ to flip `q2` state at `m1`, and the result is shown in <ref fig='qc-xch'/>. With `q2` state flipped from $$\ket{0}$$ to $$\ket{1}$$ at `m1`, the circuit above applies $$\fbox{H#1}$$ to `q1`, resulting two possible states: $$\ket{10}$$ and $$\ket{11}$$.
-{%fig 'qc' 'Controlled Hadamard gate' 'no_palette' 'qc-xch'%}
-<script>
-qc=Q`
-      I H#1 I 
-      X H#0 I
-`
-eval_draw(qc,'qc-xch',use_palette=false)
+
+Nothing happens to `q0` as the state of `q1` remains at $$\ket{0}$$ and the $$\fbox{H#1}$$ is never triggered. We can use the **Pauli-X** gate $$\fbox{X}$${%sidenote 'Pauli-X gate is represented by $$\bigoplus$$ in some circuits.'%} to flip `q1` state at `m1`, and the result is shown in <ref fig='qc-xch'/>. With `q1` state flipped from $$\ket{0}$$ to $$\ket{1}$$ at `m1`, the circuit above applies $$\fbox{H#1}$$ to `q0`, resulting two possible states: $$\ket{10}$$ and $$\ket{11}$$.
+{%fig 'qcsvg' 'Controlled Hadamard gate with a Pauli-X gate' 'qc-xch'%}
+<script type="text/javascript">
+    // circuit definition
+    var circuit = new QuantumCircuit(2);
+    circuit.addGate("x", 0, 1);
+    circuit.addGate("ch", 1, [1, 0]);
+    run_and_render_svg(circuit, 'qc-xch');
 </script>
 
 We can prove that $$p(\ket{01})=p(\ket{11})=0.5$$ by progressively following the circuit from left to right. 
-- At `m1`, we flip `q2`'s state, $$\hat{X}\oplus\hat{I}\ket{00}=\ket{10}$$;
+- At `m1`, we flip `q1`'s state, $$\hat{X}\oplus\hat{I}\ket{00}=\ket{10}$$;
 - At `m2`, the Hadamard gate is triggered, 
 {%eqn '\widehat{CH}\ket{10}=\ket{1}\oplus\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{\sqrt{2}}(\ket{10}+\ket{11}),' 'eqn-ch'%}
 where $$\widehat{CH}$$ is the controlled Hadamard gate. 
-- Because the probability amplitudes of two possible states in <ref eqn='eqn-ch'/> are $$\frac{1}{\sqrt{2}}$$, the probabilities of getting $$\ket{10}$$ or $$\ket{11}$$ are 50% at `m3`, as the caption of <ref fig='qc-xch'> indicates.
+- Because the probability amplitudes of two possible states in <ref eqn='eqn-ch'/> are $$\frac{1}{\sqrt{2}}$$, the probabilities of getting $$\ket{10}$$ or $$\ket{11}$$ are 50% at the end, as the caption of <ref fig='qc-xch'> indicates.
 
 ### 2.2 Introduction to entanglement
 Now that we have sufficient understanding of single- and multi-qubit operators{%sidenote 'we have used operators and gates interchangeably.'%}, we can move a step furter to see how quantum circuit can create entangled quantum states. Before we give the concept of entanglement, let us take a look at the following circuit:
@@ -207,16 +204,35 @@ Bell states introduced here belong to a class of entangled qubit states, called 
 Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it's constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs{%sidenote "let's hope this happens in the near future." %}, and you can still use Deutsch's algorithm to decide function type without sacrificing computational efficiency.
 
 ### 3.1 Construct a function in quantum circuit
-A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is a segment between two intermediate points that transform one set of multi-qubit states into another set. For example, If we treat `q3` and `q4` as **ancilla qubits**{%sidenote "ancilla qubit: qubits used for storing partial results, and we generally don't care their final states."%} in <ref fig="qc-simple-func"/> guarantees the `q1-q2` state being $$\ket{00}$$, no matter what state is prepared at `m1`. Readers can verify this statement by adding gates to `q1` and `q2` at `m1` and `m2`.
-{%fig 'qc' 'A function that always gives $$\ket{00}$$ at q1 and q2' 'palette' 'qc-simple-func'%}
-<script>
-var qc = Q`
-      I I X#0 I    X#1 I  
-      I I I   X#0  I   X#1
-      I I X#1 I    X#0 I  
-      I I I   X#1  I   X#0
-`
-eval_draw(qc,'qc-simple-func',use_palette=true);
+A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is a segment between two intermediate points that transform one set of multi-qubit states into another set. For example, If we treat `q2` and `q3` as **ancilla qubits**{%sidenote "ancilla qubit: qubits used for storing partial results, and we generally don't care their final states."%} in <ref fig="qc-const-func"/> guarantees the `q0-q1` state being $$\ket{00}$$, no matter what state is prepared at `m1`. Readers can verify this statement by adding gates to `q0` and `q1` at `m1` and `m2`.
+
+{%fig 'qcsvg' 'A constant function that takes inputs at q0 and q1' 'qc-const-func'%}
+<script type="text/javascript">
+    // circuit definition
+    var circuit = new QuantumCircuit(4);
+    circuit.addGate("cx", 0, [0, 2]);
+    circuit.addGate("cx", 1, [1, 3]);
+    circuit.addGate("cx", 2, [2, 0]);
+    circuit.addGate("cx", 3, [3, 1]);
+    run_and_render_svg(circuit, 'qc-const-func');
 </script>
 
-The circuit in <ref fig="qc-simple-func"/> is a constant function that uses only `q1` and `q2` as input and output. The constant function above is packaged in a [Quirk](https://algassert.com/quirk){%sidenote "This is by far the most comprehensive quantum circuit simulator that can be run and tested in browsers. Due to its versatility it won't be so efficient to render Quirk in every post here. Thus, we will just render it at its original website."%}-rendered circuit [here](https://algassert.com/quirk#circuit=%7B%22cols%22%3A%5B%5B%22X%22%2C%22H%22%5D%2C%5B%22%E2%80%A2%22%2C%22Y%22%5D%2C%5B%22~i3io%22%5D%5D%2C%22gates%22%3A%5B%7B%22id%22%3A%22~i3io%22%2C%22name%22%3A%22Const%20Func%22%2C%22circuit%22%3A%7B%22cols%22%3A%5B%5B%22%E2%80%A2%22%2C1%2C%22X%22%5D%2C%5B1%2C%22%E2%80%A2%22%2C1%2C%22X%22%5D%2C%5B%22X%22%2C1%2C%22%E2%80%A2%22%5D%2C%5B1%2C%22X%22%2C1%2C%22%E2%80%A2%22%5D%5D%7D%7D%5D%7D), in which you can check the content of the `const func` gate in the "Custom Gate" section of the `Toolbox` menu. Multi-qubit gate that is wrapped in this way is also called **oracle**, and you can again drag and drop different gates before `const funct` gate to the top two qubits to check the final probability amplitudes.
+The circuit in <ref fig="qc-const-func"/> is a constant function that uses `q0` and `q1` as input and output and have two ancilla qubits `q2` and `q3`. For circuits that implement complicated functions, it is a common practice to hide function details by wrapping corresponding circuit segments into composite gate. Multi-qubit gate that is wrapped in this way is also called **oracle**.
+
+{%fig 'qcsvg' 'An oracle that hides details of the constant function shown above' 'qc-const-oracle'%}
+<script type="text/javascript">
+    // circuit definition
+    var oracle = new QuantumCircuit(4);
+    oracle.addGate("cx", 0, [0, 2]);
+    oracle.addGate("cx", 1, [1, 3]);
+    oracle.addGate("cx", 2, [2, 0]);
+    oracle.addGate("cx", 3, [3, 1]);
+    var obj = oracle.save();
+    var circuit = new QuantumCircuit(5);
+    circuit.registerGate("f(x)", obj);
+    circuit.addGate("h",0,4);
+    circuit.addGate("f(x)",1,[0,1,2,3]);
+    run_and_render_svg(circuit, 'qc-const-oracle');
+</script>
+
+The constant function above is packaged in a [Quirk](https://algassert.com/quirk){%sidenote "Quirk is by far the most comprehensive quantum circuit simulator that can be run and tested in browsers. Due to its versatility it won't be so efficient to render Quirk in every post here. Thus, we will just render it at its original website."%}-rendered circuit [here](https://algassert.com/quirk#circuit=%7B%22cols%22%3A%5B%5B%22X%22%2C%22H%22%5D%2C%5B%22%E2%80%A2%22%2C%22Y%22%5D%2C%5B%22~i3io%22%5D%5D%2C%22gates%22%3A%5B%7B%22id%22%3A%22~i3io%22%2C%22name%22%3A%22Const%20Func%22%2C%22circuit%22%3A%7B%22cols%22%3A%5B%5B%22%E2%80%A2%22%2C1%2C%22X%22%5D%2C%5B1%2C%22%E2%80%A2%22%2C1%2C%22X%22%5D%2C%5B%22X%22%2C1%2C%22%E2%80%A2%22%5D%2C%5B1%2C%22X%22%2C1%2C%22%E2%80%A2%22%5D%5D%7D%7D%5D%7D), in which you can check the content of the `const func` gate in the "Custom Gate" section of the `Toolbox` menu. Multi-qubit gate that is wrapped in this way is also called **oracle**, and you can again drag and drop different gates before `const funct` gate to the top two qubits to check the final probability amplitudes.

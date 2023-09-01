@@ -29,10 +29,79 @@ run_and_render_svg = function(circuit, figId){
         parsedHTML.appendChild(text);
         label_id+=1;
     });
+    blackbox=parsedHTML.querySelectorAll('.qc-gate-blackbox')
+    blackbox_center = []
+    blackbox.forEach((el)=>{
+        el.remove(); 
+        el.setAttribute('fill','#639be0'); 
+        parsedHTML.appendChild(el);
+        x=parseInt(el.getAttribute('x'));
+        y=parseInt(el.getAttribute('y'));
+        w=parseInt(el.getAttribute('width'));
+        h=parseInt(el.getAttribute('height'));
+        blackbox_center.push([x+Math.floor(w/2),y+Math.floor(h/2)]);
+    });
+    // console.log(blackbox_center);
+    blackbox_label=parsedHTML.querySelectorAll('.qc-blackbox-label');
+    blackbox_label.forEach((el,i)=>{
+        el.remove();
+        el.setAttribute('x',blackbox_center[i][0]);
+        el.setAttribute('y',blackbox_center[i][1]);
+        parsedHTML.appendChild(el);
+    });
     container.appendChild(parsedHTML);
     // create link to quirk
     var quirkData = circuit.exportQuirk(true);
     var quirkURL = "http://algassert.com/quirk#circuit=" + JSON.stringify(quirkData);
     var quirkLink = document.getElementById(figId+"-quirk");
     quirkLink.setAttribute("href", quirkURL);
+    // generate distribution
+    possible_states = Object.entries(prob_report(probabilities)).sort((a, b) => a[0].localeCompare(b[0]));
+    reportDiv = document.getElementById(figId+'-report');
+    possible_states.forEach((item)=>{
+        var lineElement = document.createElement("div");
+        var line = "|"+item[0]+"⟩ "+item[1];
+        lineElement.textContent =line;
+        reportDiv.appendChild(lineElement);
+    });
 }
+
+prob_report = function(probabilities){
+    var state_strings = generateCombinations(probabilities.length).sort();
+    var states = {};
+    var nq = probabilities.length-1;
+    state_strings.forEach(function(digits){
+        ps =[];
+        digits.split("").forEach((s,i)=>{
+            if(s=='1'){
+                ps.push(probabilities[nq-i]);
+            }else{
+                ps.push(1-probabilities[nq-i]);
+            }
+        });
+        p = Math.round(ps.reduce((a,b)=>{return a*b})*100)
+        if (p>0){
+            states[digits]= generateString(Math.floor(p/5))+p.toString()+'%';
+        }
+    });
+
+    return states;
+
+}
+
+function generateCombinations(n) {
+    var states = [];
+    function generate(current, length) {
+        if (length === 0) {
+            states.push(current);
+        } else {
+            generate(current + '0', length - 1);
+            generate(current + '1', length - 1);
+        }
+    }
+
+    generate('', n);
+    return states
+}
+
+const generateString = (x) => "=".repeat(x) + "|".repeat(20 - x);
