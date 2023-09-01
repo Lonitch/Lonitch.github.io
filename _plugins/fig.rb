@@ -43,6 +43,13 @@ module Jekyll
                 use_palette=false
                 figId = "fig-#{@@fig_count}"
             end
+        elsif @text[0]== 'qcsvg'
+            if @text.length == 3
+                renderType, cap, figId = @text[0], @text[1], @text[2]
+            elsif @text.length == 2
+                renderType, cap= @text[0], @text[1]
+                figId = "fig-#{@@fig_count}"
+            end
         else
             if @text.length == 4
                 renderType, figType, cap, figId = @text[0], @text[1], @text[2].gsub('\\', '\\\\'), @text[3]
@@ -75,6 +82,8 @@ module Jekyll
             else
                 "<div class='qc-container numbered-fig' id='#{figId}-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'> #{cap}, and its probability distribution is shown below</span></div>"
             end
+        elsif renderType == 'qcsvg'
+            "<div class='qc-container numbered-fig' id='#{figId}-container'><div id='#{figId}' style='width:55%'></div><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'> #{cap},<a id='#{figId}-quirk'>see QC in Quirk.</a> Its probability distribution is shown below</span></div>"
         elsif renderType == 'img'
             if figType == 'fullwidth'
                 if link.start_with?('http://', 'https://','//')

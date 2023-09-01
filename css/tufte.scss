@@ -320,6 +320,16 @@ img { max-width: 100%; }
       align-items: flex-start; /* Align items to the start on small screens */
   }
 }
+@media (max-width: 800px) {
+  .numbered-equation {
+      flex-direction: column; /* Stack items vertically on small screens */
+      align-items: flex-start; /* Align items to the start on small screens */
+  };
+  .qc-container {
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: flex-start;
+  }
+}
 
 .sidenote, .marginnote { float: right;
                          clear: right;
