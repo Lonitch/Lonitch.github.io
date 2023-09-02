@@ -77,6 +77,7 @@ It is recommended to create an **excerpt** before the main content of your blog 
 - Make sure you have at least one empty line before section/subsection titles.
 - `Q.js` does NOT support gates that apply to more than two qubits, and `SWAP` gate is also not implemented correctly. See the issure [here](https://github.com/stewdio/q.js/issues/18).
 - Use `"` to wrap arguments to the ruby classes introduced below if your arguments contain "`'`".
+- It is recommanded to Use `\\\\` when creating multi-line equation using `eqn` class introduced below.
 
 ## LaTeX-like Elements for Blog Posts
 You can take a look at the posts created recently in the `_post` folder to learn how to use the classes introduced here. The general principles are:
