@@ -80,10 +80,10 @@ module Jekyll
             if use_palette
                 "<div class='Q-circuit-palette'></div><div class='qc-container numbered-fig' id='#{figId}-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='margin-right: 10%;'> #{cap}, and its probability distribution is shown below</span></div>"
             else
-                "<div class='qc-container numbered-fig' id='#{figId}-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'> #{cap}, and its probability distribution is shown below</span></div>"
+                "<div class='qc-container numbered-fig' id='#{figId}-container'><pre id='#{figId}' style='text-align: center;'></pre><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5.5%;'> #{cap}, and its probability distribution is shown below</span></div>"
             end
         elsif renderType == 'qcsvg'
-            "<div class='qc-container numbered-fig' id='#{figId}-container'><div id='#{figId}' style='width:55%'></div><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5%;'> #{cap},<a id='#{figId}-quirk'>see QC in Quirk.</a> Its probability distribution is shown below</span></div>"
+            "<div class='qc-container numbered-fig' id='#{figId}-container'><div id='#{figId}' style='width:55%'></div><span id='#{figId}-report' for='#{figId}' class='marginnote' style='width:30%;margin-left: 5.5%;'> #{cap},<a id='#{figId}-quirk'>see QC in Quirk.</a> Its probability distribution is shown below</span></div>"
         elsif renderType == 'img'
             if figType == 'fullwidth'
                 if link.start_with?('http://', 'https://','//')

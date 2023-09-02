@@ -56,12 +56,19 @@ run_and_render_svg = function(circuit, figId){
     var quirkLink = document.getElementById(figId+"-quirk");
     quirkLink.setAttribute("href", quirkURL);
     // generate distribution
-    possible_states = Object.entries(prob_report(probabilities)).sort((a, b) => a[0].localeCompare(b[0]));
+    possible_states = []
+    circuit.stateAsString(true).split('\n').forEach((el)=>{
+        if (el!=""){
+            var lst=el.split('i')[1].split('\t');
+            var p = parseFloat(lst[1])
+            possible_states.push(lst[0].split('>').join('⟩')+" "+generateString(Math.floor(p/5))+(Math.round(p*100)/100).toString()+'%');
+        }
+    });
     reportDiv = document.getElementById(figId+'-report');
     possible_states.forEach((item)=>{
         var lineElement = document.createElement("div");
-        var line = "|"+item[0]+"⟩ "+item[1];
-        lineElement.textContent =line;
+        // var line = "|"+item[0]+"⟩ "+item[1];
+        lineElement.textContent =item;
         reportDiv.appendChild(lineElement);
     });
 }

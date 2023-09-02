@@ -4,6 +4,7 @@ layout: default
 <h1>{{ page.title}}</h1>
 <p class="subtitle">{{ page.date | date: "%B %-d, %Y" }}</p>
 <script>
+// generate Q.js results whenever a circuit is evaluated 
 window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
     const circuit = event.detail.circuit
     if( circuit.name !== undefined ){
@@ -28,10 +29,10 @@ window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
                 el.appendChild(lineElement);
             });
 
-            // el.innerText = circuit.report$().replace(/^\n+/, "")
         }
     }
 })
+// re-evaluate circuit when it's changed.
 window.addEventListener( 'Q gui altered circuit', function( event ){
     event.detail.circuit.evaluate$()
 })
@@ -68,7 +69,7 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
             eqnNumber+=1;
         });
 
-        // Get all the div elements with the class 'numbered-fig'
+        // Prepend Fig. x to class of 'numbered-fig'
         var figDivs = document.querySelectorAll('.numbered-fig');
         var figNumber = 1
         figDivs.forEach(function(fig) {
@@ -84,11 +85,27 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
             
         });
 
+        // shut down display of mjx-container in margin notes
+        MathJax.startup.promise.then(function() {
+            findMjxContainersInMarginNotes();
+        });
+
+        function findMjxContainersInMarginNotes() {
+            var marginNoteSpans = document.querySelectorAll("span.marginnote");
+            marginNoteSpans.forEach(function(marginNoteSpan) {
+                var mjxContainers = marginNoteSpan.querySelectorAll(".MathJax");
+                mjxContainers.forEach(function(mjxContainer) {
+                    if(mjxContainer.getAttribute('display')!=null){mjxContainer.setAttribute('display',false)};
+                });
+            });
+        }
+
+
         // create references to equations or figures
         var divs = document.querySelectorAll("div[render_count]");
         var refs = document.querySelectorAll("ref");
     
-      if (refs) {
+        if (refs) {
             refs.forEach(function(ref) {
                 var refId = ref.getAttribute("fig")||ref.getAttribute("eqn");
 
