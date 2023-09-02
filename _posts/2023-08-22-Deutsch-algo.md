@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Qubit Saga: Deutsch's Algorithm"
+title:  "Qubit Saga: Deutsch–Jozsa Algorithm"
 date:   2023-08-22 11:35:00
 categories: post
 tags: [quantum-mechanics, quantum-algorithms]
@@ -15,8 +15,9 @@ tags: [quantum-mechanics, quantum-algorithms]
   - [2.2 Introduction to entanglement](#22-introduction-to-entanglement)
 - [3. Quantum Circuit for Deutsch's Algorithm](#3-quantum-circuit-for-deutschs-algorithm)
   - [3.1 Construct a function in quantum circuit](#31-construct-a-function-in-quantum-circuit)
+  - [3.2 Build the circuit](#32-build-the-circuit)
 
-The Deutsch algorithm can be considered an introductory-level quantum algorithm. Its creation was aimed at demonstrating the indisputable superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch's algorithm and its extended versions.
+The Deutsch–Jozsa algorithm can be considered an introductory-level quantum algorithm. Its creation was aimed at demonstrating the indisputable superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch's algorithm and its extended versions.
 
 ## 1. Is Your Function Constant?
 The problems efficiently solvable by the Deutsch algorithm can be described as follows: Given a function $$f(x)$$, if we do not know its explicit expression, how can we determine whether this function always outputs a constant value? The red line of <ref fig='fig-functype'/> represents a simple constant function, where $$f(x) = 1$$ for all values in its domain. The blue line of <ref fig='fig-functype'/> represents a balanced function, where $$f(x) = -1$$ when $$x < 0$$, and $$f(x) = 1$$ otherwise.
@@ -153,7 +154,7 @@ run_and_render_svg(circuit,'qc-twoh')
 </script>
 As the symbols indicate, $$\ket{00}$$ represents the measurement where both `q0` and `q1` are at $$\ket{0}$$ while $$\ket{01}$$ has `q0` at $$\ket{1}$$ and `q1` at $$\ket{0}$${%sidenote 'For multi-qubit states, we count indices of individual qubits from right to left.'%}. We can be mathematically rigorous by writting the multi-qubit states using Kronecker products, e.g., $$\ket{10}=\ket{1}\oplus\ket{0}$$. A more detailed discussion of Kronecker products can be found in [my previous post](./Kronecker-product). Kronecker product also enables us to write multi-qubit gates by combining single-qubit gates. For example, the quantum circuit in <ref fig='qc-twoh'/> can be written as
 
-{%eqn '\hat{H}_{q2}\oplus\hat{H}_{q1}\ket{0}_{q2}\oplus\ket{0}_{q1}=\hat{H}_{q2}\ket{0}_{q2}\oplus\hat{H}_{q1}\ket{0}_{q1}' 'eqn-twoh'%}
+{%eqn '\hat{H}_{q1}\oplus\hat{H}_{q0}\ket{0}_{q1}\oplus\ket{0}_{q0}=\hat{H}_{q1}\ket{0}_{q1}\oplus\hat{H}_{q0}\ket{0}_{q0}' 'eqn-twoh'%}
 
 where subscripts are qubits' indices. Because we always follow the 'right-first' convention, <ref eqn='eqn-twoh'/> can be simlified and expanded as follows:
 
@@ -204,20 +205,22 @@ Bell states introduced here belong to a class of entangled qubit states, called 
 Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it's constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs{%sidenote "let's hope this happens in the near future." %}, and you can still use Deutsch's algorithm to decide function type without sacrificing computational efficiency.
 
 ### 3.1 Construct a function in quantum circuit
-A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is a segment between two intermediate points that transform one set of multi-qubit states into another set. For example, If we treat `q2` and `q3` as **ancilla qubits**{%sidenote "ancilla qubit: qubits used for storing partial results, and we generally don't care their final states."%} in <ref fig="qc-const-func"/> guarantees the `q0-q1` state being $$\ket{00}$$, no matter what state is prepared at `m1`. Readers can verify this statement by adding gates to `q0` and `q1` at `m1` and `m2`.
+A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is a segment between two intermediate points that transform one set of multi-qubit states into another set. For example, If we treat `q2` and `q3` as **ancilla qubits**{%sidenote "ancilla qubit: qubits used for storing partial results, and we generally don't care their final states."%} in <ref fig="qc-const-func"/> guarantees the `q0-q1` state being $$\ket{00}$$, no matter what state is prepared before `m2`.
 
 {%fig 'qcsvg' 'A constant function that takes inputs at q0 and q1' 'qc-const-func'%}
 <script type="text/javascript">
     // circuit definition
     var circuit = new QuantumCircuit(4);
-    circuit.addGate("cx", 0, [0, 2]);
-    circuit.addGate("cx", 1, [1, 3]);
-    circuit.addGate("cx", 2, [2, 0]);
-    circuit.addGate("cx", 3, [3, 1]);
+    circuit.addGate("h", 0, 0);
+    circuit.addGate("h", 0, 1);
+    circuit.addGate("cx", 1, [0, 2]);
+    circuit.addGate("cx", 2, [1, 3]);
+    circuit.addGate("cx", 3, [2, 0]);
+    circuit.addGate("cx", 4, [3, 1]);
     run_and_render_svg(circuit, 'qc-const-func');
 </script>
 
-The circuit in <ref fig="qc-const-func"/> is a constant function that uses `q0` and `q1` as input and output and have two ancilla qubits `q2` and `q3`. For circuits that implement complicated functions, it is a common practice to hide function details by wrapping corresponding circuit segments into composite gate. Multi-qubit gate that is wrapped in this way is also called **oracle**.
+The circuit in <ref fig="qc-const-func"/> is a constant function that uses `q0` and `q1` as input and output and have two ancilla qubits `q2` and `q3`. For circuits that implement complicated functions, it is a common practice to hide function details by wrapping corresponding circuit segments into composite gate. Multi-qubit gate that is wrapped in this way is also called **oracle**. For the 2-qubit constant function above, an oracle is created in <ref fig='qc-const-oracle'/>, i.e., the blue block, which hides all the controlled-X gates.
 
 {%fig 'qcsvg' 'An oracle that hides details of the constant function shown above' 'qc-const-oracle'%}
 <script type="text/javascript">
@@ -230,9 +233,57 @@ The circuit in <ref fig="qc-const-func"/> is a constant function that uses `q0` 
     var obj = oracle.save();
     var circuit = new QuantumCircuit(5);
     circuit.registerGate("f(x)", obj);
+    circuit.addGate("h",0,0);
+    circuit.addGate("h",0,1);
     circuit.addGate("h",0,4);
     circuit.addGate("f(x)",1,[0,1,2,3]);
     run_and_render_svg(circuit, 'qc-const-oracle');
 </script>
 
-The constant function above is packaged in a [Quirk](https://algassert.com/quirk){%sidenote "Quirk is by far the most comprehensive quantum circuit simulator that can be run and tested in browsers. Due to its versatility it won't be so efficient to render Quirk in every post here. Thus, we will just render it at its original website."%}-rendered circuit [here](https://algassert.com/quirk#circuit=%7B%22cols%22%3A%5B%5B%22X%22%2C%22H%22%5D%2C%5B%22%E2%80%A2%22%2C%22Y%22%5D%2C%5B%22~i3io%22%5D%5D%2C%22gates%22%3A%5B%7B%22id%22%3A%22~i3io%22%2C%22name%22%3A%22Const%20Func%22%2C%22circuit%22%3A%7B%22cols%22%3A%5B%5B%22%E2%80%A2%22%2C1%2C%22X%22%5D%2C%5B1%2C%22%E2%80%A2%22%2C1%2C%22X%22%5D%2C%5B%22X%22%2C1%2C%22%E2%80%A2%22%5D%2C%5B1%2C%22X%22%2C1%2C%22%E2%80%A2%22%5D%5D%7D%7D%5D%7D), in which you can check the content of the `const func` gate in the "Custom Gate" section of the `Toolbox` menu. Multi-qubit gate that is wrapped in this way is also called **oracle**, and you can again drag and drop different gates before `const funct` gate to the top two qubits to check the final probability amplitudes.
+To demostrate Deutsch-Jozsa algorithm, we will use one constant function introduced here, based on which a non-constant function can be prepared by removing controlled gates or adding new gates.
+
+### 3.2 Build the circuit
+Now that we know how to embed a function as an oracle in a quantum circuit, we need to map the multi-qubit outputs to $$\ket{1}$$ or $$\ket{0}$$ to reflect the fact of $$f(x)=0$$ or $$f(x)=1$$. For the constant function, $$f(x)\equiv1$$, and $$\exists x, f(x)=0$$ for non-constant function. For our oracle that has two-qubit outputs, we can use the gate in <ref fig='qc-anti-ccx'/>to map $$\ket{00}$$ to 1 and other outputs to 0.
+{%fig 'qcsvg' 'Controlled gate at function output for mapping multi-qubit state to 0 or 1' 'qc-anti-ccx'%}
+<script type="text/javascript">
+    // circuit definition
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate("x", 0, 0);
+    oracle.addGate("ccx", 1, [0,1,2]);
+    oracle.addGate("x", 2, 0);
+    oracle.addGate("x", 0, 1);
+    oracle.addGate("x", 2, 1);
+    run_and_render_svg(oracle, 'qc-anti-ccx');
+</script>
+
+The measured `q2` in <ref fig='qc-anti-ccx'/> can be used as $$f(x)$$ in Deutsch-Jozsa algorithm. You can try this circuit in Quirk and see that any two-qubit state other than $$\ket{00}$$ will result in $$\ket{1}$$ at `q2`. To check if our oracle is constant, the Deutsch-Jozsa algorithm uses the following circuit:
+{%fig 'qcsvg' 'The Deutsch-Jozsa Algorithm for checking $$f(x)$$ that has two-qubit inputs/outputs' 'qc-deutsch-jozsa'%}
+<script type="text/javascript">
+    // function oracle
+    var oracle = new QuantumCircuit(4);
+    oracle.addGate("cx", 0, [0, 2]);
+    oracle.addGate("cx", 1, [1, 3]);
+    oracle.addGate("cx", 2, [2, 0]);
+    oracle.addGate("cx", 3, [3, 1]);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(6);
+    circuit.registerGate("f_const(x)", obj);
+//     circuit.registerGate("map", obj2);
+    circuit.addGate("h",0,0);
+    circuit.addGate("h",0,1);
+    circuit.addGate("f_const(x)",1,[0,1,2,3]);
+
+    circuit.addGate("x", 2, 0);
+    circuit.addGate("ccx", 3, [0,1,4]);
+    circuit.addGate("x", 4, 0);
+    circuit.addGate("x", 2, 1);
+    circuit.addGate("x", 4, 1);
+
+    circuit.addGate("x",0,5);
+    circuit.addGate("h",1,5);
+    circuit.addGate("cx",5,[4,5]);
+    circuit.addGate("h",6,0);
+    circuit.addGate("h",6,1);
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa');
+</script>

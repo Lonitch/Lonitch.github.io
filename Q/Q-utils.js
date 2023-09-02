@@ -9,7 +9,7 @@ run_and_render_svg = function(circuit, figId){
     var parsedHTML = parser.parseFromString(svg, 'text/html').body.firstChild;
     // var container_width = container.offsetWidth;
     // var svg_width = parsedHTML.getAttribute('width');
-    parsedHTML.setAttribute('style', 'margin-left:20%')
+    // parsedHTML.setAttribute('style', 'margin-left:20%')
     var m_height = "20";
     var label_x = [];
     parsedHTML.querySelectorAll(".qc-gate-label").forEach(function(el){label_x.push(parseInt(el.getAttribute("x")));});
@@ -79,7 +79,7 @@ prob_report = function(probabilities){
                 ps.push(1-probabilities[nq-i]);
             }
         });
-        p = Math.round(ps.reduce((a,b)=>{return a*b})*100)
+        p = Math.round(ps.reduce((a,b)=>{return a*b})*10000)/100;
         if (p>0){
             states[digits]= generateString(Math.floor(p/5))+p.toString()+'%';
         }

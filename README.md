@@ -1,6 +1,6 @@
 # TuBTLE: Tufte Blog Theme with Latex-like Elements
 
-This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/), [Q.js](https://quantumjavascript.app/), and [Quirk](https://algassert.com/quirk), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall quality of the content.
+This repository builds upon the concept of the Tufte-themed Jekyll site, which you can explore [here](http://clayh53.github.io/tufte-jekyll/). By integrating [JSXGraph](https://jsxgraph.org/), [Q.js](https://quantumjavascript.app/),[quantastica circuit simulator](https://github.com/quantastica/quantum-circuit/tree/master), and [Quirk](https://algassert.com/quirk), it introduces a remarkable dimension to visualizing intricate mathematical concepts. Moreover, Ruby plugins have been developed, enabling the creation of Markdown content enriched with Latex-like elements, thereby enhancing the overall appearance of the content.
 
 - [TuBTLE: Tufte Blog Theme with Latex-like Elements](#tubtle-tufte-blog-theme-with-latex-like-elements)
   - [Installation](#installation)
@@ -76,6 +76,7 @@ It is recommended to create an **excerpt** before the main content of your blog 
 - Side figures are floating at the left side if you blog is rendered on mobile devices or the browser window width is smaller than 760px. Sidenotes can be made visible by clicking the superscript numbers. 
 - Make sure you have at least one empty line before section/subsection titles.
 - `Q.js` does NOT support gates that apply to more than two qubits, and `SWAP` gate is also not implemented correctly. See the issure [here](https://github.com/stewdio/q.js/issues/18).
+- Use `"` to wrap arguments to the ruby classes introduced below if your arguments contain "`'`".
 
 ## LaTeX-like Elements for Blog Posts
 You can take a look at the posts created recently in the `_post` folder to learn how to use the classes introduced here. The general principles are:
@@ -97,7 +98,7 @@ To add a new equation with a numbered tag(automatically ordered), you can do the
 which will create a `div` element that wraps the equation. Note that if the last argument is omitted, the `id` of `<div>` is automatically set as `eqn-x`, in which `x` is a post-wise count of equation rendering.
 
 ### 3. Images
-So far we only support three rendering types: static `img`, dynamic `jsx` graph, and quantum circuit diagram `qc`. For each rendering type you can set the figure type as `fullwidth` or `marginnote`. Like the display equation, defining image id is not required but it is recommended to give your images meaningful IDs. Here image ID is defined by default as `fig-x`.  Finally, you're required to define its caption.
+So far we only support three rendering types: static `img`, dynamic `jsx` graph, `Q.js` quantum circuit diagram `qc`, and circuit svg image `qcsvg`. For each rendering type you can set the figure type as `fullwidth` or `marginnote`. Like the display equation, defining image id is not required but it is recommended to give your images meaningful IDs. Here image ID is defined by default as `fig-x`.  Finally, you're required to define its caption.
 
 To show a static image, please use the following two commands in your markdown:
 
@@ -175,6 +176,15 @@ eval_draw(qc,'qc-dumb-id',use_palette=true)
 </script>
 ```
 Notice how the `no_palette` argument is replaced with the `palette` above.
+
+The last rendering type is `qcsvg`, for which we prepare the following format to draw SVG images:
+```html
+{%fig `qcsvg` 'caption' 'fig-id'%}
+<script>
+// your code here
+</script>
+```
+Please explore [`quantatica`'s github repo](https://github.com/quantastica/quantum-circuit/tree/master#getting-started) for how to create quantum circuit.
 
 ### 4. Create references
 For big fans of Latex, the lack of references in MD documents is unfortunate. Here we provide a simple solution by adding `<ref/>` flags at the places where you need to refer to figures or equations. However, **please Do NOT use the flag at the beginning of a paragraph. It will breaks the format.** To refer to a figure, please use

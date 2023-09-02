@@ -1,8 +1,8 @@
-title: Tufte-Blog
-subtitle: Content-centric blogging
+title: TuBTLE
+subtitle: Tufte Blog Theme with Latex-like Elements
 author: Sizhe Liu
 simple_search: http://google.com/search
-description: A Jekyll theme for content-rich sites
+description: A Jekyll theme for content-rich latex-like sites
 name: tufte
 markdown: kramdown
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
