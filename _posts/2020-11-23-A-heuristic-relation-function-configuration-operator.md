@@ -8,7 +8,7 @@ date: 2020-11-23
 
 Author: Sizhe
 
-tags: [math, group theory]
+tags: [math, group-theory]
 
 toc: false
 

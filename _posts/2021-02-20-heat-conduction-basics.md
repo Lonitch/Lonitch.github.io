@@ -3,7 +3,7 @@ layout: post
 title: Basics of Heat Conduction, Inductively
 date: 2021-02-20
 Author: Sizhe
-tags: [notes, teaching, heat transfer]
+tags: [notes, teaching, heat-transfer]
 ---
 
 ## A Bit Self-reflection

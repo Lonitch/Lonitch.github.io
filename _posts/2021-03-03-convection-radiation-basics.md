@@ -3,7 +3,7 @@ layout: post
 title: Basics of Convective and Radiative Heat Transfer
 date: 2021-03-03
 Author: Sizhe
-tags: [notes, teaching, heat transfer]
+tags: [notes, teaching, heat-transfer]
 ---
 
 ## Another teaching note for heat transfer class

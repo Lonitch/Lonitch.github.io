@@ -8,7 +8,7 @@ date: 2020-11-04
 
 Author: Sizhe
 
-tags: [math, complex analysis]
+tags: [math, complex-analysis]
 
 toc: false
 

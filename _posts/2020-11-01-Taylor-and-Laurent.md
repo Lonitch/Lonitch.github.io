@@ -8,7 +8,7 @@ date: 2020-11-01
 
 Author: Sizhe
 
-tags: [mindmap, math, complex analysis]
+tags: [mindmap, math, complex-analysis]
 
 toc: false
 
