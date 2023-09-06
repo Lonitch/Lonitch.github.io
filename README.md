@@ -14,6 +14,7 @@ This repository builds upon the concept of the Tufte-themed Jekyll site, which y
     - [3. Images](#3-images)
     - [4. Create references](#4-create-references)
     - [5. Sidenote and Marginnote](#5-sidenote-and-marginnote)
+    - [6. Create index table](#6-create-index-table)
 
 
 ## Installation
@@ -206,3 +207,10 @@ Perhaps the most unique feature of the Tufte style is its sidenotes and marginno
 <!-- marginnode -->
 {%marginnote 'note content'%}
 ```
+
+### 6. Create index table
+To create indices to keywords in the main content, you need to 
+- create a subsection somewhere in your MD post using `## Index`, **the text must be exactly the same**;
+- wrap your keywords using triple star sings, e.g. `***keyword***`.
+
+The `createIndex` function in `Q/Q-utils.js` will then generate a table within which keywords are sorted alphabetically. Each entry in the table is a link to the places where keywords first appear, and you can use these links later in other posts.

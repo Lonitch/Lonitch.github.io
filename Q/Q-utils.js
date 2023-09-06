@@ -112,3 +112,159 @@ function generateCombinations(n) {
 }
 
 const generateString = (x) => "=".repeat(x) + "|".repeat(20 - x);
+
+// helper function for generating Q.js evaluation results in figure caption
+qjs_caption_results = function(circuit){
+    if( circuit.name !== undefined ){
+        const el = document.getElementById( circuit.name +'-report' )
+        if( el ) {
+            var divChildren = el.querySelectorAll("div");
+            divChildren.forEach(function(divChild) {
+                el.removeChild(divChild);
+            });
+            lines = circuit.report$().replace(/^\n+/, "").split('\n')
+            lines.forEach(function(line) {
+                var lineElement = document.createElement("div");
+                var ket1 = line.indexOf("|")
+                var ket2 = line.indexOf("⟩")
+                var state = line.substring(ket1+1,ket2).split('').reverse().join('')
+                if(state.length > 0) {
+                    lineElement.textContent = line.substring(0,ket1)+"|"+state+line.substring(ket2,line.length);
+                }
+                else{
+                    lineElement.textContent= line
+                }
+                el.appendChild(lineElement);
+            });
+
+        }
+    }
+}
+
+// helper function for generating numbered equations and figures
+eqn_fig_indices = function(){
+    // Get all the div elements with the class 'numbered-equation'
+    var equationDivs = document.querySelectorAll('.numbered-equation');
+    var eqnNumber = 1
+    // Loop through the equation divs and add/update the 'render_count' attribute
+    equationDivs.forEach(function(div) {
+        var label = document.createElement('span');
+        label.className = 'equation-label';
+        label.textContent = '(' + eqnNumber + ')';
+        div.insertBefore(label, div.firstChild.nextSibling);
+        div.setAttribute('render_count', eqnNumber);
+        eqnNumber+=1;
+    });
+
+    // Prepend Fig. x to class of 'numbered-fig'
+    var figDivs = document.querySelectorAll('.numbered-fig');
+    var figNumber = 1
+    figDivs.forEach(function(fig) {
+        var spanChild = fig.querySelector('span'); // Find <span> child
+        
+        if (fig.classList.contains('jxgbox')) {
+            spanChild = fig.nextElementSibling;
+            var spanChild = spanChild.querySelector('span.marginnote');
+        }
+        spanChild.insertAdjacentHTML("afterbegin",'Fig. ' + figNumber.toString() + ' ');
+        fig.setAttribute('render_count', figNumber);
+        figNumber+=1;
+        
+    });
+}
+
+// helper function for generating references to figures and equations
+eqn_fig_refs = function(){
+    // create references to equations or figures
+    var divs = document.querySelectorAll("div[render_count]");
+    var refs = document.querySelectorAll("ref");
+
+    if (refs) {
+        refs.forEach(function(ref) {
+            var refId = ref.getAttribute("fig")||ref.getAttribute("eqn");
+
+            divs.forEach(function(div) {
+                var divId = div.getAttribute("id");
+                if (divId==refId || divId==refId+"-container"){
+                    var count = div.getAttribute("render_count");
+                    var link = document.createElement("a");
+                    link.href = "#" + divId;
+                    if (ref.hasAttribute('eqn')){
+                        link.textContent = "Eqn. " + count;
+                    } else if(ref.hasAttribute('fig')){
+                        link.textContent = "Fig. " + count;
+                    } else{
+                        link.textContent = divId;
+                    }
+                    ref.parentNode.insertBefore(link, ref);
+                }
+            });
+        });
+    }
+}
+
+// helper functions for rendering MathJax expressions
+function findMjxContainersInMarginNotes() {
+    var marginNoteSpans = document.querySelectorAll("span.marginnote");
+    marginNoteSpans.forEach(function(marginNoteSpan) {
+        var mjxContainers = marginNoteSpan.querySelectorAll(".MathJax");
+        mjxContainers.forEach(function(mjxContainer) {
+            if(mjxContainer.getAttribute('display')!=null){mjxContainer.setAttribute('display',false)};
+        });
+    });
+}
+
+// helper function for generating word index
+createIndex = function(){
+    // Find the <h2>Index</h2> element by its text content
+    const indexHeaderElement = Array.from(document.querySelectorAll('h2')).find(element => element.textContent === 'Index');
+    if (indexHeaderElement) {
+        // Remove any existing tables
+        const existingTable = indexHeaderElement.nextElementSibling;
+        if (existingTable && existingTable.tagName === 'TABLE') {
+            existingTable.remove();
+        }
+        const entries = document.querySelectorAll('strong em');
+         // Sort the entries alphabetically by their text content
+        const sortedEntries = Array.from(entries).sort((a, b) => {
+            const textA = a.textContent.toLowerCase();
+            const textB = b.textContent.toLowerCase();
+            return textA.localeCompare(textB);
+        });
+        const table = document.createElement('table');
+        table.setAttribute('class','indexTable');
+
+        let cols = 2; // Default to 2 columns
+
+        if (window.innerWidth > 760) {
+        cols = 3;
+        }
+        if (window.innerWidth > 1000) {
+        cols = 4;
+        }
+
+        let row = document.createElement('tr');
+        let colCount = 0;
+
+        sortedEntries.forEach((entry, index) => {
+            entry.setAttribute('id',entry.textContent);
+            if (colCount === 0) {
+                row = document.createElement('tr');
+            }
+
+            const cell = document.createElement('td');
+            const link = document.createElement('a');
+            link.textContent = entry.textContent;
+            link.href = `#${entry.id}`;
+            cell.appendChild(link);
+            row.appendChild(cell);
+            colCount++;
+
+            if (colCount === cols || index === entries.length - 1) {
+                table.appendChild(row);
+                colCount = 0;
+        }
+        });
+        indexHeaderElement.insertAdjacentElement('afterend', table);
+    }
+}

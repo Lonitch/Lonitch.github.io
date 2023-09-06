@@ -6,33 +6,10 @@ layout: default
 <script>
 // generate Q.js results whenever a circuit is evaluated 
 window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
-    const circuit = event.detail.circuit
-    if( circuit.name !== undefined ){
-        const el = document.getElementById( circuit.name +'-report' )
-        if( el ) {
-            var divChildren = el.querySelectorAll("div");
-            divChildren.forEach(function(divChild) {
-                el.removeChild(divChild);
-            });
-            lines = circuit.report$().replace(/^\n+/, "").split('\n')
-            lines.forEach(function(line) {
-                var lineElement = document.createElement("div");
-                var ket1 = line.indexOf("|")
-                var ket2 = line.indexOf("⟩")
-                var state = line.substring(ket1+1,ket2).split('').reverse().join('')
-                if(state.length > 0) {
-                    lineElement.textContent = line.substring(0,ket1)+"|"+state+line.substring(ket2,line.length);
-                }
-                else{
-                    lineElement.textContent= line
-                }
-                el.appendChild(lineElement);
-            });
-
-        }
-    }
+    const circuit = event.detail.circuit;
+    qjs_caption_results(circuit);
 })
-// re-evaluate circuit when it's changed.
+// re-evaluate Q.js circuit when it's changed.
 window.addEventListener( 'Q gui altered circuit', function( event ){
     event.detail.circuit.evaluate$()
 })
@@ -55,77 +32,19 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
         .forEach( function(el){
             Q.Circuit.Editor.createPalette(el)
         })
-        
-        // Get all the div elements with the class 'numbered-equation'
-        var equationDivs = document.querySelectorAll('.numbered-equation');
-        var eqnNumber = 1
-        // Loop through the equation divs and add/update the 'render_count' attribute
-        equationDivs.forEach(function(div) {
-            var label = document.createElement('span');
-            label.className = 'equation-label';
-            label.textContent = '(' + eqnNumber + ')';
-            div.insertBefore(label, div.firstChild.nextSibling);
-            div.setAttribute('render_count', eqnNumber);
-            eqnNumber+=1;
-        });
-
-        // Prepend Fig. x to class of 'numbered-fig'
-        var figDivs = document.querySelectorAll('.numbered-fig');
-        var figNumber = 1
-        figDivs.forEach(function(fig) {
-            var spanChild = fig.querySelector('span'); // Find <span> child
-            
-            if (fig.classList.contains('jxgbox')) {
-                spanChild = fig.nextElementSibling;
-                var spanChild = spanChild.querySelector('span.marginnote');
-            }
-            spanChild.insertAdjacentHTML("afterbegin",'Fig. ' + figNumber.toString() + ' ');
-            fig.setAttribute('render_count', figNumber);
-            figNumber+=1;
-            
-        });
+        // create numbered indice for figures and equations
+        eqn_fig_indices();
 
         // shut down display of mjx-container in margin notes
         MathJax.startup.promise.then(function() {
             findMjxContainersInMarginNotes();
         });
 
-        function findMjxContainersInMarginNotes() {
-            var marginNoteSpans = document.querySelectorAll("span.marginnote");
-            marginNoteSpans.forEach(function(marginNoteSpan) {
-                var mjxContainers = marginNoteSpan.querySelectorAll(".MathJax");
-                mjxContainers.forEach(function(mjxContainer) {
-                    if(mjxContainer.getAttribute('display')!=null){mjxContainer.setAttribute('display',false)};
-                });
-            });
-        }
-
-
         // create references to equations or figures
-        var divs = document.querySelectorAll("div[render_count]");
-        var refs = document.querySelectorAll("ref");
-    
-        if (refs) {
-            refs.forEach(function(ref) {
-                var refId = ref.getAttribute("fig")||ref.getAttribute("eqn");
+        eqn_fig_refs();
 
-                divs.forEach(function(div) {
-                    var divId = div.getAttribute("id");
-                    if (divId==refId || divId==refId+"-container"){
-                        var count = div.getAttribute("render_count");
-                        var link = document.createElement("a");
-                        link.href = "#" + divId;
-                        if (ref.hasAttribute('eqn')){
-                            link.textContent = "Eqn. " + count;
-                        } else if(ref.hasAttribute('fig')){
-                            link.textContent = "Fig. " + count;
-                        } else{
-                            link.textContent = divId;
-                        }
-                        ref.parentNode.insertBefore(link, ref);
-                    }
-                });
-            });
-        }
+        // create Index
+        createIndex();
+        window.addEventListener('resize', createIndex);
     });
 </script>
