@@ -9,7 +9,7 @@ permalink: /tags/
 {% endif %}
 
 {%raw%}
-<div id="graph-container">
+<div id="graph-container" style="width:55%;height:600px">
   <!-- The graph will be rendered here -->
 </div>
 <script>
@@ -25,8 +25,11 @@ async function fetchAndParseMarkdownFiles(fileNames) {
 
 
     for (const fileName of fileNames) {
-        const response = await fetch("../articles/"+fileName+'.html');
+        const response = await fetch(".."+fileName);
         const text = await response.text();
+        // Find the title
+        const h1Match = text.match(/<h1[^>]*>([^<]+)<\/h1>/);
+        const title = h1Match ? h1Match[1].trim() : fileName; // Use the file name if <h1> is not found
         // Find all matches of tags within the 'post-tags' span
         const matches = text.matchAll(/<span class="post-tags">([\s\S]*?)<\/span>/g);
 
@@ -36,15 +39,16 @@ async function fetchAndParseMarkdownFiles(fileNames) {
             if (tags) {
                 // Remove square brackets and trim whitespace from tags
                 const cleanedTags = tags.map(tag => tag.replace(/\[|\]/g, '').trim());
-                tagsByFile[fileName] = cleanedTags;
+                tagsByFile[title] = cleanedTags;
             }
         }
     }
-    console.log(tagsByFile)
+    // console.log(tagsByFile)
     return tagsByFile;
 }
 function fetchFileNamesFromPostsDirectory() {
-    return fetch('../articles/')
+
+    return fetch('../')
         .then(response => response.text())
         .then(html => {
             const parser = new DOMParser();
@@ -55,8 +59,8 @@ function fetchFileNamesFromPostsDirectory() {
             const mdFileNames = []
             links.forEach(link => {
               href=link.getAttribute('href');
-              if (href && href.endsWith('.html')){
-                mdFileNames.push(href.split('.')[0])
+              if (href && href.startsWith('/articles')){
+                mdFileNames.push(href)
               }
 
             })
@@ -67,34 +71,37 @@ function fetchFileNamesFromPostsDirectory() {
 
 // Define a function to create the graph
 function createTagGraph(tagsByFile) {
-    // Create an array of unique tags
+    // Create an array of unique tags and titles
     const allTags = [...new Set(Object.values(tagsByFile).flat())];
+    const allTitles = Object.keys(tagsByFile);
 
-    // Create nodes and links
-    const nodes = allTags.map(tag => ({ id: tag }));
+    const nodes = allTags.concat(allTitles).map(node => ({ id: node }));
     const links = [];
 
-    for (const [fileName, tags] of Object.entries(tagsByFile)) {
-        tags.forEach(tag => {
-            const sourceNode = nodes.find(node => node.id === tag);
-            tags.forEach(otherTag => {
-                if (tag !== otherTag) {
-                    const targetNode = nodes.find(node => node.id === otherTag);
-                    if (targetNode) {
-                        links.push({ source: sourceNode.id, target: targetNode.id });
-                    }
+    // Create connections between title nodes and corresponding tag nodes
+    allTitles.forEach(title => {
+        const tags = tagsByFile[title];
+
+        if (tags) {
+            tags.forEach(tag => {
+                // Check if both title and tag nodes exist in the nodes array
+                const titleNode = nodes.find(node => node.id === title);
+                const tagNode = nodes.find(node => node.id === tag);
+
+                if (titleNode && tagNode) {
+                    links.push({ source: titleNode, target: tagNode });
                 }
             });
-        });
-    }
+        }
+    });
 
     // Create the D3 force simulation
-    const width = graphContainer.clientWidth;
-    const height = graphContainer.clientHeight;
-    const svg = d3.select(graphContainer).append('svg').attr('width', width).attr('height', height);
+    const width = 600//graphContainer.clientWidth;
+    const height = 600//graphContainer.clientHeight;
+    const svg = d3.select(graphContainer).append('svg').attr('width', "100%").attr('height', "100%");
     const simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(-100))
-        .force('link', d3.forceLink(links).distance(50))
+        .force('charge', d3.forceManyBody().strength(-30))
+        .force('link', d3.forceLink(links).distance(5))
         .force('center', d3.forceCenter(width / 2, height / 2));
 
     // Create links
@@ -102,17 +109,17 @@ function createTagGraph(tagsByFile) {
 
     // Create nodes
     const node = svg.selectAll('circle').data(nodes).enter().append('circle')
-        .attr('r', 10)
-        .attr('fill', 'blue')
+        .attr('r', d => allTags.includes(d.id) ? 8 : 5) // Adjust node size based on tag or title
+        .attr('fill', d => allTags.includes(d.id) ? 'blue' : 'red') // Node color based on tag or title
         .call(d3.drag()
             .on('start', dragStarted)
             .on('drag', dragging)
             .on('end', dragEnded));
 
     // Create labels for nodes
-    const label = svg.selectAll('text').data(nodes).enter().append('text')
-        .text(d => d.id)
-        .attr('class', 'node-label');
+    // const label = svg.selectAll('text').data(nodes).enter().append('text')
+    //     .text(d => d.id)
+    //     .attr('class', 'node-label');
 
     // Update positions on tick
     simulation.on('tick', () => {
@@ -120,18 +127,18 @@ function createTagGraph(tagsByFile) {
             .attr('x1', d => d.source.x)
             .attr('y1', d => d.source.y)
             .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y);
+            .attr('y2', d => d.target.y)
+            .attr('stroke',"black");
 
         node
             .attr('cx', d => d.x)
             .attr('cy', d => d.y);
 
-        label
-            .attr('x', d => d.x + 15)
-            .attr('y', d => d.y + 5);
+        // label
+        //     .attr('x', d => d.x + (allTags.includes(d.id) ? 15 : 20)) // Adjust label position based on tag or title
+        //     .attr('y', d => d.y + 5);
     });
 
-    // Drag functions
     function dragStarted(event, d) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
@@ -153,10 +160,6 @@ function createTagGraph(tagsByFile) {
 // Call the functions to fetch and create the graph
 fetchFileNamesFromPostsDirectory()
     .then(fileNames => {
-        // Now, you have the file names from the _posts directory
-        console.log(fileNames);
-
-        // Continue with parsing and creating the graph using the file names
         return fetchAndParseMarkdownFiles(fileNames);
     })
     .then(tagsByFile => createTagGraph(tagsByFile))
