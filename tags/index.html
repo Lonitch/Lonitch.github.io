@@ -8,6 +8,162 @@ permalink: /tags/
   <h2>No post found</h2>
 {% endif %}
 
+{%raw%}
+<div id="graph-container">
+  <!-- The graph will be rendered here -->
+</div>
+<script>
+  // Define the container for the graph
+const graphContainer = document.getElementById('graph-container');
+
+// Define a function to fetch and parse .md files
+// Define a function to fetch and parse .md files
+async function fetchAndParseMarkdownFiles(fileNames) {
+    // Parse each .md file and extract tags
+    const tagRegExp = /\[([^\]]+)\]/g;
+    const tagsByFile = {};
+
+
+    for (const fileName of fileNames) {
+        const response = await fetch("../articles/"+fileName+'.html');
+        const text = await response.text();
+        // Find all matches of tags within the 'post-tags' span
+        const matches = text.matchAll(/<span class="post-tags">([\s\S]*?)<\/span>/g);
+
+        for (const match of matches) {
+            const tags = match[1].match(tagRegExp);
+
+            if (tags) {
+                // Remove square brackets and trim whitespace from tags
+                const cleanedTags = tags.map(tag => tag.replace(/\[|\]/g, '').trim());
+                tagsByFile[fileName] = cleanedTags;
+            }
+        }
+    }
+    console.log(tagsByFile)
+    return tagsByFile;
+}
+function fetchFileNamesFromPostsDirectory() {
+    return fetch('../articles/')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const links = doc.querySelectorAll('a');
+
+            // Filter for links that point to .md files
+            const mdFileNames = []
+            links.forEach(link => {
+              href=link.getAttribute('href');
+              if (href && href.endsWith('.html')){
+                mdFileNames.push(href.split('.')[0])
+              }
+
+            })
+
+            return mdFileNames;
+        });
+}
+
+// Define a function to create the graph
+function createTagGraph(tagsByFile) {
+    // Create an array of unique tags
+    const allTags = [...new Set(Object.values(tagsByFile).flat())];
+
+    // Create nodes and links
+    const nodes = allTags.map(tag => ({ id: tag }));
+    const links = [];
+
+    for (const [fileName, tags] of Object.entries(tagsByFile)) {
+        tags.forEach(tag => {
+            const sourceNode = nodes.find(node => node.id === tag);
+            tags.forEach(otherTag => {
+                if (tag !== otherTag) {
+                    const targetNode = nodes.find(node => node.id === otherTag);
+                    if (targetNode) {
+                        links.push({ source: sourceNode.id, target: targetNode.id });
+                    }
+                }
+            });
+        });
+    }
+
+    // Create the D3 force simulation
+    const width = graphContainer.clientWidth;
+    const height = graphContainer.clientHeight;
+    const svg = d3.select(graphContainer).append('svg').attr('width', width).attr('height', height);
+    const simulation = d3.forceSimulation(nodes)
+        .force('charge', d3.forceManyBody().strength(-100))
+        .force('link', d3.forceLink(links).distance(50))
+        .force('center', d3.forceCenter(width / 2, height / 2));
+
+    // Create links
+    const link = svg.selectAll('line').data(links).enter().append('line');
+
+    // Create nodes
+    const node = svg.selectAll('circle').data(nodes).enter().append('circle')
+        .attr('r', 10)
+        .attr('fill', 'blue')
+        .call(d3.drag()
+            .on('start', dragStarted)
+            .on('drag', dragging)
+            .on('end', dragEnded));
+
+    // Create labels for nodes
+    const label = svg.selectAll('text').data(nodes).enter().append('text')
+        .text(d => d.id)
+        .attr('class', 'node-label');
+
+    // Update positions on tick
+    simulation.on('tick', () => {
+        link
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d => d.target.x)
+            .attr('y2', d => d.target.y);
+
+        node
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y);
+
+        label
+            .attr('x', d => d.x + 15)
+            .attr('y', d => d.y + 5);
+    });
+
+    // Drag functions
+    function dragStarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragging(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+    }
+
+    function dragEnded(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
+}
+
+// Call the functions to fetch and create the graph
+fetchFileNamesFromPostsDirectory()
+    .then(fileNames => {
+        // Now, you have the file names from the _posts directory
+        console.log(fileNames);
+
+        // Continue with parsing and creating the graph using the file names
+        return fetchAndParseMarkdownFiles(fileNames);
+    })
+    .then(tagsByFile => createTagGraph(tagsByFile))
+    .catch(error => console.error('Error:', error));
+</script>
+{%endraw%}
+
 <div class="tags">
   <ul class="label">
     {% for tag in site.tags %}

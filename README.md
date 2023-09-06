@@ -213,4 +213,4 @@ To create indices to keywords in the main content, you need to
 - create a subsection somewhere in your MD post using `## Index`, **the text must be exactly the same**;
 - wrap your keywords using triple star sings, e.g. `***keyword***`.
 
-The `createIndex` function in `Q/Q-utils.js` will then generate a table within which keywords are sorted alphabetically. Each entry in the table is a link to the places where keywords first appear, and you can use these links later in other posts.
+The `createIndex` function in `Q/Q-utils.js` will then generate a table within which keywords are sorted alphabetically. Each entry in the table is a link to the place where corresponding keyword first appears, and you can use these links later in other posts.
