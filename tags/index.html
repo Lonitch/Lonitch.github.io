@@ -8,15 +8,24 @@ permalink: /tags/
   <h2>No post found</h2>
 {% endif %}
 
-{%raw%}
-<div id="graph-container" style="width:55%;height:600px">
-  <!-- The graph will be rendered here -->
+<h2>Tag Graph</h2>
+<br>
+<div id="loading-bar-container">
+  <div id="loading-bar"></div>
+  <div id="loading-text">Loading 20%</div>
+</div>
+<div id="tag-graph-container" class="tag-graph">
 </div>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   // Define the container for the graph
-const graphContainer = document.getElementById('graph-container');
+const graphContainer = document.getElementById('tag-graph-container');
+const loadingBar = document.getElementById('loading-bar');
+const loadingText = document.getElementById('loading-text');
 
-// Define a function to fetch and parse .md files
+// Show the loading bar
+loadingBar.style.width = '10%';
+
 // Define a function to fetch and parse .md files
 async function fetchAndParseMarkdownFiles(fileNames) {
     // Parse each .md file and extract tags
@@ -44,6 +53,8 @@ async function fetchAndParseMarkdownFiles(fileNames) {
         }
     }
     // console.log(tagsByFile)
+    loadingBar.style.width = '20%';
+    loadingText.innerText = 'Loading 40%';
     return tagsByFile;
 }
 function fetchFileNamesFromPostsDirectory() {
@@ -71,15 +82,23 @@ function fetchFileNamesFromPostsDirectory() {
 
 // Define a function to create the graph
 function createTagGraph(tagsByFile) {
+    loadingBar.style.width = '30%';
+    loadingText.innerText = 'Loading 60%';
     // Create an array of unique tags and titles
     const allTags = [...new Set(Object.values(tagsByFile).flat())];
     const allTitles = Object.keys(tagsByFile);
 
-    const nodes = allTags.concat(allTitles).map(node => ({ id: node }));
+    const nodes = [];
     const links = [];
+
+    // Create nodes for tags
+    allTags.forEach(tag => {
+        nodes.push({ id: tag, type: 'tag' });
+    });
 
     // Create connections between title nodes and corresponding tag nodes
     allTitles.forEach(title => {
+        nodes.push({ id: title, type: 'title' });
         const tags = tagsByFile[title];
 
         if (tags) {
@@ -96,12 +115,16 @@ function createTagGraph(tagsByFile) {
     });
 
     // Create the D3 force simulation
-    const width = 600//graphContainer.clientWidth;
-    const height = 600//graphContainer.clientHeight;
-    const svg = d3.select(graphContainer).append('svg').attr('width', "100%").attr('height', "100%");
+    const width = graphContainer.clientWidth;
+    const height = graphContainer.clientHeight;
+    const svg = d3.select(graphContainer).append('svg')
+                .attr('class', 'tag-graph-content')
+                .attr('width', '100%')
+                .attr('height', '100%')
+                .attr('viewBox', `0 0 ${width} ${height}`);
     const simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(-30))
-        .force('link', d3.forceLink(links).distance(5))
+        .force('charge', d3.forceManyBody().strength(d => (d.type === 'tag' ? -width/10 : -width/20)))
+        .force('link', d3.forceLink().distance(d => (d.source.type === 'tag' && d.target.type === 'tag') ? width/16 : width/32).id(d => d.id))
         .force('center', d3.forceCenter(width / 2, height / 2));
 
     // Create links
@@ -109,7 +132,7 @@ function createTagGraph(tagsByFile) {
 
     // Create nodes
     const node = svg.selectAll('circle').data(nodes).enter().append('circle')
-        .attr('r', d => allTags.includes(d.id) ? 8 : 5) // Adjust node size based on tag or title
+        .attr('r', d => allTags.includes(d.id) ? 0.015*width : 0.008*width) // Adjust node size based on tag or title
         .attr('fill', d => allTags.includes(d.id) ? ' #ea5130' : ' #3095ea') // Node color based on tag or title
         .call(d3.drag()
             .on('start', dragStarted)
@@ -117,9 +140,12 @@ function createTagGraph(tagsByFile) {
             .on('end', dragEnded));
 
     // Create labels for nodes
-    // const label = svg.selectAll('text').data(nodes).enter().append('text')
-    //     .text(d => d.id)
-    //     .attr('class', 'node-label');
+    const label = svg.selectAll('text').data(nodes).enter().append('text')
+        .text(d => (d.type === 'tag' ? d.id : ''))
+        .attr('class', 'node-label')
+        .attr('text-anchor', 'middle') // Center the label horizontally
+        .attr('dominant-baseline', 'middle') // Center the label vertically
+        .attr('font-size', 12);
 
     // Update positions on tick
     simulation.on('tick', () => {
@@ -134,10 +160,13 @@ function createTagGraph(tagsByFile) {
             .attr('cx', d => d.x)
             .attr('cy', d => d.y);
 
-        // label
-        //     .attr('x', d => d.x + (allTags.includes(d.id) ? 15 : 20)) // Adjust label position based on tag or title
-        //     .attr('y', d => d.y + 5);
+        label
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .attr('font-size', '12');
     });
+
+    simulation.force('link').links(links);
 
     function dragStarted(event, d) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -155,20 +184,51 @@ function createTagGraph(tagsByFile) {
         d.fx = null;
         d.fy = null;
     }
+  
+    const graph = {
+        svg: svg,
+        simulation: simulation
+    };
+
+    loadingBar.style.width = '50%';
+    loadingText.innerText = 'Loading 100%';
+    setTimeout(() => {
+        loadingBar.style.display = 'none';
+        loadingText.style.display = 'none';
+    }, 300); // Delay to allow for smooth transition
+
+    return graph;
+
 }
 
 // Call the functions to fetch and create the graph
+var tagsByFile=null;
+var tagGraph = null
 fetchFileNamesFromPostsDirectory()
     .then(fileNames => {
         return fetchAndParseMarkdownFiles(fileNames);
     })
-    .then(tagsByFile => createTagGraph(tagsByFile))
+    .then(result => {tagsByFile=result;tagGraph=createTagGraph(result)})
     .catch(error => console.error('Error:', error));
+
+// Function to update the graph when window size changes
+function updateGraphOnResize() {
+    const newWidth = graphContainer.clientWidth;
+    const newHeight = graphContainer.clientHeight;
+
+    tagGraph.svg.remove();
+    tagGraph = createTagGraph(tagsByFile);
+    tagGraph.simulation.restart();
+}
+
+// Add a window resize event listener
+window.addEventListener('resize', updateGraphOnResize);
+})
 </script>
-{%endraw%}
+
 
 <div class="tags">
-  <ul class="label">
+  <!-- <ul class="label">
     {% for tag in site.tags %}
     <li>
       <a href="#{{ tag[0] }}">
@@ -177,12 +237,12 @@ fetchFileNamesFromPostsDirectory()
       </a>
     </li>
     {% endfor %}
-  </ul>
+  </ul> -->
 
   {% for tag in site.tags %}
-    <h2 id="{{ tag[0] }}">
+    <h3 id="{{ tag[0] }}">
       {{ tag[0] }}
-    </h2>
+    </h3>
     <ul class="tag">
       {% for post in tag[1] %}
         {% if post.title != null %}

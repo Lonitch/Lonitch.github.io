@@ -313,11 +313,47 @@ img { max-width: 100%; }
   align-items: center;
 }
 
+#loading-bar {
+  width: 0;
+  height: 5px;
+  background-color: #0073e6;
+  position: relative;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease-in-out;
+}
 /* Apply styles for smaller window sizes */
 @media (max-width: 800px) {
-  .numbered-equation {
-      flex-direction: column; /* Stack items vertically on small screens */
-      align-items: flex-start; /* Align items to the start on small screens */
+  .tag-graph {
+    border-color: #000;
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
+    .tag-graph-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid #6b81c0; /* Add a border around the content */
+      box-sizing: border-box;
+    }
+  }
+}
+@media (min-width: 801px) {
+  .tag-graph {
+    width: 50%;
+    padding-top: 40%;
+    position: relative;
+    .tag-graph-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid #6b81c0; /* Add a border around the content */
+      box-sizing: border-box;
+    }
   }
 }
 @media (max-width: 800px) {
