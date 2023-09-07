@@ -110,7 +110,7 @@ function createTagGraph(tagsByFile) {
     // Create nodes
     const node = svg.selectAll('circle').data(nodes).enter().append('circle')
         .attr('r', d => allTags.includes(d.id) ? 8 : 5) // Adjust node size based on tag or title
-        .attr('fill', d => allTags.includes(d.id) ? 'blue' : 'red') // Node color based on tag or title
+        .attr('fill', d => allTags.includes(d.id) ? ' #ea5130' : ' #3095ea') // Node color based on tag or title
         .call(d3.drag()
             .on('start', dragStarted)
             .on('drag', dragging)
