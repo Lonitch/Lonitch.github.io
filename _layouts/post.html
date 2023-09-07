@@ -34,6 +34,19 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // add class to toc list
+        const ulElements = document.querySelectorAll('ul');
+        let tocElement = null;
+
+        // Iterate through the <ul> elements and find the one with <li> containing <a>
+        ulElements.forEach((ul) => {
+        const liWithA = ul.querySelectorAll('li a');
+        const li = ul.querySelectorAll('li');
+        if (liWithA.length == li.length) {
+            tocElement = ul;
+            tocElement.setAttribute('class','toc-list')
+        }
+        });
         // add interactive circuit to all elements with class "Q-circuit-palette"
         Array
         .from( document.querySelectorAll( '.Q-circuit-palette' ))
