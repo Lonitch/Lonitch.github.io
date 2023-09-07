@@ -35,7 +35,7 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // add class to toc list
-        const ulElements = document.querySelectorAll('ul');
+        const ulElements = document.querySelector('article').querySelectorAll('ul');
         let tocElement = null;
 
         // Iterate through the <ul> elements and find the one with <li> containing <a>
