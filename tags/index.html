@@ -31,6 +31,7 @@ async function fetchAndParseMarkdownFiles(fileNames) {
     // Parse each .md file and extract tags
     const tagRegExp = /\[([^\]]+)\]/g;
     const tagsByFile = {};
+    const hrefByFile = {};
 
 
     for (const fileName of fileNames) {
@@ -49,13 +50,14 @@ async function fetchAndParseMarkdownFiles(fileNames) {
                 // Remove square brackets and trim whitespace from tags
                 const cleanedTags = tags.map(tag => tag.replace(/\[|\]/g, '').trim());
                 tagsByFile[title] = cleanedTags;
+                hrefByFile[title] = fileName;
             }
         }
     }
     // console.log(tagsByFile)
     loadingBar.style.width = '20%';
     loadingText.innerText = 'Loading 40%';
-    return tagsByFile;
+    return [tagsByFile,hrefByFile];
 }
 function fetchFileNamesFromPostsDirectory() {
 
@@ -81,7 +83,7 @@ function fetchFileNamesFromPostsDirectory() {
 }
 
 // Define a function to create the graph
-function createTagGraph(tagsByFile) {
+function createTagGraph(tagsByFile, hrefByFile) {
     loadingBar.style.width = '30%';
     loadingText.innerText = 'Loading 60%';
     // Create an array of unique tags and titles
@@ -98,7 +100,7 @@ function createTagGraph(tagsByFile) {
 
     // Create connections between title nodes and corresponding tag nodes
     allTitles.forEach(title => {
-        nodes.push({ id: title, type: 'title' });
+        nodes.push({ id: title, type: 'title', href:hrefByFile[title] });
         const tags = tagsByFile[title];
 
         if (tags) {
@@ -124,28 +126,46 @@ function createTagGraph(tagsByFile) {
                 .attr('viewBox', `0 0 ${width} ${height}`);
     const simulation = d3.forceSimulation(nodes)
         .force('charge', d3.forceManyBody().strength(d => (d.type === 'tag' ? -width/10 : -width/20)))
-        .force('link', d3.forceLink().distance(d => (d.source.type === 'tag' && d.target.type === 'tag') ? width/16 : width/32).id(d => d.id))
+        .force('link', d3.forceLink().distance(width/25))
         .force('center', d3.forceCenter(width / 2, height / 2));
 
     // Create links
-    const link = svg.selectAll('line').data(links).enter().append('line');
+    const link = svg.selectAll('line').data(links).enter().append('line')
+                .attr('opacity',0.3);
 
     // Create nodes
-    const node = svg.selectAll('circle').data(nodes).enter().append('circle')
-        .attr('r', d => allTags.includes(d.id) ? 0.015*width : 0.008*width) // Adjust node size based on tag or title
+    const node = svg.selectAll('circle').data(nodes).enter().append('a')
+        .attr('href', d => (d.type==='tag'?'#'+d.id:d.href)) // Set the URL for the link based on your data
+        .attr('target', d => (d.type==='tag'?'_self':'_blank')) // Open the link in a new tab
+        .append('circle')
+        .attr('r', d => allTags.includes(d.id) ? 0.018*width : 0.01*width) // Adjust node size based on tag or title
         .attr('fill', d => allTags.includes(d.id) ? ' #ea5130' : ' #3095ea') // Node color based on tag or title
+        .attr('opacity',0.6)
+        .attr('node-label',d=>d.id)
         .call(d3.drag()
             .on('start', dragStarted)
             .on('drag', dragging)
-            .on('end', dragEnded));
+            .on('end', dragEnded))
+        .on('mouseover', function (event, d) {
+          d3.select(this).attr('opacity', 1);
+          cur_label = this.getAttribute('node-label');
+          label._groups[0].filter(l => (l.__data__.id === cur_label && l.__data__.type === 'title'))
+                          .forEach(el=>el.setAttribute('style', 'visibility:visible'));})
+        .on('mouseout', function (event, d) {
+          d3.select(this).attr('opacity', 0.6)
+          cur_label = this.getAttribute('node-label');
+          label._groups[0].filter(l => (l.__data__.id === cur_label && l.__data__.type === 'title'))
+                          .forEach(el=>el.setAttribute('style', 'visibility:hidden'));});
 
     // Create labels for nodes
     const label = svg.selectAll('text').data(nodes).enter().append('text')
-        .text(d => (d.type === 'tag' ? d.id : ''))
+        .text(d => (d.id))
         .attr('class', 'node-label')
-        .attr('text-anchor', 'middle') // Center the label horizontally
+        .attr('text-anchor', 'left')
         .attr('dominant-baseline', 'middle') // Center the label vertically
-        .attr('font-size', 12);
+        .attr('font-size', 12)
+        .attr('opacity', d=>(d.type==='tag'? 0.6:0.8))
+        .style('visibility', d=>(d.type==='tag'?'visible':'hidden'));
 
     // Update positions on tick
     simulation.on('tick', () => {
@@ -161,9 +181,8 @@ function createTagGraph(tagsByFile) {
             .attr('cy', d => d.y);
 
         label
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-        .attr('font-size', '12');
+        .attr('x', d => d.x+6)
+        .attr('y', d => d.y-12);
     });
 
     simulation.force('link').links(links);
@@ -203,12 +222,14 @@ function createTagGraph(tagsByFile) {
 
 // Call the functions to fetch and create the graph
 var tagsByFile=null;
-var tagGraph = null
+var tagGraph = null;
+var hrefByFile=null;
 fetchFileNamesFromPostsDirectory()
     .then(fileNames => {
-        return fetchAndParseMarkdownFiles(fileNames);
+        res= fetchAndParseMarkdownFiles(fileNames);
+        return res;
     })
-    .then(result => {tagsByFile=result;tagGraph=createTagGraph(result)})
+    .then(result => {console.log(result);[tagsByFile,hrefByFile]=result;tagGraph=createTagGraph(tagsByFile,hrefByFile)})
     .catch(error => console.error('Error:', error));
 
 // Function to update the graph when window size changes
@@ -217,7 +238,7 @@ function updateGraphOnResize() {
     const newHeight = graphContainer.clientHeight;
 
     tagGraph.svg.remove();
-    tagGraph = createTagGraph(tagsByFile);
+    tagGraph = createTagGraph(tagsByFile,hrefByFile);
     tagGraph.simulation.restart();
 }
 
