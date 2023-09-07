@@ -26,20 +26,21 @@ const loadingText = document.getElementById('loading-text');
 // Show the loading bar
 loadingBar.style.width = '10%';
 
-// Define a function to fetch and parse .md files
+// fetch and parse .md files
 async function fetchAndParseMarkdownFiles(fileNames) {
-    // Parse each .md file and extract tags
     const tagRegExp = /\[([^\]]+)\]/g;
     const tagsByFile = {};
     const hrefByFile = {};
 
-
-    for (const fileName of fileNames) {
-        const response = await fetch(".."+fileName);
+    // Create an array of promises for fetching the files in parallel
+    const fetchPromises = fileNames.map(async (fileName) => {
+        const response = await fetch(".." + fileName);
         const text = await response.text();
+
         // Find the title
         const h1Match = text.match(/<h1[^>]*>([^<]+)<\/h1>/);
-        const title = h1Match ? h1Match[1].trim() : fileName; // Use the file name if <h1> is not found
+        const title = h1Match ? h1Match[1].trim() : fileName;
+
         // Find all matches of tags within the 'post-tags' span
         const matches = text.matchAll(/<span class="post-tags">([\s\S]*?)<\/span>/g);
 
@@ -47,18 +48,22 @@ async function fetchAndParseMarkdownFiles(fileNames) {
             const tags = match[1].match(tagRegExp);
 
             if (tags) {
-                // Remove square brackets and trim whitespace from tags
                 const cleanedTags = tags.map(tag => tag.replace(/\[|\]/g, '').trim());
                 tagsByFile[title] = cleanedTags;
                 hrefByFile[title] = fileName;
             }
         }
-    }
-    // console.log(tagsByFile)
+    });
+
+    await Promise.all(fetchPromises);
+
+    // Update loading progress (if you have a loading bar)
     loadingBar.style.width = '20%';
     loadingText.innerText = 'Loading 40%';
-    return [tagsByFile,hrefByFile];
+
+    return [tagsByFile, hrefByFile];
 }
+
 function fetchFileNamesFromPostsDirectory() {
 
     return fetch('../')
@@ -126,7 +131,7 @@ function createTagGraph(tagsByFile, hrefByFile) {
                 .attr('viewBox', `0 0 ${width} ${height}`);
     const simulation = d3.forceSimulation(nodes)
         .force('charge', d3.forceManyBody().strength(d => (d.type === 'tag' ? -width/10 : -width/20)))
-        .force('link', d3.forceLink().distance(width/25))
+        .force('link', d3.forceLink().distance(width/30))
         .force('center', d3.forceCenter(width / 2, height / 2));
 
     // Create links
@@ -229,7 +234,7 @@ fetchFileNamesFromPostsDirectory()
         res= fetchAndParseMarkdownFiles(fileNames);
         return res;
     })
-    .then(result => {console.log(result);[tagsByFile,hrefByFile]=result;tagGraph=createTagGraph(tagsByFile,hrefByFile)})
+    .then(result => {[tagsByFile,hrefByFile]=result;tagGraph=createTagGraph(tagsByFile,hrefByFile)})
     .catch(error => console.error('Error:', error));
 
 // Function to update the graph when window size changes
