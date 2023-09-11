@@ -42,7 +42,7 @@ The information in this section explains how to make a customized copy of this p
 - Change ```_includes/header.html``` and ```_includes/footer.html``` for header and footer formats
 
 ## Create Comment Section
-Our comment section is powered by [uteranc.es](http://www.uteranc.es). To make comments visible after each post, please replace `repo` attribute with your own repository name in the following element that you can find at ```_layouts/post.html```:
+We provide two ways of displaying comments: [uteranc.es](http://www.uteranc.es) or [giscus](https://giscus.app/). Uteranc makes comments as github issues while giscus reports all comments in repo discussion. giscus supports insertion of MathJAX expression and online image, but uteranc loads more quickly. If you want to use uteranc, please replace `repo` attribute with your own repository name in the following element that you can find at ```_layouts/post.html```:
 
 ```html
 <script src="https://utteranc.es/client.js"
@@ -54,6 +54,8 @@ Our comment section is powered by [uteranc.es](http://www.uteranc.es). To make c
         async>
 </script>
 ```
+
+To use giscus, please replace the `script` element above with generated element configured directly on the website [here](https://giscus.app/).
 
 ## Create a New Blog
 Blogs are markdown files stored at `_posts` folder with their names formatted as `year-mm-dd-post-name.md`. Each markdown file starts with a head that specifies its name, date, layout type, and tags. An example of such head is shown below. Notice how the information starts and ends with `---` and each tag has words separated by `-`.
