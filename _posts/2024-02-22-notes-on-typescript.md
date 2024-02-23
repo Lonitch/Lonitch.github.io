@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Typescript: Some Random Notes"
+title: "Typescript: Fundementals + Intermediate"
 date: 2024-02-22 21:30:00
 categories: post
 tags: [programming, web-dev]
@@ -59,9 +59,7 @@ interface Hamster extends Mammal {
 }
 function careForHamster(h: Hamster) {
   h.getFurOrHairColor();
-  //   ^?
   h.squeak();
-  //   ^?
 }
 ```
 
@@ -70,7 +68,6 @@ TypeScript adds a second heritage clause that can be used to state that a given 
 ```typescript
 // @noImplicitAny: false
 function consumeFood(arg) {}
-/// ---cut---
 interface AnimalLike {
   eat(food): void;
 }
@@ -97,9 +94,7 @@ interface AnimalLike {
 }
 function feed(animal: AnimalLike) {
   animal.eat;
-  //        ^?
   animal.isAlive;
-  //        ^?
 }
 
 // SECOND DECLARATION OF THE SAME NAME
@@ -112,9 +107,7 @@ These declarations are merged together to create a result identical to what you 
 
 ```typescript
 window.document; // an existing property
-//      ^?
 window.exampleProperty = 42;
-//      ^?
 // tells TS that `exampleProperty` exists
 interface Window {
   exampleProperty: number;
@@ -560,3 +553,162 @@ if (Car.isCar(val)) {
   // ^? let val: Car
 }
 ```
+
+### Narrowing with `switch(true)`
+
+TypeScript 5.3 introduced the ability to use switch(true) for narrowing:
+
+```ts
+class Fish {
+  swim(): void {}
+}
+class Bird {
+  fly(): void {}
+}
+
+let val = {} as any;
+switch (true) {
+  case val instanceof Bird:
+    val.fly();
+    break;
+  case val instanceof Fish:
+    val.swim();
+    break;
+}
+```
+
+### `satisfies` keyword
+
+How can we make sure that `usHolidays` conforms to the type `Holidays`? We could use a type annotation:
+
+```ts
+type DateLike = Date | number | string;
+
+type Holidays = {
+  [k: string]: DateLike;
+};
+
+const usHolidays: Holidays = {
+  independenceDay: "July 4, 2024",
+  memorialDay: new Date("May 27, 2024"),
+  laborDay: 1725260400000, // September 2, 2024
+};
+```
+
+\*\*but now, we have to treat `memorialDay`, for example, as `Date | number | string`. To prevent this, we can use `satisfies`:
+
+```ts
+const usHolidays = {
+  independenceDay: "July 4, 2024",
+  memorialDay: new Date("May 27, 2024"),
+  laborDay: 1725260400000, // September 2, 2024
+};
+```
+
+It’s important to remember that we’re **not** actually executing a type guard here — the satisfies operator is exclusively using type information, based on what’s been inferred by the declaration of usHolidays and what’s been declared for the Holidays type.
+
+## Generics
+
+Generics are dummy names for type parameters.
+
+### Defining type parameter for function
+
+simple example can be found below:
+
+```ts
+function wrapInArray<T>(arg: T): [T] {
+  return [arg];
+}
+wrapInArray(new Date());
+// ^? wrapInArray<number>(arg: number):[number]
+wrapInArray(new Date());
+// ^? wrapInArray<Date>(arg: Date):[Date]
+```
+
+### Defining type parameter for interface
+
+simple example can be found below:
+
+```ts
+interface Dict<T> {
+  [k: string]: T;
+}
+```
+
+### An exercise: map, filter, and reduce for dictionary
+
+```ts
+///// SAMPLE DATA FOR YOUR EXPERIMENTATION PLEASURE (do not modify)
+const fruits = {
+  apple: { color: "red", mass: 100 },
+  grape: { color: "red", mass: 5 },
+  banana: { color: "yellow", mass: 183 },
+  lemon: { color: "yellow", mass: 80 },
+  pear: { color: "green", mass: 178 },
+  orange: { color: "orange", mass: 262 },
+  raspberry: { color: "red", mass: 4 },
+  cherry: { color: "red", mass: 5 },
+};
+
+interface Dict<T> {
+  [k: string]: T;
+}
+
+// Array.prototype.map, but for Dict
+function mapDict(...args: any[]): any {}
+// Array.prototype.filter, but for Dict
+function filterDict(...args: any[]): any {}
+// Array.prototype.reduce, but for Dict
+function reduceDict(...args: any[]): any {}
+```
+
+{::options parse_block_html="true" /}
+
+<details><summary markdown="span">try the challenge before see the solution here!</summary>
+```ts
+// Array.prototype.map, but for Dict
+function mapDict<T, S>(
+  inputDict: Dict<T>,
+  mapFunction: (original: T, key: string) => S
+): Dict<S> {
+  const outDict: Dict<S> = {}
+  for (let k of Object.keys(inputDict)) {
+    const thisVal = inputDict[k]
+    outDict[k] = mapFunction(thisVal, k)
+  }
+  return outDict
+}
+// Array.prototype.filter, but for Dict
+function filterDict<T>(
+  inputDict: Dict<T>,
+  filterFunction: (value: T, key: string) => boolean
+): Dict<T> {
+  const outDict: Dict<T> = {}
+  for (let k of Object.keys(inputDict)) {
+    const thisVal = inputDict[k]
+    if (filterFunction(thisVal, k)) outDict[k] = thisVal
+  }
+  return outDict
+}
+// Array.prototype.reduce, but for Dict
+function reduceDict<T, S>(
+  inputDict: Dict<T>,
+  reducerFunction: (
+    currentVal: S,
+    dictItem: T,
+    key: string
+  ) => S,
+  initialValue: S
+): S {
+  let value = initialValue
+  for (let k of Object.keys(inputDict)) {
+    const thisVal = inputDict[k]
+    value = reducerFunction(value, thisVal, k)
+  }
+  return value
+}
+```
+</details>
+<br/>
+
+{::options parse_block_html="false" /}
