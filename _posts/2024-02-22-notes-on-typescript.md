@@ -39,7 +39,6 @@ _Typescript is a statically typed fake language._<!--more-->
   - [Defining type parameter for interface](#defining-type-parameter-for-interface)
   - [An exercise: map, filter, and reduce for dictionary](#an-exercise-map-filter-and-reduce-for-dictionary)
 
-<div class="full-width">
 ## Type vs. Interface
 
 Simple **type** definition looks like the following
@@ -740,5 +739,3 @@ function reduceDict<T, S>(
 <br/>
 
 {::options parse_block_html="false" /}
-
-</div>
