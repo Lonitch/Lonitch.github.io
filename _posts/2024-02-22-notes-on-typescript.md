@@ -8,10 +8,38 @@ tags: [programming, web-dev]
 
 _Typescript is a statically typed fake language._<!--more-->
 
-## Forewords
 
-This post records some random notes when taking the Typescript fundamental class on the frontend master.
+- [Type vs. Interface](#type-vs-interface)
+  - [`extends` and `implements` for interfaces](#extends-and-implements-for-interfaces)
+  - [Open Interfaces: augmenting existing built-in or library types](#open-interfaces-augmenting-existing-built-in-or-library-types)
+  - [Choose btw `type` or `interface`](#choose-btw-type-or-interface)
+- [Recursive types](#recursive-types)
+- [Type queries](#type-queries)
+  - [`keyof`](#keyof)
+  - [`typeof`](#typeof)
+  - [Indexed access types](#indexed-access-types)
+- [Callables and Constructables](#callables-and-constructables)
+  - [Callable types](#callable-types)
+  - [`void`](#void)
+  - [Function overloads](#function-overloads)
+  - [`this` types](#this-types)
+  - [Explicitly define return types](#explicitly-define-return-types)
+- [Classes](#classes)
+  - [`public`, `private`, and `protected`](#public-private-and-protected)
+  - [JS private `#fields`](#js-private-fields)
+  - [Param properties](#param-properties)
+  - [Overrides](#overrides)
+- [Type Guards and Narrowing](#type-guards-and-narrowing)
+  - [Built-in type guards](#built-in-type-guards)
+  - [User-defined type guard](#user-defined-type-guard)
+  - [Narrowing with `switch(true)`](#narrowing-with-switchtrue)
+  - [`satisfies` keyword](#satisfies-keyword)
+- [Generics](#generics)
+  - [Defining type parameter for function](#defining-type-parameter-for-function)
+  - [Defining type parameter for interface](#defining-type-parameter-for-interface)
+  - [An exercise: map, filter, and reduce for dictionary](#an-exercise-map-filter-and-reduce-for-dictionary)
 
+<div class="full-width">
 ## Type vs. Interface
 
 Simple **type** definition looks like the following
@@ -118,7 +146,7 @@ interface Window {
 
 In many situations, either a type alias or an interface would be perfectly fine, however…
 
-- If you need to define something other than an object type (e.g., use of the | union type operator), you must use a type alias
+- If you need to define something other than an object type (e.g., use of the `|` union type operator), you must use a type alias
 - If you need to define a type to use with the implements heritage term on a class, use an interface
 - If you need to allow consumers of your types to augment them, you must use an interface.
 
@@ -712,3 +740,5 @@ function reduceDict<T, S>(
 <br/>
 
 {::options parse_block_html="false" /}
+
+</div>
