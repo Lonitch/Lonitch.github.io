@@ -4,23 +4,23 @@
 $spacing-unit:     30px;
 %vertical-rhythm {
     margin-bottom: calc($spacing-unit / 2);
-    font-size: 16px;
 }
 
 .highlight {
-    background: #abc3dd;
+    background: #b4ddab4a;
     padding: 6px;
     width: max-content;
     @extend %vertical-rhythm;
 
     .c     { color: #998; font-style: italic } // Comment
     .err   { color: #a61717; background-color: #e3d2d2 } // Error
-    .k     { font-weight: bold } // Keyword
+    .k     { color: orangere; font-weight: bold } // Keyword
     .o     { font-weight: bold } // Operator
     .cm    { color: #998; font-style: italic } // Comment.Multiline
     .cp    { color: #999; font-weight: bold } // Comment.Preproc
     .c1    { color: #998; font-style: italic } // Comment.Single
     .cs    { color: #999; font-weight: bold; font-style: italic } // Comment.Special
+    .dl    { color: green }
     .gd    { color: #000; background-color: #fdd } // Generic.Deleted
     .gd .x { color: #000; background-color: #faa } // Generic.Deleted.Specific
     .ge    { font-style: italic } // Generic.Emph
@@ -36,7 +36,7 @@ $spacing-unit:     30px;
     .kc    { font-weight: bold } // Keyword.Constant
     .kd    { color: orangered; font-weight: bold } // Keyword.Declaration
     .kp    { font-weight: bold } // Keyword.Pseudo
-    .kr    { font-weight: bold } // Keyword.Reserved
+    .kr    { color: #0086B3; } // Keyword.Reserved
     .kt    { color: #458; font-weight: bold } // Keyword.Type
     .m     { color: #099 } // Literal.Number
     .s     { color: #d14 } // Literal.String
@@ -50,6 +50,7 @@ $spacing-unit:     30px;
     .nn    { color: #555 } // Name.Namespace
     .nt    { color: #000080 } // Name.Tag
     .nv    { color: #008080 } // Name.Variable
+    .nx    { color: blueviolet }
     .ow    { font-weight: bold } // Operator.Word
     .w     { color: #bbb } // Text.Whitespace
     .mf    { color: #099 } // Literal.Number.Float
@@ -59,7 +60,7 @@ $spacing-unit:     30px;
     .sb    { color: #d14 } // Literal.String.Backtick
     .sc    { color: #d14 } // Literal.String.Char
     .sd    { color: #d14 } // Literal.String.Doc
-    .s2    { color: #d14 } // Literal.String.Double
+    .s2    { color: green } // Literal.String.Double
     .se    { color: #d14 } // Literal.String.Escape
     .sh    { color: #d14 } // Literal.String.Heredoc
     .si    { color: #d14 } // Literal.String.Interpol
