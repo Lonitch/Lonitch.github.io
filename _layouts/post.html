@@ -58,10 +58,10 @@ window.addEventListener( 'Q gui altered circuit', function( event ){
         let tocElement = null;
 
         // Iterate through the <ul> elements and find the one with <li> containing <a>
-        ulElements.forEach((ul) => {
+        ulElements.forEach((ul,i) => {
         const liWithA = ul.querySelectorAll('li a');
         const li = ul.querySelectorAll('li');
-        if (liWithA.length == li.length) {
+        if (liWithA.length == li.length && i==0) {
             tocElement = ul;
             tocElement.setAttribute('class','toc-list')
         }
