@@ -9,37 +9,38 @@ tags: [programming, web-dev]
 _Typescript is a statically typed fake language._<!--more-->
 
 
-- [Type vs. Interface](#type-vs-interface)
+- [1. Type vs. Interface](#1-type-vs-interface)
   - [`extends` and `implements` for interfaces](#extends-and-implements-for-interfaces)
   - [Open Interfaces: augmenting existing built-in or library types](#open-interfaces-augmenting-existing-built-in-or-library-types)
   - [Choose btw `type` or `interface`](#choose-btw-type-or-interface)
-- [Recursive types](#recursive-types)
-- [Type queries](#type-queries)
+  - [Top and bottom types](#top-and-bottom-types)
+- [2. Recursive types](#2-recursive-types)
+- [3. Type queries](#3-type-queries)
   - [`keyof`](#keyof)
   - [`typeof`](#typeof)
   - [Indexed access types](#indexed-access-types)
-- [Callables and Constructables](#callables-and-constructables)
+- [4. Callables and Constructables](#4-callables-and-constructables)
   - [Callable types](#callable-types)
   - [`void`](#void)
   - [Function overloads](#function-overloads)
   - [`this` types](#this-types)
   - [Explicitly define return types](#explicitly-define-return-types)
-- [Classes](#classes)
+- [5. Classes](#5-classes)
   - [`public`, `private`, and `protected`](#public-private-and-protected)
   - [JS private `#fields`](#js-private-fields)
   - [Param properties](#param-properties)
   - [Overrides](#overrides)
-- [Type Guards and Narrowing](#type-guards-and-narrowing)
+- [6. Type Guards and Narrowing](#6-type-guards-and-narrowing)
   - [Built-in type guards](#built-in-type-guards)
   - [User-defined type guard](#user-defined-type-guard)
   - [Narrowing with `switch(true)`](#narrowing-with-switchtrue)
   - [`satisfies` keyword](#satisfies-keyword)
-- [Generics](#generics)
+- [7. Generics](#7-generics)
   - [Defining type parameter for function](#defining-type-parameter-for-function)
   - [Defining type parameter for interface](#defining-type-parameter-for-interface)
   - [An exercise: map, filter, and reduce for dictionary](#an-exercise-map-filter-and-reduce-for-dictionary)
 
-## Type vs. Interface
+## 1. Type vs. Interface
 
 Simple **type** definition looks like the following
 
@@ -149,7 +150,36 @@ In many situations, either a type alias or an interface would be perfectly fine,
 - If you need to define a type to use with the implements heritage term on a class, use an interface
 - If you need to allow consumers of your types to augment them, you must use an interface.
 
-## Recursive types
+### Top and bottom types
+
+Typescript provides two top types: `any` and `unknown`. You can think of values with an `any` type as “playing by the usual JavaScript rules”. Like any, `unknown` can accept any value that is possible to create in JavaScript.
+
+However, **values with an `unknown` type cannot be used without applying a type guard!** See the following as an example:
+
+```typescript
+function doSomethingRisky() {
+  if (Math.random() > 0.5)  return "ok"
+  else if (Math.random() > 0.5) throw new Error("Bad luck!")
+  else throw "Really bad luck"
+}
+
+try {
+  doSomethingRisky()
+} catch (e: unknown) {
+  if (e instanceof Error) {
+    e
+  } else if (typeof e === 'string') {
+    e
+  } else {
+    // Last resort
+    console.error(e)
+  }
+}
+```
+
+There’s a compiler flag `useUnknownInCatchVariables` that helps enforce this across a project, without requiring any explicit type annotation.
+
+## 2. Recursive types
 
 Recursive types, are self-referential, and are often used to describe infinitely nestable types. For example, consider infinitely nestable arrays of numbers
 
@@ -192,7 +222,7 @@ isJSON(undefined); //! undefined is not valid JSON
 isJSON(BigInt(143)); //! BigInts are not valid JSON
 ```
 
-## Type queries
+## 3. Type queries
 
 ### `keyof`
 
@@ -229,7 +259,7 @@ let carColor: Car["color"];
 let carProperty: Car["color" | "year"];
 ```
 
-## Callables and Constructables
+## 4. Callables and Constructables
 
 ### Callable types
 
@@ -340,7 +370,7 @@ async function getData(
 }
 ```
 
-## Classes
+## 5. Classes
 
 ### `public`, `private`, and `protected`
 
@@ -441,7 +471,7 @@ const t = new Truck();
 t.honk(); // "beep"
 ```
 
-## Type Guards and Narrowing
+## 6. Type Guards and Narrowing
 
 ### Built-in type guards
 
@@ -634,7 +664,7 @@ const usHolidays = {
 
 It’s important to remember that we’re **not** actually executing a type guard here — the satisfies operator is exclusively using type information, based on what’s been inferred by the declaration of usHolidays and what’s been declared for the Holidays type.
 
-## Generics
+## 7. Generics
 
 Generics are dummy names for type parameters.
 
