@@ -13,7 +13,9 @@ _Typescript is a statically typed fake language._<!--more-->
   - [`extends` and `implements` for interfaces](#extends-and-implements-for-interfaces)
   - [Open Interfaces: augmenting existing built-in or library types](#open-interfaces-augmenting-existing-built-in-or-library-types)
   - [Choose btw `type` or `interface`](#choose-btw-type-or-interface)
-  - [Top and bottom types](#top-and-bottom-types)
+  - [Top types: `any`, `unknown`, `object`, and `{}`](#top-types-any-unknown-object-and-)
+  - [Bottom type: `never`](#bottom-type-never)
+  - [Nullish values: `null`, `void`, and `undefined`](#nullish-values-null-void-and-undefined)
 - [2. Recursive types](#2-recursive-types)
 - [3. Type queries](#3-type-queries)
   - [`keyof`](#keyof)
@@ -150,7 +152,7 @@ In many situations, either a type alias or an interface would be perfectly fine,
 - If you need to define a type to use with the implements heritage term on a class, use an interface
 - If you need to allow consumers of your types to augment them, you must use an interface.
 
-### Top and bottom types
+### Top types: `any`, `unknown`, `object`, and `{}`
 
 Typescript provides two top types: `any` and `unknown`. You can think of values with an `any` type as “playing by the usual JavaScript rules”. Like any, `unknown` can accept any value that is possible to create in JavaScript.
 
@@ -178,6 +180,95 @@ try {
 ```
 
 There’s a compiler flag `useUnknownInCatchVariables` that helps enforce this across a project, without requiring any explicit type annotation.
+
+The `object` type represents the set `{ all possible values except for primitives }`. Primitive value types in JavaScript are `{ string, number, boolean, Symbol, null, undefined, BigInt }`. **DO NOT confuse `object` with the concept of `object type` used to desctibe shapes of `interface`**. The following shows that you can not assign primitives to `object` typed variable:
+
+```typescript
+// @errors: 2322
+let val: object = { status: "ok" }
+val = "foo" // ERROR
+val = null // ERROR
+val = () => "ok" // OK
+
+// The type of this value cannot be modeled by an interface
+let response:
+    { success: string, data: unknown }
+  | { error: string, code: number }
+      = { success: "ok", data: [] }
+
+val = response // OK
+```
+
+The empty object type {} represents the set **{ all possible values, except for null and undefined }**. Some examples below:
+
+```typescript
+const myObj: {
+  a?: number
+  b: string
+} = { b: "foo" }
+let nullableString: string | null = null
+
+let val2: {} = 4 // OK
+val2 = "abc" // OK
+val2 = new Date() // OK
+val2 = nullableString // NOT OK
+val2 = myObj.a // NOT OK
+```
+
+You can use the type `{}` in combination with the intersection type operator & to remove nullability from another type:
+
+```typescript
+type NullableStringOrNumber = string | number | null | undefined;
+type StringOrNumber = NullableStringOrNumber & {}
+```
+
+### Bottom type: `never`
+
+Consider the following scenario:
+
+```typescript
+class Car {
+  drive() {
+    console.log("vroom")
+  }
+}
+class Truck {
+  tow() {
+    console.log("dragging something")
+  }
+}
+type Vehicle = Truck | Car
+ 
+let myVehicle: Vehicle = obtainRandomVehicle()
+ 
+// The exhaustive conditional
+if (myVehicle instanceof Truck) {
+  myVehicle.tow() // Truck
+} else if (myVehicle instanceof Car) {
+  myVehicle.drive() // Car
+} else {
+  // This will only work if the type of myVehicle is never.
+  const neverValue: never = myVehicle
+}
+```
+
+Now, if we change the `Vehicle` type to be `Truck | Car | Boat` then, we will get the error in the `else` bracket:
+
+```typescript
+// The exhaustive conditional
+if (myVehicle instanceof Truck) {
+  myVehicle.tow() // Truck
+} else if (myVehicle instanceof Car) {
+  myVehicle.drive() // Car
+} else {
+  const neverValue: never = myVehicle
+// ^Type 'Boat' is not assignable to type 'never'.
+}
+```
+
+Thus, using `never` to exhaust conditions will help us catch upstream code changes and unexpected values.
+
+### Nullish values: `null`, `void`, and `undefined`
 
 ## 2. Recursive types
 
