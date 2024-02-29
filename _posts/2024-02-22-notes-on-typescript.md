@@ -16,6 +16,10 @@ _Typescript is a statically typed fake language._<!--more-->
   - [Top types: `any`, `unknown`, `object`, and `{}`](#top-types-any-unknown-object-and-)
   - [Bottom type: `never`](#bottom-type-never)
   - [Nullish values: `null`, `void`, and `undefined`](#nullish-values-null-void-and-undefined)
+  - [Non-null assertion: cast away the possibility of a `null`/`undefined`](#non-null-assertion-cast-away-the-possibility-of-a-nullundefined)
+  - [Definite assignment assertion: assert smt was initialized](#definite-assignment-assertion-assert-smt-was-initialized)
+  - [Optional chaining `?.`](#optional-chaining-)
+  - [Nullish coalescing `??`](#nullish-coalescing-)
 - [2. Recursive types](#2-recursive-types)
 - [3. Type queries](#3-type-queries)
   - [`keyof`](#keyof)
@@ -269,6 +273,64 @@ if (myVehicle instanceof Truck) {
 Thus, using `never` to exhaust conditions will help us catch upstream code changes and unexpected values.
 
 ### Nullish values: `null`, `void`, and `undefined`
+
+- `null`: there is a value, and that value is nothing.
+- `undefined`: the value isn't available
+- `void`: should exclusively be used to describe that a function’s return value should be ignored
+
+### Non-null assertion: cast away the possibility of a `null`/`undefined`
+
+```typescript
+// suppress warning of 'obj.fruits' is possible 'undefined'
+obj.fruits!.push("banana")
+```
+
+Non-null assertion is recommended to be used in test suite
+
+### Definite assignment assertion: assert smt was initialized
+
+The definite assignment `!:` assertion is used to suppress TypeScript’s objections about a class field being used, when it can’t be proven1 that it was initialized. See an example below:
+
+```typescript
+class ThingWithAsyncSetup {
+  setupPromise: Promise<any> // ignore the <any> for now
+  isSetup!: boolean
+ 
+  constructor() {
+    this.setupPromise = new Promise((resolve) => {
+      this.isSetup = false
+      return this.doSetup()
+    }).then(() => {
+      this.isSetup = true
+    })
+  }
+ 
+  private async doSetup() { }
+}
+```
+
+### Optional chaining `?.`
+Now let’s say we want to render information on a dashboard, for the customer’s most recent payment on any invoice (or leave blank if they haven’t made any payments).
+
+All this, just to sort of drill down and find something if it’s there. Optional chaining gives us a more concise way to do this
+
+```typescript
+function getLastPayment(data: ResponseData): number | undefined {
+  return data?.customer?.lastInvoice?.lastPayment?.amount
+}
+```
+
+### Nullish coalescing `??`
+
+```typescript
+type PlayerConfig = {
+  volume?: 0 | 25 | 50 | 75 | 100
+}
+
+let smt: PlayerConfig = getConfig();
+// vol==50 when smt.volume is null or undefined
+const vol = smt.volume??50;
+```
 
 ## 2. Recursive types
 
