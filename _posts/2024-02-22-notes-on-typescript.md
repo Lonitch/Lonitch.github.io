@@ -20,31 +20,39 @@ _Typescript is a statically typed fake language._<!--more-->
   - [Definite assignment assertion: assert smt was initialized](#definite-assignment-assertion-assert-smt-was-initialized)
   - [Optional chaining `?.`](#optional-chaining-)
   - [Nullish coalescing `??`](#nullish-coalescing-)
-- [2. Recursive types](#2-recursive-types)
-- [3. Type queries](#3-type-queries)
+- [2. Conditional \& Mapped Types](#2-conditional--mapped-types)
+  - [Conditional types](#conditional-types)
+  - [Extract and Exclude](#extract-and-exclude)
+- [3. Recursive types](#3-recursive-types)
+- [4. Type queries](#4-type-queries)
   - [`keyof`](#keyof)
   - [`typeof`](#typeof)
   - [Indexed access types](#indexed-access-types)
-- [4. Callables and Constructables](#4-callables-and-constructables)
+- [5. Callables and Constructables](#5-callables-and-constructables)
   - [Callable types](#callable-types)
   - [`void`](#void)
   - [Function overloads](#function-overloads)
   - [`this` types](#this-types)
   - [Explicitly define return types](#explicitly-define-return-types)
-- [5. Classes](#5-classes)
+- [6. Classes](#6-classes)
   - [`public`, `private`, and `protected`](#public-private-and-protected)
   - [JS private `#fields`](#js-private-fields)
   - [Param properties](#param-properties)
   - [Overrides](#overrides)
-- [6. Type Guards and Narrowing](#6-type-guards-and-narrowing)
+- [7. Type Guards and Narrowing](#7-type-guards-and-narrowing)
   - [Built-in type guards](#built-in-type-guards)
   - [User-defined type guard](#user-defined-type-guard)
   - [Narrowing with `switch(true)`](#narrowing-with-switchtrue)
   - [`satisfies` keyword](#satisfies-keyword)
-- [7. Generics](#7-generics)
+- [8. Generics](#8-generics)
   - [Defining type parameter for function](#defining-type-parameter-for-function)
   - [Defining type parameter for interface](#defining-type-parameter-for-interface)
   - [An exercise: map, filter, and reduce for dictionary](#an-exercise-map-filter-and-reduce-for-dictionary)
+  - [Generic constraints: “minimum requirement” for a type param](#generic-constraints-minimum-requirement-for-a-type-param)
+  - [TypeParams best practice](#typeparams-best-practice)
+- [9. Modules \& CJS interop](#9-modules--cjs-interop)
+  - [ES Module imports and exports](#es-module-imports-and-exports)
+  - [Importing non-TS things](#importing-non-ts-things)
 
 ## 1. Type vs. Interface
 
@@ -332,7 +340,102 @@ let smt: PlayerConfig = getConfig();
 const vol = smt.volume??50;
 ```
 
-## 2. Recursive types
+## 2. Conditional & Mapped Types
+
+### Conditional types 
+
+Conditional types allow for types to be expressed using a very similar (basically, the same) syntax
+
+```typescript
+class Grill {
+  startGas() {}
+  stopGas() {}
+}
+class Oven {
+  setTemperature(degrees: number) {}
+}
+
+type CookingDevice<T> = T extends "grill" ? Grill : Oven
+
+let device1: CookingDevice<"grill">
+//   ^let device1: Grill
+let device2: CookingDevice<"oven">
+//   ^let device2: Oven
+```
+`extends` is a check of a subset relationship: `A extends B?` means "Is A a subset of B?" To verify this thought, see the following:
+
+```typescript
+type IsLowNumber<T> = T extends 1 | 2 ? true : false
+type TestOne = IsLowNumber<1>
+//     ^type TestOne=true 
+type TestTwo = IsLowNumber<2>
+//     ^type TestTwo=true
+type TestTen = IsLowNumber<10>
+//     ^type TestTen= false
+type TestTenWithTwo = IsLowNumber<10 | 2>
+//     ^type TestTenWithTwo = boolean
+```
+
+In the last case,
+
+```typescript
+  T = 2 —> { 2 } extends { 1, 2 } —> true
+  T = 10 —> { 10 } extends { 1, 2 } —> false
+  true | false —> boolean
+```
+
+### Extract and Exclude 
+
+```typescript
+type FavoriteColors =
+  | "dark sienna"
+  | "van dyke brown"
+  | "yellow ochre"
+  | "sap green"
+  | "titanium white"
+  | "phthalo green"
+  | "prussian blue"
+  | "cadium yellow"
+  | [number, number, number]
+  | { red: number; green: number; blue: number }
+ 
+type StringColors = Extract<FavoriteColors, string>
+// type StringColors = "dark sienna" | "van dyke brown" | "yellow ochre" | "sap green" | "titanium white" | "phthalo green" | "prussian blue" | "cadium yellow"
+
+type ObjectColors = Extract<FavoriteColors, { red: number }>       
+// type ObjectColors = {
+//     red: number;
+//     green: number;
+//     blue: number;
+// }
+
+type TupleColors = Extract<FavoriteColors, [number, number, number]>
+// type TupleColors = [number, number, number]
+```
+
+```typescript
+// a set of four specific things
+type FavoriteColors =
+  | "dark sienna"
+  | "van dyke brown"
+  | "yellow ochre"
+  | "sap green"
+  | "titanium white"
+  | "phthalo green"
+  | "prussian blue"
+  | "cadium yellow"
+  | [number, number, number]
+  | { red: number; green: number; blue: number }
+ 
+type NonStringColors = Exclude<FavoriteColors, string>        
+// type NonStringColors = [number, number, number] | {
+//     red: number;
+//     green: number;
+//     blue: number;
+// }
+```
+
+## 3. Recursive types
 
 Recursive types, are self-referential, and are often used to describe infinitely nestable types. For example, consider infinitely nestable arrays of numbers
 
@@ -375,7 +478,7 @@ isJSON(undefined); //! undefined is not valid JSON
 isJSON(BigInt(143)); //! BigInts are not valid JSON
 ```
 
-## 3. Type queries
+## 4. Type queries
 
 ### `keyof`
 
@@ -412,7 +515,7 @@ let carColor: Car["color"];
 let carProperty: Car["color" | "year"];
 ```
 
-## 4. Callables and Constructables
+## 5. Callables and Constructables
 
 ### Callable types
 
@@ -523,7 +626,7 @@ async function getData(
 }
 ```
 
-## 5. Classes
+## 6. Classes
 
 ### `public`, `private`, and `protected`
 
@@ -624,7 +727,7 @@ const t = new Truck();
 t.honk(); // "beep"
 ```
 
-## 6. Type Guards and Narrowing
+## 7. Type Guards and Narrowing
 
 ### Built-in type guards
 
@@ -817,7 +920,7 @@ const usHolidays = {
 
 It’s important to remember that we’re **not** actually executing a type guard here — the satisfies operator is exclusively using type information, based on what’s been inferred by the declaration of usHolidays and what’s been declared for the Holidays type.
 
-## 7. Generics
+## 8. Generics
 
 Generics are dummy names for type parameters.
 
@@ -922,3 +1025,119 @@ function reduceDict<T, S>(
 <br/>
 
 {::options parse_block_html="false" /}
+
+### Generic constraints: “minimum requirement” for a type param
+
+The way we define constraints on generics is by using the `extends` keyword.  Assume we have the following function parametrized by generics:
+
+```typescript
+interface Dict<T> {
+  [k: string]: T
+}
+
+function foo<T>(list: T[]): Dict<T> {
+  // do smt
+}
+```
+
+Let's say, you want `T` to describe some objects that have `id` field. We can impose the constraint by first define an extra interface like the following:
+
+```typescript
+interface HasId {
+  id: string
+}
+
+function<T extends HasId>(list: T[]): Dict<T>{}
+```
+
+### TypeParams best practice 
+
+The snippet below gives two similar functions(`example1` and `example2`) that produce the same results(i.e. `result1` and `result2` are the same). 
+
+```typescript
+interface HasId {
+  id: string
+}
+interface Dict<T> {
+  [k: string]: T
+}
+
+function example1<T extends HasId[]>(list: T) {
+  return list.pop()
+}
+function example2<T extends HasId>(list: T[]) {
+  return list.pop()
+}
+
+class Payment implements HasId {
+  static #next_id_counter = 1;
+  id = `pmnt_${Payment.#next_id_counter++}`
+}
+class Invoice implements HasId {
+  static #next_id_counter = 1;
+  id = `invc_${Invoice.#next_id_counter++}`
+}
+
+const result1 = example1([
+  //   ^ const result1: HasId | undefined
+  new Payment(),
+  new Invoice(),
+  new Payment()
+])
+
+const result2 = example2([
+  //   ^ const result2: Payment | Invoice | undefined
+  new Payment(),
+  new Invoice(),
+  new Payment()
+])
+```
+
+Compare the types of `result1` and `result2`, we’re effectively losing type information because of the way we define our type parameter in `example1`. Thus, the best practice is to define type parameters as simply as possible. 
+
+## 9. Modules & CJS interop
+
+### ES Module imports and exports
+
+Basic examples:
+
+```typescript
+// named imports
+import { Blueberry, Raspberry } from './berries'
+import Kiwi from './kiwi' // default import
+export function makeFruitSalad() {} // named export
+export default class FruitBasket {} // default export
+export { lemon, lime } from './citrus' // re-export
+export * as berries from './berries' // re-export entire module as a single namespace
+```
+
+Although fairly uncommon in the JS world, it’s possible to import an entire module as a namespace. TypeScript supports this as well
+
+```typescript
+import * as allBerries from "./berries" // namespace import
+allBerries.Strawberry // using the namespace
+allBerries.Blueberry
+allBerries.Raspberry
+export * from "./berries" // namespace re-export
+```
+
+TypeScript provides an unambiguous way of importing _only_ types. 
+
+```typescript
+import type { Strawberry } from './berries/strawberry'
+```
+
+### Importing non-TS things
+
+Importing images can be accomplished through a module declaration as shown below:
+
+```typescript
+// @filename: global.d.ts
+declare module "*.png" {
+  const imgUrl: string
+  export default imgUrl
+}
+// @filename: component.ts
+import img from "./file.png"
+```
+
