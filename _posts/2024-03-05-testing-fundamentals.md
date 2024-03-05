@@ -11,6 +11,7 @@ _Driving high-quality code with vitest/vite_<!--more-->
 <!-- mtoc-start -->
 
 * [Intro](#intro)
+* [Brief Intro to Vite](#brief-intro-to-vite)
 * [Kinds of tests](#kinds-of-tests)
   * [unit tests](#unit-tests)
   * [integration tests (functional)](#integration-tests-functional)
@@ -29,6 +30,8 @@ First, why we write tests?
   - this reduces effort to get to the erroneous states
 - **Tests Driving Dev.**: think of tests as the driving force to write high-quality code
   - when you have test-first mindset, you will end up with tests that are easy to reason about
+
+## Brief Intro to Vite
 
 ## Kinds of tests
 
