@@ -160,6 +160,10 @@ article.group ul:not(.toc-list) li {
   width: 103%; /* make list width 120% after the first list*/
 }
 
+article.group ul:not(.toc-list) ul {
+  width: 103%; /* make list width 120% after the first list*/
+}
+
 ul:not(.toc-list) li a {
   color: black;
   text-decoration: underline; /* add underline for links in li */

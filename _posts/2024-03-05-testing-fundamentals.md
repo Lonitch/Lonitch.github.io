@@ -6,7 +6,7 @@ categories: post
 tags: [programming, web-dev, build-tool]
 ---
 
-_A crash course on SolidJS_<!--more-->
+_Driving high-quality code with vitest/vite_<!--more-->
 
 <!-- mtoc-start -->
 
