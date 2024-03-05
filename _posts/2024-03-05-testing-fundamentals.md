@@ -1,15 +1,16 @@
-# Testing Fundamentals
+---
+layout: post
+title: "Testing Fundamentals: Vitest"
+date: 2024-03-05
+categories: post
+tags: [programming, web-dev, build-tool]
+---
 
-First, why we write tests?
-
-- **Laziness**: we write tests to make writting high-quality code easy
-- **Good Dev. Env.**: set up your env so that **writing/running** the test is easier than the application
-  - this reduces effort to get to the erroneous states
-- **Tests Driving Dev.**: think of tests as the driving force to write high-quality code
-  - when you have test-first mindset, you will end up with tests that are easy to reason about
+_A crash course on SolidJS_<!--more-->
 
 <!-- mtoc-start -->
 
+* [Intro](#intro)
 * [Kinds of tests](#kinds-of-tests)
   * [unit tests](#unit-tests)
   * [integration tests (functional)](#integration-tests-functional)
@@ -18,6 +19,16 @@ First, why we write tests?
 * [Example: unit test](#example-unit-test)
 
 <!-- mtoc-end -->
+
+## Intro
+
+First, why we write tests?
+
+- **Laziness**: we write tests to make writting high-quality code easy
+- **Good Dev. Env.**: set up your env so that **writing/running** the test is easier than the application
+  - this reduces effort to get to the erroneous states
+- **Tests Driving Dev.**: think of tests as the driving force to write high-quality code
+  - when you have test-first mindset, you will end up with tests that are easy to reason about
 
 ## Kinds of tests
 
@@ -152,11 +163,11 @@ describe("github-api", () => {
       const mockUser = "usr";
       const mockRepo = "repo";
 
-      // the goal is to assert that 
+      // the goal is to assert that
       // "getRepository" calls the fetch method with the correct headers
       // and returns the correct data
 
-      // what a successful mock call would return? 
+      // what a successful mock call would return?
       fetch.mockResolvedValue(createFetchResponse(mockResponse))
       // create the class instance
       const api = new GithubApi(mockToken);
@@ -173,7 +184,7 @@ describe("github-api", () => {
             Authorization: `Bearer ${mockToken}`,
           },
         }
-      );  
+      );
 
       // then we check if the returned result matches mockResponse
       expect(res).toStrictEqual(mockResponse)
