@@ -26,6 +26,7 @@ _Driving high-quality code with vitest/vite_<!--more-->
   * [`import.meta.glob`](#importmetaglob)
   * [Environments and modes](#environments-and-modes)
   * [Create a component library](#create-a-component-library)
+  * [Integrate `solid-js` with `vite`](#integrate-solid-js-with-vite)
 * [Kinds of tests](#kinds-of-tests)
   * [unit tests](#unit-tests)
   * [integration tests (functional)](#integration-tests-functional)
@@ -376,6 +377,11 @@ You can add your library to your `package.json` like the following:
   }
 }
 ```
+
+### Integrate `solid-js` with `vite`
+
+- [vite-plugin-solid](https://github.com/solidjs/vite-plugin-solid)
+- [ts-vitest-template](https://github.com/solidjs/templates/tree/main/ts-vitest)
 
 ## Kinds of tests
 
