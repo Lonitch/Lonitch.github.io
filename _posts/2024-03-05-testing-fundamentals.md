@@ -18,6 +18,14 @@ _Driving high-quality code with vitest/vite_<!--more-->
   * [Vite with JS frontend framework](#vite-with-js-frontend-framework)
   * [Using Vite project template](#using-vite-project-template)
   * [Working with static Assets](#working-with-static-assets)
+  * [`assetsInclude`](#assetsinclude)
+  * [vite-imagetools](#vite-imagetools)
+  * [`import.meta`](#importmeta)
+  * [Conditional imports](#conditional-imports)
+  * [vite-plugin-dynamic-import](#vite-plugin-dynamic-import)
+  * [`import.meta.glob`](#importmetaglob)
+  * [Environments and modes](#environments-and-modes)
+  * [Create a component library](#create-a-component-library)
 * [Kinds of tests](#kinds-of-tests)
   * [unit tests](#unit-tests)
   * [integration tests (functional)](#integration-tests-functional)
@@ -44,23 +52,18 @@ Vite is a build tool and development server that is designed to make web develop
 ### The big why
 
 - Vite has a fast server for development/testing. Like nodemon, using Vite also has Hot Module Replacement features.
-
 - It allows the use of `import` and `export` without compiling JS/TS code first
-
 - Provide a flexible configuration interface through the file `vite.config.js`
-
 - Vite handles assets like imgs, fonts, and other static resources, allowing you to import them in the code directly
-
 - Vite supports import of CSS modules
-
 - Vite's functionality is extendable through plugins
-
 - Vite analyzes codebase automatically to eliminate dead code paths, reducing bundle size when building the codebase
 
 ### Basic structure of a Vite project
 
 ```bash
 project-root
+├── vite.config.js # vite configuration file
 ├── index.html # has <script type="module" src="/src/index.js"></script>
 ├── public # static content
 └── src
@@ -73,12 +76,19 @@ In `package.json` of a `vite`-enabled project, we usually prepare the following 
 
 ```json
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "prepare": "husky install",
+    "start": "vite --config vite.config.js",
+    "dev": "vite --config vite.config.js",
+    "build": "tsc && vite build --config vite.config.js",
     "test": "vitest",
   },
+```
+
+For `bun` users, you can follow the instructions [here](https://bun.sh/guides/ecosystem/vite) to prepare the scripts below:
+
+```json
+"dev": "bunx --bun vite",
+"build": "bunx --bun vite build --config vite.config.js",
+"test": "vitest",
 ```
 
 Notice that building the application will **result in** a folder called `dist` in your project folder, in which you will find compiled JS under the subfolder called `assets`.
@@ -122,31 +132,249 @@ For example, if you have an image at `public/my-image.jpg`, it will be available
 There are some key points to remember when keeping static content in `public` folder:
 
 - Unlike files in src or other source code directories, changes to files in public don’t trigger a rebuild.
-
 - Files in the public directory cannot be imported in your source code as modules.
-
 - These files are not processed or optimized by Vite or any of its plugins.
 
-**BUT YOU CAN KEEP STATIC CONTENT IN `src` FOLDER**
+**BUT YOU CAN KEEP STATIC CONTENT IN `src` FOLDER TO PROCESS IT**, see the section of [vite-imagetools](#vite-imagetools).
 
-Let's say you have a `image.jpg` placed at `src/images`. Then you can create an image element in JS/TS like the following: 
+Let's say you have a `image.jpg` placed at `src/images`. Then you can create an image element in JS/TS like the following:
 
-```javascript 
-import image from './images/image.jpg';
+```javascript
+import image from "./images/image.jpg";
 
-const content = document.querySelector('#content');
+const content = document.querySelector("#content");
 
 export default function loadImage() {
-	const imageElement = document.createElement('img');
-	imageElement.src = image;
-	content.appendChild(imageElement);
+  const imageElement = document.createElement("img");
+  imageElement.src = image;
+  content.appendChild(imageElement);
 }
 ```
 
 If you're facing type error when using the snippet above, you can create a `vite.d.ts` file at the root with the following content in it:
 
-```typescript 
+```typescript
 /// <reference types="vite/client" />
+```
+
+### `assetsInclude`
+
+By default, Vite treats certain types of files like images and fonts as assets, meaning they will be copied as-is into the final build directory without being bundled as JavaScript. However, you may have other custom file types that you want to be treated in the same way. That’s where assetsInclude comes in handy.
+
+You can use this option to extend the default behavior by specifying a string,
+
+```javascript
+// in vite.config.js
+import { defineConfig } from 'vite'
+export default defineConfig{
+  assetsInclude: ["*.pdf", "*.ico"],
+};
+// in another .js file
+import pdfPath from "src/assets/some-document.pdf";
+```
+
+by using a RegExp,
+
+```javascript
+import { defineConfig } from 'vite'
+export default defineConfig{
+	assetsInclude: /^./some-special-dir/.*.special-extension$/
+};
+```
+
+by array of patterns
+
+```javascript
+import { defineConfig } from 'vite'
+export default defineConfig {
+	assetsInclude: ['*.pdf', /^./some-special-dir/.*.special-extension$/]
+};
+```
+
+### vite-imagetools
+
+To install vite-imagetools, simply run `npm install -D vite-imagetools` or `bun run -d vite-imagestools`, and in your `vite.config.js` add the following line in `defineConfig`:
+
+```javascript
+plugins: [imagetools()];
+```
+
+You **MUST** move your images to `src` folder before using imagetools to process them. For example, the `import` command below converts a large JPG image to a 100x100 webpg image:
+
+```javascript
+// image is in the src folder
+import image from "./large-img.jpg?h=100&w=100&format=webp";
+```
+
+### `import.meta`
+
+- Variables prefixed with VITE\_ in your .env files are exposed to your code via `import.meta.env.VITE_XXX`
+- `import.meta.url` provides the URL of the current module, which can be useful for dynamic imports or working with assets.
+
+### Conditional imports
+
+In Vite, when you use the `import()` function to dynamically import a module, it returns a Promise that resolves to the module object. This module object contains all the exported members of the imported module.
+
+Here's an example:
+
+```javascript
+import("/path/to/module.js").then((module) => {
+  // Use the imported module, assume it exports a function
+  // called foo
+  console.log(module.foo());
+});
+```
+
+Vite offers more advanced features like the define option in `vite.config.js`, which lets you replace global variables at compile time:
+
+```javascript
+// vite.config.js
+export default defineConfig{
+  define: {
+	__MY_CONDITION__: 'some value'
+  }
+};
+// some other js/ts file
+if (__MY_CONDITION__ === 'some value') {
+	// Conditionally import something
+}
+```
+
+### vite-plugin-dynamic-import
+
+While Vite doesn’t offer built-in direct support for conditional imports in import statements, there’s a third-party plugin called [ vite-plugin-dynamic-import ](https://www.npmjs.com/package/vite-plugin-dynamic-import) that provides such a feature.
+
+```javascript 
+//vite.config.js
+import { defineConfig } from 'vite'
+import dynamicImport from 'vite-plugin-dynamic-import';
+
+export default defineConfig {
+	plugins: [dynamicImport()]
+};
+// in other js/ts file 
+import(`./content/${variable}.js`);
+```
+
+### `import.meta.glob`
+
+Vite includes support for importing multiple modules at the same time `import.meta.glob`. For example, you should see **something where the keys are the file names and the values are promises that are just import statements** by running 
+
+```javascript 
+console.log(import.meta.glob('./logos/**/*.svg'));
+```
+
+This means, we could do smt like:
+
+```javascript 
+const content = document.querySelector('#content');
+
+export default function logos() {
+	const modules = import.meta.glob('./logos/**/*.svg');
+
+	for (const m of Object.values(modules)) {
+		m().then((svg) => {
+			const img = document.createElement('img');
+			img.width = 100;
+
+			img.src = svg.default;
+			content.appendChild(img);
+		});
+	}
+}
+```
+
+### Environments and modes
+
+Vite has the following built-in variables:
+
+- MODE: Running mode (development, production, etc.)
+- BASE_URL: Base URL of the app
+- PROD: Boolean, indicating if in production
+- DEV: Boolean, indicating if in development
+- SSR: Boolean, indicating if in server-side rendering mode
+
+Vite supports multiple .env files for different modes:
+
+- `.env`: Default.
+- `.env.local`: Local overrides for the default environment.
+- `.env.[mode]`: For a specific mode (e.g., .env.production for production mode).
+- `.env.[mode].local`: Local overrides for a specific mode.
+
+In your application, you can access these variables through `import.meta.env.VARIABLE_NAME`.
+
+Since environment variables are strings, you may want to declare their types if you’re using TypeScript. Create a `env.d.ts` file for type declarations:
+
+```javascript 
+interface ImportMetaEnv {
+	VITE_API_URL: string;
+	// define other variables here
+}
+```
+
+some security concerns:
+
+- `.env.*.local` files are local-only and should not be checked into version control.
+- No sensitive data should be prefixed with VITE_ as it will be exposed to the client.
+
+### Create a component library
+
+We first give Vite an entry point for our library. For example, `src/components/index.ts`, in which we have two components:
+
+```typescript 
+export * from './button';
+export * from './input';
+```
+
+We then update `vite.config.js` to set up library generation:
+
+```javascript 
+import { resolve } from 'node:path';
+import { defineConfig } from 'vite';
+// install by npm install -D 
+// or bun install -d  
+// the two plugins below are for 
+// generate index.d.ts in dist folder
+// and resolve import css issues in ts
+import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+
+// find current root directory path
+const __dirname = new URL('.', import.meta.url).pathname;
+
+export default defineConfig({
+  plugins: [libInjectCss(),dts({include: ['src/components']})],
+  build: {
+    // not include publich folder
+    copyPublicDir: false,
+    // for injecting css
+    cssCodeSplit: true,
+    lib: {
+      entry: resolve(__dirname, 'src/components/index.ts'),
+      name: 'libraryName',
+      // will crete libname.js and libname.umd.cjs
+      fileName: 'libname',
+      formats: ['es', 'umd']
+	},
+  }
+});
+```
+
+You can add your library to your `package.json` like the following:
+
+```json 
+{
+  "main": "./dist/libname.umd.cjs",
+  "module": "./dist/libname.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/libname.js",
+      "require": "./dist/libname.umd.cjs",
+      "types": "./dist/index.d.ts"
+	}
+  }
+}
 ```
 
 ## Kinds of tests
