@@ -3,7 +3,7 @@ layout: post
 title: "Testing Fundamentals: Vitest"
 date: 2024-03-05
 categories: post
-tags: [programming, web-dev, build-tool]
+tags: [programming, basics, web-dev, build-tool]
 ---
 
 _Driving high-quality code with vitest/vite_<!--more-->
@@ -12,6 +12,12 @@ _Driving high-quality code with vitest/vite_<!--more-->
 
 * [Intro](#intro)
 * [Brief Intro to Vite](#brief-intro-to-vite)
+  * [The big why](#the-big-why)
+  * [Basic structure of a Vite project](#basic-structure-of-a-vite-project)
+  * [Working with CSS modules](#working-with-css-modules)
+  * [Vite with JS frontend framework](#vite-with-js-frontend-framework)
+  * [Using Vite project template](#using-vite-project-template)
+  * [Working with static Assets](#working-with-static-assets)
 * [Kinds of tests](#kinds-of-tests)
   * [unit tests](#unit-tests)
   * [integration tests (functional)](#integration-tests-functional)
@@ -32,6 +38,116 @@ First, why we write tests?
   - when you have test-first mindset, you will end up with tests that are easy to reason about
 
 ## Brief Intro to Vite
+
+Vite is a build tool and development server that is designed to make web development, particularly for modern JavaScript applications, faster and more efficient.
+
+### The big why
+
+- Vite has a fast server for development/testing. Like nodemon, using Vite also has Hot Module Replacement features.
+
+- It allows the use of `import` and `export` without compiling JS/TS code first
+
+- Provide a flexible configuration interface through the file `vite.config.js`
+
+- Vite handles assets like imgs, fonts, and other static resources, allowing you to import them in the code directly
+
+- Vite supports import of CSS modules
+
+- Vite's functionality is extendable through plugins
+
+- Vite analyzes codebase automatically to eliminate dead code paths, reducing bundle size when building the codebase
+
+### Basic structure of a Vite project
+
+```bash
+project-root
+├── index.html # has <script type="module" src="/src/index.js"></script>
+├── public # static content
+└── src
+    ├── index.js
+    └── components # ui components
+    ... # other stuff
+```
+
+In `package.json` of a `vite`-enabled project, we usually prepare the following scripts for developing, testing, and building the app. If you're using `npm` or `bun`, you can run any one of the folowing scripts through `npm/bun run xxx`.
+
+```json
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "prepare": "husky install",
+    "test": "vitest",
+  },
+```
+
+Notice that building the application will **result in** a folder called `dist` in your project folder, in which you will find compiled JS under the subfolder called `assets`.
+
+### Working with CSS modules
+
+If we give a CSS file a `*.module.css` extension, then we can access its fingerprinted classes.
+
+```css
+/*in style.modue.css*/
+.count {
+  font-size: 4em;
+  color: rebeccapurple;
+}
+```
+
+```javascript
+/* in xxxx.js */
+import styles from "style.module.css";
+document.getElementById("count").classList.add(styles.count);
+```
+
+Vite can also handle `SCSS` and [PostCSS](https://postcss.org/).
+
+### Vite with JS frontend framework
+
+Check community support for Vite to work with various JS frontend framework [here](https://github.com/vitejs/awesome-vite?tab=readme-ov-file#plugins).
+
+### Using Vite project template
+
+You can quickly scaffold out a new Vite project by using `npm create vite@latest` or `bun create vite@latest`, which will start a cli interface to ask you project name(create a new folder with given name) and choose frontend framework(options are Vanilla, Vue, React, Preact, Solid,...)
+
+A good template for using Vite with `typescript` can be found [here](https://github.com/stevekinney/template-typescript)
+
+### Working with static Assets
+
+By default, Vite serves static files from the `public` directory in the root of your project. Files in this directory are served as-is at the root level.
+
+For example, if you have an image at `public/my-image.jpg`, it will be available at `http://localhost:3000/my-image.jpg.`
+
+There are some key points to remember when keeping static content in `public` folder:
+
+- Unlike files in src or other source code directories, changes to files in public don’t trigger a rebuild.
+
+- Files in the public directory cannot be imported in your source code as modules.
+
+- These files are not processed or optimized by Vite or any of its plugins.
+
+**BUT YOU CAN KEEP STATIC CONTENT IN `src` FOLDER**
+
+Let's say you have a `image.jpg` placed at `src/images`. Then you can create an image element in JS/TS like the following: 
+
+```javascript 
+import image from './images/image.jpg';
+
+const content = document.querySelector('#content');
+
+export default function loadImage() {
+	const imageElement = document.createElement('img');
+	imageElement.src = image;
+	content.appendChild(imageElement);
+}
+```
+
+If you're facing type error when using the snippet above, you can create a `vite.d.ts` file at the root with the following content in it:
+
+```typescript 
+/// <reference types="vite/client" />
+```
 
 ## Kinds of tests
 
@@ -84,7 +200,7 @@ export const useRepository = routeLoader$(async ({ params, env }) => {
   const response = await fetch(`https://api.github.com/repos/${user}/${repo}`, {
     headers,
   });
-  const repository = (await response.json()) as OrgRepoResponse;
+  const repository = (await response.json());
   return repository;
 });
 ```
@@ -122,7 +238,7 @@ class GithubApi {
 
 To make the original code cleaner like the following:
 
-```typescript
+```javascript
 // in index.ts
 import { GithubApi } from "./github-api";
 export const useRepository = routeLoader$(async ({ params, env }) => {
@@ -136,7 +252,7 @@ export const useRepository = routeLoader$(async ({ params, env }) => {
 
 We can use [vitest](https://vitest.dev/) to prepare tests for the async function "`getRepostory`" in `GithubApi` class:
 
-```typescript
+```javascript
 // in github-api.spec.ts
 // the file must be named as xxx.spec.xx
 import { describe, it, vi, beforeEach } from "vitest";
