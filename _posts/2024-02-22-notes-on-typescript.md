@@ -52,6 +52,9 @@ _Typescript is a statically typed fake language._<!--more-->
   * [Generic constraints: “minimum requirement” for a type param](#generic-constraints-minimum-requirement-for-a-type-param)
   * [TypeParams best practice](#typeparams-best-practice)
   * [`infer`: access sub-parts of a large type](#infer-access-sub-parts-of-a-large-type)
+  * [`Record`: create object types with specific key-value pairs](#record-create-object-types-with-specific-key-value-pairs)
+  * [`Pick`: make new type by picking properties from old type](#pick-make-new-type-by-picking-properties-from-old-type)
+  * [Template literal types: create types based on string literal](#template-literal-types-create-types-based-on-string-literal)
 * [9. Modules & CJS interop](#9-modules--cjs-interop)
   * [ES Module imports and exports](#es-module-imports-and-exports)
   * [Importing non-TS things](#importing-non-ts-things)
@@ -1131,6 +1134,91 @@ function greet(name: string): string {
 
 type AddReturnType = ReturnType<typeof add>; // number
 type GreetReturnType = ReturnType<typeof greet>; // string
+```
+
+### `Record`: create object types with specific key-value pairs
+
+`Record` is useful when you want to **enforce** a certain type for all the values in an object, but allows keys to be multiple types. 
+
+```typescript
+type User = {
+  id: number;
+  name: string;
+};
+
+// A record that maps user IDs to user objects
+// there must be two keys, "ddo" and "ccc", in the object
+type UsersById = Record<number | "ddo" | "ccc", User>;
+
+const users: UsersById = {
+  2: { id: 2, name: "Bob" },
+  "ddo": { id: 3, name: "Pob" },
+  "ccc": { id: 4, name: "Jobs" }
+};
+```
+
+### `Pick`: make new type by picking properties from old type
+```typescript 
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+// Create a new type that only includes the 'id' and 'name' properties
+type UserSummary = Pick<User, 'id' | 'name'>;
+```
+
+### Template literal types: create types based on string literal
+
+Here is a basic example:
+
+```typescript 
+type ArtFeatures = "cabin" | "tree" | "sunset"
+type Colors =
+  | "darkSienna"
+  | "sapGreen"
+  | "titaniumWhite"
+  | "prussianBlue"
+
+type ArtMethodNames = `paint_${Colors}_${ArtFeatures}`
+```
+
+TS provides some utility types you can use in template literal types: `UpperCase`/`LowerCase`/`Capitalize`/`Uncapitalize`. For example,
+
+```typescript 
+type ArtMethodNames =
+  `paint${Capitalize<Colors>}${Capitalize<ArtFeatures>}`
+```
+
+With the template, we can map the keys of an existing object type into something else. In the following example, we add `set` in front of keys of `type DataSDK`:
+
+```typescript 
+interface DataState {
+  digits: number[]
+  names: string[]
+  flags: Record<"darkMode" | "mobile", boolean>
+}
+ 
+type DataSDK = {
+  // The mapped type, notice the use of "as" here
+  [K in keyof DataState as `set${Capitalize<K>}`]:
+    (arg: DataState[K]) => void
+}
+ 
+function load(dataSDK: DataSDK) {
+  dataSDK.setDigits([14])
+  dataSDK.setFlags({ darkMode: true, mobile: false })
+}
+```
+
+TS5 allows `infer` to be used in template literal type, which makes it easy to extract portions of string literal:
+
+```typescript 
+const courseWebsite = "Frontend Masters";
+type ExtractMasterName<S> = S extends `${infer T} Masters` ? T : never;
+let fe: ExtractMasterName<typeof courseWebsite> = 'Backend'
+//  typeof fe is "Frontend", so the assignment above causes error.
 ```
 
 ## 9. Modules & CJS interop
