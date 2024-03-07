@@ -8,51 +8,55 @@ tags: [programming, web-dev]
 
 _Typescript is a statically typed fake language._<!--more-->
 
+<!-- mtoc-start -->
 
-- [1. Type vs. Interface](#1-type-vs-interface)
-  - [`extends` and `implements` for interfaces](#extends-and-implements-for-interfaces)
-  - [Open Interfaces: augmenting existing built-in or library types](#open-interfaces-augmenting-existing-built-in-or-library-types)
-  - [Choose btw `type` or `interface`](#choose-btw-type-or-interface)
-  - [Top types: `any`, `unknown`, `object`, and `{}`](#top-types-any-unknown-object-and-)
-  - [Bottom type: `never`](#bottom-type-never)
-  - [Nullish values: `null`, `void`, and `undefined`](#nullish-values-null-void-and-undefined)
-  - [Non-null assertion: cast away the possibility of a `null`/`undefined`](#non-null-assertion-cast-away-the-possibility-of-a-nullundefined)
-  - [Definite assignment assertion: assert smt was initialized](#definite-assignment-assertion-assert-smt-was-initialized)
-  - [Optional chaining `?.`](#optional-chaining-)
-  - [Nullish coalescing `??`](#nullish-coalescing-)
-- [2. Conditional \& Mapped Types](#2-conditional--mapped-types)
-  - [Conditional types](#conditional-types)
-  - [Extract and Exclude](#extract-and-exclude)
-- [3. Recursive types](#3-recursive-types)
-- [4. Type queries](#4-type-queries)
-  - [`keyof`](#keyof)
-  - [`typeof`](#typeof)
-  - [Indexed access types](#indexed-access-types)
-- [5. Callables and Constructables](#5-callables-and-constructables)
-  - [Callable types](#callable-types)
-  - [`void`](#void)
-  - [Function overloads](#function-overloads)
-  - [`this` types](#this-types)
-  - [Explicitly define return types](#explicitly-define-return-types)
-- [6. Classes](#6-classes)
-  - [`public`, `private`, and `protected`](#public-private-and-protected)
-  - [JS private `#fields`](#js-private-fields)
-  - [Param properties](#param-properties)
-  - [Overrides](#overrides)
-- [7. Type Guards and Narrowing](#7-type-guards-and-narrowing)
-  - [Built-in type guards](#built-in-type-guards)
-  - [User-defined type guard](#user-defined-type-guard)
-  - [Narrowing with `switch(true)`](#narrowing-with-switchtrue)
-  - [`satisfies` keyword](#satisfies-keyword)
-- [8. Generics](#8-generics)
-  - [Defining type parameter for function](#defining-type-parameter-for-function)
-  - [Defining type parameter for interface](#defining-type-parameter-for-interface)
-  - [An exercise: map, filter, and reduce for dictionary](#an-exercise-map-filter-and-reduce-for-dictionary)
-  - [Generic constraints: “minimum requirement” for a type param](#generic-constraints-minimum-requirement-for-a-type-param)
-  - [TypeParams best practice](#typeparams-best-practice)
-- [9. Modules \& CJS interop](#9-modules--cjs-interop)
-  - [ES Module imports and exports](#es-module-imports-and-exports)
-  - [Importing non-TS things](#importing-non-ts-things)
+* [1. Type vs. Interface](#1-type-vs-interface)
+  * [Open Interfaces: augmenting existing built-in or library types](#open-interfaces-augmenting-existing-built-in-or-library-types)
+  * [Choose btw `type` or `interface`](#choose-btw-type-or-interface)
+  * [Top types: `any`, `unknown`, `object`, and `{}`](#top-types-any-unknown-object-and-)
+  * [Bottom type: `never`](#bottom-type-never)
+  * [Nullish values: `null`, `void`, and `undefined`](#nullish-values-null-void-and-undefined)
+  * [Non-null assertion: cast away the possibility of a `null`/`undefined`](#non-null-assertion-cast-away-the-possibility-of-a-nullundefined)
+  * [Definite assignment assertion: assert smt was initialized](#definite-assignment-assertion-assert-smt-was-initialized)
+  * [Optional chaining `?.`](#optional-chaining-)
+  * [Nullish coalescing `??`](#nullish-coalescing-)
+  * [`extends` and `implements` for interfaces](#extends-and-implements-for-interfaces)
+* [2. Conditional & Mapped Types](#2-conditional--mapped-types)
+  * [Conditional types](#conditional-types)
+  * [Extract and Exclude](#extract-and-exclude)
+* [3. Recursive types](#3-recursive-types)
+* [4. Type queries](#4-type-queries)
+  * [`keyof`](#keyof)
+  * [`typeof`](#typeof)
+  * [Indexed access types](#indexed-access-types)
+* [5. Callables and Constructables](#5-callables-and-constructables)
+  * [Callable types](#callable-types)
+  * [`void`](#void)
+  * [Function overloads](#function-overloads)
+  * [`this` types](#this-types)
+  * [Explicitly define return types](#explicitly-define-return-types)
+* [6. Classes](#6-classes)
+  * [`public`, `private`, and `protected`](#public-private-and-protected)
+  * [JS private `#fields`](#js-private-fields)
+  * [Param properties](#param-properties)
+  * [Overrides](#overrides)
+* [7. Type Guards and Narrowing](#7-type-guards-and-narrowing)
+  * [Built-in type guards](#built-in-type-guards)
+  * [User-defined type guard](#user-defined-type-guard)
+  * [Narrowing with `switch(true)`](#narrowing-with-switchtrue)
+  * [`satisfies` keyword](#satisfies-keyword)
+* [8. Generics](#8-generics)
+  * [Defining type parameter for function](#defining-type-parameter-for-function)
+  * [Defining type parameter for interface](#defining-type-parameter-for-interface)
+  * [An exercise: map, filter, and reduce for dictionary](#an-exercise-map-filter-and-reduce-for-dictionary)
+  * [Generic constraints: “minimum requirement” for a type param](#generic-constraints-minimum-requirement-for-a-type-param)
+  * [TypeParams best practice](#typeparams-best-practice)
+  * [`infer`: access sub-parts of a large type](#infer-access-sub-parts-of-a-large-type)
+* [9. Modules & CJS interop](#9-modules--cjs-interop)
+  * [ES Module imports and exports](#es-module-imports-and-exports)
+  * [Importing non-TS things](#importing-non-ts-things)
+
+<!-- mtoc-end -->
 
 ## 1. Type vs. Interface
 
@@ -81,46 +85,6 @@ An **interface** is a way of defining an object type (not to be confused with a 
 ```typescript
 {
   field: value;
-}
-```
-
-### `extends` and `implements` for interfaces
-
-- Just as in in JavaScript, a subclass extends from a base class.
-- Additionally a “sub-interface” extends from a base interface, as shown in the example below
-
-```typescript
-interface Animal {
-  isAlive(): boolean;
-}
-interface Mammal extends Animal {
-  getFurOrHairColor(): string;
-}
-interface Hamster extends Mammal {
-  squeak(): string;
-}
-function careForHamster(h: Hamster) {
-  h.getFurOrHairColor();
-  h.squeak();
-}
-```
-
-TypeScript adds a second heritage clause that can be used to state that a given class should produce instances that confirm to a given interface: implements.
-
-```typescript
-// @noImplicitAny: false
-function consumeFood(arg) {}
-interface AnimalLike {
-  eat(food): void;
-}
-
-class Dog implements AnimalLike {
-  bark() {
-    return "woof";
-  }
-  eat(food) {
-    consumeFood(food);
-  }
 }
 ```
 
@@ -172,21 +136,21 @@ However, **values with an `unknown` type cannot be used without applying a type 
 
 ```typescript
 function doSomethingRisky() {
-  if (Math.random() > 0.5)  return "ok"
-  else if (Math.random() > 0.5) throw new Error("Bad luck!")
-  else throw "Really bad luck"
+  if (Math.random() > 0.5) return "ok";
+  else if (Math.random() > 0.5) throw new Error("Bad luck!");
+  else throw "Really bad luck";
 }
 
 try {
-  doSomethingRisky()
+  doSomethingRisky();
 } catch (e: unknown) {
   if (e instanceof Error) {
-    e
-  } else if (typeof e === 'string') {
-    e
+    e;
+  } else if (typeof e === "string") {
+    e;
   } else {
     // Last resort
-    console.error(e)
+    console.error(e);
   }
 }
 ```
@@ -197,41 +161,40 @@ The `object` type represents the set `{ all possible values except for primitive
 
 ```typescript
 // @errors: 2322
-let val: object = { status: "ok" }
-val = "foo" // ERROR
-val = null // ERROR
-val = () => "ok" // OK
+let val: object = { status: "ok" };
+val = "foo"; // ERROR
+val = null; // ERROR
+val = () => "ok"; // OK
 
 // The type of this value cannot be modeled by an interface
 let response:
-    { success: string, data: unknown }
-  | { error: string, code: number }
-      = { success: "ok", data: [] }
+  | { success: string; data: unknown }
+  | { error: string; code: number } = { success: "ok", data: [] };
 
-val = response // OK
+val = response; // OK
 ```
 
 The empty object type {} represents the set **{ all possible values, except for null and undefined }**. Some examples below:
 
 ```typescript
 const myObj: {
-  a?: number
-  b: string
-} = { b: "foo" }
-let nullableString: string | null = null
+  a?: number;
+  b: string;
+} = { b: "foo" };
+let nullableString: string | null = null;
 
-let val2: {} = 4 // OK
-val2 = "abc" // OK
-val2 = new Date() // OK
-val2 = nullableString // NOT OK
-val2 = myObj.a // NOT OK
+let val2: {} = 4; // OK
+val2 = "abc"; // OK
+val2 = new Date(); // OK
+val2 = nullableString; // NOT OK
+val2 = myObj.a; // NOT OK
 ```
 
 You can use the type `{}` in combination with the intersection type operator & to remove nullability from another type:
 
 ```typescript
 type NullableStringOrNumber = string | number | null | undefined;
-type StringOrNumber = NullableStringOrNumber & {}
+type StringOrNumber = NullableStringOrNumber & {};
 ```
 
 ### Bottom type: `never`
@@ -241,26 +204,26 @@ Consider the following scenario:
 ```typescript
 class Car {
   drive() {
-    console.log("vroom")
+    console.log("vroom");
   }
 }
 class Truck {
   tow() {
-    console.log("dragging something")
+    console.log("dragging something");
   }
 }
-type Vehicle = Truck | Car
- 
-let myVehicle: Vehicle = obtainRandomVehicle()
- 
+type Vehicle = Truck | Car;
+
+let myVehicle: Vehicle = obtainRandomVehicle();
+
 // The exhaustive conditional
 if (myVehicle instanceof Truck) {
-  myVehicle.tow() // Truck
+  myVehicle.tow(); // Truck
 } else if (myVehicle instanceof Car) {
-  myVehicle.drive() // Car
+  myVehicle.drive(); // Car
 } else {
   // This will only work if the type of myVehicle is never.
-  const neverValue: never = myVehicle
+  const neverValue: never = myVehicle;
 }
 ```
 
@@ -269,12 +232,12 @@ Now, if we change the `Vehicle` type to be `Truck | Car | Boat` then, we will ge
 ```typescript
 // The exhaustive conditional
 if (myVehicle instanceof Truck) {
-  myVehicle.tow() // Truck
+  myVehicle.tow(); // Truck
 } else if (myVehicle instanceof Car) {
-  myVehicle.drive() // Car
+  myVehicle.drive(); // Car
 } else {
-  const neverValue: never = myVehicle
-// ^Type 'Boat' is not assignable to type 'never'.
+  const neverValue: never = myVehicle;
+  // ^Type 'Boat' is not assignable to type 'never'.
 }
 ```
 
@@ -290,7 +253,7 @@ Thus, using `never` to exhaust conditions will help us catch upstream code chang
 
 ```typescript
 // suppress warning of 'obj.fruits' is possible 'undefined'
-obj.fruits!.push("banana")
+obj.fruits!.push("banana");
 ```
 
 Non-null assertion is recommended to be used in test suite
@@ -301,30 +264,31 @@ The definite assignment `!:` assertion is used to suppress TypeScript’s object
 
 ```typescript
 class ThingWithAsyncSetup {
-  setupPromise: Promise<any> // ignore the <any> for now
-  isSetup!: boolean
- 
+  setupPromise: Promise<any>; // ignore the <any> for now
+  isSetup!: boolean;
+
   constructor() {
     this.setupPromise = new Promise((resolve) => {
-      this.isSetup = false
-      return this.doSetup()
+      this.isSetup = false;
+      return this.doSetup();
     }).then(() => {
-      this.isSetup = true
-    })
+      this.isSetup = true;
+    });
   }
- 
-  private async doSetup() { }
+
+  private async doSetup() {}
 }
 ```
 
 ### Optional chaining `?.`
+
 Now let’s say we want to render information on a dashboard, for the customer’s most recent payment on any invoice (or leave blank if they haven’t made any payments).
 
 All this, just to sort of drill down and find something if it’s there. Optional chaining gives us a more concise way to do this
 
 ```typescript
 function getLastPayment(data: ResponseData): number | undefined {
-  return data?.customer?.lastInvoice?.lastPayment?.amount
+  return data?.customer?.lastInvoice?.lastPayment?.amount;
 }
 ```
 
@@ -332,17 +296,72 @@ function getLastPayment(data: ResponseData): number | undefined {
 
 ```typescript
 type PlayerConfig = {
-  volume?: 0 | 25 | 50 | 75 | 100
-}
+  volume?: 0 | 25 | 50 | 75 | 100;
+};
 
 let smt: PlayerConfig = getConfig();
 // vol==50 when smt.volume is null or undefined
-const vol = smt.volume??50;
+const vol = smt.volume ?? 50;
+```
+
+### `extends` and `implements` for interfaces
+
+- Just as in in JavaScript, a subclass extends from a base class.
+- Additionally a “sub-interface” extends from a base interface, as shown in the example below
+
+```typescript
+interface Animal {
+  isAlive(): boolean;
+}
+interface Mammal extends Animal {
+  getFurOrHairColor(): string;
+}
+interface Hamster extends Mammal {
+  squeak(): string;
+}
+function careForHamster(h: Hamster) {
+  h.getFurOrHairColor();
+  h.squeak();
+}
+```
+
+A better way to understand `x extends y` is to translate it into "x is subset/subtype of y" or "x is assignable to y". The translation makes the assignment below clearer:
+
+```typescript
+type a1 = 64 extends number ? true : false;
+// a1=true, 64 is a numeric literal type, which is a specific subtype of number
+type a2 = string[] extends any ? true : false;
+// true, any is the top type, meaning that any type is assignable to `any`
+type a3 = Date extends { new (...args: any[]): any } ? true : false;
+// false, Date is JS build-in instance type, not constructor type, while
+// {new (..args: any[]): any} is a constructor type
+// to get a constructor type, we can use (typeof Date)
+type a4 = typeof Date extends { new (...args: any[]): any } ? true : false;
+// true, see above for the reason
+```
+
+TypeScript adds a second heritage clause that can be used to state that a given class should produce instances that confirm to a given interface: implements.
+
+```typescript
+// @noImplicitAny: false
+function consumeFood(arg) {}
+interface AnimalLike {
+  eat(food): void;
+}
+
+class Dog implements AnimalLike {
+  bark() {
+    return "woof";
+  }
+  eat(food) {
+    consumeFood(food);
+  }
+}
 ```
 
 ## 2. Conditional & Mapped Types
 
-### Conditional types 
+### Conditional types
 
 Conditional types allow for types to be expressed using a very similar (basically, the same) syntax
 
@@ -355,24 +374,25 @@ class Oven {
   setTemperature(degrees: number) {}
 }
 
-type CookingDevice<T> = T extends "grill" ? Grill : Oven
+type CookingDevice<T> = T extends "grill" ? Grill : Oven;
 
-let device1: CookingDevice<"grill">
+let device1: CookingDevice<"grill">;
 //   ^let device1: Grill
-let device2: CookingDevice<"oven">
+let device2: CookingDevice<"oven">;
 //   ^let device2: Oven
 ```
+
 `extends` is a check of a subset relationship: `A extends B?` means "Is A a subset of B?" To verify this thought, see the following:
 
 ```typescript
-type IsLowNumber<T> = T extends 1 | 2 ? true : false
-type TestOne = IsLowNumber<1>
-//     ^type TestOne=true 
-type TestTwo = IsLowNumber<2>
+type IsLowNumber<T> = T extends 1 | 2 ? true : false;
+type TestOne = IsLowNumber<1>;
+//     ^type TestOne=true
+type TestTwo = IsLowNumber<2>;
 //     ^type TestTwo=true
-type TestTen = IsLowNumber<10>
+type TestTen = IsLowNumber<10>;
 //     ^type TestTen= false
-type TestTenWithTwo = IsLowNumber<10 | 2>
+type TestTenWithTwo = IsLowNumber<10 | 2>;
 //     ^type TestTenWithTwo = boolean
 ```
 
@@ -384,7 +404,7 @@ In the last case,
   true | false —> boolean
 ```
 
-### Extract and Exclude 
+### Extract and Exclude
 
 ```typescript
 type FavoriteColors =
@@ -397,19 +417,19 @@ type FavoriteColors =
   | "prussian blue"
   | "cadium yellow"
   | [number, number, number]
-  | { red: number; green: number; blue: number }
- 
-type StringColors = Extract<FavoriteColors, string>
+  | { red: number; green: number; blue: number };
+
+type StringColors = Extract<FavoriteColors, string>;
 // type StringColors = "dark sienna" | "van dyke brown" | "yellow ochre" | "sap green" | "titanium white" | "phthalo green" | "prussian blue" | "cadium yellow"
 
-type ObjectColors = Extract<FavoriteColors, { red: number }>       
+type ObjectColors = Extract<FavoriteColors, { red: number }>;
 // type ObjectColors = {
 //     red: number;
 //     green: number;
 //     blue: number;
 // }
 
-type TupleColors = Extract<FavoriteColors, [number, number, number]>
+type TupleColors = Extract<FavoriteColors, [number, number, number]>;
 // type TupleColors = [number, number, number]
 ```
 
@@ -425,9 +445,9 @@ type FavoriteColors =
   | "prussian blue"
   | "cadium yellow"
   | [number, number, number]
-  | { red: number; green: number; blue: number }
- 
-type NonStringColors = Exclude<FavoriteColors, string>        
+  | { red: number; green: number; blue: number };
+
+type NonStringColors = Exclude<FavoriteColors, string>;
 // type NonStringColors = [number, number, number] | {
 //     red: number;
 //     green: number;
@@ -1028,11 +1048,11 @@ function reduceDict<T, S>(
 
 ### Generic constraints: “minimum requirement” for a type param
 
-The way we define constraints on generics is by using the `extends` keyword.  Assume we have the following function parametrized by generics:
+The way we define constraints on generics is by using the `extends` keyword. Assume we have the following function parametrized by generics:
 
 ```typescript
 interface Dict<T> {
-  [k: string]: T
+  [k: string]: T;
 }
 
 function foo<T>(list: T[]): Dict<T> {
@@ -1050,50 +1070,68 @@ interface HasId {
 function<T extends HasId>(list: T[]): Dict<T>{}
 ```
 
-### TypeParams best practice 
+### TypeParams best practice
 
-The snippet below gives two similar functions(`example1` and `example2`) that produce the same results(i.e. `result1` and `result2` are the same). 
+The snippet below gives two similar functions(`example1` and `example2`) that produce the same results(i.e. `result1` and `result2` are the same).
 
 ```typescript
 interface HasId {
-  id: string
+  id: string;
 }
 interface Dict<T> {
-  [k: string]: T
+  [k: string]: T;
 }
 
 function example1<T extends HasId[]>(list: T) {
-  return list.pop()
+  return list.pop();
 }
 function example2<T extends HasId>(list: T[]) {
-  return list.pop()
+  return list.pop();
 }
 
 class Payment implements HasId {
   static #next_id_counter = 1;
-  id = `pmnt_${Payment.#next_id_counter++}`
+  id = `pmnt_${Payment.#next_id_counter++}`;
 }
 class Invoice implements HasId {
   static #next_id_counter = 1;
-  id = `invc_${Invoice.#next_id_counter++}`
+  id = `invc_${Invoice.#next_id_counter++}`;
 }
 
 const result1 = example1([
   //   ^ const result1: HasId | undefined
   new Payment(),
   new Invoice(),
-  new Payment()
-])
+  new Payment(),
+]);
 
 const result2 = example2([
   //   ^ const result2: Payment | Invoice | undefined
   new Payment(),
   new Invoice(),
-  new Payment()
-])
+  new Payment(),
+]);
 ```
 
-Compare the types of `result1` and `result2`, we’re effectively losing type information because of the way we define our type parameter in `example1`. Thus, the best practice is to define type parameters as simply as possible. 
+Compare the types of `result1` and `result2`, we’re effectively losing type information because of the way we define our type parameter in `example1`. Thus, the best practice is to define type parameters as simply as possible.
+
+### `infer`: access sub-parts of a large type
+
+`infer` can only be used in conditional type expression. In the following example, the `ReturnType` type takes a function type T and checks if T is a function that returns some type R. If it is, it infers the return type of the function (R) and returns it. Otherwise, it returns never.
+
+```typescript
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+
+function add(a: number, b: number): number {
+  return a + b;
+}
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+type AddReturnType = ReturnType<typeof add>; // number
+type GreetReturnType = ReturnType<typeof greet>; // string
+```
 
 ## 9. Modules & CJS interop
 
@@ -1103,28 +1141,28 @@ Basic examples:
 
 ```typescript
 // named imports
-import { Blueberry, Raspberry } from './berries'
-import Kiwi from './kiwi' // default import
+import { Blueberry, Raspberry } from "./berries";
+import Kiwi from "./kiwi"; // default import
 export function makeFruitSalad() {} // named export
 export default class FruitBasket {} // default export
-export { lemon, lime } from './citrus' // re-export
-export * as berries from './berries' // re-export entire module as a single namespace
+export { lemon, lime } from "./citrus"; // re-export
+export * as berries from "./berries"; // re-export entire module as a single namespace
 ```
 
 Although fairly uncommon in the JS world, it’s possible to import an entire module as a namespace. TypeScript supports this as well
 
 ```typescript
-import * as allBerries from "./berries" // namespace import
-allBerries.Strawberry // using the namespace
-allBerries.Blueberry
-allBerries.Raspberry
-export * from "./berries" // namespace re-export
+import * as allBerries from "./berries"; // namespace import
+allBerries.Strawberry; // using the namespace
+allBerries.Blueberry;
+allBerries.Raspberry;
+export * from "./berries"; // namespace re-export
 ```
 
-TypeScript provides an unambiguous way of importing _only_ types. 
+TypeScript provides an unambiguous way of importing _only_ types.
 
 ```typescript
-import type { Strawberry } from './berries/strawberry'
+import type { Strawberry } from "./berries/strawberry";
 ```
 
 ### Importing non-TS things
@@ -1134,10 +1172,9 @@ Importing images can be accomplished through a module declaration as shown below
 ```typescript
 // @filename: global.d.ts
 declare module "*.png" {
-  const imgUrl: string
-  export default imgUrl
+  const imgUrl: string;
+  export default imgUrl;
 }
 // @filename: component.ts
-import img from "./file.png"
+import img from "./file.png";
 ```
-
