@@ -6,33 +6,33 @@ categories: post
 tags: [programming, basics, web-dev, build-tool]
 ---
 
-_Driving high-quality code with vitest/vite_<!--more-->
+_"Effortless as the wind that whispers by, when upon my bike I ride and fly."_<!--more-->
 
 <!-- mtoc-start -->
 
-* [Intro](#intro)
-* [Brief Intro to Vite](#brief-intro-to-vite)
-  * [The big why](#the-big-why)
-  * [Basic structure of a Vite project](#basic-structure-of-a-vite-project)
-  * [Working with CSS modules](#working-with-css-modules)
-  * [Vite with JS frontend framework](#vite-with-js-frontend-framework)
-  * [Using Vite project template](#using-vite-project-template)
-  * [Working with static Assets](#working-with-static-assets)
-  * [`assetsInclude`](#assetsinclude)
-  * [vite-imagetools](#vite-imagetools)
-  * [`import.meta`](#importmeta)
-  * [Conditional imports](#conditional-imports)
-  * [vite-plugin-dynamic-import](#vite-plugin-dynamic-import)
-  * [`import.meta.glob`](#importmetaglob)
-  * [Environments and modes](#environments-and-modes)
-  * [Create a component library](#create-a-component-library)
-  * [Integrate `solid-js` with `vite`](#integrate-solid-js-with-vite)
-* [Kinds of tests](#kinds-of-tests)
-  * [unit tests](#unit-tests)
-  * [integration tests (functional)](#integration-tests-functional)
-  * [system tests (e2e)](#system-tests-e2e)
-  * [acceptance tests: mimic real user behavior](#acceptance-tests-mimic-real-user-behavior)
-* [Example: unit test](#example-unit-test)
+- [Intro](#intro)
+- [Brief Intro to Vite](#brief-intro-to-vite)
+  - [The big why](#the-big-why)
+  - [Basic structure of a Vite project](#basic-structure-of-a-vite-project)
+  - [Working with CSS modules](#working-with-css-modules)
+  - [Vite with JS frontend framework](#vite-with-js-frontend-framework)
+  - [Using Vite project template](#using-vite-project-template)
+  - [Working with static Assets](#working-with-static-assets)
+  - [`assetsInclude`](#assetsinclude)
+  - [vite-imagetools](#vite-imagetools)
+  - [`import.meta`](#importmeta)
+  - [Conditional imports](#conditional-imports)
+  - [vite-plugin-dynamic-import](#vite-plugin-dynamic-import)
+  - [`import.meta.glob`](#importmetaglob)
+  - [Environments and modes](#environments-and-modes)
+  - [Create a component library](#create-a-component-library)
+  - [Integrate `solid-js` with `vite`](#integrate-solid-js-with-vite)
+- [Kinds of tests](#kinds-of-tests)
+  - [unit tests](#unit-tests)
+  - [integration tests (functional)](#integration-tests-functional)
+  - [system tests (e2e)](#system-tests-e2e)
+  - [acceptance tests: mimic real user behavior](#acceptance-tests-mimic-real-user-behavior)
+- [Example: unit test](#example-unit-test)
 
 <!-- mtoc-end -->
 
