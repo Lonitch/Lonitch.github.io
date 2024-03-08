@@ -29,7 +29,7 @@ _Typescript is a statically typed fake language._<!--more-->
   * [`keyof`](#keyof)
   * [`typeof`](#typeof)
   * [Indexed access types](#indexed-access-types)
-* [5. Callables and Constructables](#5-callables-and-constructables)
+* [5. Function and Constructor Types](#5-function-and-constructor-types)
   * [Callable types](#callable-types)
   * [`void`](#void)
   * [Function overloads](#function-overloads)
@@ -55,6 +55,7 @@ _Typescript is a statically typed fake language._<!--more-->
   * [`Record`: create object types with specific key-value pairs](#record-create-object-types-with-specific-key-value-pairs)
   * [`Pick`: make new type by picking properties from old type](#pick-make-new-type-by-picking-properties-from-old-type)
   * [Template literal types: create types based on string literal](#template-literal-types-create-types-based-on-string-literal)
+  * [Type registry: one handles many return types](#type-registry-one-handles-many-return-types)
 * [9. Modules & CJS interop](#9-modules--cjs-interop)
   * [ES Module imports and exports](#es-module-imports-and-exports)
   * [Importing non-TS things](#importing-non-ts-things)
@@ -538,7 +539,7 @@ let carColor: Car["color"];
 let carProperty: Car["color" | "year"];
 ```
 
-## 5. Callables and Constructables
+## 5. Function and Constructor Types
 
 ### Callable types
 
@@ -1138,7 +1139,7 @@ type GreetReturnType = ReturnType<typeof greet>; // string
 
 ### `Record`: create object types with specific key-value pairs
 
-`Record` is useful when you want to **enforce** a certain type for all the values in an object, but allows keys to be multiple types. 
+`Record` is useful when you want to **enforce** a certain type for all the values in an object, but allows keys to be multiple types.
 
 ```typescript
 type User = {
@@ -1152,13 +1153,14 @@ type UsersById = Record<number | "ddo" | "ccc", User>;
 
 const users: UsersById = {
   2: { id: 2, name: "Bob" },
-  "ddo": { id: 3, name: "Pob" },
-  "ccc": { id: 4, name: "Jobs" }
+  ddo: { id: 3, name: "Pob" },
+  ccc: { id: 4, name: "Jobs" },
 };
 ```
 
 ### `Pick`: make new type by picking properties from old type
-```typescript 
+
+```typescript
 type User = {
   id: number;
   name: string;
@@ -1166,59 +1168,117 @@ type User = {
 };
 
 // Create a new type that only includes the 'id' and 'name' properties
-type UserSummary = Pick<User, 'id' | 'name'>;
+type UserSummary = Pick<User, "id" | "name">;
 ```
 
 ### Template literal types: create types based on string literal
 
 Here is a basic example:
 
-```typescript 
-type ArtFeatures = "cabin" | "tree" | "sunset"
-type Colors =
-  | "darkSienna"
-  | "sapGreen"
-  | "titaniumWhite"
-  | "prussianBlue"
+```typescript
+type ArtFeatures = "cabin" | "tree" | "sunset";
+type Colors = "darkSienna" | "sapGreen" | "titaniumWhite" | "prussianBlue";
 
-type ArtMethodNames = `paint_${Colors}_${ArtFeatures}`
+type ArtMethodNames = `paint_${Colors}_${ArtFeatures}`;
 ```
 
 TS provides some utility types you can use in template literal types: `UpperCase`/`LowerCase`/`Capitalize`/`Uncapitalize`. For example,
 
-```typescript 
-type ArtMethodNames =
-  `paint${Capitalize<Colors>}${Capitalize<ArtFeatures>}`
+```typescript
+type ArtMethodNames = `paint${Capitalize<Colors>}${Capitalize<ArtFeatures>}`;
 ```
 
 With the template, we can map the keys of an existing object type into something else. In the following example, we add `set` in front of keys of `type DataSDK`:
 
-```typescript 
+```typescript
 interface DataState {
-  digits: number[]
-  names: string[]
-  flags: Record<"darkMode" | "mobile", boolean>
+  digits: number[];
+  names: string[];
+  flags: Record<"darkMode" | "mobile", boolean>;
 }
- 
+
 type DataSDK = {
   // The mapped type, notice the use of "as" here
-  [K in keyof DataState as `set${Capitalize<K>}`]:
-    (arg: DataState[K]) => void
-}
- 
+  [K in keyof DataState as `set${Capitalize<K>}`]: (arg: DataState[K]) => void;
+};
+
 function load(dataSDK: DataSDK) {
-  dataSDK.setDigits([14])
-  dataSDK.setFlags({ darkMode: true, mobile: false })
+  dataSDK.setDigits([14]);
+  dataSDK.setFlags({ darkMode: true, mobile: false });
 }
 ```
 
 TS5 allows `infer` to be used in template literal type, which makes it easy to extract portions of string literal:
 
-```typescript 
+```typescript
 const courseWebsite = "Frontend Masters";
 type ExtractMasterName<S> = S extends `${infer T} Masters` ? T : never;
-let fe: ExtractMasterName<typeof courseWebsite> = 'Backend'
+let fe: ExtractMasterName<typeof courseWebsite> = "Backend";
 //  typeof fe is "Frontend", so the assignment above causes error.
+```
+
+### Type registry: one handles many return types
+
+Imagine we need a function(let's call it `multiFunc`) to return data of different types/classes, depending on various conditions. Of course you can define it using union type as the following:
+
+```typescript
+function multiFunc(
+  typeName: "class1" | "class2",
+  identifier: string,
+): Class1 | Class2 {
+  if (typeName == "class1") {
+    return new Class1(identifier);
+  } else {
+    return new Class2(identifier);
+  }
+}
+```
+
+There is one big disadvantage of doing so: **poor scalabilit**: as you add more types, the union(`Class1 | Class2 | Class3...`) becomes unwieldy and complicates your function definition.
+
+We can use type registry to avoid over-complicating your function definitions. Here is how we do it in the example above:
+
+```typescript 
+// define an interface for the registry 
+interface FuncTypeRegistry {
+    "class1": Class1,
+    "class2": Class2
+}
+// now we can use generics to define our "multiFunc"
+function multiFunc<K extends keyof FuncTypeRegistry>(
+    typeName: K,
+    identifier: string,
+   // notice how union type now disappears!!
+): FuncTypeRegistry[K] {
+// logic is unchanged.
+}
+```
+
+We can take a step further by specifying the format of `identifier` using [literal template](#template-literal-types-create-types-based-on-string-literal):
+
+```typescript 
+function multiFunc<K extends keyof FuncTypeRegistry>(
+    typeName: K,
+    // assume we want to set identifier for Class1 instance 
+    // as "class1_xxxx"
+    // and Class2 instance as "class2_xxx"
+    identifier: `${K}_${string}`,
+): FuncTypeRegistry[K] {
+// logic is unchanged.
+}
+```
+
+Based on this, we can even define another function that takes a array of "identifier" and return an array of `Class1` or `Class2` as the following:
+
+```typescript 
+function multiFuncArray<K extends keyof FuncTypeRegistry>(
+    typeName: K,
+    // an array of "class1_xxx" or array of "class2_xxx"
+    identifiers: `${K}_${string}`[]
+   // notice how extra bracket is added here
+): FuncTypeRegistry[K][]{
+    // new logic for arrays
+}
 ```
 
 ## 9. Modules & CJS interop
