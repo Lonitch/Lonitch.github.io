@@ -1,7 +1,7 @@
 ---
 title: "Make TS Stick"
 author: Sizhe Liu
-categories: post 
+categories: post
 tags: [programming, web-dev, basics]
 ---
 
@@ -13,3 +13,114 @@ _Only suffering and pain stick, so we become proficient through them_<!--more-->
 - `private filedName` is a TypeScript private field, and while type-checking helps ensure we do not access it improperly, at runtime it’s **accessible** outside the class.
 
 ## Make variable immutable
+
+```javascript
+// "a" holds a immutable value and cannot be reassigned
+const a = "AAAAAA";
+// "b" holds a immutable value and can be reassigned
+let b = "BBBBBB";
+// "c" cannot be reassigned
+const c = { learnAt: "web" };
+// but the following is OK
+c.learnAt = "xxxx";
+// "d" is reassignable, and it holds a mutable value
+let d = { learnAt: "cafe" };
+// "e" is not reassignable, and holds an immutable value
+const e = Object.freeze({ learnAt: "school" });
+// the following is NOT OK
+// e.learnAt="xxxx"
+```
+
+We can also use `readOnly` to make a property in an object not reassignable:
+
+```typescript
+type ImmutableObject = {
+  readonly property: string;
+};
+
+const myImmutableObject: ImmutableObject = {
+  property: "This property cannot be changed",
+};
+
+// Trying to change these values will result in a TypeScript error
+// myImmutableObject.property = "New value"; // Error
+```
+
+## Simple conversion from string to dictionary
+
+```javascript
+const str = "hello";
+let val = { ...str.split("") };
+console.log(val);
+/**
+ * {
+ *   '0': 'h',
+ *   '1': 'e',
+ *   '2': 'l',
+ *   '3': 'l',
+ *   '4': 'o'
+ * }
+ */
+```
+
+## `string` vs `String`, `number` vs `Number`
+
+`string` and `number` are premitives, while `String` and `Number` are interfaces(defined in object-like fashion). Thus,
+
+```typescript 
+let a: string & number // never 
+// a type contains properties shared by String & Number
+let b: String & Number 
+```
+
+We can even extend a new interface from `String` and `Number` by resolving conflicting properties:
+
+```typescript 
+// NOT OK
+// interface Foo extends String, Number {}
+// the following is OK 
+interface Bar extends String, Number {
+  valueOf(): never
+  toString(): string
+}
+```
+
+## A `Promise/resolve` knowledge checker
+In what order will the animal names below be printed to the console?
+
+```javascript 
+function getData() {
+  console.log("elephant")
+  const p = new Promise((resolve) => {
+    console.log("giraffe")
+    resolve("lion")
+    console.log("zebra")
+  })
+  console.log("koala")
+  return p
+}
+async function main() {
+  console.log("cat")
+  const result = await getData()
+  console.log(result)
+}
+console.log("dog")
+main().then(() => {
+  console.log("moose")
+})
+```
+
+The answer: dog, cat, elephant, giraffe, zebra, koala, lion, moose.
+
+The explanation:
+
+- `main` function runs `console.log("cat")` first,
+- jump into `getData` function
+- run `console.log("elephant")`
+- executor function in `Promise` is called synchronously with the `Promise` constructor, hence,
+    - `console.log("giraffe")` runs first
+    - `resolve("lion")` executes, but it does not return any `result` until the rest of the function is executed
+    - `console.log("zebra")` prints "zebra"
+    - `console.log("koala")` prints "koala"
+- execute `console.log(result)`, printing "lion"
+- execute `console.log("moose")` printing "moose"
