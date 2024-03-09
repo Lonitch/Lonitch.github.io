@@ -172,4 +172,13 @@ type GoodType2 = [string, ...number[], string];
 
 ## `useUnknownInCatchVariables`
 
+Turn `useUnknownInCatchVariables` in `tsconfig.json` to `true`, to formulate your `catch` clause as the following:
 
+```typescript
+try{
+    somethingRisky()
+} catch (error unknown){
+    if(err instanceof Error) throw err
+    else throw new Error(`${err}`);
+}
+```
