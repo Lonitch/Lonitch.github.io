@@ -67,47 +67,45 @@ console.log(val);
 
 `string` and `number` are premitives, while `String` and `Number` are interfaces(defined in object-like fashion). Thus,
 
-```typescript 
-let a: string & number // never 
+```typescript
+let a: string & number; // never
 // a type contains properties shared by String & Number
-let b: String & Number 
+let b: String & Number;
 ```
 
 We can even extend a new interface from `String` and `Number` by resolving conflicting properties:
 
-```typescript 
-// NOT OK
-// interface Foo extends String, Number {}
-// the following is OK 
+```typescript
 interface Bar extends String, Number {
-  valueOf(): never
-  toString(): string
+  valueOf(): never;
+  toString(): string;
 }
 ```
 
 ## A `Promise/resolve` knowledge checker
+
 In what order will the animal names below be printed to the console?
 
-```javascript 
+```javascript
 function getData() {
-  console.log("elephant")
+  console.log("elephant");
   const p = new Promise((resolve) => {
-    console.log("giraffe")
-    resolve("lion")
-    console.log("zebra")
-  })
-  console.log("koala")
-  return p
+    console.log("giraffe");
+    resolve("lion");
+    console.log("zebra");
+  });
+  console.log("koala");
+  return p;
 }
 async function main() {
-  console.log("cat")
-  const result = await getData()
-  console.log(result)
+  console.log("cat");
+  const result = await getData();
+  console.log(result);
 }
-console.log("dog")
+console.log("dog");
 main().then(() => {
-  console.log("moose")
-})
+  console.log("moose");
+});
 ```
 
 The answer: dog, cat, elephant, giraffe, zebra, koala, lion, moose.
@@ -118,9 +116,60 @@ The explanation:
 - jump into `getData` function
 - run `console.log("elephant")`
 - executor function in `Promise` is called synchronously with the `Promise` constructor, hence,
-    - `console.log("giraffe")` runs first
-    - `resolve("lion")` executes, but it does not return any `result` until the rest of the function is executed
-    - `console.log("zebra")` prints "zebra"
-    - `console.log("koala")` prints "koala"
+  - `console.log("giraffe")` runs first
+  - `resolve("lion")` executes, but it does not return any `result` until the rest of the function is executed
+  - `console.log("zebra")` prints "zebra"
+  - `console.log("koala")` prints "koala"
 - execute `console.log(result)`, printing "lion"
 - execute `console.log("moose")` printing "moose"
+
+## use `...rest` in tuple type
+
+Define a tuple type whose first element is number, an enum the second which is followed by some other strings:
+
+```typescript
+enum SecondElem = {
+    GroundBeef,
+    Lamb,
+    Pork
+}
+// ...string[] is the rest element here
+type TupleType = [number, SecondElem, ...string[]];
+
+const t: TupleType = [12, SecondElem.Pork, "str2"];
+```
+
+It's a bit tricky when you create a function that manipulate tuple types like the one defined above. As it's possible to **lose some type information**:
+
+```typescript
+// exclude the first element in the passed tuple
+function foo<T>(arg: readOnly [number, ...T[]]){
+  const [_ignored, ...rest] = arg;
+  return rest;
+}
+// tail has a type of (string|SecondElem)[]
+const tail = foo([11,SecondElem.GroundBeef, "lettuce"])
+```
+
+The type of `tail` is `(string|SecondElem)[]`, not `[SecondElem, ...string[]]`. To solve this issue, we can rewrite `foo` as:
+
+```typescript
+function foo<T extends any[]>(arg: readOnly [number, ...T]){
+    // remain the same
+}
+const tail = foo([11,SecondElem.GroundBeef,"lettuce"])
+// tail now has a type of [SecondElem, ...string[]]
+```
+
+When defining a tuple type, you can use multiple `...` and they can be anywhere. But there can only be one `...rest[]`:
+
+```typescript
+type GoodType1 = [...[number, string], ...string[]];
+// compiler error
+type BadType = [...number[], ...string[]];
+type GoodType2 = [string, ...number[], string];
+```
+
+## `useUnknownInCatchVariables`
+
+
