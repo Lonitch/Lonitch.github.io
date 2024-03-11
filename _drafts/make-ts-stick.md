@@ -7,6 +7,19 @@ tags: [programming, web-dev, basics]
 
 _Only suffering and pain stick, so we become proficient through them_<!--more-->
 
+<!-- mtoc-start -->
+
+* [`#` versus `private`](#-versus-private)
+* [Make variable immutable](#make-variable-immutable)
+* [Simple conversion from string to dictionary](#simple-conversion-from-string-to-dictionary)
+* [`string` vs `String`, `number` vs `Number`](#string-vs-string-number-vs-number)
+* [A `Promise/resolve` knowledge checker](#a-promiseresolve-knowledge-checker)
+* [use `...rest` in tuple type](#use-rest-in-tuple-type)
+* [`useUnknownInCatchVariables`](#useunknownincatchvariables)
+* [Define a class using template literal](#define-a-class-using-template-literal)
+
+<!-- mtoc-end -->
+
 ## `#` versus `private`
 
 - `#fieldName`is a JS private field, and it’s actually inaccessible outside of the class at runtime
@@ -180,5 +193,81 @@ try{
 } catch (error unknown){
     if(err instanceof Error) throw err
     else throw new Error(`${err}`);
+}
+```
+
+## Define a class using template literal
+
+The `DataStore` class below gives some sort of type error that alerts you that you’ve broken the established pattern if you mis-name a method on the class(e.g., `getSongs` instead of `getAllSong`).
+
+If you add a new entity like Comic (shown below) and make no other changes to your solution, you should get some sort of type error that alerts you to the absence of a clearComics, `getAllComics` and `getAllSongs` method.
+
+```typescript
+export interface DataEntity {
+  id: string;
+}
+export interface Movie extends DataEntity {
+  director: string;
+}
+export interface Song extends DataEntity {
+  singer: string;
+}
+
+export type DataEntityMap = {
+  movie: Movie;
+  song: Song;
+};
+
+export type Setter = {
+  [K in keyof DataEntityMap as `add${Capitalize<K>}`]: (
+    arg: DataEntityMap[K],
+  ) => void;
+};
+
+export type Getter = {
+  [K in keyof DataEntityMap as `get${Capitalize<K>}`]: (
+    arg: string,
+  ) => DataEntityMap[K] | undefined;
+};
+
+export type GetAll = {
+  [K in keyof DataEntityMap as `getAll${Capitalize<K>}`]: () => DataEntityMap[K][];
+};
+
+export type Clearer = {
+  [K in keyof DataEntityMap as `clear${Capitalize<K>}`]: () => void;
+};
+
+export type StoreMethods = Setter & Getter & GetAll & Clearer;
+
+export class DataStore implements StoreMethods {
+  constructor(
+    public movies: { [key: string]: Movie } = {},
+    public songs: { [key: string]: Song } = {},
+  ) {}
+  addMovie(arg: Movie) {
+    this.movies[arg.id] = arg;
+  }
+  addSong(arg: Song) {
+    this.songs[arg.id] = arg;
+  }
+  getSong(arg: string) {
+    return this.songs[arg];
+  }
+  getMovie(arg: string) {
+    return this.movies[arg];
+  }
+  getAllSong() {
+    return Object.values(this.songs);
+  }
+  getAllMovie() {
+    return Object.values(this.movies);
+  }
+  clearSong() {
+    this.songs = {};
+  }
+  clearMovie() {
+    this.movies = {};
+  }
 }
 ```
