@@ -17,6 +17,7 @@ _Only suffering and pain stick, so we become proficient through them_<!--more-->
 * [use `...rest` in tuple type](#use-rest-in-tuple-type)
 * [`useUnknownInCatchVariables`](#useunknownincatchvariables)
 * [Define a class using template literal](#define-a-class-using-template-literal)
+* [Using tuple type can be unsafe](#using-tuple-type-can-be-unsafe)
 
 <!-- mtoc-end -->
 
@@ -241,10 +242,18 @@ export type Clearer = {
 export type StoreMethods = Setter & Getter & GetAll & Clearer;
 
 export class DataStore implements StoreMethods {
+  // private field whose type is defined by using Record
+  #data: { [K in keyof DataEntityMap]: Record<string, DataEntityMap[K]> } = {
+    song: {},
+    movie: {},
+  };
   constructor(
     public movies: { [key: string]: Movie } = {},
     public songs: { [key: string]: Song } = {},
-  ) {}
+  ) {
+        this.#data.song = this.songs;
+        this.#data.movie = this.movies;
+    }
   addMovie(arg: Movie) {
     this.movies[arg.id] = arg;
   }
@@ -270,4 +279,13 @@ export class DataStore implements StoreMethods {
     this.movies = {};
   }
 }
+```
+
+## Using tuple type can be unsafe
+
+The following snippet compiles because **tuples are a specialized flavor of arrays, they expose the entire array API**.
+
+```typescript
+const vector3: [number, number, number] = [3, 4, 5];
+vector3.push(6);
 ```
