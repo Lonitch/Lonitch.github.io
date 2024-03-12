@@ -18,6 +18,7 @@ _Only suffering and pain stick, so we become proficient through them_<!--more-->
 * [`useUnknownInCatchVariables`](#useunknownincatchvariables)
 * [Define a class using template literal](#define-a-class-using-template-literal)
 * [Using tuple type can be unsafe](#using-tuple-type-can-be-unsafe)
+* [Callback func is not definite in `.them`](#callback-func-is-not-definite-in-them)
 
 <!-- mtoc-end -->
 
@@ -288,4 +289,21 @@ The following snippet compiles because **tuples are a specialized flavor of arra
 ```typescript
 const vector3: [number, number, number] = [3, 4, 5];
 vector3.push(6);
+```
+
+## Callback func is not definite in `.them`
+The callback passed to `.then` is not regarded as a “definite assignment”. In fact, all callbacks are treated this way. Because of this, the following won't compile:
+
+```typescript 
+class Person {
+  name: string
+  constructor(userId: string) {
+    // Fetch user's name from an API endpoint
+    fetch(`/api/user-info/${userId}`)
+      .then((resp) => resp.json())
+      .then((info) => {
+        this.name = info.name // set the user's name
+      })
+  }
+}
 ```
