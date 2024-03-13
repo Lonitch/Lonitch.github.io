@@ -1,5 +1,7 @@
 ---
+layout: post
 title: "Make TS Stick"
+date: 2024-03-13
 author: Sizhe Liu
 categories: post
 tags: [programming, web-dev, basics]
