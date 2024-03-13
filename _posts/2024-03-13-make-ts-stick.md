@@ -349,3 +349,5 @@ type Concat<A extends unknown[], B extends unknown[]> = [...A, ...B];
 ## Type challenges 
 
 You can try to solve the type challenges at [this github repo](https://github.com/type-challenges/type-challenges?tab=readme-ov-file)
+
+You can find videos explaining solutions in the playlist [here](https://www.youtube.com/playlist?list=PLOlZuxYbPik180vcJfsAM6xHYLVxrEgHC)
