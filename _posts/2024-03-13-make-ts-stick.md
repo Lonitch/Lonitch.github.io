@@ -11,21 +11,17 @@ _Only suffering and pain stick, so we become proficient through them_<!--more-->
 
 <!-- mtoc-start -->
 
-* [`#` versus `private`](#-versus-private)
-* [Make variable immutable](#make-variable-immutable)
-* [Simple conversion from string to dictionary](#simple-conversion-from-string-to-dictionary)
-* [`string` vs `String`, `number` vs `Number`](#string-vs-string-number-vs-number)
-* [A `Promise/resolve` knowledge checker](#a-promiseresolve-knowledge-checker)
-* [use `...rest` in tuple type](#use-rest-in-tuple-type)
-* [`useUnknownInCatchVariables`](#useunknownincatchvariables)
-* [Define a class using template literal](#define-a-class-using-template-literal)
-* [Using tuple type can be unsafe](#using-tuple-type-can-be-unsafe)
-* [Callback func is not definite in `.then`](#callback-func-is-not-definite-in-then)
-* [Use `extends` as `is` when defining type](#use-extends-as-is-when-defining-type)
-* [Use properties of `any[]` when defining type](#use-properties-of-any-when-defining-type)
-* [Check if type `A` ends with type `B`](#check-if-type-a-ends-with-type-b)
-* [Concat two tuple types ](#concat-two-tuple-types-)
-* [Type challenges ](#type-challenges-)
+- [`#` versus `private`](#-versus-private)
+- [Make variable immutable](#make-variable-immutable)
+- [Simple conversion from string to dictionary](#simple-conversion-from-string-to-dictionary)
+- [`string` vs `String`, `number` vs `Number`](#string-vs-string-number-vs-number)
+- [A `Promise/resolve` knowledge checker](#a-promiseresolve-knowledge-checker)
+- [use `...rest` in tuple type](#use-rest-in-tuple-type)
+- [`useUnknownInCatchVariables`](#useunknownincatchvariables)
+- [Define a class using template literal](#define-a-class-using-template-literal)
+- [Using tuple type can be unsafe](#using-tuple-type-can-be-unsafe)
+- [Callback func is not definite in `.then`](#callback-func-is-not-definite-in-then)
+- [Type challenges](#type-challenges)
 
 <!-- mtoc-end -->
 
@@ -315,40 +311,7 @@ class Person {
 }
 ```
 
-## Use `extends` as `is` when defining type
-
-Implement a type that evaluates to `T` if the type `C` is true or `F` if `C` is false.
-
-```typescript 
-type IF<C,T,F> = C extends true ? T : F;
-```
-
-## Use properties of `any[]` when defining type
-
-Implement a type that evaluates to a numeric type literal, equivalent to the length of a specified tuple type T
-
-```typescript 
-type LengthOfTuple<T extends readonly any[]> = T['length'];
-```
-
-## Check if type `A` ends with type `B`
-
-```typescript 
-type EndsWith<A extends string, B extends string> = 
-  A extends `${infer _Prefix}${B}` ? true : false;
-
-type Test1 = EndsWith<'Hello World', 'World'>; // Evaluates to true
-type Test2 = EndsWith<'TypeScript', 'Script'>; // Evaluates to true
-type Test3 = EndsWith<'JavaScript', 'Type'>;   // Evaluates to false
-```
-
-## Concat two tuple types 
-
-```typescript 
-type Concat<A extends unknown[], B extends unknown[]> = [...A, ...B];
-```
-
-## Type challenges 
+## Type challenges
 
 You can try to solve the type challenges at [this github repo](https://github.com/type-challenges/type-challenges?tab=readme-ov-file)
 
