@@ -22,6 +22,9 @@
   * [git pull --rebase](#git-pull---rebase)
 * [Spot bugs](#spot-bugs)
   * [Bisect bug search](#bisect-bug-search)
+* [Revert changes](#revert-changes)
+* [Meld commits](#meld-commits)
+* [Tags: named locations within git history](#tags-named-locations-within-git-history)
 
 <!-- mtoc-end -->
 
@@ -74,6 +77,14 @@ committer <committer-info>
 - If you `git cat-file -p <sha-of-current-commit-the-git-tree>`, you will find cached files(blobs) under current commit and its ancestors. Each blob is also assigned to a SHA code. Another `git cat-file -p` command will reveal what is inside each blob.
 
 - `git log --graph --online` to see historic acyclic graph
+
+You can view what were changed in the last x commits by 
+
+```bash 
+# replace x with any positive integer
+git log -p --online -x
+```
+ where `-p` is a shortname for `--patch`.
 
 ### View and change config
 
@@ -400,3 +411,39 @@ For `vitest`, you can replace the last command with
 ```bash 
 git bisect run ./node_modules/.bin/vitest --run
 ```
+
+## Revert changes
+
+Reverting is simple, you simply use
+
+```bash 
+git revert <sha-of-past-commit>
+```
+
+Notice that reverting might cause conflicts as well. If it happens, you should consider resolve the conflicts like what's been shown in the section [Solving conflicts](#solving-conflicts). And use `git revert --continue` to finish the reverting.
+
+## Meld commits
+
+We can meld past commits and alter history of a branch(change SHA of commits) by using 
+
+```bash 
+git reset --soft HEAD~x # replace x with any positive integer
+```
+
+The basics of soft is to reset the history to the point you want (HEAD~x) and the index and worktree will contain the changes whence you came (Our revert in this example). We could have used soft reset and went back several commits and we would have all their changes.
+
+If you replace `--soft` with `--hard`, git will drop changes to the `index`(SHA) and worktree, meaning that **any work that is being tracked by git will be destroyed**. Use `--hard` with caution as it can destroy your work and it can be impossible to get back that work.
+
+
+## Tags: named locations within git history
+
+The best way to think about a tag is a branch that cannot be changed. It can only be deleted. Basic tag commands are: 
+
+```bash 
+git tag # list all the tags
+git tag <name> # create
+git tag -d <name> # delete
+git checkout <tagname> # to checkout a tag
+```
+
+You can push tags to a remote via `git push --tags` and pull via `git pull --tags`. Note that `--tags` will fetch branches as well as tags.
