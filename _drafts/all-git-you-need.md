@@ -250,10 +250,11 @@ git stash pop --index x
 
 ## Squash commits
 
-Squash commits when you want to combine them into one to make history clearer. As an example, suppose you are at the tip of your branch, and you want to squash the past 3 commit into one. 
+Squash commits when you want to combine them into one to make history clearer. As an example, suppose you are at the tip of your branch, and you want to squash the past 3 commit into one.
 
-To start the squash, run 
-```bash 
+To start the squash, run
+
+```bash
 git rebase -i HEAD~3
 ```
 
@@ -334,23 +335,23 @@ git rebase --continue
 
 ## Spot bugs
 
-A classic problem is the following: somewhere in the last X commits something has gone wrong. To test if something has gone wrong takes several minutes or longer. So you want to find the relevant commit ASAP. 
+A classic problem is the following: somewhere in the last X commits something has gone wrong. To test if something has gone wrong takes several minutes or longer. So you want to find the relevant commit ASAP.
 
 You can use `git log --graph --oneline` and look at those commit messages to take your best guesses. But, the following things might slow you down:
 
-- poor commit messages 
+- poor commit messages
 - cannot boil down the bug to a specific keyword
 - or you simply don't know any keywords to narrow down your search
 
-You can certainly use 
+You can certainly use
 
 ```bash
 git log --patch --grep "keyword"
 ```
 
-to find patches whose commit message contains your "keyword". **But what if the occurences of "keyword" are everywhere?** Well, if you have a vague idea of which files bugs might appear, you can use 
+to find patches whose commit message contains your "keyword". **But what if the occurences of "keyword" are everywhere?** Well, if you have a vague idea of which files bugs might appear, you can use
 
-```bash 
+```bash
 git log -p -- path/to/file1 path/to/file2 --
 ```
 
@@ -358,3 +359,44 @@ If your code is easy to understand, this way is more efficient. But **what could
 
 ### Bisect bug search
 
+For people who don't know bisection method, you can read about it [here](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter19.03-Bisection-Method.html), The argument `c` that causes `f(c)=0` in the article is analogous to the commit the bug first introduced in our case.
+
+In the following example, we use the first commit of the repo and the current tip of `master` and find the problematic commit via `git bisect`:
+
+```bash 
+git bisect start 
+# set current commit as bad 
+git bisect bad
+# find the SHA of a good commit
+git log --oneline
+# assume the sha is "benice8"
+git bisect good benice8
+# the command above tells you 
+# how many revisions left to check 
+# and jump the center commit
+run your test # replace this command with the real one
+# depending on the result of your test
+# label current commit as good/bad
+git bisect bad
+```
+
+Repeat the last two steps in the snippet above until you see 
+
+```
+<sha-of-a-commit> is the first bad commit
+```
+
+If your test is run by a binary, you can automate the bisect process by 
+
+```bash 
+git bisect start 
+git bisect good <sha-of-good-commit>
+git bisect bad
+git bisect run path/to/your/binary [--options]
+```
+
+For `vitest`, you can replace the last command with 
+
+```bash 
+git bisect run ./node_modules/.bin/vitest --run
+```
