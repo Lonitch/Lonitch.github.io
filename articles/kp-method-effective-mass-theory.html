@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Sizhe's k-p Method and Effective Mass Theory</title>
+  <meta name="description" content="\(\vec{k} \cdot \vec{p}\) methodPurpose: derive analytical expressions for the band dispersion and the effective masses in the immediate vicinity of a \(k-\)...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
+  <link rel="canonical" href="/articles/kp-method-effective-mass-theory">
+
+  <link rel="alternate" type="application/rss+xml" title="TuBTLE" href="/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="/Q/jsxgraph.css" />
+  <script type="text/javascript" src="/Q/jsxgraphcore.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/Q/Q.css">
+	<link rel="stylesheet" type="text/css" href="/Q/Q-Circuit-Editor.css">
+
+		<script src="https://www.googletagmanager.com/gtag/js" async></script>
+		<script src="/Q/Q.js"></script>
+		<script src="/Q/Q-ComplexNumber.js"></script>
+		<script src="/Q/Q-Matrix.js"></script>
+		<script src="/Q/Q-Qubit.js"></script>
+		<script src="/Q/Q-Gate.js"></script>
+		<script src="/Q/Q-History.js"></script>
+		<script src="/Q/Q-Circuit.js"></script>
+		<script src="/Q/Q-Circuit-Editor.js"></script>
+    <script src="/Q/quantum-circuit.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/Q/Q-utils.js"></script>
+
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="SIZHE"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>k-p Method and Effective Mass Theory</h1>
+<p class="subtitle">August 18, 2020</p>
+<div class="post-tags">
+    <em>Tags: </em>
+    <span class="post-tags">
+    
+    [notes] 
+    
+    [math] 
+    
+    [quantum-mechanics] 
+    
+    </span>
+</div>
+<script>
+// generate Q.js results whenever a circuit is evaluated 
+window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
+    const circuit = event.detail.circuit;
+    qjs_caption_results(circuit);
+})
+// re-evaluate Q.js circuit when it's changed.
+window.addEventListener( 'Q gui altered circuit', function( event ){
+    event.detail.circuit.evaluate$()
+})
+</script>
+
+<h2 id="veck-cdot-vecp-method">\(\vec{k} \cdot \vec{p}\) method</h2>
+<p><strong>Purpose</strong>: derive analytical expressions for the band dispersion and the effective masses in the immediate vicinity of a \(k-\)point at which all the single-electron states are known.<!--more--></p>
+
+<p>In other words, \(\vec{k} \cdot \vec{p}\) method \(\rightarrow\) extrapolation method applied to compute valence bands of SEMICONDUCTOR!</p>
+
+<p>From Bloch’s theorem, the wavefumction takes a form of</p>
+
+\[\psi_{n \vec{k}}=e^{i \vec{k} \cdot \vec{r}} u_{n \vec{k}}(\vec{r})\tag{1.1}\]
+
+<p>with \(n\) being energy band index. Eq. (1.1) is a solution to single-electron Schrodinger eqn.</p>
+
+\[\left(\frac{\hat{p}^{2}}{2 m}+U(\vec{r})\right) \psi_{n \vec{k}}=E_{n \vec{k}} \vec{\psi}_{n \vec{k}}\tag{1.2}\]
+
+<p>Using (1.1) in (1.2) to give,</p>
+
+\[\begin{aligned}\left[\frac{\hat{p}^{2}}{2 m}+U(\vec{r})\right] e^{i \vec{k} \cdot \vec{r}} u_{n \vec{k}}(\vec{r})&amp;=E_{n \vec{k}} \psi_{n k}\\
+\left[\frac{\hat{p}^{2}}{2 m}+\frac{\hbar^{2} k^{2}}{2 m}+\frac{\hbar k \cdot \hat{p}}{m}+U(\vec{r})\right]u_{n\vec{k}}&amp;=E_{n\vec{k}}u_{n\vec{k}}\\
+\left[\frac{\hat{p}^{2}}{2 m}+\frac{\hbar k \cdot \hat{p}}{m}+U(\vec{r})\right]u_{n\vec{k}}&amp;=\left(E_{n\vec{k}}-\frac{\hbar^{2} k^{2}}{2 m}\right)u_{n\vec{k}}.
+\end{aligned}\tag{1.3}\]
+
+<p>Now we use the information above to derive a secular relation for calculating \(E_{nk}\). Assume that we know \(u_{n k}(r)\) and \(E_{nk}\) for all “\(n\)” at \(\vec{k_0}\), then we can expand \(u_{n\vec{k}}\) at \(\vec{k}\) in terms of \(u_{n\vec{k_0}}\) as</p>
+
+\[u_{n \vec{k}}(\vec{r})=\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \vec{k}_{0}\right) u_{n^{\prime}\vec{k}_{0}}(\vec{r}) \tag{1.4},\]
+
+<p>and</p>
+
+\[\left[\frac{\hat{p}^{2}}{2 m}+\frac{\hbar \overrightarrow{k_{0}} \cdot \hat{p}}{m}+U(\vec{r})\right] u_{n \vec{k}_0}(\vec{r})=\left(E_{n\vec{k}_0}-\frac{\hbar^{2} \vec{k}^2_{0}}{2 m}\right) u_{n \vec{k}_{0}}(\vec{r})\tag{1.5}.\]
+
+<p>Use (1.4) and (1.5) in (1.3) to give:</p>
+
+\[\begin{aligned}
+&amp;\sum_{n^{\prime}} C_{n^{\prime}}(\vec{k}, \vec{k}_0)\left[\left(E_{n^{\prime}\vec{k}_0} -\frac{\hbar \overrightarrow{k_{0}}^{2}}{2 m}\right) u_{n^{\prime} \vec{k_{0}}}(\vec{r})+\frac{\hbar}{i m}\left(\vec{k}-\vec{k}_{0}\right) \cdot \nabla u_{n^{\prime}\vec{k}_{0}}(\vec{r})\right]\\
+&amp;=\sum_{n^{\prime}} C_{n^{\prime}}(\vec{k}, \vec{k}_0)\left(E_{n \vec{k}}-\frac{\hbar^{2} k^{2}}{2 m}\right) u_{n^{\prime}\overrightarrow{k_{0}}}(\vec{r}).
+\end{aligned}\]
+
+<p>Mutiply both sides by \(u^*_{nk_0}(\vec{r})\) and integrating over \(\vec{r}\) yields:</p>
+
+\[\begin{aligned}&amp;\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \vec{k}_{0}\right)\left[\left(E_{n^{\prime}\vec{k}_{0}} -\frac{\hbar^{2} \vec{k}_{0}^{2}}{2 m}\right) \delta_{n n^{\prime}}+\frac{\hbar}{m}\left(\vec{k}-\overrightarrow{k_{0}}\right) \cdot \vec{P}_{n n^{\prime}}\left(k_{0}\right)\right]\\
+&amp;=\sum_{n^{\prime}} C_{n^{\prime}}\left(\vec{k}, \overrightarrow{k_{0}}\right)\left(E_{n \vec{k}}-\frac{\hbar^{2} \vec{k}^{2}}{2 m}\right) \delta_{n n^{\prime}}.
+\end{aligned}\tag{1.6}\]
+
+<p>where</p>
+
+\[\int d \vec{r} u_{n\vec{k}_0}^{*} u_{n^{\prime} k_{0}}=\delta_{n n^{\prime}}\]
+
+<p>and the <strong>momentum matrix element</strong> is</p>
+
+\[-i \int d \vec{r} u_{n\vec{k}}  \nabla u_{n^{\prime}\vec{k}_{0}}=\vec{P}_{n n^{\prime}}\left(k_{0}\right).\]
+
+<p>Move the RHS of (1.6) to LHS to give:</p>
+
+\[\begin{aligned}\sum_{n^{\prime}}&amp;\left\{\frac{\hbar}{m}\left(\vec{k}-\vec{k}_{0}\right) \cdot \vec{P}_{n n'}\left(\vec{k}_{0}\right)+\right.\\
+&amp;\left.\left[E_{n \vec{k}_{0}}+\frac{\hbar^{2}}{2 m}\left(\vec{k}^{2}-\vec{k}_{0}^{2}\right)-E_{n \vec{k}}\right] \delta_{n n'}\right\}C_{n'}(\vec{k},\vec{k}_0)=0.\end{aligned}\tag{1.7}\]
+
+<p>The “<strong>secular equation</strong>” for \(E_{nk}\) follows from the condition for the existence of nontrivial solutions to this set of homogeneous linear equations,</p>
+
+\[det\left|\frac{\hbar}{m}\left(\vec{k}-\vec{k}_{0}\right) \cdot \vec{P}_{n n'}\left(\vec{k}_{0}\right)+\left[E_{n \vec{k}_{0}}+\frac{\hbar^{2}}{2 m}\left(\vec{k}^{2}-\vec{k}_{0}^{2}\right)-E_{n \vec{k}}\right] \delta_{n n'}\right|=0.\tag{1.8}\]
+
+<h2 id="special-things-about-the-derivation-of-18">Special things about the derivation of (1.8)</h2>
+
+<ul>
+  <li>No restriction on \(\vec{k}\);</li>
+  <li>If only an under-complete set of \(u_{nk_0}\) is used, the k-p method is accurate only for \(\vec{k}\) near \(\vec{k}_0\).</li>
+  <li>When sufficiently large set of \(u_{nk_0}\) is used, the band structure in FBZ can be approximated.</li>
+</ul>
+
+<h2 id="effective-mass-tensor-theory">Effective mass tensor theory</h2>
+
+<p><strong>Purpose</strong>: The k-p method above deals with unperturbed single-electron Schrodinger equation. Using effective mass tensor theory, we are able to take into account non-periodic perturbation in the Hamiltonian operator, and study the motion of electron or holes in a perturbed potential.</p>
+
+<p>When \(\vec{k}\) approaches an extreme point of an energy band \(\vec{k_0}\), we can expand \(E_{n\vec{k}}\) as a Taylor series about \(\vec{k_0}\):</p>
+
+\[\begin{aligned}
+E_{n \vec{k}} &amp; \approx E_{n \vec{k}_{0}}+\frac{1}{2} \sum_{\alpha \beta}\left(\frac{\partial^{2} E_{n\vec{k}} }{\partial k_{\alpha} \partial k_{\beta}}\right)\left(\vec{k}-\overrightarrow{k_{0}}\right)_{\alpha}\left(\vec{k}-\vec{k}_{0}\right)_{\beta} \\
+&amp;=E_{n k_{0}}+\left.\sum_{\alpha \beta}\left(\frac{\hbar^{2}}{2 m^{*}}\right)_{\alpha \beta}\right|_{\vec{k}_{0}}\left(\vec{k}-\vec{k}_{0}\right)_{\alpha}\left(\vec{k}-\vec{k}_{0}\right) \beta
+\end{aligned}\]
+
+<p>Where the inverse effective mass tensor element is defined as</p>
+
+\[\quad\left(\frac{1}{m^{*}}\right)_{\alpha \beta}=\frac{1}{\hbar^{2}} \frac{d^{2} E_{n \vec{k}}}{d k_{\alpha} d k_{\beta}}\tag{2.1}.\]
+
+<p>If the solid possesses the cubic symmetry then the effective mass tersor is a diagonal matrix.</p>
+
+<p>Consider the ettective mass theory for a single nondegenerate energy band and let the single-electron Hamiltonian to be</p>
+
+\[\widehat{H}=\widehat{H}_0+V(\vec{r})\]
+
+<p>where</p>
+
+\[\widehat{H}_{0}|n \vec{k}\rangle=E_{n \vec{k}}|n \vec{k}\rangle\]
+
+<p>and</p>
+
+\[|\psi\rangle=\sum_{n\vec{k}}^{\prime} a_{n\vec{k}} |n \vec{k}\rangle\]
+
+<p>with the summation over FBZ only. Using the summation we have</p>
+
+\[\sum_{n_{k}}^{\prime} a_{n \vec{k}}\left(E_{n k}+V\right)|n \vec{k}\rangle=E\sum_{n\vec{k}}^{\prime} a_{n\vec{k}} |n \vec{k}\rangle.\]
+
+<p>Multiply \(\|n'\vec{k'}\rangle\) on both sides to give</p>
+
+\[\left\langle n^{\prime} \vec{k}^{\prime}\left|\sum_{n \vec{k}}^{\prime} a_{n \vec{k}}\left(E_{n \vec{k}}+v\right)\right| n \vec{k}\right\rangle=\left\langle n^{\prime} \vec{k}^{\prime}\right| E \sum_{nk}^{\prime} a_{n\vec{k}} \left|n\vec{k}\right\rangle\tag{2.2}.\]
+
+<p>From</p>
+
+\[\left\langle n' \vec{k}^{\prime} \mid n \vec{k}\right\rangle=\delta_{n n} \cdot \delta_{k k^{\prime}},\]
+
+<p>we have from (2.2) that</p>
+
+\[\left(E_{n k}-E\right) a_{n k}+\sum_{n=k^{\prime}}^{\prime} V_{n \vec{k} n^{\prime} \vec{k}^{\prime}} a_{n^{\prime}\vec{k^{\prime}} }=0\]
+
+<p>where</p>
+
+\[V_{n\vec{k}n'\vec{k}'}=\left\langle n \vec{k}|V| n^{\prime} \vec{k}^{\prime}\right\rangle=\int d \vec{r} e^{-i (\vec{k}-\vec{k}^{\prime}) \cdot \vec{r}} u_{n \vec{k}}^{*}(\vec{r}) V u_{n^{\prime}\vec{k}'}\tag{2.3}.\]
+
+<p>If we express \(u_{nk}^*u_{n'k'}\) as a Fourier series w.r.t the reciprocal lattice vector, \(\mathbf{K}\),</p>
+
+\[u_{n \vec{k}}^{*} u_{n^{\prime}\vec{k'}}=\sum_{\mathbf{K}} C_{\mathbf{K}}\left(n \vec{k}, n^{\prime} \vec{k}^{\prime}\right) e^{i \mathbf{K} \cdot \vec{r}}\]
+
+<p>and</p>
+
+\[C_{\mathbf{K}}\left(n \vec{k}, n^{\prime} \vec{k}^{\prime}\right)=\frac{1}{V} \int_{V} d \vec{r} e^{-i \mathbf{K} \cdot \vec{r}} u_{n \vec{k}}^{*} u_{n^{\prime}\vec{k'}}\]
+
+<p>Then</p>
+
+\[\begin{aligned}
+V_{n \vec{k}, n^{\prime} \vec{k}^{\prime}} &amp;=\sum_{k} C_{\mathbf{K}}\left(n \vec{k}, n^{\prime} \vec{k}^{\prime}\right) \int d r e^{-i\left(\vec{k}-\vec{k}^{\prime}-\mathbf{K}\right) \cdot \vec{r}} V(r) \\
+&amp;=\sum_{\mathbf{K}} C_{\mathbf{K}}\left(n \vec{k}, n^{\prime} \vec{k}^{\prime}\right) V_{\vec{k}-\vec{k}^{\prime}-\mathbf{K}}
+\end{aligned}\]
+
+<p><strong>Note that \(V\) is usually small, so it doesn’t cause band mixing.</strong> Thus we can ignore the matrix element where \(n\neq n'\) to give</p>
+
+\[\begin{aligned}\sum^{\prime}_{n'\vec{k'}}V_{n\vec{k},n'\vec{k}'}a_{n'\vec{k}'}&amp;\approx\sum^{\prime}_{\vec{k'}}V_{n\vec{k},n\vec{k}'}a_{n\vec{k}'}\\
+&amp;=\sum_{\mathbf{K}}\sum_{\vec{k'}}C_{\mathbf{K}}(n\vec{k},n\vec{k}')V_{\vec{k}-\vec{k'}-\mathbf{K}}a_{n\vec{k'}}.\end{aligned}\tag{2.4}\]
+
+<p>Change summation variable \(\vec{k}^{\prime}\rightarrow\vec{k}^{\prime}+\mathbf{K}\), we have from (2.4)</p>
+
+\[\sum^{\prime}_{n'\vec{k'}}V_{n\vec{k},n'\vec{k}'}a_{n'\vec{k}'}\approx\sum_{\vec{k}^{\prime}} \sum_{\mathbf{K}} C_{\mathbf{K}}\left(n \vec{k}, n \vec{k}^{\prime}\right) V_{\vec{k}-\vec{k'}} a_{n \vec{k}^{\prime}} \tag{2.5},\]
+
+<p>where we applied the periodicity of \(a_{n\vec{k}}\) and \(C_{K}\) on reciprocal Latrice. Now we ignore the terms with \(C_{K\neq0}\) to give</p>
+
+\[\begin{aligned}\sum_{n=1} V_{n \vec{k}n^{\prime} \vec{k}^{\prime}}  a_{n\vec{k}^{\prime}} &amp;\approx \sum_{k^{\prime}} C_{0}\left(n \vec{k}, n \vec{k}^{\prime}\right) V_{k-k^{\prime}} a_{n \vec{k}^{\prime}}\\
+&amp;=\frac{1}{V} \sum_{\vec{k}^{\prime}} V_{\vec{k}-\vec{k}^{\prime}} a_{n \vec{k}^{\prime}}
+\end{aligned}\tag{2.6}.\]
+
+<p>According to the definition of \(C_{K}\) we have</p>
+
+\[C_{0}(n \vec{k}, n \vec{k})=\frac{1}{N v_{c}}\]
+
+<p>with \(v_c\) being unit cell volumn. For valence electron \(u_{n\vec{k}}\) varies slowly with \(\vec{k}\), so we have</p>
+
+\[C_{0}\left(n \vec{k}, n \vec{k}^{\prime}\right) \approx C_{0}\left(n\vec{k}, n \vec{k}\right)=\frac{1}{N v_{c}}\]
+
+<p>Therefore</p>
+
+\[(E_{n \vec{k}}-E) a_{n \vec{k}}+\frac{1}{N v_{c}} \sum_{\vec{k}^{\prime}} V_{\vec{k}-\vec{k}^{\prime}} a_{n \vec{k}^{\prime}}=0 \tag{2.7}\]
+
+<p>To transtiom (2.7) into a form for real space, we multiply both sides With \(e^{i\vec{k}\cdot r}\) and sum over all \(\vec{k}\) in reciprocal space to give</p>
+
+\[\sum_{\vec{k}}\left[\left(E_{n k}-E\right) a_{n \vec{k}} e^{i \vec{k} \cdot r}+\frac{1}{Nv_c}\sum_{\vec{k}'}V_{\vec{k}-\vec{k}'}a_{n\vec{k}'}e^{i\vec{k}\cdot\vec{r}}\right]=0\tag{2.8}.\]
+
+<p>where the <strong>envelop function</strong> is defined as</p>
+
+\[F_{n}(\vec{r})=\sum_{\vec{k}} e^{i \vec{k} \cdot \vec{r}} a_{n \vec{k}}.\]
+
+<p>In (2.8) we also rewrite \(E_{n\vec{k}}\) as \(E_n(\vec{k})\) with the operator being \(E_{n}(-i\nabla)\). The second term in (2.8) is then</p>
+
+\[\frac{1}{N v_{L}} \int d \vec{r'} \sum_{\vec{k} \vec{k}^{\prime}} e^{i \vec{k} \cdot(\vec{r}-\vec{r'})} e^{i \vec{k'} \cdot \vec{r}^{\prime}} V\left(\vec{r}^{\prime}\right) a_{n \vec{k'}}=V(\vec{r}) F_{n}(\vec{r})\]
+
+<p>Thus,</p>
+
+\[\left[\widehat{E}_{n}(-i \nabla)+V(\vec{r})\right] F_{n}(\vec{r})=E F_{n}(\vec{r}) \tag{2.9}.\]
+
+<p>To solve the original perturbed Schrodinger equation, we can first solve (2.9) to get envelop function \(F_n\), and then use it to construct the solution to the Schrodinger equation as</p>
+
+\[\left\langle\vec{r} \mid \vec{\psi}_{n}\right\rangle=\vec{\psi}_{n}(\vec{r})=\sum_{\vec{k}} a_{n\vec{k}}  \psi_{n \vec{k}}(\vec{r}) \approx\sum_{n\vec{k}} a_{n \vec{k}} e^{i \vec{k} \cdot \vec{r}} u_{n \vec{k}_{0}}(\vec{r})=F_nu_{n\vec{k}_0}.\]
+
+<p>To get the format of \(\hat{E}_n\) in (2.9), we first expand \(E_n\) about \(\vec{k}=0\) to the second order</p>
+
+\[E_{n}(\vec{k})=E_{n}(0)+\sum_{\alpha \beta}\left(\frac{\hbar^{2}}{2 m^{*}}\right)_{\alpha \beta} k_{\alpha} k_{\beta} \tag{2.10}\]
+
+<p>So</p>
+
+\[\left[\sum_{\alpha_{\beta}}\left(\frac{\hbar^{2}}{2 m^{*}}\right)_{\alpha{\beta}}\left(-i \frac{\partial}{\partial k_{\alpha}}\right)\left(-i \frac{\partial}{\partial k_{\beta}}\right)+V(\vec{r})\right] F_{n}=(E-E_n(0))F_n.\]
+
+<h3 id="summary">Summary</h3>
+<p align="center">
+  <img width="550" height="133" src="/images/kp.PNG" />
+</p>
+<p style="text-align: center;">Summary</p>
+
+<p>The detailed handwriting note can be downloaded <a href="https://drive.google.com/file/d/1SHvv67Mr5i_ymo7njdj5RoPQTQ9jd-or/view?usp=sharing">here</a>.</p>
+
+<br>
+<hr style="border:none;height:1.0px;background-image:linear-gradient(to right, #fff, #333, #fff);">
+<br>
+<!-- <script src="https://utteranc.es/client.js"
+        repo="Lonitch/Lonitch.github.io"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script> -->
+<script src="https://giscus.app/client.js"
+        data-repo="Lonitch/Lonitch.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNjI5MjYyNzI="
+        data-category="General"
+        data-category-id="DIC_kwDOD6vvwM4CZPCU"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // add class to toc list
+        const ulElements = document.querySelector('article').querySelectorAll('ul');
+        let tocElement = null;
+
+        // Iterate through the <ul> elements and find the one with <li> containing <a>
+        ulElements.forEach((ul,i) => {
+        const liWithA = ul.querySelectorAll('li a');
+        const li = ul.querySelectorAll('li');
+        if (liWithA.length == li.length && i==0) {
+            tocElement = ul;
+            tocElement.setAttribute('class','toc-list')
+        }
+        });
+        // add interactive circuit to all elements with class "Q-circuit-palette"
+        Array
+        .from( document.querySelectorAll( '.Q-circuit-palette' ))
+        .forEach( function(el){
+            Q.Circuit.Editor.createPalette(el)
+        })
+        // create numbered indice for figures and equations
+        eqn_fig_indices();
+
+        // shut down display of mjx-container in margin notes
+        MathJax.startup.promise.then(function() {
+            findMjxContainersInMarginNotes();
+        });
+
+        // create references to equations or figures
+        eqn_fig_refs();
+
+        // create Index
+        createIndex();
+        window.addEventListener('resize', createIndex);
+    });
+</script>
+
+    </article>
+    <span class="print-footer">k-p Method and Effective Mass Theory - August 18, 2020 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <!-- <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>     -->
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/Lonitch/Lonitch.github.io">Tufte Blog Theme with Latex-like Elements</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

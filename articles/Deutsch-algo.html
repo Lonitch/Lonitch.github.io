@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Sizhe's Qubit Saga: Deutsch–Jozsa Algorithm</title>
+  <meta name="description" content="北风就从今夜开始，慢慢吹起。">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
+  <link rel="canonical" href="/articles/Deutsch-algo">
+
+  <link rel="alternate" type="application/rss+xml" title="TuBTLE" href="/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="/Q/jsxgraph.css" />
+  <script type="text/javascript" src="/Q/jsxgraphcore.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/Q/Q.css">
+	<link rel="stylesheet" type="text/css" href="/Q/Q-Circuit-Editor.css">
+
+		<script src="https://www.googletagmanager.com/gtag/js" async></script>
+		<script src="/Q/Q.js"></script>
+		<script src="/Q/Q-ComplexNumber.js"></script>
+		<script src="/Q/Q-Matrix.js"></script>
+		<script src="/Q/Q-Qubit.js"></script>
+		<script src="/Q/Q-Gate.js"></script>
+		<script src="/Q/Q-History.js"></script>
+		<script src="/Q/Q-Circuit.js"></script>
+		<script src="/Q/Q-Circuit-Editor.js"></script>
+    <script src="/Q/quantum-circuit.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/Q/Q-utils.js"></script>
+
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="SIZHE"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Qubit Saga: Deutsch–Jozsa Algorithm</h1>
+<p class="subtitle">September 2, 2023</p>
+<div class="post-tags">
+    <em>Tags: </em>
+    <span class="post-tags">
+    
+    [quantum-mechanics] 
+    
+    [quantum-algorithms] 
+    
+    </span>
+</div>
+<script>
+// generate Q.js results whenever a circuit is evaluated 
+window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
+    const circuit = event.detail.circuit;
+    qjs_caption_results(circuit);
+})
+// re-evaluate Q.js circuit when it's changed.
+window.addEventListener( 'Q gui altered circuit', function( event ){
+    event.detail.circuit.evaluate$()
+})
+</script>
+
+<p><em>北风就从今夜开始，慢慢吹起。</em><!--more--></p>
+
+<ul>
+  <li><a href="#1-is-your-function-constant">1. Is Your Function Constant?</a>
+    <ul>
+      <li><a href="#11-the-chernoff-bound-and-exponential-envelope">1.1 The Chernoff bound and exponential envelope</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-quantum-circuit-basics">2. Quantum Circuit Basics</a>
+    <ul>
+      <li><a href="#21-single--and-multi-qubit-gates">2.1 Single- and multi-qubit gates</a></li>
+      <li><a href="#22-introduction-to-entanglement">2.2 Introduction to entanglement</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-quantum-circuit-for-deutschs-algorithm">3. Quantum Circuit for Deutsch’s Algorithm</a>
+    <ul>
+      <li><a href="#31-construct-a-function-in-quantum-circuit">3.1 Construct a function in quantum circuit</a></li>
+      <li><a href="#32-build-the-circuit-before-the-hadamard-transform">3.2 Build the circuit before the Hadamard transform</a></li>
+      <li><a href="#33-hadamard-transform-at-the-last-step">3.3 Hadamard transform at the last step</a></li>
+      <li><a href="#34-running-into-mistake-with-extra-ancilla">3.4 Running into mistake with extra ancilla</a></li>
+    </ul>
+  </li>
+  <li><a href="#index">Index</a></li>
+</ul>
+
+<p>The Deutsch–Jozsa algorithm can be considered as an introductory-level quantum algorithm. Its creation was aimed at demonstrating the superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove the quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch-Jozsa algorithm.</p>
+
+<h2 id="1-is-your-function-constant">1. Is Your Function Constant?</h2>
+<p>The problems efficiently solvable by the algorithm can be described as follows: Given a function \(f(x)\), if we do not know its explicit expression, how can we determine whether this function always outputs a constant value? The red line in <ref fig="fig-functype"></ref> represents a simple constant function, where \(f(x) = 1\) for all values in its domain. The blue line in <ref fig="fig-functype"></ref> represents a balanced function, where \(f(x) = -1\) when \(x &lt; 0\), and \(f(x) = 1\) otherwise.</p>
+
+<div id="fig-functype" class="jxgbox shadow marginnote numbered-fig" style="aspect-ratio: 1 / 1; width: 40%; user-select: none; overflow: hidden; position: relative; touch-action: none;"></div>
+<p><span class="marginnote"> Two function types</span>
+<script>
+  JXG.Options.text.useMathJax = true;
+  const board = JXG.JSXGraph.initBoard("fig-functype", {
+    boundingbox: [-1.5, 1.5, 1.5, -1.5],
+    keepaspectratio: true,
+    axis:true
+});
+board.create('stepfunction',
+      [[-1.0,-0.5,0,0.5,1],[-1,-1,1,1,1]],
+      {strokeColor:'blue',strokeWidth:1.2}
+);
+board.create('functiongraph',
+      [function(x){return 1},-1,1],
+      {strokeColor:'red',strokeWidth:1.2}
+);
+board.create('line', [[0.2,0.8],[0.4,0.8]], 
+{color:'red',straightFirst:false, straightLast:false});
+board.create('text',[0.45,0.8,"constant function"],{color:'red',fontSize:10});
+board.create('line', [[0.2,0.6],[0.4,0.6]], 
+{color:'blue',straightFirst:false, straightLast:false});
+board.create('text',[0.45,0.6,"balanced function"],{color:'blue',fontSize:10});
+</script></p>
+
+<p>In every paper of quantum algorithm, scholars always start with a discussion of how classical computer would solve a problem. Here we take the same route just to fool people that classical algorithms are dumb. We then explain that they are not unbearably bad, just polynomially slower than the quantum algorithm. Without losing the generality, let’s first focus on a function \(f(x)\) whose input \(x\) is an integer in a range \((-N,N)\), with \(N\) being an arbitrary number. Classically, We check if such a function is constant or not by evaluating the function N+1 times. If the evaluated values are all identical, it’s a constant function. Deutsch-Jozsa algorithm tells function type by ensuring a specific quantum state’s probability becomes unity while excluding other possibilities.</p>
+
+<h3 id="11-the-chernoff-bound-and-exponential-envelope">1.1 The Chernoff bound and exponential envelope</h3>
+<p>The classical method above is never used in real life as it’s usually hard to enumerate all possible inputs for discrete or continuous functions. Instead, we want to keep the probability of guessing the wrong function type to a low level, \(\epsilon\)<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle" /><span class="sidenote">the \(\epsilon\) here should be diminishingly small. </span>. In the case above, we have a function producing non-deterministic binary output \(f(x_i)\), and we’re facing a decision problem, i.e., how probable we will guess the function type wrong after \(k\ll N/2+1\) function evaluation? Let’s assume, without any loss of generality, that we guess the function type to be constant. With this assumption, the question becomes: <strong>what is the possibility of the k evaluations telling me that the function is not constant?</strong> In the following discussion, we use \(f_i=1\) to represent \(f(x_i)=1\) and \(f_i=0\) otherwise. After k evaluations by randomly choosing \(\{x_0,x_1,...,x_k\}\), the majority voting fails when \(s_k=\sum_i^k f_i&lt;k\). <label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle" /><span class="sidenote">we need only one wrong answer to tell the function is not constant </span> There are \(C^q_k\) k-sequences \(\{f_1,f_2,...,f_k\}\) that have \(q\) correct answers, and the probability of \(s_k=q\) is</p>
+
+<div id="eqn-1" class="numbered-equation">
+$$\large p(s_k=q)=C^q_k(1/2+\delta)^q(1/2-\delta)^{k-q},$$
+</div>
+
+<p>in which \(p(f_i=1)=\frac{1}{2}+\delta\) and \(p(f_i=0)=\frac{1}{2}-\delta\).<label for="sn-3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-3" class="margin-toggle" /><span class="sidenote">we introduce \(\delta\) here for the sake of generality. Note that for a balanced function \(\delta=0\), and \(\delta=1/2\) for constant function. Any other function type will have its \(\delta\in(0,1/2)\). </span> It is clear that \(p(s_k=q)\) follows <a href="https://en.wikipedia.org/wiki/Binomial_distribution">binomial distribution</a> and the expectation value \(E(s_k)=k(1/2+\delta)\). Therefore, the most probable \(s_k\) that yields a failed majority voting should be as close to \(k(1/2+\delta)\) as possible. However, we don’t know how to choose \(\delta\) as the explicit expression of \(f(x)\) is unknow to us. An educated guess could be \(\delta\cong 0\), that is, assuming that correct or wrong answers are <strong>almost equally possible</strong>. If we take such an assumption, then each \(\{f_1,f_2,...,f_k\}\) with its \(s_k=k/2\) can occur with the probability</p>
+
+<div id="eqn-psk" class="numbered-equation">
+$$\large p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.$$
+</div>
+
+<p>Since there are \(2^k\) possible squences \(\{f_1,f_2,...,f_k\}\), we can conclude from <ref eqn="eqn-psk"></ref> that the possibility of guessing function type wrong after \(k\) evaluations is</p>
+
+<div id="eqn-psk-leq-k-1" class="numbered-equation">
+$$\large p(s_k\leq k-1)&lt;2^k(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}=(1-4\delta^2)^{k/2},$$
+</div>
+
+<p>Note that \(1-x\leq \exp(-x)\), we obtain the <strong>Chernoff bound</strong>:</p>
+
+<div id="eqn-4" class="numbered-equation">
+$$\large p(s_k\leq k-1)&lt;\exp(-2\delta^2k).$$
+</div>
+
+<p>Let \(\epsilon=p(s_k\leq k-1)\), we have the error drops below \(\epsilon\) when the number of function evaluations exceeds the following limit:</p>
+
+<div id="eqn-5" class="numbered-equation">
+$$\large k&gt;\frac{1}{2\delta^2}\ln(\frac{1}{\epsilon}).$$
+</div>
+
+<p>Thus, the problem described here has a classical complexity of \(O(\ln(1/\epsilon))\).</p>
+
+<p>There is a another way to calculate the classical complexity using the exponential envolop of \(p(s_k\leq k-1)\).<label for="sn-4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-4" class="margin-toggle" /><span class="sidenote">this discussion is for people(including me) who are not comfortable with the assumed value of \(\delta\) above </span> Because there is only one sequence that has \(s_k=k\) with \(\{f_1,f_2,...f_k\}=\{1,1,...,1\}\), we have the probability of such a sequence being</p>
+
+<div id="eqn-6" class="numbered-equation">
+$$\large p(s_k=k)=(\frac{1}{2}+\delta)^k$$
+</div>
+
+<p>and hence,</p>
+
+<div id="eqn-7" class="numbered-equation">
+$$\large p(s_k\leq k-1)=1-p(s_k=k)=1-(\frac{1}{2}+\delta)^k&lt;e^{-k\delta^3}$$
+</div>
+
+<p>where the last inequality gives an exponential envelope for \(p(s_k\leq k-1)\). Repeat the analysis above, we have</p>
+
+<div id="eqn-envelop" class="numbered-equation">
+$$\large \epsilon&lt;e^{-k\delta^3}\rightarrow k&gt;\frac{1}{\delta^3}\ln(1/\epsilon)$$
+</div>
+
+<p>giving the same classical complexity as the Chernoff bound. <ref fig="fig-bounds"></ref> below shows how \(p(s_k\leq k-1)\), Chernoff bound, and the exponential envelope in <ref eqn="eqn-envelop"></ref> vary with the \(\delta\). As we increase the \(k\) value, the Chernoff bound breaks at \(\lfloor k\rfloor&gt;3\), and the envelope breaks as well when \(\lfloor k\rfloor\geq8\). In summary, both bounds hold for the full range of \(\delta\in(0,1/2)\) when limited function evaluations are performed.</p>
+
+<div id="fig-bounds" class="jxgbox shadow numbered-fig" style="aspect-ratio: 2 / 1; width: 70%; user-select: none; overflow: hidden; position: relative; touch-action: none;"></div>
+<p><span class="marginnote"> Interactive plot of \(p(s_k\leq k-1)\), Chernoff bound, and exponential envelope varying with \(\delta\). Use the slider to see how the \(p(s_k\leq k-1)\) goes above the two bounds as k increases.</span>
+<script>
+JXG.Options.text.useMathJax = true;
+  const board2 = JXG.JSXGraph.initBoard("fig-bounds", {
+    boundingbox: [-0.5, 1.5, 1.5, -0.5],
+    keepaspectratio: true,
+    axis:true
+});
+var k = board2.create('slider', [[0.5,1],[1.5,1],[1,1,20]],
+    {suffixLabel:'k= ',label: {fontSize: 18, strokeColor: 'black'}})
+var epsilon = board2.create('functiongraph',
+      [function(x){return 1-(0.5+x)**k.Value()},0,0.5],
+      {strokeColor:'blue',strokeWidth:1.2}
+);
+var chernoff = board2.create('functiongraph',
+      [function(x){return Math.exp(-2*k.Value()*x**2)},0,0.5],
+      {strokeColor:'red',strokeWidth:1.2}
+);
+var envelope = board2.create('functiongraph',
+      [function(x){return Math.exp(-k.Value()*(x**3))},0,0.5],
+      {strokeColor:'green',strokeWidth:1.2}
+);
+board2.create('line', [[1,0.8],[1.4,0.8]], {labels:['Chernoff'],
+color:'red',straightFirst:false, straightLast:false});
+board2.create('text',[1.45,0.8,"\\[\\exp(-2\\delta^2k)\\]"],{color:'red',fontSize:14});
+board2.create('line', [[1,0.6],[1.4,0.6]], {labels:[''],
+color:'green',straightFirst:false, straightLast:false});
+board2.create('text',[1.45,0.6,"\\[\\exp(-k\\delta^3)\\]"],{color:'green',fontSize:14});
+board2.create('line', [[1,0.4],[1.4,0.4]], {labels:[''],
+color:'blue',straightFirst:false, straightLast:false});
+board2.create('text',[1.45,0.4,"\\[1-(1/2+\\delta)^k\\]"],{color:'blue',fontSize:14});
+</script></p>
+
+<p>The analysis in <ref fig="fig-bounds"></ref> wraps up our problem statement in the context of classical computation. Next we will quickly go through some basics of quantum gates and draft the first quantum circuit for solving the problem here.</p>
+
+<h2 id="2-quantum-circuit-basics">2. Quantum Circuit Basics</h2>
+<p>Transistors give rise to logic circuits by regulating the flow of electric current through varying voltage levels, so the binary states, 1 and 0, are represented physically by voltage levels. Because the voltage is always controllable by logic gates, signals passing through the logic circuit are deterministic. Quantum circuit, on the other hand, is never deterministic as its basic unit is “qubit”, the quantum counterpart of the classical “bit”. Qubits are physical realizations of quantum two-state systems.
+<span id="fig-cartoon" class="marginnote numbered-fig"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Schrodingers_cat.svg/1024px-Schrodingers_cat.svg.png" /><br /><span> Schrodinger’s cat on Wikipedia</span></span> 
+For people who are not familiar with quantum mechanics, you can think of qubit as a blackbox containing Schrodinger’s cat. We get to know if the cat is dead or alive by opening the box. Here, dead and alive are the two “<strong>quantum states</strong>“<label for="sn-5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-5" class="margin-toggle" /><span class="sidenote">here we use Dirac notation to represent quantum states. In this case, the cat has two possible states:\(\ket{alive}\) or \(\ket{dead}\) </span>, and the behavior of opening box is our “<strong>measurement</strong>” of the cat’s states<label for="sn-6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-6" class="margin-toggle" /><span class="sidenote">for now, let’s naively use \(\hat{M}\) to represent the measurement. In the language of linear algebra, this is an operator applicable to the vector space spanned by basis vectors of \(\ket{alive}\) and \(\ket{dead}\) </span>. Before the “measurement”, the cat can either be dead or alive. Such a state uncertainty is captured by the concept of <strong>superposition</strong>. Let’s first use Dirac notation to represent superposition in this case as \(\ket{alive}+\ket{dead}\). Notice the ressemblance here between the superposition and the linear combination<label for="sn-7" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-7" class="margin-toggle" /><span class="sidenote">If we treat \(\ket{alive}\) and \(\ket{dead}\) as two linearly independent vectors, then all of the linear combinations, \(\alpha\ket{alive}+\beta\ket{dead}\) forms a vector space. </span> pervasive in linear algebra. At the moment of opening the blackbox, we apply the “measurement” to the superposed state, \(\hat{M}(\ket{alive}+\ket{dead})\), which results in  \(\ket{alive}\) if the cat jumps out of the box, or \(\ket{dead}\) if the cat stays there forever. Before the measurement, we can only predict the cat’s state using probabilities. For example, if we place a bottle of poison with the cat in the box, and we know cats like to topple small things. Then the probability of cat being alive at time \(t\), \(p(\ket{\psi(t)}=\ket{alive})\) should be lower than 1<label for="sn-8" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-8" class="margin-toggle" /><span class="sidenote">\(\ket{\psi(t)}\) represents the cat’s state at time \(t\) </span>. Note that \(\small p(\ket{\psi(t)}=\ket{alive})+p(\ket{\psi(t)}=\ket{dead})=1\) at any time instance. To reflect this fact in the superposed state, we need to normalize the “length” of the linear combination \(\alpha\ket{alive}+\beta\ket{dead}\) to one, i.e., \(\alpha^2+\beta^2=1\). For the cat, we have \(\small p(\ket{\psi(t)}=\ket{alive})=\lvert\alpha\rvert^2\), and \(\small p(\ket{\psi(t)}=\ket{dead})=\lvert\beta\rvert^2\). Due to their relations to probabilities, \(\alpha\) and \(\beta\) are called <strong>probability amplitudes</strong>, and they are generally complex numbers.</p>
+
+<h3 id="21-single--and-multi-qubit-gates">2.1 Single- and multi-qubit gates</h3>
+<p>So a qubit can be thought of a blackbox containing a cat of superposed quantum state. Upon the measurement, the qubit has two possible states analogous to the classical bit, \(\ket{0}\) and \(\ket{1}\). If we first set the qubit at the state of \(\ket{0}\) and do nothing(e.g. no poison bottle in the box)<label for="sn-9" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-9" class="margin-toggle" /><span class="sidenote">Doing nothing is an oversimplified statement. Huge amount of efforts is required to protect a quantum system from noises that break its current state before measurement. </span>, next time when we measure the qubit, it will still be at the state of \(\ket{0}\) just like what we would expect on a classical computer. However, we can turn the qubit state into a superposed one by applying quantum gate to it<label for="sn-10" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-10" class="margin-toggle" /><span class="sidenote">there are only two effects of classical gates to bits: flip the bit or remain bit state. </span>. Such a gate is call <strong><em>Hadamard gate</em></strong>, and is represented as \(\fbox{H}\) in quantum circuit.</p>
+
+<p>The following quantum circuit shows one Hadamard gate applied to one qubit(the horizontal line).</p>
+
+<div class="qc-container numbered-fig" id="qc-hadamard-container"><div id="qc-hadamard" style="width:55%"></div><span id="qc-hadamard-report" for="qc-hadamard" class="marginnote" style="width:30%;margin-left: 5.5%;"> One Hadamard gate,<a id="qc-hadamard-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script>
+qc=new QuantumCircuit(1);
+qc.addGate('h',0,0);
+run_and_render_svg(qc,'qc-hadamard');
+</script>
+
+<p>The qubit in <ref fig="qc-hadamard"></ref> is set to \(\ket{0}\) at the beginning. The wire represents evolution of the qubit in time, along which we have one intermediate point: <code class="language-plaintext highlighter-rouge">m1</code>. The caption of <ref fig="qc-hadamard"></ref> also gives the probabilities of getting different states of <code class="language-plaintext highlighter-rouge">q0</code> at the end. Because the Hadamard gate turns <code class="language-plaintext highlighter-rouge">q0</code> into a superposed state, \(1/\sqrt{2}\ket{0}+1/\sqrt{2}\ket{1}\)<label for="sn-11" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-11" class="margin-toggle" /><span class="sidenote">\(\alpha=\beta=1/\sqrt{2}\) </span>, we have \((1/\sqrt{2})^2=1/2\) possibility of getting \(\ket{0}\) or \(\ket{1}\) when measuring the state of <code class="language-plaintext highlighter-rouge">q0</code>. The full qubit evolution introduced in <ref fig="qc-hadamard"></ref> can be expressed in Dirac’s notation as</p>
+
+<div id="eqn-Hevolve" class="numbered-equation">
+$$\large \hat{H}_{m1}\ket{0}=\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$$
+</div>
+
+<p>where subscripts indicate middle points’ locations. If there are multiple gates applied to a qubit, it’s conventional to place operators chronically from right to left before the qubit.</p>
+
+<p>Now, let’s consider two qubits, and add a Hadamard gate to both of them. The corresponding circuit is shown in <ref fig="qc-twoh"></ref>, and its caption gives 4 possible two-qubit states upon measurement.</p>
+<div class="qc-container numbered-fig" id="qc-twoh-container"><div id="qc-twoh" style="width:55%"></div><span id="qc-twoh-report" for="qc-twoh" class="marginnote" style="width:30%;margin-left: 5.5%;"> Two Hadamard gate,<a id="qc-twoh-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script>
+var circuit = new QuantumCircuit(2);
+circuit.addGate("h", 0, 0);
+circuit.addGate("h", 0, 1);
+run_and_render_svg(circuit,'qc-twoh')
+</script>
+
+<p>As the symbols indicate, \(\ket{00}\) represents the measurement where both <code class="language-plaintext highlighter-rouge">q0</code> and <code class="language-plaintext highlighter-rouge">q1</code> are at \(\ket{0}\) while \(\ket{01}\) has <code class="language-plaintext highlighter-rouge">q0</code> at \(\ket{1}\) and <code class="language-plaintext highlighter-rouge">q1</code> at \(\ket{0}\)<label for="sn-12" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-12" class="margin-toggle" /><span class="sidenote">For multi-qubit states, we count indices of individual qubits from right to left. </span>. We can be mathematically rigorous by writting the multi-qubit states using Kronecker products, e.g., \(\ket{10}=\ket{1}\otimes\ket{0}\). A more detailed discussion of Kronecker products can be found in <a href="./Kronecker-product">my previous post</a>. Kronecker product also enables us to write multi-qubit gates by combining single-qubit gates. For example, the quantum circuit in <ref fig="qc-twoh"></ref> can be written as</p>
+
+<div id="eqn-twoh" class="numbered-equation">
+$$\large \hat{H}_{q1}\otimes\hat{H}_{q0}\ket{0}_{q1}\otimes\ket{0}_{q0}=\hat{H}_{q1}\ket{0}_{q1}\otimes\hat{H}_{q0}\ket{0}_{q0}$$
+</div>
+
+<p>where subscripts are qubits’ indices. Because we always follow the ‘right-first’ convention, <ref eqn="eqn-twoh"></ref> can be simplified and expanded as follows:</p>
+
+<div id="eqn-twoh-result" class="numbered-equation">
+$$\large \begin{align}\hat{H}\ket{0}\otimes\hat{H}\ket{0}&amp;=\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\otimes\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\\&amp;=\frac{1}{2}\left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)\end{align}$$
+</div>
+
+<p>The probability amplitudes in <ref eqn="eqn-twoh-result"></ref> are identical for all possible states, and they all correspond to \((1/2)^2=1/4\) possiblity of measured state being one of the four options, agreeing with the result in the caption of <ref fig="qc-twoh">.</ref></p>
+
+<p>Another distinct feature of quantum circuits is <strong><em>Controlled gates</em></strong>, which apply quantum gates to a qubit when its <strong>control qubit</strong> is at state \(\ket{1}\). The circuit in <ref fig="qc-ch"></ref> shows that \(\fbox{H}\) is only applied to <code class="language-plaintext highlighter-rouge">q0</code> when the control qubit <code class="language-plaintext highlighter-rouge">q1</code> has a state of \(\ket{1}\).</p>
+<div class="qc-container numbered-fig" id="qc-ch-container"><div id="qc-ch" style="width:55%"></div><span id="qc-ch-report" for="qc-ch" class="marginnote" style="width:30%;margin-left: 5.5%;"> Controlled Hadamard gate,<a id="qc-ch-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    var circuit = new QuantumCircuit(2);
+    circuit.addGate("ch", 0, [1, 0]);
+    run_and_render_svg(circuit, 'qc-ch');
+</script>
+
+<p>Nothing happens to <code class="language-plaintext highlighter-rouge">q0</code> as the state of <code class="language-plaintext highlighter-rouge">q1</code> remains at \(\ket{0}\) and the \(\fbox{H}\) is never triggered. We can use the <strong><em>Pauli-X</em></strong> gate \(\fbox{X}\)<label for="sn-13" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-13" class="margin-toggle" /><span class="sidenote">Pauli-X gate is represented by \(\bigoplus\) in some circuits. </span> to flip <code class="language-plaintext highlighter-rouge">q1</code> state at <code class="language-plaintext highlighter-rouge">m1</code>, and the result is shown in <ref fig="qc-xch"></ref>. With <code class="language-plaintext highlighter-rouge">q1</code> state flipped from \(\ket{0}\) to \(\ket{1}\) at <code class="language-plaintext highlighter-rouge">m1</code>, the circuit above applies \(\fbox{H}\) to <code class="language-plaintext highlighter-rouge">q0</code>, resulting two possible states: \(\ket{10}\) and \(\ket{11}\).</p>
+<div class="qc-container numbered-fig" id="qc-xch-container"><div id="qc-xch" style="width:55%"></div><span id="qc-xch-report" for="qc-xch" class="marginnote" style="width:30%;margin-left: 5.5%;"> Controlled Hadamard gate with a Pauli-X gate,<a id="qc-xch-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    // circuit definition
+    var circuit = new QuantumCircuit(2);
+    circuit.addGate("x", 0, 1);
+    circuit.addGate("ch", 1, [1, 0]);
+    run_and_render_svg(circuit, 'qc-xch');
+</script>
+
+<p>We can prove that \(p(\ket{01})=p(\ket{11})=0.5\) by progressively following the circuit from left to right.</p>
+<ul>
+  <li>At <code class="language-plaintext highlighter-rouge">m1</code>, we flip <code class="language-plaintext highlighter-rouge">q1</code>’s state, \(\tiny\hat{X}\otimes\hat{I}\ket{0}\otimes\ket{0}=\hat{X}\ket{0}\otimes\hat{I}\ket{0}=\ket{10}\);</li>
+  <li>At <code class="language-plaintext highlighter-rouge">m2</code>, the Hadamard gate is triggered,</li>
+</ul>
+<div id="eqn-ch" class="numbered-equation">
+$$\large \small\widehat{CH}\ket{10}=\ket{1}\otimes\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{\sqrt{2}}(\ket{10}+\ket{11}),$$
+</div>
+<p>where \(\small\widehat{CH}\) is the controlled Hadamard gate.</p>
+<ul>
+  <li>Because the probability amplitudes of two possible states in <ref eqn="eqn-ch"></ref> are \(\frac{1}{\sqrt{2}}\), the probabilities of getting \(\ket{10}\) or \(\ket{11}\) are 50% at the end, as the caption of <ref fig="qc-xch"> indicates.</ref></li>
+</ul>
+
+<h3 id="22-introduction-to-entanglement">2.2 Introduction to entanglement</h3>
+<p>Now that we have sufficient understanding of single- and multi-qubit operators<label for="sn-14" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-14" class="margin-toggle" /><span class="sidenote">we have used operators and gates interchangeably. </span>, we can move a step furter to see how quantum circuit can create entangled quantum states. Before we give the concept of entanglement, let us take a look at the following circuit:</p>
+<div class="Q-circuit-palette"></div>
+<div class="qc-container numbered-fig" id="qc-bell-simple-container"><pre id="qc-bell-simple" style="text-align: center;"></pre><span id="qc-bell-simple-report" for="qc-bell-simple" class="marginnote" style="margin-right: 10%;"> Making Bell state$$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$, and its probability distribution is shown below</span></div>
+<script>
+qc=Q`
+      I H X#0 I 
+      I I X#1 I
+`
+eval_draw(qc,'qc-bell-simple',use_palette=true);
+</script>
+
+<p>The caption of <ref fig="qc-bell-simple"></ref> shows that there are only two possible states: \(\ket{00}\) and \(\ket{11}\)<label for="sn-15" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-15" class="margin-toggle" /><span class="sidenote">reader can prove this using the progressive method introduced above. </span> with 50% probability for each state. Now, let’s say the measured state of <code class="language-plaintext highlighter-rouge">q1</code> is \(\ket{0}\), according to the probability distribution, the two-qubit state must be \(\ket{00}\) and <code class="language-plaintext highlighter-rouge">q2</code> must be \(\ket{0}\) as well. On the other hand, if <code class="language-plaintext highlighter-rouge">q1</code> is \(\ket{1}\), we must have <code class="language-plaintext highlighter-rouge">q2</code> being \(\ket{1}\). Thus, states of the two qubits are coupled, and we can confirm the states of both qubits by measuring only one of them. Such a correlation is called quantum entanglement. As a matter of fact, the entangled state \(\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})\) is one of the four <strong><em>Bell states</em></strong>. <ref fig="qc-bell-simple"></ref> is an interactive circuit to which you can add and delete gates. You can apply \(\fbox{X}\) at <code class="language-plaintext highlighter-rouge">m1</code> to <code class="language-plaintext highlighter-rouge">q1</code> to get another Bell state: \(\small\frac{1}{\sqrt{2}}(\ket{00}-\ket{11})\), resulting the same probability distribution. On the other hand, if \(\fbox{X}\) is applied at <code class="language-plaintext highlighter-rouge">m2</code> to <code class="language-plaintext highlighter-rouge">q2</code>, you get \(\small\frac{1}{\sqrt{2}}(\ket{01}+\ket{10})\). If two \(\fbox{X}\) are applied at <code class="language-plaintext highlighter-rouge">m1</code> to <code class="language-plaintext highlighter-rouge">q2</code> and <code class="language-plaintext highlighter-rouge">q1</code>, we get the last Bell state \(\small\frac{1}{\sqrt{2}}(\ket{01}-\ket{10})\).</p>
+
+<p>Bell states introduced here belong to a class of entangled qubit states, called <strong><em>maximally entangled states</em></strong>. The name is due to the 100% certainty of one qubit’s state if we know the state of the other one. There are states <strong><em>partially entangled</em></strong>. As an example, consider the state of \(\frac{1}{10}\ket{01}+\frac{\sqrt{99}}{10}\ket{00}\). Kronecker product allows us to factor the state into a form of \(\ket{0}(\frac{1}{10}\ket{1}+\frac{\sqrt{99}}{10}\ket{0})\). The measurement of <code class="language-plaintext highlighter-rouge">q2</code> will always gives \(\ket{0}\), but we have 1% chance of getting \(\ket{1}\) and 99% chance of getting \(\ket{0}\) for <code class="language-plaintext highlighter-rouge">q1</code>. We can NOT tell, with 100% certainty what state <code class="language-plaintext highlighter-rouge">q1</code> is upon the measurement of <code class="language-plaintext highlighter-rouge">q2</code>.</p>
+
+<h2 id="3-quantum-circuit-for-deutschs-algorithm">3. Quantum Circuit for Deutsch’s Algorithm</h2>
+<p>Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it’s constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs<label for="sn-16" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-16" class="margin-toggle" /><span class="sidenote">let’s hope this happens in the near future. </span>, and you can still use Deutsch-Jozsa algorithm to decide function type without sacrificing computational efficiency.</p>
+
+<h3 id="31-construct-a-function-in-quantum-circuit">3.1 Construct a function in quantum circuit</h3>
+<p>A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is <strong>a segment between two intermediate points that transform one set of multi-qubit states into another set</strong>. In quantum circuit, we use two <strong>DIFFERENT</strong> sets of qubits as inputs and outputs. For example, If we treat <code class="language-plaintext highlighter-rouge">q0</code> and <code class="language-plaintext highlighter-rouge">q1</code> as input qubits and <code class="language-plaintext highlighter-rouge">q2</code> as output qubit in <ref fig="qc-const-func"></ref>, then the circuit represents a constant function that always gives \(\ket{1}\) at <code class="language-plaintext highlighter-rouge">q2</code> no matter how you prepare inputs at <code class="language-plaintext highlighter-rouge">q0</code> and <code class="language-plaintext highlighter-rouge">q1</code>.</p>
+
+<div class="qc-container numbered-fig" id="qc-const-func-container"><div id="qc-const-func" style="width:55%"></div><span id="qc-const-func-report" for="qc-const-func" class="marginnote" style="width:30%;margin-left: 5.5%;"> A constant function $$f_c(x)$$ that takes inputs at q0 and q1 and output at q2,<a id="qc-const-func-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    var circuit = new QuantumCircuit(3);
+    circuit.addGate("x", 1, 2);
+    run_and_render_svg(circuit, 'qc-const-func');
+</script>
+
+<p>We can use controlled gates to construct a balanced function as shown in <ref fig="qc-balanced-func"></ref>. The function is indeed balanced as \(\ket{00}\) and \(\ket{11}\) results in \(\ket{1}\) at <code class="language-plaintext highlighter-rouge">q2</code> while \(\ket{01}\) and \(\ket{10}\) maps to \(\ket{0}\).</p>
+<div class="qc-container numbered-fig" id="qc-balanced-func-container"><div id="qc-balanced-func" style="width:55%"></div><span id="qc-balanced-func-report" for="qc-balanced-func" class="marginnote" style="width:30%;margin-left: 5.5%;"> A balanced function $$f_b(x)$$ that takes inputs at q0 and q1 and output at q2,<a id="qc-balanced-func-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    var circuit = new QuantumCircuit(3);
+    circuit.addGate("x", 0, 2);
+    circuit.addGate("cx", 1, [0,2]);
+    circuit.addGate("cx", 2, [1,2]);
+    run_and_render_svg(circuit, 'qc-balanced-func');
+</script>
+
+<p>For circuits that implement complicated functions, it is a common practice to hide function details by wrapping corresponding circuit segments into a composite gate. Multi-qubit gates wrapped in this way are called <strong><em>oracle</em></strong>. For the 2-qubit constant function above, an oracle is created in <ref fig="qc-const-oracle"></ref>, i.e., the blue block, which always results in \(\ket{1}\) at <code class="language-plaintext highlighter-rouge">q2</code>, and takes <code class="language-plaintext highlighter-rouge">q0</code> and <code class="language-plaintext highlighter-rouge">q1</code> as function arguments.</p>
+
+<div class="qc-container numbered-fig" id="qc-const-oracle-container"><div id="qc-const-oracle" style="width:55%"></div><span id="qc-const-oracle-report" for="qc-const-oracle" class="marginnote" style="width:30%;margin-left: 5.5%;"> An oracle that hides details of the constant function,<a id="qc-const-oracle-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    // circuit definition
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate("x", 1, 2);
+    var obj = oracle.save();
+    var circuit = new QuantumCircuit(4);
+    circuit.registerGate("f_c(x)", obj);
+    circuit.addGate("h",0,0);
+    circuit.addGate("h",0,1);
+    circuit.addGate("h",0,3);
+    circuit.addGate("f_c(x)",1,[0,1,2]);
+    run_and_render_svg(circuit, 'qc-const-oracle');
+</script>
+
+<p>In the next section, we will use constant and blanced functions introduced here to demostrate Deutsch-Jozsa algorithm, which can tell the two functions apart with 100% confidence.</p>
+
+<h3 id="32-build-the-circuit-before-the-hadamard-transform">3.2 Build the circuit before the Hadamard transform</h3>
+<p>The circuits in <ref fig="qc-deutsch-jozsa"></ref> shows how Deutsch-Jozsa algorithm is applied to the constant \(f_c(x)\). To apply the algorithm to a function of arbitrary number of arguments, you need to replace the oracle in the circuits below with the function and apply the Hadamard gates to all its input qubits before the oracle and apply to them again the Hadamard gates after the oracle.</p>
+<div class="qc-container numbered-fig" id="qc-deutsch-jozsa-container"><div id="qc-deutsch-jozsa" style="width:55%"></div><span id="qc-deutsch-jozsa-report" for="qc-deutsch-jozsa" class="marginnote" style="width:30%;margin-left: 5.5%;"> The Deutsch-Jozsa Algorithm for checking the type of $$f_c(x)$$. The information measured at q1 and q2 is stored at two classical bits, c0 and c1,<a id="qc-deutsch-jozsa-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    // function oracle
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate("x", 0, 2);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(3);
+    circuit.registerGate("f_c(x)", obj);
+    circuit.addGate("h",0,0);
+    circuit.addGate("h",0,1);
+    circuit.addGate("f_c(x)",2,[0,1,2]);
+
+    circuit.addGate("x",0,2);
+    circuit.addGate("h",1,2);
+    circuit.addGate("h",3,0);
+    circuit.addGate("h",3,1);
+    circuit.addMeasure(0, "c0", 0)
+    circuit.addMeasure(1, "c1", 1)
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa');
+</script>
+
+<p>Let us go back to the basics to analyze what the circuit does. First of all, we have three qubits  that serve two different purposes:</p>
+<ul>
+  <li>function arguments are provided by <code class="language-plaintext highlighter-rouge">q0</code> and <code class="language-plaintext highlighter-rouge">q1</code>,</li>
+  <li>function output is given at <code class="language-plaintext highlighter-rouge">q2</code> but it is initialized with a state of \(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\), the qubit <code class="language-plaintext highlighter-rouge">q2</code> is also called <strong><em>ancilla</em></strong> in literature<label for="sn-17" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-17" class="margin-toggle" /><span class="sidenote">ancilla qubits are used for storing partial results or creating entanglement. </span>.</li>
+</ul>
+
+<p>We can again use the progressive method in <a href="#21-single--and-multi-qubit-gates">Sec.2.1</a> to see how the multi-qubit state evolves at each intermediate point in <ref fig="qc-deutsch-jozsa"></ref>. With \(\fbox{H}\) at <code class="language-plaintext highlighter-rouge">q0</code> and <code class="language-plaintext highlighter-rouge">q1</code>, and \(\fbox{X}\) at <code class="language-plaintext highlighter-rouge">q2</code>, we turn \(\ket{000}\) into the following state at <code class="language-plaintext highlighter-rouge">m1</code>:</p>
+
+<div id="algo-step-1" class="numbered-equation">
+$$\large \begin{align}
+\ket{\psi}_{m1}&amp;=\frac{(\ket{0}+\ket{1})}{\sqrt{2}}\otimes\frac{(\ket{0}+\ket{1})}{\sqrt{2}}\otimes\ket{1}\\\\
+&amp;=\frac{1}{2}(\ket{00}+\ket{01}+\ket{10}+\ket{11})\otimes\ket{1}
+\end{align},$$
+</div>
+
+<p>where the Kronecker products bridge the states at input and output qubits. The second line in <ref fig="algo-step-1"></ref> indicates that the input qubits are turned into superposed states, including all the possible inputs. This manifests the power of quantum computing, that is, evaluating all possible outputs of a function by feeding it a superposed state composed of all possible inputs. To make our discussion concise, let us write the superposed state as</p>
+
+<div id="algo-step-1-2" class="numbered-equation">
+$$\large \begin{align}
+\ket{\psi}_{m1}&amp;=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\ket{1}
+\end{align},$$
+</div>
+
+<p>where we convert the 2-digit binary number(<code class="language-plaintext highlighter-rouge">00</code>,<code class="language-plaintext highlighter-rouge">01</code>,<code class="language-plaintext highlighter-rouge">10</code>,<code class="language-plaintext highlighter-rouge">11</code>) into decimal numbers \(x\), and \(n\) is the number of input qubits in <ref eqn="algo-step-1-2"></ref>. The conversion simplifies the notation of quantum state evaluated at <code class="language-plaintext highlighter-rouge">m2</code>, where we apply \(\fbox{H}\) to <code class="language-plaintext highlighter-rouge">q3</code> to give</p>
+
+<div id="algo-step-2" class="numbered-equation">
+$$\large \ket{\psi}_{m2}=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\frac{\ket{0}-\ket{1}}{\sqrt{2}}.$$
+</div>
+
+<p>The critical step happens at <code class="language-plaintext highlighter-rouge">m3</code> where we apply the oracle to the three qubits, which results in a state of \(\small \ket{f(x)\oplus0}-\ket{f(x)\oplus1}/\sqrt{2}\) at <code class="language-plaintext highlighter-rouge">q2</code>. The \(\oplus\) within \(\ket{ }\) here is the add modulo 2, so \(\small\ket{f(x)\oplus0}-\ket{f(x)\oplus1}=(-1)^{f(x)}(\ket{0}-\ket{1})\). With this reasoning, the state at <code class="language-plaintext highlighter-rouge">m3</code> becomes</p>
+
+<div id="algo-step-3" class="numbered-equation">
+$$\large \begin{align}\ket{\psi}_{m3} &amp;=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\frac{\ket{f(x)\oplus0}-\ket{f(x)\oplus1}}{\sqrt{2}}
+\\
+&amp;=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes(-1)^{f(x)}\frac{\ket{0}-\ket{1}}{\sqrt{2}}\\
+&amp;=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\frac{\ket{0}-\ket{1}}{\sqrt{2}}
+\end{align}$$
+</div>
+<p>Thus, the oracle at <code class="language-plaintext highlighter-rouge">m3</code> adds a <strong><em>global phase</em></strong> \((-1)^{f(x)}\) to \(\ket{\psi}_{m3}\)<label for="sn-18" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-18" class="margin-toggle" /><span class="sidenote">global phase is a complex number of unity norm attached to a quantum state, and it does not affect probability distribution of the state measurements. </span>. Due to the commutativity between Kronecker product and scalar product, we can move the global phase in front of any qubit(e.g. the last line in <ref eqn="algo-step-3"></ref>), and such a manipulation is also referred as <strong><em>phase kickback</em></strong>. Because of this, An oracle with its output qubit initialized with the superposed state of \(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\) is also referred to as <strong><em>phase oracle</em></strong>.</p>
+
+<p>At this point, we can confidently disregard <code class="language-plaintext highlighter-rouge">q2</code> in the discussion below as its state will remain the same after <code class="language-plaintext highlighter-rouge">m3</code>, and \(\ket{\psi}_{m3}\) is simplified into</p>
+
+<div id="algo-step-3-2" class="numbered-equation">
+$$\large \ket{\psi}_{m3}=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^n}}\ket{x}$$
+</div>
+
+<p>The step at <code class="language-plaintext highlighter-rouge">m4</code> reveals the function type by applying Hadamard gates(i.e. \(\hat{H}\otimes\hat{H}=\hat{H}^{\otimes n}, n=2\)) again to the input qubits. Before we derive the final result, we need to take a deeper look at what \(\hat{H}^{\otimes n}\) could do to states like \(\ket{\psi}_{m3}\).</p>
+
+<h3 id="33-hadamard-transform-at-the-last-step">3.3 Hadamard transform at the last step</h3>
+<p>Let \(k\) be a n-length binary string and \(\ket{k}\) be a n-qubit state, then the Hadamard transform gives</p>
+
+<div id="eqn-h-trans" class="numbered-equation">
+$$\large \hat{H}^{\otimes n}|k\rangle=\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}(-1)^{k \cdot j}|j\rangle,$$
+</div>
+
+<p>where \(j \cdot k=j_0 k_0 \oplus j_1 k_1 \oplus \cdots \oplus j_{n-1} k_{n-1}\) is the sum of the bitwise product, where \(\oplus\) is addition modulo 2. We will try to derive <ref eqn="eqn-h-trans"></ref> from the perspective of basis transformation, inspired by the blog <a href="https://benjaminwhiteside.com/2021/08/02/the-hadamard-transform/">here</a><label for="sn-19" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-19" class="margin-toggle" /><span class="sidenote">you need knowledge of group theory in order to fully appreciate the writing </span>. We begin our derivation by considering the simple case of \(\small\ket{k}=\ket{\underbrace{00...0}_{n}}\), i.e.,</p>
+
+<div id="h-trans-1" class="numbered-equation">
+$$\large \begin{align}
+\hat{H}^{\otimes n}|\underbrace{00...0}_{n}\rangle&amp;=\frac{1}{\sqrt{2^n}}\prod^{n}(\ket{0}+\ket{1})\\
+&amp;=\frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}\ket{z}
+\end{align}$$
+</div>
+
+<p>Now, let’s take a step further by replacing the j-th 0 of \(\ket{k}\) with 1, and the Hadamard transform of this modified state is then</p>
+
+<div id="h-trans-2" class="numbered-equation">
+$$\large \begin{align}
+\small \hat{H}^{\otimes n}|\underbrace{00...0}_{n-j}\rangle\otimes\ket{1\underbrace{00...0}_{j-1}}&amp;=\small \frac{1}{\sqrt{2^n}}\prod^{n-j}(\ket{0}+\ket{1})\times (\ket{0}-\ket{1})\times \prod^{j-1}(\ket{0}+\ket{1})\\
+&amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z_j=0}\ket{z}-\frac{1}{\sqrt{2^n}}\sum_{z_j=1}\ket{z}\\
+&amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}(-1)^{k_j\cdot z_j}\ket{z}.
+\end{align}$$
+</div>
+
+<p>Since \(k_j=1\) in this case, \((-1)^{k_j\cdot z_j}=1\) in <ref eqn="h-trans-2"></ref> when \(z_j=1\). When both j-th and l-th 0 of \(\ket{k}\) become 1, one can follow the same procedure in <ref eqn="h-trans-2"></ref> to find that</p>
+
+<div id="h-trans-3" class="numbered-equation">
+$$\large \begin{align}
+\small\hat{H}^{\otimes n}\ket{\underbrace{00...0}_{n-l}}\otimes\ket{1\underbrace{00...0}_{l-j-1}}\otimes\ket{1\underbrace{00...0}_{j-1}}&amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}(-1)^{k_j\cdot z_j+k_l\cdot z_l}\ket{z}\\\\
+&amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}(-1)^{k\cdot z}\ket{z},
+\end{align}$$
+</div>
+
+<p>where the last equivelance is due to the fact of digits being 0 in \(\ket{k}\) other than \(k_j\) and \(k_l\). So we must have \(k_j\cdot z_j+k_l\cdot z_l=\sum_ik_i\cdot z_i=k\cdot z\), with \(k\cdot z\) being the inner product of two binary sequences. The formalism of <ref eqn="h-trans-3"></ref> can also apply to n-length binary sequence \(\ket{k}\) with arbitrary number of 1. Also, what matters here is only the oddity of \(\sum_ik_i\cdot z_i\), we can modify the inner product by using the addition modulo 2, that is, \(k\cdot z=k_0z_0\oplus k_0z_0\oplus\cdots k_nz_n\). With this modification, we now complete the derivation of Hadamard transform in <ref eqn="eqn-h-trans"></ref>.</p>
+
+<p>Applying <ref eqn="eqn-h-trans"></ref> to <ref eqn="algo-step-3-2"></ref> gives</p>
+
+<div id="algo-step-4" class="numbered-equation">
+$$\large \begin{align}
+\hat{H}^{\otimes n}\ket{\psi}_{m3}&amp;=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^{2n}}}\sum_{z=0}^{2^n-1}(-1)^{x\cdot z}\ket{z}\\
+&amp;=\sum_{z=0}^{2^n-1}\sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\ket{z}.
+\end{align}$$
+</div>
+
+<p>Note that \(\ket{z}\) represents possible state of input qubits, and each possible state has its probability amplitude being \(\small \sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\). For a constant function that \(f(x)\equiv1\), we have the probability of \(\small\ket{z}=\ket{\underbrace{00..0}_{n}}\) being unity because \(f(x)+x\cdot z\equiv 1\) for all the \(2^n\) terms. On the other hand, \(\small \sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\equiv0\) if \(f(x)\) is balanced.</p>
+
+<p>To verify the statement above, we can replace \(f_c(x)\) in <ref fig="qc-deutsch-jozsa"></ref> with \(f_b(x)\) as shown in <ref fig="qc-deutsch-jozsa-2"></ref></p>
+
+<div class="qc-container numbered-fig" id="qc-deutsch-jozsa-2-container"><div id="qc-deutsch-jozsa-2" style="width:55%"></div><span id="qc-deutsch-jozsa-2-report" for="qc-deutsch-jozsa-2" class="marginnote" style="width:30%;margin-left: 5.5%;"> Erroneous implementation of the Deutsch-Jozsa Algorithm for checking the type of $$f_b(x)$$,<a id="qc-deutsch-jozsa-2-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    // function oracle
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate("x", 0, 2);
+    oracle.addGate("cx", 1, [0,2]);
+    oracle.addGate("cx", 2, [1,2]);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(3);
+    circuit.registerGate("f_b(x)", obj);
+    circuit.addGate("h",0,0);
+    circuit.addGate("h",0,1);
+    circuit.addGate("f_b(x)",2,[0,1,2]);
+
+    circuit.addGate("x",0,2);
+    circuit.addGate("h",1,2);
+    circuit.addGate("h",3,0);
+    circuit.addGate("h",3,1);
+    circuit.addMeasure(0, "c0", 0)
+    circuit.addMeasure(1, "c1", 1)
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa-2');
+</script>
+
+<p>Indeed, the balanced function guarantees the input qubits at a state of \(\ket{11}\) at the end. <strong>With the Deutsch-Jozsa algorithm, we can tell for sure that the function is not constant if at least one measured state is not \(\ket{\underbrace{00...0}_{n}}\)</strong>.</p>
+
+<h3 id="34-running-into-mistake-with-extra-ancilla">3.4 Running into mistake with extra ancilla</h3>
+<p>The circuit in <ref fig="qc-deutsch-jozsa-error"></ref> is my first implementation of the algorithm, in which 4 quibits, instead of 3 qubits, were employed. I was doing so to enforce “\(\ket{y\oplus f(x)}\)” at <code class="language-plaintext highlighter-rouge">q3</code>, as indicated by public references.</p>
+
+<div class="qc-container numbered-fig" id="qc-deutsch-jozsa-error-container"><div id="qc-deutsch-jozsa-error" style="width:55%"></div><span id="qc-deutsch-jozsa-error-report" for="qc-deutsch-jozsa-error" class="marginnote" style="width:30%;margin-left: 5.5%;"> Erroneous implementation of the Deutsch-Jozsa Algorithm for checking the type of $$f_b(x)$$,<a id="qc-deutsch-jozsa-error-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    // function oracle
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate("x", 0, 2);
+    oracle.addGate("cx", 1, [0,2]);
+    oracle.addGate("cx", 2, [1,2]);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(4);
+    circuit.registerGate("f_b(x)", obj);
+    circuit.addGate("h",0,0);
+    circuit.addGate("h",0,1);
+    circuit.addGate("f_b(x)",1,[0,1,2]);
+
+    circuit.addGate("x",0,3);
+    circuit.addGate("h",1,3);
+    circuit.addGate("cx",2,[2,3]);
+    circuit.addGate("h",3,0);
+    circuit.addGate("h",3,1);
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa-error');
+</script>
+
+<p>The newly added <code class="language-plaintext highlighter-rouge">q3</code> results in the following \(\ket{\psi}_{m2}\) that has an extra \(\ket{f(x)}\) compared to <ref eqn="algo-step-2">,</ref></p>
+<div id="algo-step-2-error" class="numbered-equation">
+$$\large \ket{\psi}_{m2}=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\ket{f(x)}\otimes\frac{\ket{0}-\ket{1}}{\sqrt{2}}.$$
+</div>
+
+<p>By following the steps in <ref fig="qc-deutsch-jozsa-error"></ref>, the quantum state at <code class="language-plaintext highlighter-rouge">m3</code> becomes</p>
+<div id="algo-step-3-error" class="numbered-equation">
+$$\large \ket{\psi}_{m3}=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\ket{f(x)}.$$
+</div>
+
+<p>After the Hadamard transform, we can no longer guaranttee zero probability of getting \(\ket{\underbrace{00...0}_{n}}\) for the balanced function as</p>
+
+<div id="algo-step-4-error" class="numbered-equation">
+$$\large \begin{align}
+\ket{\psi}_{m4}&amp;=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^{2n}}}\sum_{z=0}^{2^n-1}(-1)^{x\cdot z}\ket{z}\otimes\ket{f(x)}\\
+&amp;=\sum_{z=0}^{2^n-1}\sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\ket{z}\otimes\ket{f(x)}.
+\end{align}$$
+</div>
+
+<p>Therefore, states like \(\ket{0000}\) and \(\ket{0100}\) have their probabilities being 12.5%, as indicated in the caption of <ref fig="qc-deutsch-jozsa-error"></ref>.</p>
+
+<h2 id="index">Index</h2>
+
+<br>
+<hr style="border:none;height:1.0px;background-image:linear-gradient(to right, #fff, #333, #fff);">
+<br>
+<!-- <script src="https://utteranc.es/client.js"
+        repo="Lonitch/Lonitch.github.io"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script> -->
+<script src="https://giscus.app/client.js"
+        data-repo="Lonitch/Lonitch.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNjI5MjYyNzI="
+        data-category="General"
+        data-category-id="DIC_kwDOD6vvwM4CZPCU"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // add class to toc list
+        const ulElements = document.querySelector('article').querySelectorAll('ul');
+        let tocElement = null;
+
+        // Iterate through the <ul> elements and find the one with <li> containing <a>
+        ulElements.forEach((ul,i) => {
+        const liWithA = ul.querySelectorAll('li a');
+        const li = ul.querySelectorAll('li');
+        if (liWithA.length == li.length && i==0) {
+            tocElement = ul;
+            tocElement.setAttribute('class','toc-list')
+        }
+        });
+        // add interactive circuit to all elements with class "Q-circuit-palette"
+        Array
+        .from( document.querySelectorAll( '.Q-circuit-palette' ))
+        .forEach( function(el){
+            Q.Circuit.Editor.createPalette(el)
+        })
+        // create numbered indice for figures and equations
+        eqn_fig_indices();
+
+        // shut down display of mjx-container in margin notes
+        MathJax.startup.promise.then(function() {
+            findMjxContainersInMarginNotes();
+        });
+
+        // create references to equations or figures
+        eqn_fig_refs();
+
+        // create Index
+        createIndex();
+        window.addEventListener('resize', createIndex);
+    });
+</script>
+
+    </article>
+    <span class="print-footer">Qubit Saga: Deutsch–Jozsa Algorithm - September 2, 2023 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <!-- <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>     -->
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/Lonitch/Lonitch.github.io">Tufte Blog Theme with Latex-like Elements</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

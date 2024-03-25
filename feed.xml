@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TuBTLE</title>
+    <description>A Jekyll theme for content-rich latex-like sites</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 25 Mar 2024 11:37:12 -0500</pubDate>
+    <lastBuildDate>Mon, 25 Mar 2024 11:37:12 -0500</lastBuildDate>
+    <generator>Jekyll v4.3.3</generator>
+    
+      <item>
+        <title>Make TS Stick</title>
+        <description>&lt;p&gt;&lt;em&gt;Only suffering and pain stick, so we become proficient through them&lt;/em&gt;&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;!-- mtoc-start --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#-versus-private&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; versus &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;private&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#make-variable-immutable&quot;&gt;Make variable immutable&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#simple-conversion-from-string-to-dictionary&quot;&gt;Simple conversion from string to dictionary&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#string-vs-string-number-vs-number&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; vs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number&lt;/code&gt; vs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Number&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#a-promiseresolve-knowledge-checker&quot;&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Promise/resolve&lt;/code&gt; knowledge checker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#use-rest-in-tuple-type&quot;&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;...rest&lt;/code&gt; in tuple type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#useunknownincatchvariables&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;useUnknownInCatchVariables&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#define-a-class-using-template-literal&quot;&gt;Define a class using template literal&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#using-tuple-type-can-be-unsafe&quot;&gt;Using tuple type can be unsafe&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#callback-func-is-not-definite-in-then&quot;&gt;Callback func is not definite in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.then&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#type-challenges&quot;&gt;Type challenges&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- mtoc-end --&gt;
+
+&lt;h2 id=&quot;-versus-private&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; versus &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;private&lt;/code&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#fieldName&lt;/code&gt;is a JS private field, and it’s actually inaccessible outside of the class at runtime&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;private filedName&lt;/code&gt; is a TypeScript private field, and while type-checking helps ensure we do not access it improperly, at runtime it’s &lt;strong&gt;accessible&lt;/strong&gt; outside the class.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;make-variable-immutable&quot;&gt;Make variable immutable&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// &quot;a&quot; holds a immutable value and cannot be reassigned&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;AAAAAA&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// &quot;b&quot; holds a immutable value and can be reassigned&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;BBBBBB&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// &quot;c&quot; cannot be reassigned&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;learnAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// but the following is OK&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;learnAt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;xxxx&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// &quot;d&quot; is reassignable, and it holds a mutable value&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;learnAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;cafe&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// &quot;e&quot; is not reassignable, and holds an immutable value&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;freeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;learnAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;school&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// the following is NOT OK&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// e.learnAt=&quot;xxxx&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can also use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readOnly&lt;/code&gt; to make a property in an object not reassignable:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ImmutableObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;myImmutableObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ImmutableObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;This property cannot be changed&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Trying to change these values will result in a TypeScript error&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// myImmutableObject.property = &quot;New value&quot;; // Error&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;simple-conversion-from-string-to-dictionary&quot;&gt;Simple conversion from string to dictionary&lt;/h2&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/**
+ * {
+ *   '0': 'h',
+ *   '1': 'e',
+ *   '2': 'l',
+ *   '3': 'l',
+ *   '4': 'o'
+ * }
+ */&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;string-vs-string-number-vs-number&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; vs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number&lt;/code&gt; vs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Number&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number&lt;/code&gt; are premitives, while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Number&lt;/code&gt; are interfaces(defined in object-like fashion). Thus,&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// never&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// a type contains properties shared by String &amp;amp; Number&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can even extend a new interface from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Number&lt;/code&gt; by resolving conflicting properties:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;never&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;a-promiseresolve-knowledge-checker&quot;&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Promise/resolve&lt;/code&gt; knowledge checker&lt;/h2&gt;
+
+&lt;p&gt;In what order will the animal names below be printed to the console?&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;elephant&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;giraffe&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lion&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;zebra&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;koala&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;cat&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dog&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;moose&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The answer: dog, cat, elephant, giraffe, zebra, koala, lion, moose.&lt;/p&gt;
+
+&lt;p&gt;The explanation:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; function runs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(&quot;cat&quot;)&lt;/code&gt; first,&lt;/li&gt;
+  &lt;li&gt;jump into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getData&lt;/code&gt; function&lt;/li&gt;
+  &lt;li&gt;run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(&quot;elephant&quot;)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;executor function in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Promise&lt;/code&gt; is called synchronously with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Promise&lt;/code&gt; constructor, hence,
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(&quot;giraffe&quot;)&lt;/code&gt; runs first&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resolve(&quot;lion&quot;)&lt;/code&gt; executes, but it does not return any &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result&lt;/code&gt; until the rest of the function is executed&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(&quot;zebra&quot;)&lt;/code&gt; prints “zebra”&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(&quot;koala&quot;)&lt;/code&gt; prints “koala”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;execute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(result)&lt;/code&gt;, printing “lion”&lt;/li&gt;
+  &lt;li&gt;execute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;console.log(&quot;moose&quot;)&lt;/code&gt; printing “moose”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;use-rest-in-tuple-type&quot;&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;...rest&lt;/code&gt; in tuple type&lt;/h2&gt;
+
+&lt;p&gt;Define a tuple type whose first element is number, an enum the second which is followed by some other strings:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kr&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SecondElem&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;GroundBeef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Lamb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Pork&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ...string[] is the rest element here&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TupleType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SecondElem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]];&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TupleType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SecondElem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Pork&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;str2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s a bit tricky when you create a function that manipulate tuple types like the one defined above. As it’s possible to &lt;strong&gt;lose some type information&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// exclude the first element in the passed tuple&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;readOnly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]]){&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_ignored&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// tail has a type of (string|SecondElem)[]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SecondElem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;GroundBeef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lettuce&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The type of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(string|SecondElem)[]&lt;/code&gt;, not &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[SecondElem, ...string[]]&lt;/code&gt;. To solve this issue, we can rewrite &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; as:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;readOnly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]){&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// remain the same&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SecondElem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;GroundBeef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lettuce&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// tail now has a type of [SecondElem, ...string[]]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When defining a tuple type, you can use multiple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;...&lt;/code&gt; and they can be anywhere. But there can only be one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;...rest[]&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GoodType1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[...[&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]];&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// compiler error&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BadType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[...&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GoodType2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;useunknownincatchvariables&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;useUnknownInCatchVariables&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Turn &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;useUnknownInCatchVariables&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;true&lt;/code&gt;, to formulate your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;catch&lt;/code&gt; clause as the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;somethingRisky&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;unknown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;define-a-class-using-template-literal&quot;&gt;Define a class using template literal&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DataStore&lt;/code&gt; class below gives some sort of type error that alerts you that you’ve broken the established pattern if you mis-name a method on the class(e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getSongs&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getAllSong&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;If you add a new entity like Comic (shown below) and make no other changes to your solution, you should get some sort of type error that alerts you to the absence of a clearComics, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getAllComics&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getAllSongs&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Movie&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;director&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;singer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;movie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Movie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Setter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Capitalize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Getter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Capitalize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GetAll&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`getAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Capitalize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Clearer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Capitalize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;StoreMethods&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Setter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Getter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GetAll&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Clearer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DataStore&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;StoreMethods&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// private field whose type is defined by using Record&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataEntityMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;movie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Movie&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;songs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Song&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;song&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;songs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;movie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;addMovie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Movie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;addSong&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Song&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;songs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;getSong&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;songs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;getMovie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;getAllSong&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;songs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;getAllMovie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;clearSong&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;songs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;clearMovie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;using-tuple-type-can-be-unsafe&quot;&gt;Using tuple type can be unsafe&lt;/h2&gt;
+
+&lt;p&gt;The following snippet compiles because &lt;strong&gt;tuples are a specialized flavor of arrays, they expose the entire array API&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;vector3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;vector3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;callback-func-is-not-definite-in-then&quot;&gt;Callback func is not definite in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.then&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;The callback passed to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.then&lt;/code&gt; is not regarded as a “definite assignment”. In fact, all callbacks are treated this way. Because of this, the following won’t compile:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Fetch user's name from an API endpoint&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`/api/user-info/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// set the user's name&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;type-challenges&quot;&gt;Type challenges&lt;/h2&gt;
+
+&lt;p&gt;You can try to solve the type challenges at &lt;a href=&quot;https://github.com/type-challenges/type-challenges?tab=readme-ov-file&quot;&gt;this github repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can find videos explaining solutions in the playlist &lt;a href=&quot;https://www.youtube.com/playlist?list=PLOlZuxYbPik180vcJfsAM6xHYLVxrEgHC&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 13 Mar 2024 00:00:00 -0500</pubDate>
+        <link>/articles/make-ts-stick</link>
+        <guid isPermaLink="true">/articles/make-ts-stick</guid>
+        
+        <category>programming</category>
+        
+        <category>web-dev</category>
+        
+        <category>basics</category>
+        
+        
+        <category>post</category>
+        
+      </item>
+    
+      <item>
+        <title>Qubit Saga: Deutsch–Jozsa Algorithm</title>
+        <description>&lt;p&gt;&lt;em&gt;北风就从今夜开始，慢慢吹起。&lt;/em&gt;&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-is-your-function-constant&quot;&gt;1. Is Your Function Constant?&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#11-the-chernoff-bound-and-exponential-envelope&quot;&gt;1.1 The Chernoff bound and exponential envelope&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-quantum-circuit-basics&quot;&gt;2. Quantum Circuit Basics&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-single--and-multi-qubit-gates&quot;&gt;2.1 Single- and multi-qubit gates&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#22-introduction-to-entanglement&quot;&gt;2.2 Introduction to entanglement&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-quantum-circuit-for-deutschs-algorithm&quot;&gt;3. Quantum Circuit for Deutsch’s Algorithm&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#31-construct-a-function-in-quantum-circuit&quot;&gt;3.1 Construct a function in quantum circuit&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#32-build-the-circuit-before-the-hadamard-transform&quot;&gt;3.2 Build the circuit before the Hadamard transform&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#33-hadamard-transform-at-the-last-step&quot;&gt;3.3 Hadamard transform at the last step&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#34-running-into-mistake-with-extra-ancilla&quot;&gt;3.4 Running into mistake with extra ancilla&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Deutsch–Jozsa algorithm can be considered as an introductory-level quantum algorithm. Its creation was aimed at demonstrating the superiority of quantum computation in solving a certain class of problems. However, the problem discussed in this article lacks corresponding real-life examples. Therefore, readers might as well regard this algorithm as a deliberate construction by the academic community to prove the quantum supremacy. In this article, starting from the corresponding mathematical problem, the author dissects the quantum circuit behind the Deutsch-Jozsa algorithm.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-is-your-function-constant&quot;&gt;1. Is Your Function Constant?&lt;/h2&gt;
+&lt;p&gt;The problems efficiently solvable by the algorithm can be described as follows: Given a function \(f(x)\), if we do not know its explicit expression, how can we determine whether this function always outputs a constant value? The red line in &lt;ref fig=&quot;fig-functype&quot;&gt;&lt;/ref&gt; represents a simple constant function, where \(f(x) = 1\) for all values in its domain. The blue line in &lt;ref fig=&quot;fig-functype&quot;&gt;&lt;/ref&gt; represents a balanced function, where \(f(x) = -1\) when \(x &amp;lt; 0\), and \(f(x) = 1\) otherwise.&lt;/p&gt;
+
+&lt;div id=&quot;fig-functype&quot; class=&quot;jxgbox shadow marginnote numbered-fig&quot; style=&quot;aspect-ratio: 1 / 1; width: 40%; user-select: none; overflow: hidden; position: relative; touch-action: none;&quot;&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&quot;marginnote&quot;&gt; Two function types&lt;/span&gt;
+&lt;script&gt;
+  JXG.Options.text.useMathJax = true;
+  const board = JXG.JSXGraph.initBoard(&quot;fig-functype&quot;, {
+    boundingbox: [-1.5, 1.5, 1.5, -1.5],
+    keepaspectratio: true,
+    axis:true
+});
+board.create('stepfunction',
+      [[-1.0,-0.5,0,0.5,1],[-1,-1,1,1,1]],
+      {strokeColor:'blue',strokeWidth:1.2}
+);
+board.create('functiongraph',
+      [function(x){return 1},-1,1],
+      {strokeColor:'red',strokeWidth:1.2}
+);
+board.create('line', [[0.2,0.8],[0.4,0.8]], 
+{color:'red',straightFirst:false, straightLast:false});
+board.create('text',[0.45,0.8,&quot;constant function&quot;],{color:'red',fontSize:10});
+board.create('line', [[0.2,0.6],[0.4,0.6]], 
+{color:'blue',straightFirst:false, straightLast:false});
+board.create('text',[0.45,0.6,&quot;balanced function&quot;],{color:'blue',fontSize:10});
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;In every paper of quantum algorithm, scholars always start with a discussion of how classical computer would solve a problem. Here we take the same route just to fool people that classical algorithms are dumb. We then explain that they are not unbearably bad, just polynomially slower than the quantum algorithm. Without losing the generality, let’s first focus on a function \(f(x)\) whose input \(x\) is an integer in a range \((-N,N)\), with \(N\) being an arbitrary number. Classically, We check if such a function is constant or not by evaluating the function N+1 times. If the evaluated values are all identical, it’s a constant function. Deutsch-Jozsa algorithm tells function type by ensuring a specific quantum state’s probability becomes unity while excluding other possibilities.&lt;/p&gt;
+
+&lt;h3 id=&quot;11-the-chernoff-bound-and-exponential-envelope&quot;&gt;1.1 The Chernoff bound and exponential envelope&lt;/h3&gt;
+&lt;p&gt;The classical method above is never used in real life as it’s usually hard to enumerate all possible inputs for discrete or continuous functions. Instead, we want to keep the probability of guessing the wrong function type to a low level, \(\epsilon\)&lt;label for=&quot;sn-1&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-1&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;the \(\epsilon\) here should be diminishingly small. &lt;/span&gt;. In the case above, we have a function producing non-deterministic binary output \(f(x_i)\), and we’re facing a decision problem, i.e., how probable we will guess the function type wrong after \(k\ll N/2+1\) function evaluation? Let’s assume, without any loss of generality, that we guess the function type to be constant. With this assumption, the question becomes: &lt;strong&gt;what is the possibility of the k evaluations telling me that the function is not constant?&lt;/strong&gt; In the following discussion, we use \(f_i=1\) to represent \(f(x_i)=1\) and \(f_i=0\) otherwise. After k evaluations by randomly choosing \(\{x_0,x_1,...,x_k\}\), the majority voting fails when \(s_k=\sum_i^k f_i&amp;lt;k\). &lt;label for=&quot;sn-2&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-2&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;we need only one wrong answer to tell the function is not constant &lt;/span&gt; There are \(C^q_k\) k-sequences \(\{f_1,f_2,...,f_k\}\) that have \(q\) correct answers, and the probability of \(s_k=q\) is&lt;/p&gt;
+
+&lt;div id=&quot;eqn-1&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large p(s_k=q)=C^q_k(1/2+\delta)^q(1/2-\delta)^{k-q},$$
+&lt;/div&gt;
+
+&lt;p&gt;in which \(p(f_i=1)=\frac{1}{2}+\delta\) and \(p(f_i=0)=\frac{1}{2}-\delta\).&lt;label for=&quot;sn-3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;we introduce \(\delta\) here for the sake of generality. Note that for a balanced function \(\delta=0\), and \(\delta=1/2\) for constant function. Any other function type will have its \(\delta\in(0,1/2)\). &lt;/span&gt; It is clear that \(p(s_k=q)\) follows &lt;a href=&quot;https://en.wikipedia.org/wiki/Binomial_distribution&quot;&gt;binomial distribution&lt;/a&gt; and the expectation value \(E(s_k)=k(1/2+\delta)\). Therefore, the most probable \(s_k\) that yields a failed majority voting should be as close to \(k(1/2+\delta)\) as possible. However, we don’t know how to choose \(\delta\) as the explicit expression of \(f(x)\) is unknow to us. An educated guess could be \(\delta\cong 0\), that is, assuming that correct or wrong answers are &lt;strong&gt;almost equally possible&lt;/strong&gt;. If we take such an assumption, then each \(\{f_1,f_2,...,f_k\}\) with its \(s_k=k/2\) can occur with the probability&lt;/p&gt;
+
+&lt;div id=&quot;eqn-psk&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large p(\{f_1,f_2,...,f_k\}; s_k=k/2+\lim_{\delta\rightarrow0}\delta)=(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}.$$
+&lt;/div&gt;
+
+&lt;p&gt;Since there are \(2^k\) possible squences \(\{f_1,f_2,...,f_k\}\), we can conclude from &lt;ref eqn=&quot;eqn-psk&quot;&gt;&lt;/ref&gt; that the possibility of guessing function type wrong after \(k\) evaluations is&lt;/p&gt;
+
+&lt;div id=&quot;eqn-psk-leq-k-1&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large p(s_k\leq k-1)&amp;lt;2^k(\frac{1}{2}-\delta)^{k/2}(\frac{1}{2}+\delta)^{k/2}=(1-4\delta^2)^{k/2},$$
+&lt;/div&gt;
+
+&lt;p&gt;Note that \(1-x\leq \exp(-x)\), we obtain the &lt;strong&gt;Chernoff bound&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div id=&quot;eqn-4&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large p(s_k\leq k-1)&amp;lt;\exp(-2\delta^2k).$$
+&lt;/div&gt;
+
+&lt;p&gt;Let \(\epsilon=p(s_k\leq k-1)\), we have the error drops below \(\epsilon\) when the number of function evaluations exceeds the following limit:&lt;/p&gt;
+
+&lt;div id=&quot;eqn-5&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large k&amp;gt;\frac{1}{2\delta^2}\ln(\frac{1}{\epsilon}).$$
+&lt;/div&gt;
+
+&lt;p&gt;Thus, the problem described here has a classical complexity of \(O(\ln(1/\epsilon))\).&lt;/p&gt;
+
+&lt;p&gt;There is a another way to calculate the classical complexity using the exponential envolop of \(p(s_k\leq k-1)\).&lt;label for=&quot;sn-4&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-4&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;this discussion is for people(including me) who are not comfortable with the assumed value of \(\delta\) above &lt;/span&gt; Because there is only one sequence that has \(s_k=k\) with \(\{f_1,f_2,...f_k\}=\{1,1,...,1\}\), we have the probability of such a sequence being&lt;/p&gt;
+
+&lt;div id=&quot;eqn-6&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large p(s_k=k)=(\frac{1}{2}+\delta)^k$$
+&lt;/div&gt;
+
+&lt;p&gt;and hence,&lt;/p&gt;
+
+&lt;div id=&quot;eqn-7&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large p(s_k\leq k-1)=1-p(s_k=k)=1-(\frac{1}{2}+\delta)^k&amp;lt;e^{-k\delta^3}$$
+&lt;/div&gt;
+
+&lt;p&gt;where the last inequality gives an exponential envelope for \(p(s_k\leq k-1)\). Repeat the analysis above, we have&lt;/p&gt;
+
+&lt;div id=&quot;eqn-envelop&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \epsilon&amp;lt;e^{-k\delta^3}\rightarrow k&amp;gt;\frac{1}{\delta^3}\ln(1/\epsilon)$$
+&lt;/div&gt;
+
+&lt;p&gt;giving the same classical complexity as the Chernoff bound. &lt;ref fig=&quot;fig-bounds&quot;&gt;&lt;/ref&gt; below shows how \(p(s_k\leq k-1)\), Chernoff bound, and the exponential envelope in &lt;ref eqn=&quot;eqn-envelop&quot;&gt;&lt;/ref&gt; vary with the \(\delta\). As we increase the \(k\) value, the Chernoff bound breaks at \(\lfloor k\rfloor&amp;gt;3\), and the envelope breaks as well when \(\lfloor k\rfloor\geq8\). In summary, both bounds hold for the full range of \(\delta\in(0,1/2)\) when limited function evaluations are performed.&lt;/p&gt;
+
+&lt;div id=&quot;fig-bounds&quot; class=&quot;jxgbox shadow numbered-fig&quot; style=&quot;aspect-ratio: 2 / 1; width: 70%; user-select: none; overflow: hidden; position: relative; touch-action: none;&quot;&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&quot;marginnote&quot;&gt; Interactive plot of \(p(s_k\leq k-1)\), Chernoff bound, and exponential envelope varying with \(\delta\). Use the slider to see how the \(p(s_k\leq k-1)\) goes above the two bounds as k increases.&lt;/span&gt;
+&lt;script&gt;
+JXG.Options.text.useMathJax = true;
+  const board2 = JXG.JSXGraph.initBoard(&quot;fig-bounds&quot;, {
+    boundingbox: [-0.5, 1.5, 1.5, -0.5],
+    keepaspectratio: true,
+    axis:true
+});
+var k = board2.create('slider', [[0.5,1],[1.5,1],[1,1,20]],
+    {suffixLabel:'k= ',label: {fontSize: 18, strokeColor: 'black'}})
+var epsilon = board2.create('functiongraph',
+      [function(x){return 1-(0.5+x)**k.Value()},0,0.5],
+      {strokeColor:'blue',strokeWidth:1.2}
+);
+var chernoff = board2.create('functiongraph',
+      [function(x){return Math.exp(-2*k.Value()*x**2)},0,0.5],
+      {strokeColor:'red',strokeWidth:1.2}
+);
+var envelope = board2.create('functiongraph',
+      [function(x){return Math.exp(-k.Value()*(x**3))},0,0.5],
+      {strokeColor:'green',strokeWidth:1.2}
+);
+board2.create('line', [[1,0.8],[1.4,0.8]], {labels:['Chernoff'],
+color:'red',straightFirst:false, straightLast:false});
+board2.create('text',[1.45,0.8,&quot;\\[\\exp(-2\\delta^2k)\\]&quot;],{color:'red',fontSize:14});
+board2.create('line', [[1,0.6],[1.4,0.6]], {labels:[''],
+color:'green',straightFirst:false, straightLast:false});
+board2.create('text',[1.45,0.6,&quot;\\[\\exp(-k\\delta^3)\\]&quot;],{color:'green',fontSize:14});
+board2.create('line', [[1,0.4],[1.4,0.4]], {labels:[''],
+color:'blue',straightFirst:false, straightLast:false});
+board2.create('text',[1.45,0.4,&quot;\\[1-(1/2+\\delta)^k\\]&quot;],{color:'blue',fontSize:14});
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;The analysis in &lt;ref fig=&quot;fig-bounds&quot;&gt;&lt;/ref&gt; wraps up our problem statement in the context of classical computation. Next we will quickly go through some basics of quantum gates and draft the first quantum circuit for solving the problem here.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-quantum-circuit-basics&quot;&gt;2. Quantum Circuit Basics&lt;/h2&gt;
+&lt;p&gt;Transistors give rise to logic circuits by regulating the flow of electric current through varying voltage levels, so the binary states, 1 and 0, are represented physically by voltage levels. Because the voltage is always controllable by logic gates, signals passing through the logic circuit are deterministic. Quantum circuit, on the other hand, is never deterministic as its basic unit is “qubit”, the quantum counterpart of the classical “bit”. Qubits are physical realizations of quantum two-state systems.
+&lt;span id=&quot;fig-cartoon&quot; class=&quot;marginnote numbered-fig&quot;&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Schrodingers_cat.svg/1024px-Schrodingers_cat.svg.png&quot; /&gt;&lt;br /&gt;&lt;span&gt; Schrodinger’s cat on Wikipedia&lt;/span&gt;&lt;/span&gt; 
+For people who are not familiar with quantum mechanics, you can think of qubit as a blackbox containing Schrodinger’s cat. We get to know if the cat is dead or alive by opening the box. Here, dead and alive are the two “&lt;strong&gt;quantum states&lt;/strong&gt;“&lt;label for=&quot;sn-5&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-5&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;here we use Dirac notation to represent quantum states. In this case, the cat has two possible states:\(\ket{alive}\) or \(\ket{dead}\) &lt;/span&gt;, and the behavior of opening box is our “&lt;strong&gt;measurement&lt;/strong&gt;” of the cat’s states&lt;label for=&quot;sn-6&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-6&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;for now, let’s naively use \(\hat{M}\) to represent the measurement. In the language of linear algebra, this is an operator applicable to the vector space spanned by basis vectors of \(\ket{alive}\) and \(\ket{dead}\) &lt;/span&gt;. Before the “measurement”, the cat can either be dead or alive. Such a state uncertainty is captured by the concept of &lt;strong&gt;superposition&lt;/strong&gt;. Let’s first use Dirac notation to represent superposition in this case as \(\ket{alive}+\ket{dead}\). Notice the ressemblance here between the superposition and the linear combination&lt;label for=&quot;sn-7&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-7&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;If we treat \(\ket{alive}\) and \(\ket{dead}\) as two linearly independent vectors, then all of the linear combinations, \(\alpha\ket{alive}+\beta\ket{dead}\) forms a vector space. &lt;/span&gt; pervasive in linear algebra. At the moment of opening the blackbox, we apply the “measurement” to the superposed state, \(\hat{M}(\ket{alive}+\ket{dead})\), which results in  \(\ket{alive}\) if the cat jumps out of the box, or \(\ket{dead}\) if the cat stays there forever. Before the measurement, we can only predict the cat’s state using probabilities. For example, if we place a bottle of poison with the cat in the box, and we know cats like to topple small things. Then the probability of cat being alive at time \(t\), \(p(\ket{\psi(t)}=\ket{alive})\) should be lower than 1&lt;label for=&quot;sn-8&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-8&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;\(\ket{\psi(t)}\) represents the cat’s state at time \(t\) &lt;/span&gt;. Note that \(\small p(\ket{\psi(t)}=\ket{alive})+p(\ket{\psi(t)}=\ket{dead})=1\) at any time instance. To reflect this fact in the superposed state, we need to normalize the “length” of the linear combination \(\alpha\ket{alive}+\beta\ket{dead}\) to one, i.e., \(\alpha^2+\beta^2=1\). For the cat, we have \(\small p(\ket{\psi(t)}=\ket{alive})=\lvert\alpha\rvert^2\), and \(\small p(\ket{\psi(t)}=\ket{dead})=\lvert\beta\rvert^2\). Due to their relations to probabilities, \(\alpha\) and \(\beta\) are called &lt;strong&gt;probability amplitudes&lt;/strong&gt;, and they are generally complex numbers.&lt;/p&gt;
+
+&lt;h3 id=&quot;21-single--and-multi-qubit-gates&quot;&gt;2.1 Single- and multi-qubit gates&lt;/h3&gt;
+&lt;p&gt;So a qubit can be thought of a blackbox containing a cat of superposed quantum state. Upon the measurement, the qubit has two possible states analogous to the classical bit, \(\ket{0}\) and \(\ket{1}\). If we first set the qubit at the state of \(\ket{0}\) and do nothing(e.g. no poison bottle in the box)&lt;label for=&quot;sn-9&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-9&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Doing nothing is an oversimplified statement. Huge amount of efforts is required to protect a quantum system from noises that break its current state before measurement. &lt;/span&gt;, next time when we measure the qubit, it will still be at the state of \(\ket{0}\) just like what we would expect on a classical computer. However, we can turn the qubit state into a superposed one by applying quantum gate to it&lt;label for=&quot;sn-10&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-10&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;there are only two effects of classical gates to bits: flip the bit or remain bit state. &lt;/span&gt;. Such a gate is call &lt;strong&gt;&lt;em&gt;Hadamard gate&lt;/em&gt;&lt;/strong&gt;, and is represented as \(\fbox{H}\) in quantum circuit.&lt;/p&gt;
+
+&lt;p&gt;The following quantum circuit shows one Hadamard gate applied to one qubit(the horizontal line).&lt;/p&gt;
+
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-hadamard-container&quot;&gt;&lt;div id=&quot;qc-hadamard&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-hadamard-report&quot; for=&quot;qc-hadamard&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; One Hadamard gate,&lt;a id=&quot;qc-hadamard-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script&gt;
+qc=new QuantumCircuit(1);
+qc.addGate('h',0,0);
+run_and_render_svg(qc,'qc-hadamard');
+&lt;/script&gt;
+
+&lt;p&gt;The qubit in &lt;ref fig=&quot;qc-hadamard&quot;&gt;&lt;/ref&gt; is set to \(\ket{0}\) at the beginning. The wire represents evolution of the qubit in time, along which we have one intermediate point: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt;. The caption of &lt;ref fig=&quot;qc-hadamard&quot;&gt;&lt;/ref&gt; also gives the probabilities of getting different states of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; at the end. Because the Hadamard gate turns &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; into a superposed state, \(1/\sqrt{2}\ket{0}+1/\sqrt{2}\ket{1}\)&lt;label for=&quot;sn-11&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-11&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;\(\alpha=\beta=1/\sqrt{2}\) &lt;/span&gt;, we have \((1/\sqrt{2})^2=1/2\) possibility of getting \(\ket{0}\) or \(\ket{1}\) when measuring the state of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt;. The full qubit evolution introduced in &lt;ref fig=&quot;qc-hadamard&quot;&gt;&lt;/ref&gt; can be expressed in Dirac’s notation as&lt;/p&gt;
+
+&lt;div id=&quot;eqn-Hevolve&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \hat{H}_{m1}\ket{0}=\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$$
+&lt;/div&gt;
+
+&lt;p&gt;where subscripts indicate middle points’ locations. If there are multiple gates applied to a qubit, it’s conventional to place operators chronically from right to left before the qubit.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s consider two qubits, and add a Hadamard gate to both of them. The corresponding circuit is shown in &lt;ref fig=&quot;qc-twoh&quot;&gt;&lt;/ref&gt;, and its caption gives 4 possible two-qubit states upon measurement.&lt;/p&gt;
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-twoh-container&quot;&gt;&lt;div id=&quot;qc-twoh&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-twoh-report&quot; for=&quot;qc-twoh&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; Two Hadamard gate,&lt;a id=&quot;qc-twoh-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script&gt;
+var circuit = new QuantumCircuit(2);
+circuit.addGate(&quot;h&quot;, 0, 0);
+circuit.addGate(&quot;h&quot;, 0, 1);
+run_and_render_svg(circuit,'qc-twoh')
+&lt;/script&gt;
+
+&lt;p&gt;As the symbols indicate, \(\ket{00}\) represents the measurement where both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; are at \(\ket{0}\) while \(\ket{01}\) has &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; at \(\ket{1}\) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; at \(\ket{0}\)&lt;label for=&quot;sn-12&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-12&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For multi-qubit states, we count indices of individual qubits from right to left. &lt;/span&gt;. We can be mathematically rigorous by writting the multi-qubit states using Kronecker products, e.g., \(\ket{10}=\ket{1}\otimes\ket{0}\). A more detailed discussion of Kronecker products can be found in &lt;a href=&quot;./Kronecker-product&quot;&gt;my previous post&lt;/a&gt;. Kronecker product also enables us to write multi-qubit gates by combining single-qubit gates. For example, the quantum circuit in &lt;ref fig=&quot;qc-twoh&quot;&gt;&lt;/ref&gt; can be written as&lt;/p&gt;
+
+&lt;div id=&quot;eqn-twoh&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \hat{H}_{q1}\otimes\hat{H}_{q0}\ket{0}_{q1}\otimes\ket{0}_{q0}=\hat{H}_{q1}\ket{0}_{q1}\otimes\hat{H}_{q0}\ket{0}_{q0}$$
+&lt;/div&gt;
+
+&lt;p&gt;where subscripts are qubits’ indices. Because we always follow the ‘right-first’ convention, &lt;ref eqn=&quot;eqn-twoh&quot;&gt;&lt;/ref&gt; can be simplified and expanded as follows:&lt;/p&gt;
+
+&lt;div id=&quot;eqn-twoh-result&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}\hat{H}\ket{0}\otimes\hat{H}\ket{0}&amp;amp;=\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\otimes\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)\\&amp;amp;=\frac{1}{2}\left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;The probability amplitudes in &lt;ref eqn=&quot;eqn-twoh-result&quot;&gt;&lt;/ref&gt; are identical for all possible states, and they all correspond to \((1/2)^2=1/4\) possiblity of measured state being one of the four options, agreeing with the result in the caption of &lt;ref fig=&quot;qc-twoh&quot;&gt;.&lt;/ref&gt;&lt;/p&gt;
+
+&lt;p&gt;Another distinct feature of quantum circuits is &lt;strong&gt;&lt;em&gt;Controlled gates&lt;/em&gt;&lt;/strong&gt;, which apply quantum gates to a qubit when its &lt;strong&gt;control qubit&lt;/strong&gt; is at state \(\ket{1}\). The circuit in &lt;ref fig=&quot;qc-ch&quot;&gt;&lt;/ref&gt; shows that \(\fbox{H}\) is only applied to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; when the control qubit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; has a state of \(\ket{1}\).&lt;/p&gt;
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-ch-container&quot;&gt;&lt;div id=&quot;qc-ch&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-ch-report&quot; for=&quot;qc-ch&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; Controlled Hadamard gate,&lt;a id=&quot;qc-ch-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var circuit = new QuantumCircuit(2);
+    circuit.addGate(&quot;ch&quot;, 0, [1, 0]);
+    run_and_render_svg(circuit, 'qc-ch');
+&lt;/script&gt;
+
+&lt;p&gt;Nothing happens to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; as the state of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; remains at \(\ket{0}\) and the \(\fbox{H}\) is never triggered. We can use the &lt;strong&gt;&lt;em&gt;Pauli-X&lt;/em&gt;&lt;/strong&gt; gate \(\fbox{X}\)&lt;label for=&quot;sn-13&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-13&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Pauli-X gate is represented by \(\bigoplus\) in some circuits. &lt;/span&gt; to flip &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; state at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt;, and the result is shown in &lt;ref fig=&quot;qc-xch&quot;&gt;&lt;/ref&gt;. With &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; state flipped from \(\ket{0}\) to \(\ket{1}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt;, the circuit above applies \(\fbox{H}\) to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt;, resulting two possible states: \(\ket{10}\) and \(\ket{11}\).&lt;/p&gt;
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-xch-container&quot;&gt;&lt;div id=&quot;qc-xch&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-xch-report&quot; for=&quot;qc-xch&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; Controlled Hadamard gate with a Pauli-X gate,&lt;a id=&quot;qc-xch-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // circuit definition
+    var circuit = new QuantumCircuit(2);
+    circuit.addGate(&quot;x&quot;, 0, 1);
+    circuit.addGate(&quot;ch&quot;, 1, [1, 0]);
+    run_and_render_svg(circuit, 'qc-xch');
+&lt;/script&gt;
+
+&lt;p&gt;We can prove that \(p(\ket{01})=p(\ket{11})=0.5\) by progressively following the circuit from left to right.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt;, we flip &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt;’s state, \(\tiny\hat{X}\otimes\hat{I}\ket{0}\otimes\ket{0}=\hat{X}\ket{0}\otimes\hat{I}\ket{0}=\ket{10}\);&lt;/li&gt;
+  &lt;li&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m2&lt;/code&gt;, the Hadamard gate is triggered,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&quot;eqn-ch&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \small\widehat{CH}\ket{10}=\ket{1}\otimes\left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right)=\frac{1}{\sqrt{2}}(\ket{10}+\ket{11}),$$
+&lt;/div&gt;
+&lt;p&gt;where \(\small\widehat{CH}\) is the controlled Hadamard gate.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Because the probability amplitudes of two possible states in &lt;ref eqn=&quot;eqn-ch&quot;&gt;&lt;/ref&gt; are \(\frac{1}{\sqrt{2}}\), the probabilities of getting \(\ket{10}\) or \(\ket{11}\) are 50% at the end, as the caption of &lt;ref fig=&quot;qc-xch&quot;&gt; indicates.&lt;/ref&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;22-introduction-to-entanglement&quot;&gt;2.2 Introduction to entanglement&lt;/h3&gt;
+&lt;p&gt;Now that we have sufficient understanding of single- and multi-qubit operators&lt;label for=&quot;sn-14&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-14&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;we have used operators and gates interchangeably. &lt;/span&gt;, we can move a step furter to see how quantum circuit can create entangled quantum states. Before we give the concept of entanglement, let us take a look at the following circuit:&lt;/p&gt;
+&lt;div class=&quot;Q-circuit-palette&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-bell-simple-container&quot;&gt;&lt;pre id=&quot;qc-bell-simple&quot; style=&quot;text-align: center;&quot;&gt;&lt;/pre&gt;&lt;span id=&quot;qc-bell-simple-report&quot; for=&quot;qc-bell-simple&quot; class=&quot;marginnote&quot; style=&quot;margin-right: 10%;&quot;&gt; Making Bell state$$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$, and its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script&gt;
+qc=Q`
+      I H X#0 I 
+      I I X#1 I
+`
+eval_draw(qc,'qc-bell-simple',use_palette=true);
+&lt;/script&gt;
+
+&lt;p&gt;The caption of &lt;ref fig=&quot;qc-bell-simple&quot;&gt;&lt;/ref&gt; shows that there are only two possible states: \(\ket{00}\) and \(\ket{11}\)&lt;label for=&quot;sn-15&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-15&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;reader can prove this using the progressive method introduced above. &lt;/span&gt; with 50% probability for each state. Now, let’s say the measured state of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; is \(\ket{0}\), according to the probability distribution, the two-qubit state must be \(\ket{00}\) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; must be \(\ket{0}\) as well. On the other hand, if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; is \(\ket{1}\), we must have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; being \(\ket{1}\). Thus, states of the two qubits are coupled, and we can confirm the states of both qubits by measuring only one of them. Such a correlation is called quantum entanglement. As a matter of fact, the entangled state \(\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})\) is one of the four &lt;strong&gt;&lt;em&gt;Bell states&lt;/em&gt;&lt;/strong&gt;. &lt;ref fig=&quot;qc-bell-simple&quot;&gt;&lt;/ref&gt; is an interactive circuit to which you can add and delete gates. You can apply \(\fbox{X}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; to get another Bell state: \(\small\frac{1}{\sqrt{2}}(\ket{00}-\ket{11})\), resulting the same probability distribution. On the other hand, if \(\fbox{X}\) is applied at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m2&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt;, you get \(\small\frac{1}{\sqrt{2}}(\ket{01}+\ket{10})\). If two \(\fbox{X}\) are applied at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt;, we get the last Bell state \(\small\frac{1}{\sqrt{2}}(\ket{01}-\ket{10})\).&lt;/p&gt;
+
+&lt;p&gt;Bell states introduced here belong to a class of entangled qubit states, called &lt;strong&gt;&lt;em&gt;maximally entangled states&lt;/em&gt;&lt;/strong&gt;. The name is due to the 100% certainty of one qubit’s state if we know the state of the other one. There are states &lt;strong&gt;&lt;em&gt;partially entangled&lt;/em&gt;&lt;/strong&gt;. As an example, consider the state of \(\frac{1}{10}\ket{01}+\frac{\sqrt{99}}{10}\ket{00}\). Kronecker product allows us to factor the state into a form of \(\ket{0}(\frac{1}{10}\ket{1}+\frac{\sqrt{99}}{10}\ket{0})\). The measurement of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; will always gives \(\ket{0}\), but we have 1% chance of getting \(\ket{1}\) and 99% chance of getting \(\ket{0}\) for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt;. We can NOT tell, with 100% certainty what state &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; is upon the measurement of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-quantum-circuit-for-deutschs-algorithm&quot;&gt;3. Quantum Circuit for Deutsch’s Algorithm&lt;/h2&gt;
+&lt;p&gt;Our problem is to find out if a given function is constant or not without knowing its expression. In reality, this could happen if the function is too complicated to figure out its output pattern. For the sake of demonstration, however, we need to construct a simple function in our quantum circuit which maps various inputs to either the same output or different outputs. By constructing the function, we definitely know if it’s constant or not. But imagine you inherit a function constructed previously that takes tens or even hundreds of inputs&lt;label for=&quot;sn-16&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-16&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;let’s hope this happens in the near future. &lt;/span&gt;, and you can still use Deutsch-Jozsa algorithm to decide function type without sacrificing computational efficiency.&lt;/p&gt;
+
+&lt;h3 id=&quot;31-construct-a-function-in-quantum-circuit&quot;&gt;3.1 Construct a function in quantum circuit&lt;/h3&gt;
+&lt;p&gt;A function is a map from a set of inputs to a set of outputs. On a quantum circuit that envolves multiple qubits, a function is &lt;strong&gt;a segment between two intermediate points that transform one set of multi-qubit states into another set&lt;/strong&gt;. In quantum circuit, we use two &lt;strong&gt;DIFFERENT&lt;/strong&gt; sets of qubits as inputs and outputs. For example, If we treat &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; as input qubits and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; as output qubit in &lt;ref fig=&quot;qc-const-func&quot;&gt;&lt;/ref&gt;, then the circuit represents a constant function that always gives \(\ket{1}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; no matter how you prepare inputs at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-const-func-container&quot;&gt;&lt;div id=&quot;qc-const-func&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-const-func-report&quot; for=&quot;qc-const-func&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; A constant function $$f_c(x)$$ that takes inputs at q0 and q1 and output at q2,&lt;a id=&quot;qc-const-func-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var circuit = new QuantumCircuit(3);
+    circuit.addGate(&quot;x&quot;, 1, 2);
+    run_and_render_svg(circuit, 'qc-const-func');
+&lt;/script&gt;
+
+&lt;p&gt;We can use controlled gates to construct a balanced function as shown in &lt;ref fig=&quot;qc-balanced-func&quot;&gt;&lt;/ref&gt;. The function is indeed balanced as \(\ket{00}\) and \(\ket{11}\) results in \(\ket{1}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; while \(\ket{01}\) and \(\ket{10}\) maps to \(\ket{0}\).&lt;/p&gt;
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-balanced-func-container&quot;&gt;&lt;div id=&quot;qc-balanced-func&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-balanced-func-report&quot; for=&quot;qc-balanced-func&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; A balanced function $$f_b(x)$$ that takes inputs at q0 and q1 and output at q2,&lt;a id=&quot;qc-balanced-func-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var circuit = new QuantumCircuit(3);
+    circuit.addGate(&quot;x&quot;, 0, 2);
+    circuit.addGate(&quot;cx&quot;, 1, [0,2]);
+    circuit.addGate(&quot;cx&quot;, 2, [1,2]);
+    run_and_render_svg(circuit, 'qc-balanced-func');
+&lt;/script&gt;
+
+&lt;p&gt;For circuits that implement complicated functions, it is a common practice to hide function details by wrapping corresponding circuit segments into a composite gate. Multi-qubit gates wrapped in this way are called &lt;strong&gt;&lt;em&gt;oracle&lt;/em&gt;&lt;/strong&gt;. For the 2-qubit constant function above, an oracle is created in &lt;ref fig=&quot;qc-const-oracle&quot;&gt;&lt;/ref&gt;, i.e., the blue block, which always results in \(\ket{1}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt;, and takes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt; as function arguments.&lt;/p&gt;
+
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-const-oracle-container&quot;&gt;&lt;div id=&quot;qc-const-oracle&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-const-oracle-report&quot; for=&quot;qc-const-oracle&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; An oracle that hides details of the constant function,&lt;a id=&quot;qc-const-oracle-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // circuit definition
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate(&quot;x&quot;, 1, 2);
+    var obj = oracle.save();
+    var circuit = new QuantumCircuit(4);
+    circuit.registerGate(&quot;f_c(x)&quot;, obj);
+    circuit.addGate(&quot;h&quot;,0,0);
+    circuit.addGate(&quot;h&quot;,0,1);
+    circuit.addGate(&quot;h&quot;,0,3);
+    circuit.addGate(&quot;f_c(x)&quot;,1,[0,1,2]);
+    run_and_render_svg(circuit, 'qc-const-oracle');
+&lt;/script&gt;
+
+&lt;p&gt;In the next section, we will use constant and blanced functions introduced here to demostrate Deutsch-Jozsa algorithm, which can tell the two functions apart with 100% confidence.&lt;/p&gt;
+
+&lt;h3 id=&quot;32-build-the-circuit-before-the-hadamard-transform&quot;&gt;3.2 Build the circuit before the Hadamard transform&lt;/h3&gt;
+&lt;p&gt;The circuits in &lt;ref fig=&quot;qc-deutsch-jozsa&quot;&gt;&lt;/ref&gt; shows how Deutsch-Jozsa algorithm is applied to the constant \(f_c(x)\). To apply the algorithm to a function of arbitrary number of arguments, you need to replace the oracle in the circuits below with the function and apply the Hadamard gates to all its input qubits before the oracle and apply to them again the Hadamard gates after the oracle.&lt;/p&gt;
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-deutsch-jozsa-container&quot;&gt;&lt;div id=&quot;qc-deutsch-jozsa&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-deutsch-jozsa-report&quot; for=&quot;qc-deutsch-jozsa&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; The Deutsch-Jozsa Algorithm for checking the type of $$f_c(x)$$. The information measured at q1 and q2 is stored at two classical bits, c0 and c1,&lt;a id=&quot;qc-deutsch-jozsa-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // function oracle
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate(&quot;x&quot;, 0, 2);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(3);
+    circuit.registerGate(&quot;f_c(x)&quot;, obj);
+    circuit.addGate(&quot;h&quot;,0,0);
+    circuit.addGate(&quot;h&quot;,0,1);
+    circuit.addGate(&quot;f_c(x)&quot;,2,[0,1,2]);
+
+    circuit.addGate(&quot;x&quot;,0,2);
+    circuit.addGate(&quot;h&quot;,1,2);
+    circuit.addGate(&quot;h&quot;,3,0);
+    circuit.addGate(&quot;h&quot;,3,1);
+    circuit.addMeasure(0, &quot;c0&quot;, 0)
+    circuit.addMeasure(1, &quot;c1&quot;, 1)
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa');
+&lt;/script&gt;
+
+&lt;p&gt;Let us go back to the basics to analyze what the circuit does. First of all, we have three qubits  that serve two different purposes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;function arguments are provided by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt;,&lt;/li&gt;
+  &lt;li&gt;function output is given at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; but it is initialized with a state of \(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\), the qubit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; is also called &lt;strong&gt;&lt;em&gt;ancilla&lt;/em&gt;&lt;/strong&gt; in literature&lt;label for=&quot;sn-17&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-17&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;ancilla qubits are used for storing partial results or creating entanglement. &lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can again use the progressive method in &lt;a href=&quot;#21-single--and-multi-qubit-gates&quot;&gt;Sec.2.1&lt;/a&gt; to see how the multi-qubit state evolves at each intermediate point in &lt;ref fig=&quot;qc-deutsch-jozsa&quot;&gt;&lt;/ref&gt;. With \(\fbox{H}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q1&lt;/code&gt;, and \(\fbox{X}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt;, we turn \(\ket{000}\) into the following state at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m1&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-1&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\ket{\psi}_{m1}&amp;amp;=\frac{(\ket{0}+\ket{1})}{\sqrt{2}}\otimes\frac{(\ket{0}+\ket{1})}{\sqrt{2}}\otimes\ket{1}\\\\
+&amp;amp;=\frac{1}{2}(\ket{00}+\ket{01}+\ket{10}+\ket{11})\otimes\ket{1}
+\end{align},$$
+&lt;/div&gt;
+
+&lt;p&gt;where the Kronecker products bridge the states at input and output qubits. The second line in &lt;ref fig=&quot;algo-step-1&quot;&gt;&lt;/ref&gt; indicates that the input qubits are turned into superposed states, including all the possible inputs. This manifests the power of quantum computing, that is, evaluating all possible outputs of a function by feeding it a superposed state composed of all possible inputs. To make our discussion concise, let us write the superposed state as&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-1-2&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\ket{\psi}_{m1}&amp;amp;=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\ket{1}
+\end{align},$$
+&lt;/div&gt;
+
+&lt;p&gt;where we convert the 2-digit binary number(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;00&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;01&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;11&lt;/code&gt;) into decimal numbers \(x\), and \(n\) is the number of input qubits in &lt;ref eqn=&quot;algo-step-1-2&quot;&gt;&lt;/ref&gt;. The conversion simplifies the notation of quantum state evaluated at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m2&lt;/code&gt;, where we apply \(\fbox{H}\) to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q3&lt;/code&gt; to give&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-2&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \ket{\psi}_{m2}=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\frac{\ket{0}-\ket{1}}{\sqrt{2}}.$$
+&lt;/div&gt;
+
+&lt;p&gt;The critical step happens at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m3&lt;/code&gt; where we apply the oracle to the three qubits, which results in a state of \(\small \ket{f(x)\oplus0}-\ket{f(x)\oplus1}/\sqrt{2}\) at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt;. The \(\oplus\) within \(\ket{ }\) here is the add modulo 2, so \(\small\ket{f(x)\oplus0}-\ket{f(x)\oplus1}=(-1)^{f(x)}(\ket{0}-\ket{1})\). With this reasoning, the state at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m3&lt;/code&gt; becomes&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-3&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}\ket{\psi}_{m3} &amp;amp;=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\frac{\ket{f(x)\oplus0}-\ket{f(x)\oplus1}}{\sqrt{2}}
+\\
+&amp;amp;=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes(-1)^{f(x)}\frac{\ket{0}-\ket{1}}{\sqrt{2}}\\
+&amp;amp;=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\frac{\ket{0}-\ket{1}}{\sqrt{2}}
+\end{align}$$
+&lt;/div&gt;
+&lt;p&gt;Thus, the oracle at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m3&lt;/code&gt; adds a &lt;strong&gt;&lt;em&gt;global phase&lt;/em&gt;&lt;/strong&gt; \((-1)^{f(x)}\) to \(\ket{\psi}_{m3}\)&lt;label for=&quot;sn-18&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-18&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;global phase is a complex number of unity norm attached to a quantum state, and it does not affect probability distribution of the state measurements. &lt;/span&gt;. Due to the commutativity between Kronecker product and scalar product, we can move the global phase in front of any qubit(e.g. the last line in &lt;ref eqn=&quot;algo-step-3&quot;&gt;&lt;/ref&gt;), and such a manipulation is also referred as &lt;strong&gt;&lt;em&gt;phase kickback&lt;/em&gt;&lt;/strong&gt;. Because of this, An oracle with its output qubit initialized with the superposed state of \(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\) is also referred to as &lt;strong&gt;&lt;em&gt;phase oracle&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;At this point, we can confidently disregard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q2&lt;/code&gt; in the discussion below as its state will remain the same after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m3&lt;/code&gt;, and \(\ket{\psi}_{m3}\) is simplified into&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-3-2&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \ket{\psi}_{m3}=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^n}}\ket{x}$$
+&lt;/div&gt;
+
+&lt;p&gt;The step at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m4&lt;/code&gt; reveals the function type by applying Hadamard gates(i.e. \(\hat{H}\otimes\hat{H}=\hat{H}^{\otimes n}, n=2\)) again to the input qubits. Before we derive the final result, we need to take a deeper look at what \(\hat{H}^{\otimes n}\) could do to states like \(\ket{\psi}_{m3}\).&lt;/p&gt;
+
+&lt;h3 id=&quot;33-hadamard-transform-at-the-last-step&quot;&gt;3.3 Hadamard transform at the last step&lt;/h3&gt;
+&lt;p&gt;Let \(k\) be a n-length binary string and \(\ket{k}\) be a n-qubit state, then the Hadamard transform gives&lt;/p&gt;
+
+&lt;div id=&quot;eqn-h-trans&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \hat{H}^{\otimes n}|k\rangle=\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}(-1)^{k \cdot j}|j\rangle,$$
+&lt;/div&gt;
+
+&lt;p&gt;where \(j \cdot k=j_0 k_0 \oplus j_1 k_1 \oplus \cdots \oplus j_{n-1} k_{n-1}\) is the sum of the bitwise product, where \(\oplus\) is addition modulo 2. We will try to derive &lt;ref eqn=&quot;eqn-h-trans&quot;&gt;&lt;/ref&gt; from the perspective of basis transformation, inspired by the blog &lt;a href=&quot;https://benjaminwhiteside.com/2021/08/02/the-hadamard-transform/&quot;&gt;here&lt;/a&gt;&lt;label for=&quot;sn-19&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sn-19&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;you need knowledge of group theory in order to fully appreciate the writing &lt;/span&gt;. We begin our derivation by considering the simple case of \(\small\ket{k}=\ket{\underbrace{00...0}_{n}}\), i.e.,&lt;/p&gt;
+
+&lt;div id=&quot;h-trans-1&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\hat{H}^{\otimes n}|\underbrace{00...0}_{n}\rangle&amp;amp;=\frac{1}{\sqrt{2^n}}\prod^{n}(\ket{0}+\ket{1})\\
+&amp;amp;=\frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}\ket{z}
+\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;Now, let’s take a step further by replacing the j-th 0 of \(\ket{k}\) with 1, and the Hadamard transform of this modified state is then&lt;/p&gt;
+
+&lt;div id=&quot;h-trans-2&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\small \hat{H}^{\otimes n}|\underbrace{00...0}_{n-j}\rangle\otimes\ket{1\underbrace{00...0}_{j-1}}&amp;amp;=\small \frac{1}{\sqrt{2^n}}\prod^{n-j}(\ket{0}+\ket{1})\times (\ket{0}-\ket{1})\times \prod^{j-1}(\ket{0}+\ket{1})\\
+&amp;amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z_j=0}\ket{z}-\frac{1}{\sqrt{2^n}}\sum_{z_j=1}\ket{z}\\
+&amp;amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}(-1)^{k_j\cdot z_j}\ket{z}.
+\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;Since \(k_j=1\) in this case, \((-1)^{k_j\cdot z_j}=1\) in &lt;ref eqn=&quot;h-trans-2&quot;&gt;&lt;/ref&gt; when \(z_j=1\). When both j-th and l-th 0 of \(\ket{k}\) become 1, one can follow the same procedure in &lt;ref eqn=&quot;h-trans-2&quot;&gt;&lt;/ref&gt; to find that&lt;/p&gt;
+
+&lt;div id=&quot;h-trans-3&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\small\hat{H}^{\otimes n}\ket{\underbrace{00...0}_{n-l}}\otimes\ket{1\underbrace{00...0}_{l-j-1}}\otimes\ket{1\underbrace{00...0}_{j-1}}&amp;amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}(-1)^{k_j\cdot z_j+k_l\cdot z_l}\ket{z}\\\\
+&amp;amp;=\small \frac{1}{\sqrt{2^n}}\sum_{z=0}^{2^n-1}(-1)^{k\cdot z}\ket{z},
+\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;where the last equivelance is due to the fact of digits being 0 in \(\ket{k}\) other than \(k_j\) and \(k_l\). So we must have \(k_j\cdot z_j+k_l\cdot z_l=\sum_ik_i\cdot z_i=k\cdot z\), with \(k\cdot z\) being the inner product of two binary sequences. The formalism of &lt;ref eqn=&quot;h-trans-3&quot;&gt;&lt;/ref&gt; can also apply to n-length binary sequence \(\ket{k}\) with arbitrary number of 1. Also, what matters here is only the oddity of \(\sum_ik_i\cdot z_i\), we can modify the inner product by using the addition modulo 2, that is, \(k\cdot z=k_0z_0\oplus k_0z_0\oplus\cdots k_nz_n\). With this modification, we now complete the derivation of Hadamard transform in &lt;ref eqn=&quot;eqn-h-trans&quot;&gt;&lt;/ref&gt;.&lt;/p&gt;
+
+&lt;p&gt;Applying &lt;ref eqn=&quot;eqn-h-trans&quot;&gt;&lt;/ref&gt; to &lt;ref eqn=&quot;algo-step-3-2&quot;&gt;&lt;/ref&gt; gives&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-4&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\hat{H}^{\otimes n}\ket{\psi}_{m3}&amp;amp;=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^{2n}}}\sum_{z=0}^{2^n-1}(-1)^{x\cdot z}\ket{z}\\
+&amp;amp;=\sum_{z=0}^{2^n-1}\sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\ket{z}.
+\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;Note that \(\ket{z}\) represents possible state of input qubits, and each possible state has its probability amplitude being \(\small \sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\). For a constant function that \(f(x)\equiv1\), we have the probability of \(\small\ket{z}=\ket{\underbrace{00..0}_{n}}\) being unity because \(f(x)+x\cdot z\equiv 1\) for all the \(2^n\) terms. On the other hand, \(\small \sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\equiv0\) if \(f(x)\) is balanced.&lt;/p&gt;
+
+&lt;p&gt;To verify the statement above, we can replace \(f_c(x)\) in &lt;ref fig=&quot;qc-deutsch-jozsa&quot;&gt;&lt;/ref&gt; with \(f_b(x)\) as shown in &lt;ref fig=&quot;qc-deutsch-jozsa-2&quot;&gt;&lt;/ref&gt;&lt;/p&gt;
+
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-deutsch-jozsa-2-container&quot;&gt;&lt;div id=&quot;qc-deutsch-jozsa-2&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-deutsch-jozsa-2-report&quot; for=&quot;qc-deutsch-jozsa-2&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; Erroneous implementation of the Deutsch-Jozsa Algorithm for checking the type of $$f_b(x)$$,&lt;a id=&quot;qc-deutsch-jozsa-2-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // function oracle
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate(&quot;x&quot;, 0, 2);
+    oracle.addGate(&quot;cx&quot;, 1, [0,2]);
+    oracle.addGate(&quot;cx&quot;, 2, [1,2]);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(3);
+    circuit.registerGate(&quot;f_b(x)&quot;, obj);
+    circuit.addGate(&quot;h&quot;,0,0);
+    circuit.addGate(&quot;h&quot;,0,1);
+    circuit.addGate(&quot;f_b(x)&quot;,2,[0,1,2]);
+
+    circuit.addGate(&quot;x&quot;,0,2);
+    circuit.addGate(&quot;h&quot;,1,2);
+    circuit.addGate(&quot;h&quot;,3,0);
+    circuit.addGate(&quot;h&quot;,3,1);
+    circuit.addMeasure(0, &quot;c0&quot;, 0)
+    circuit.addMeasure(1, &quot;c1&quot;, 1)
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa-2');
+&lt;/script&gt;
+
+&lt;p&gt;Indeed, the balanced function guarantees the input qubits at a state of \(\ket{11}\) at the end. &lt;strong&gt;With the Deutsch-Jozsa algorithm, we can tell for sure that the function is not constant if at least one measured state is not \(\ket{\underbrace{00...0}_{n}}\)&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;34-running-into-mistake-with-extra-ancilla&quot;&gt;3.4 Running into mistake with extra ancilla&lt;/h3&gt;
+&lt;p&gt;The circuit in &lt;ref fig=&quot;qc-deutsch-jozsa-error&quot;&gt;&lt;/ref&gt; is my first implementation of the algorithm, in which 4 quibits, instead of 3 qubits, were employed. I was doing so to enforce “\(\ket{y\oplus f(x)}\)” at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q3&lt;/code&gt;, as indicated by public references.&lt;/p&gt;
+
+&lt;div class=&quot;qc-container numbered-fig&quot; id=&quot;qc-deutsch-jozsa-error-container&quot;&gt;&lt;div id=&quot;qc-deutsch-jozsa-error&quot; style=&quot;width:55%&quot;&gt;&lt;/div&gt;&lt;span id=&quot;qc-deutsch-jozsa-error-report&quot; for=&quot;qc-deutsch-jozsa-error&quot; class=&quot;marginnote&quot; style=&quot;width:30%;margin-left: 5.5%;&quot;&gt; Erroneous implementation of the Deutsch-Jozsa Algorithm for checking the type of $$f_b(x)$$,&lt;a id=&quot;qc-deutsch-jozsa-error-quirk&quot;&gt;see QC in Quirk.&lt;/a&gt; Its probability distribution is shown below&lt;/span&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // function oracle
+    var oracle = new QuantumCircuit(3);
+    oracle.addGate(&quot;x&quot;, 0, 2);
+    oracle.addGate(&quot;cx&quot;, 1, [0,2]);
+    oracle.addGate(&quot;cx&quot;, 2, [1,2]);
+    var obj = oracle.save();
+    // assemble the big circuit
+    var circuit = new QuantumCircuit(4);
+    circuit.registerGate(&quot;f_b(x)&quot;, obj);
+    circuit.addGate(&quot;h&quot;,0,0);
+    circuit.addGate(&quot;h&quot;,0,1);
+    circuit.addGate(&quot;f_b(x)&quot;,1,[0,1,2]);
+
+    circuit.addGate(&quot;x&quot;,0,3);
+    circuit.addGate(&quot;h&quot;,1,3);
+    circuit.addGate(&quot;cx&quot;,2,[2,3]);
+    circuit.addGate(&quot;h&quot;,3,0);
+    circuit.addGate(&quot;h&quot;,3,1);
+    run_and_render_svg(circuit, 'qc-deutsch-jozsa-error');
+&lt;/script&gt;
+
+&lt;p&gt;The newly added &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;q3&lt;/code&gt; results in the following \(\ket{\psi}_{m2}\) that has an extra \(\ket{f(x)}\) compared to &lt;ref eqn=&quot;algo-step-2&quot;&gt;,&lt;/ref&gt;&lt;/p&gt;
+&lt;div id=&quot;algo-step-2-error&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \ket{\psi}_{m2}=\sum_{x=0}^{2^n-1}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\ket{f(x)}\otimes\frac{\ket{0}-\ket{1}}{\sqrt{2}}.$$
+&lt;/div&gt;
+
+&lt;p&gt;By following the steps in &lt;ref fig=&quot;qc-deutsch-jozsa-error&quot;&gt;&lt;/ref&gt;, the quantum state at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m3&lt;/code&gt; becomes&lt;/p&gt;
+&lt;div id=&quot;algo-step-3-error&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \ket{\psi}_{m3}=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^n}}\ket{x}\otimes\ket{f(x)}.$$
+&lt;/div&gt;
+
+&lt;p&gt;After the Hadamard transform, we can no longer guaranttee zero probability of getting \(\ket{\underbrace{00...0}_{n}}\) for the balanced function as&lt;/p&gt;
+
+&lt;div id=&quot;algo-step-4-error&quot; class=&quot;numbered-equation&quot;&gt;
+$$\large \begin{align}
+\ket{\psi}_{m4}&amp;amp;=\sum_{x=0}^{2^n-1}(-1)^{f(x)}\frac{1}{\sqrt{2^{2n}}}\sum_{z=0}^{2^n-1}(-1)^{x\cdot z}\ket{z}\otimes\ket{f(x)}\\
+&amp;amp;=\sum_{z=0}^{2^n-1}\sum_{x=0}^{2^n-1}(-1)^{f(x)+x\cdot z}\frac{1}{2^{n}}\ket{z}\otimes\ket{f(x)}.
+\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;Therefore, states like \(\ket{0000}\) and \(\ket{0100}\) have their probabilities being 12.5%, as indicated in the caption of &lt;ref fig=&quot;qc-deutsch-jozsa-error&quot;&gt;&lt;/ref&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;index&quot;&gt;Index&lt;/h2&gt;
+</description>
+        <pubDate>Sat, 02 Sep 2023 16:30:00 -0500</pubDate>
+        <link>/articles/Deutsch-algo</link>
+        <guid isPermaLink="true">/articles/Deutsch-algo</guid>
+        
+        <category>quantum-mechanics</category>
+        
+        <category>quantum-algorithms</category>
+        
+        
+        <category>post</category>
+        
+      </item>
+    
+      <item>
+        <title>Trace and Determinant</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/09-trace-and-determinant.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 03 Dec 2022 00:00:00 -0600</pubDate>
+        <link>/articles/trace-and-determinant</link>
+        <guid isPermaLink="true">/articles/trace-and-determinant</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Structure of Operators on Complex Vector Spaces</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/08-structure-of-operator-on-complex-vector-spaces.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 Nov 2022 00:00:00 -0600</pubDate>
+        <link>/articles/structure-of-operators-on-complex-vector-spaces</link>
+        <guid isPermaLink="true">/articles/structure-of-operators-on-complex-vector-spaces</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Operators on Inner Product Spaces</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/07-operators-on-inner-product-spaces.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 24 Nov 2022 00:00:00 -0600</pubDate>
+        <link>/articles/operators-on-inner-product-spaces</link>
+        <guid isPermaLink="true">/articles/operators-on-inner-product-spaces</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Inner Product Spaces</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/06-intro-to-inner-product-vector-space.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 17 Nov 2022 00:00:00 -0600</pubDate>
+        <link>/articles/intro-to-inner-product-space</link>
+        <guid isPermaLink="true">/articles/intro-to-inner-product-space</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Invariant Subspaces, Eigenvectors, and Eigenvalues</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/05-invariant-subspace-and-eigenvalue.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 12 Nov 2022 00:00:00 -0600</pubDate>
+        <link>/articles/invariant-subspace-and-eigenvalues</link>
+        <guid isPermaLink="true">/articles/invariant-subspace-and-eigenvalues</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Linear Map, Matrix, and Duality</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/04-linear-map-matrix-and-duality.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 26 Oct 2022 00:00:00 -0500</pubDate>
+        <link>/articles/linear-map-matrix-and-duality</link>
+        <guid isPermaLink="true">/articles/linear-map-matrix-and-duality</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Bases and Dimensions</title>
+        <description>&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/03-base-and-dimension.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 05 Oct 2022 00:00:00 -0500</pubDate>
+        <link>/articles/bases-and-dimension</link>
+        <guid isPermaLink="true">/articles/bases-and-dimension</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Span and Linear Dependency</title>
+        <description>&lt;p&gt;This note is based on Linear Done Right by Sheldon Axler, explaining some aspects that confuse me when reading Sec. 2.1 of the book. I personally don’t own any credit for the proofs showing here. This is just a compilation of better ways(in my personal opinion) to present the content in the book. By following the same nomenclature in the book, we use \(\mathcal{F}\) to represent either \(\mathbb{R}\) or \(\mathbb{C}\).&lt;/p&gt;
+
+&lt;p&gt;Please check the full note &lt;a href=&quot;https://lonitch.github.io/vector_space_basics/02-span-and-linear-dependency.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 02 Oct 2022 00:00:00 -0500</pubDate>
+        <link>/articles/span-and-linear-dependency</link>
+        <guid isPermaLink="true">/articles/span-and-linear-dependency</guid>
+        
+        <category>notes</category>
+        
+        <category>linear-algebra</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

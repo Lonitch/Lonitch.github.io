@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Sizhe's Make TS Stick</title>
+  <meta name="description" content="Only suffering and pain stick, so we become proficient through them">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
+  <link rel="canonical" href="/articles/make-ts-stick">
+
+  <link rel="alternate" type="application/rss+xml" title="TuBTLE" href="/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="/Q/jsxgraph.css" />
+  <script type="text/javascript" src="/Q/jsxgraphcore.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/Q/Q.css">
+	<link rel="stylesheet" type="text/css" href="/Q/Q-Circuit-Editor.css">
+
+		<script src="https://www.googletagmanager.com/gtag/js" async></script>
+		<script src="/Q/Q.js"></script>
+		<script src="/Q/Q-ComplexNumber.js"></script>
+		<script src="/Q/Q-Matrix.js"></script>
+		<script src="/Q/Q-Qubit.js"></script>
+		<script src="/Q/Q-Gate.js"></script>
+		<script src="/Q/Q-History.js"></script>
+		<script src="/Q/Q-Circuit.js"></script>
+		<script src="/Q/Q-Circuit-Editor.js"></script>
+    <script src="/Q/quantum-circuit.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/Q/Q-utils.js"></script>
+
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="SIZHE"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Make TS Stick</h1>
+<p class="subtitle">March 13, 2024</p>
+<div class="post-tags">
+    <em>Tags: </em>
+    <span class="post-tags">
+    
+    [programming] 
+    
+    [web-dev] 
+    
+    [basics] 
+    
+    </span>
+</div>
+<script>
+// generate Q.js results whenever a circuit is evaluated 
+window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
+    const circuit = event.detail.circuit;
+    qjs_caption_results(circuit);
+})
+// re-evaluate Q.js circuit when it's changed.
+window.addEventListener( 'Q gui altered circuit', function( event ){
+    event.detail.circuit.evaluate$()
+})
+</script>
+
+<p><em>Only suffering and pain stick, so we become proficient through them</em><!--more--></p>
+
+<!-- mtoc-start -->
+
+<ul>
+  <li><a href="#-versus-private"><code class="language-plaintext highlighter-rouge">#</code> versus <code class="language-plaintext highlighter-rouge">private</code></a></li>
+  <li><a href="#make-variable-immutable">Make variable immutable</a></li>
+  <li><a href="#simple-conversion-from-string-to-dictionary">Simple conversion from string to dictionary</a></li>
+  <li><a href="#string-vs-string-number-vs-number"><code class="language-plaintext highlighter-rouge">string</code> vs <code class="language-plaintext highlighter-rouge">String</code>, <code class="language-plaintext highlighter-rouge">number</code> vs <code class="language-plaintext highlighter-rouge">Number</code></a></li>
+  <li><a href="#a-promiseresolve-knowledge-checker">A <code class="language-plaintext highlighter-rouge">Promise/resolve</code> knowledge checker</a></li>
+  <li><a href="#use-rest-in-tuple-type">use <code class="language-plaintext highlighter-rouge">...rest</code> in tuple type</a></li>
+  <li><a href="#useunknownincatchvariables"><code class="language-plaintext highlighter-rouge">useUnknownInCatchVariables</code></a></li>
+  <li><a href="#define-a-class-using-template-literal">Define a class using template literal</a></li>
+  <li><a href="#using-tuple-type-can-be-unsafe">Using tuple type can be unsafe</a></li>
+  <li><a href="#callback-func-is-not-definite-in-then">Callback func is not definite in <code class="language-plaintext highlighter-rouge">.then</code></a></li>
+  <li><a href="#type-challenges">Type challenges</a></li>
+</ul>
+
+<!-- mtoc-end -->
+
+<h2 id="-versus-private"><code class="language-plaintext highlighter-rouge">#</code> versus <code class="language-plaintext highlighter-rouge">private</code></h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">#fieldName</code>is a JS private field, and it’s actually inaccessible outside of the class at runtime</li>
+  <li><code class="language-plaintext highlighter-rouge">private filedName</code> is a TypeScript private field, and while type-checking helps ensure we do not access it improperly, at runtime it’s <strong>accessible</strong> outside the class.</li>
+</ul>
+
+<h2 id="make-variable-immutable">Make variable immutable</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// "a" holds a immutable value and cannot be reassigned</span>
+<span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">AAAAAA</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// "b" holds a immutable value and can be reassigned</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">BBBBBB</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// "c" cannot be reassigned</span>
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{</span> <span class="na">learnAt</span><span class="p">:</span> <span class="dl">"</span><span class="s2">web</span><span class="dl">"</span> <span class="p">};</span>
+<span class="c1">// but the following is OK</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">learnAt</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">xxxx</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// "d" is reassignable, and it holds a mutable value</span>
+<span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="p">{</span> <span class="na">learnAt</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cafe</span><span class="dl">"</span> <span class="p">};</span>
+<span class="c1">// "e" is not reassignable, and holds an immutable value</span>
+<span class="kd">const</span> <span class="nx">e</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">freeze</span><span class="p">({</span> <span class="na">learnAt</span><span class="p">:</span> <span class="dl">"</span><span class="s2">school</span><span class="dl">"</span> <span class="p">});</span>
+<span class="c1">// the following is NOT OK</span>
+<span class="c1">// e.learnAt="xxxx"</span>
+</code></pre></div></div>
+
+<p>We can also use <code class="language-plaintext highlighter-rouge">readOnly</code> to make a property in an object not reassignable:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">ImmutableObject</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="k">readonly</span> <span class="na">property</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">myImmutableObject</span><span class="p">:</span> <span class="nx">ImmutableObject</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">property</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This property cannot be changed</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Trying to change these values will result in a TypeScript error</span>
+<span class="c1">// myImmutableObject.property = "New value"; // Error</span>
+</code></pre></div></div>
+
+<h2 id="simple-conversion-from-string-to-dictionary">Simple conversion from string to dictionary</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">str</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+<span class="cm">/**
+ * {
+ *   '0': 'h',
+ *   '1': 'e',
+ *   '2': 'l',
+ *   '3': 'l',
+ *   '4': 'o'
+ * }
+ */</span>
+</code></pre></div></div>
+
+<h2 id="string-vs-string-number-vs-number"><code class="language-plaintext highlighter-rouge">string</code> vs <code class="language-plaintext highlighter-rouge">String</code>, <code class="language-plaintext highlighter-rouge">number</code> vs <code class="language-plaintext highlighter-rouge">Number</code></h2>
+
+<p><code class="language-plaintext highlighter-rouge">string</code> and <code class="language-plaintext highlighter-rouge">number</code> are premitives, while <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Number</code> are interfaces(defined in object-like fashion). Thus,</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span><span class="p">:</span> <span class="kr">string</span> <span class="o">&amp;</span> <span class="kr">number</span><span class="p">;</span> <span class="c1">// never</span>
+<span class="c1">// a type contains properties shared by String &amp; Number</span>
+<span class="kd">let</span> <span class="nx">b</span><span class="p">:</span> <span class="nb">String</span> <span class="o">&amp;</span> <span class="nb">Number</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>We can even extend a new interface from <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Number</code> by resolving conflicting properties:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Bar</span> <span class="kd">extends</span> <span class="nb">String</span><span class="p">,</span> <span class="nb">Number</span> <span class="p">{</span>
+  <span class="nf">valueOf</span><span class="p">():</span> <span class="nx">never</span><span class="p">;</span>
+  <span class="nf">toString</span><span class="p">():</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="a-promiseresolve-knowledge-checker">A <code class="language-plaintext highlighter-rouge">Promise/resolve</code> knowledge checker</h2>
+
+<p>In what order will the animal names below be printed to the console?</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">getData</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">elephant</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">giraffe</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nf">resolve</span><span class="p">(</span><span class="dl">"</span><span class="s2">lion</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">zebra</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">koala</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">cat</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">getData</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">);</span>
+<span class="nf">main</span><span class="p">().</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">moose</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The answer: dog, cat, elephant, giraffe, zebra, koala, lion, moose.</p>
+
+<p>The explanation:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">main</code> function runs <code class="language-plaintext highlighter-rouge">console.log("cat")</code> first,</li>
+  <li>jump into <code class="language-plaintext highlighter-rouge">getData</code> function</li>
+  <li>run <code class="language-plaintext highlighter-rouge">console.log("elephant")</code></li>
+  <li>executor function in <code class="language-plaintext highlighter-rouge">Promise</code> is called synchronously with the <code class="language-plaintext highlighter-rouge">Promise</code> constructor, hence,
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">console.log("giraffe")</code> runs first</li>
+      <li><code class="language-plaintext highlighter-rouge">resolve("lion")</code> executes, but it does not return any <code class="language-plaintext highlighter-rouge">result</code> until the rest of the function is executed</li>
+      <li><code class="language-plaintext highlighter-rouge">console.log("zebra")</code> prints “zebra”</li>
+      <li><code class="language-plaintext highlighter-rouge">console.log("koala")</code> prints “koala”</li>
+    </ul>
+  </li>
+  <li>execute <code class="language-plaintext highlighter-rouge">console.log(result)</code>, printing “lion”</li>
+  <li>execute <code class="language-plaintext highlighter-rouge">console.log("moose")</code> printing “moose”</li>
+</ul>
+
+<h2 id="use-rest-in-tuple-type">use <code class="language-plaintext highlighter-rouge">...rest</code> in tuple type</h2>
+
+<p>Define a tuple type whose first element is number, an enum the second which is followed by some other strings:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">enum</span> <span class="nx">SecondElem</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">GroundBeef</span><span class="p">,</span>
+    <span class="nx">Lamb</span><span class="p">,</span>
+    <span class="nx">Pork</span>
+<span class="p">}</span>
+<span class="c1">// ...string[] is the rest element here</span>
+<span class="kd">type</span> <span class="nx">TupleType</span> <span class="o">=</span> <span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="nx">SecondElem</span><span class="p">,</span> <span class="p">...</span><span class="kr">string</span><span class="p">[]];</span>
+
+<span class="kd">const</span> <span class="nx">t</span><span class="p">:</span> <span class="nx">TupleType</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="nx">SecondElem</span><span class="p">.</span><span class="nx">Pork</span><span class="p">,</span> <span class="dl">"</span><span class="s2">str2</span><span class="dl">"</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>It’s a bit tricky when you create a function that manipulate tuple types like the one defined above. As it’s possible to <strong>lose some type information</strong>:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// exclude the first element in the passed tuple</span>
+<span class="kd">function</span> <span class="nf">foo</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">readOnly</span> <span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="p">...</span><span class="nx">T</span><span class="p">[]]){</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">_ignored</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">rest</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// tail has a type of (string|SecondElem)[]</span>
+<span class="kd">const</span> <span class="nx">tail</span> <span class="o">=</span> <span class="nf">foo</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span><span class="nx">SecondElem</span><span class="p">.</span><span class="nx">GroundBeef</span><span class="p">,</span> <span class="dl">"</span><span class="s2">lettuce</span><span class="dl">"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The type of <code class="language-plaintext highlighter-rouge">tail</code> is <code class="language-plaintext highlighter-rouge">(string|SecondElem)[]</code>, not <code class="language-plaintext highlighter-rouge">[SecondElem, ...string[]]</code>. To solve this issue, we can rewrite <code class="language-plaintext highlighter-rouge">foo</code> as:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">foo</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="kr">any</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">readOnly</span> <span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="p">...</span><span class="nx">T</span><span class="p">]){</span>
+    <span class="c1">// remain the same</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">tail</span> <span class="o">=</span> <span class="nf">foo</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span><span class="nx">SecondElem</span><span class="p">.</span><span class="nx">GroundBeef</span><span class="p">,</span><span class="dl">"</span><span class="s2">lettuce</span><span class="dl">"</span><span class="p">])</span>
+<span class="c1">// tail now has a type of [SecondElem, ...string[]]</span>
+</code></pre></div></div>
+
+<p>When defining a tuple type, you can use multiple <code class="language-plaintext highlighter-rouge">...</code> and they can be anywhere. But there can only be one <code class="language-plaintext highlighter-rouge">...rest[]</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">GoodType1</span> <span class="o">=</span> <span class="p">[...[</span><span class="kr">number</span><span class="p">,</span> <span class="kr">string</span><span class="p">],</span> <span class="p">...</span><span class="kr">string</span><span class="p">[]];</span>
+<span class="c1">// compiler error</span>
+<span class="kd">type</span> <span class="nx">BadType</span> <span class="o">=</span> <span class="p">[...</span><span class="kr">number</span><span class="p">[],</span> <span class="p">...</span><span class="kr">string</span><span class="p">[]];</span>
+<span class="kd">type</span> <span class="nx">GoodType2</span> <span class="o">=</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="p">...</span><span class="kr">number</span><span class="p">[],</span> <span class="kr">string</span><span class="p">];</span>
+</code></pre></div></div>
+
+<h2 id="useunknownincatchvariables"><code class="language-plaintext highlighter-rouge">useUnknownInCatchVariables</code></h2>
+
+<p>Turn <code class="language-plaintext highlighter-rouge">useUnknownInCatchVariables</code> in <code class="language-plaintext highlighter-rouge">tsconfig.json</code> to <code class="language-plaintext highlighter-rouge">true</code>, to formulate your <code class="language-plaintext highlighter-rouge">catch</code> clause as the following:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">{</span>
+    <span class="nf">somethingRisky</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch </span><span class="p">(</span><span class="nx">error</span> <span class="nx">unknown</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="k">throw</span> <span class="nx">err</span>
+    <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">err</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="define-a-class-using-template-literal">Define a class using template literal</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataStore</code> class below gives some sort of type error that alerts you that you’ve broken the established pattern if you mis-name a method on the class(e.g., <code class="language-plaintext highlighter-rouge">getSongs</code> instead of <code class="language-plaintext highlighter-rouge">getAllSong</code>).</p>
+
+<p>If you add a new entity like Comic (shown below) and make no other changes to your solution, you should get some sort of type error that alerts you to the absence of a clearComics, <code class="language-plaintext highlighter-rouge">getAllComics</code> and <code class="language-plaintext highlighter-rouge">getAllSongs</code> method.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kr">interface</span> <span class="nx">DataEntity</span> <span class="p">{</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">Movie</span> <span class="kd">extends</span> <span class="nx">DataEntity</span> <span class="p">{</span>
+  <span class="nl">director</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">Song</span> <span class="kd">extends</span> <span class="nx">DataEntity</span> <span class="p">{</span>
+  <span class="nl">singer</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">DataEntityMap</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">movie</span><span class="p">:</span> <span class="nx">Movie</span><span class="p">;</span>
+  <span class="nl">song</span><span class="p">:</span> <span class="nx">Song</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">Setter</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">DataEntityMap</span> <span class="k">as</span> <span class="s2">`add</span><span class="p">${</span><span class="nb">Capitalize</span><span class="o">&lt;</span><span class="nx">K</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="p">(</span>
+    <span class="na">arg</span><span class="p">:</span> <span class="nx">DataEntityMap</span><span class="p">[</span><span class="nx">K</span><span class="p">],</span>
+  <span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">Getter</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">DataEntityMap</span> <span class="k">as</span> <span class="s2">`get</span><span class="p">${</span><span class="nb">Capitalize</span><span class="o">&lt;</span><span class="nx">K</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="p">(</span>
+    <span class="na">arg</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">DataEntityMap</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">GetAll</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">DataEntityMap</span> <span class="k">as</span> <span class="s2">`getAll</span><span class="p">${</span><span class="nb">Capitalize</span><span class="o">&lt;</span><span class="nx">K</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">DataEntityMap</span><span class="p">[</span><span class="nx">K</span><span class="p">][];</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">Clearer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">DataEntityMap</span> <span class="k">as</span> <span class="s2">`clear</span><span class="p">${</span><span class="nb">Capitalize</span><span class="o">&lt;</span><span class="nx">K</span><span class="o">&gt;</span><span class="p">}</span><span class="s2">`</span><span class="p">]:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">StoreMethods</span> <span class="o">=</span> <span class="nx">Setter</span> <span class="o">&amp;</span> <span class="nx">Getter</span> <span class="o">&amp;</span> <span class="nx">GetAll</span> <span class="o">&amp;</span> <span class="nx">Clearer</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">DataStore</span> <span class="k">implements</span> <span class="nx">StoreMethods</span> <span class="p">{</span>
+  <span class="c1">// private field whose type is defined by using Record</span>
+  <span class="err">#</span><span class="nx">data</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">DataEntityMap</span><span class="p">]:</span> <span class="nb">Record</span><span class="o">&lt;</span><span class="kr">string</span><span class="p">,</span> <span class="nx">DataEntityMap</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">}</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">song</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="na">movie</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="p">};</span>
+  <span class="nf">constructor</span><span class="p">(</span>
+    <span class="k">public</span> <span class="nx">movies</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">Movie</span> <span class="p">}</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="k">public</span> <span class="nx">songs</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="nx">key</span><span class="p">:</span> <span class="kr">string</span><span class="p">]:</span> <span class="nx">Song</span> <span class="p">}</span> <span class="o">=</span> <span class="p">{},</span>
+  <span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">data</span><span class="p">.</span><span class="nx">song</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">songs</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="err">#</span><span class="nx">data</span><span class="p">.</span><span class="nx">movie</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="nf">addMovie</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">Movie</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">[</span><span class="nx">arg</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nf">addSong</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">Song</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">songs</span><span class="p">[</span><span class="nx">arg</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nf">getSong</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">songs</span><span class="p">[</span><span class="nx">arg</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="nf">getMovie</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">[</span><span class="nx">arg</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="nf">getAllSong</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">values</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">songs</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nf">getAllMovie</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nf">values</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nf">clearSong</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">songs</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="p">}</span>
+  <span class="nf">clearMovie</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">movies</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="using-tuple-type-can-be-unsafe">Using tuple type can be unsafe</h2>
+
+<p>The following snippet compiles because <strong>tuples are a specialized flavor of arrays, they expose the entire array API</strong>.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">vector3</span><span class="p">:</span> <span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="kr">number</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="nx">vector3</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="callback-func-is-not-definite-in-then">Callback func is not definite in <code class="language-plaintext highlighter-rouge">.then</code></h2>
+<p>The callback passed to <code class="language-plaintext highlighter-rouge">.then</code> is not regarded as a “definite assignment”. In fact, all callbacks are treated this way. Because of this, the following won’t compile:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">userId</span><span class="p">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Fetch user's name from an API endpoint</span>
+    <span class="nf">fetch</span><span class="p">(</span><span class="s2">`/api/user-info/</span><span class="p">${</span><span class="nx">userId</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">resp</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">resp</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nf">then</span><span class="p">((</span><span class="nx">info</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// set the user's name</span>
+      <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="type-challenges">Type challenges</h2>
+
+<p>You can try to solve the type challenges at <a href="https://github.com/type-challenges/type-challenges?tab=readme-ov-file">this github repo</a></p>
+
+<p>You can find videos explaining solutions in the playlist <a href="https://www.youtube.com/playlist?list=PLOlZuxYbPik180vcJfsAM6xHYLVxrEgHC">here</a></p>
+
+<br>
+<hr style="border:none;height:1.0px;background-image:linear-gradient(to right, #fff, #333, #fff);">
+<br>
+<!-- <script src="https://utteranc.es/client.js"
+        repo="Lonitch/Lonitch.github.io"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script> -->
+<script src="https://giscus.app/client.js"
+        data-repo="Lonitch/Lonitch.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNjI5MjYyNzI="
+        data-category="General"
+        data-category-id="DIC_kwDOD6vvwM4CZPCU"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // add class to toc list
+        const ulElements = document.querySelector('article').querySelectorAll('ul');
+        let tocElement = null;
+
+        // Iterate through the <ul> elements and find the one with <li> containing <a>
+        ulElements.forEach((ul,i) => {
+        const liWithA = ul.querySelectorAll('li a');
+        const li = ul.querySelectorAll('li');
+        if (liWithA.length == li.length && i==0) {
+            tocElement = ul;
+            tocElement.setAttribute('class','toc-list')
+        }
+        });
+        // add interactive circuit to all elements with class "Q-circuit-palette"
+        Array
+        .from( document.querySelectorAll( '.Q-circuit-palette' ))
+        .forEach( function(el){
+            Q.Circuit.Editor.createPalette(el)
+        })
+        // create numbered indice for figures and equations
+        eqn_fig_indices();
+
+        // shut down display of mjx-container in margin notes
+        MathJax.startup.promise.then(function() {
+            findMjxContainersInMarginNotes();
+        });
+
+        // create references to equations or figures
+        eqn_fig_refs();
+
+        // create Index
+        createIndex();
+        window.addEventListener('resize', createIndex);
+    });
+</script>
+
+    </article>
+    <span class="print-footer">Make TS Stick - March 13, 2024 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <!-- <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>     -->
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/Lonitch/Lonitch.github.io">Tufte Blog Theme with Latex-like Elements</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

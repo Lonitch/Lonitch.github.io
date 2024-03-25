@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Sizhe's blog</title>
+  <meta name="description" content="A Jekyll theme for content-rich latex-like sites">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
+  <link rel="canonical" href="/">
+
+  <link rel="alternate" type="application/rss+xml" title="TuBTLE" href="/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="/Q/jsxgraph.css" />
+  <script type="text/javascript" src="/Q/jsxgraphcore.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/Q/Q.css">
+	<link rel="stylesheet" type="text/css" href="/Q/Q-Circuit-Editor.css">
+
+		<script src="https://www.googletagmanager.com/gtag/js" async></script>
+		<script src="/Q/Q.js"></script>
+		<script src="/Q/Q-ComplexNumber.js"></script>
+		<script src="/Q/Q-Matrix.js"></script>
+		<script src="/Q/Q-Qubit.js"></script>
+		<script src="/Q/Q-Gate.js"></script>
+		<script src="/Q/Q-History.js"></script>
+		<script src="/Q/Q-Circuit.js"></script>
+		<script src="/Q/Q-Circuit-Editor.js"></script>
+    <script src="/Q/quantum-circuit.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/Q/Q-utils.js"></script>
+
+</head>
+
+  <body class="full-width">
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="SIZHE"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a class="active" href="/" class="active">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article>
+        <h1 class="content-listing-header sans">Articles</h1>
+  <ul class="content-listing ">
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/make-ts-stick"><h3 class="contrast">Make TS Stick</h3></a>
+          <br><span class="smaller">March 13, 2024</span>  <br/>
+          <div><p><em>Only suffering and pain stick, so we become proficient through them</em></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Deutsch-algo"><h3 class="contrast">Qubit Saga: Deutsch–Jozsa Algorithm</h3></a>
+          <br><span class="smaller">September 2, 2023</span>  <br/>
+          <div><p><em>北风就从今夜开始，慢慢吹起。</em></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/trace-and-determinant"><h3 class="contrast">Trace and Determinant</h3></a>
+          <br><span class="smaller">December 3, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/09-trace-and-determinant.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/structure-of-operators-on-complex-vector-spaces"><h3 class="contrast">Structure of Operators on Complex Vector Spaces</h3></a>
+          <br><span class="smaller">November 30, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/08-structure-of-operator-on-complex-vector-spaces.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/operators-on-inner-product-spaces"><h3 class="contrast">Operators on Inner Product Spaces</h3></a>
+          <br><span class="smaller">November 24, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/07-operators-on-inner-product-spaces.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/intro-to-inner-product-space"><h3 class="contrast">Inner Product Spaces</h3></a>
+          <br><span class="smaller">November 17, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/06-intro-to-inner-product-vector-space.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/invariant-subspace-and-eigenvalues"><h3 class="contrast">Invariant Subspaces, Eigenvectors, and Eigenvalues</h3></a>
+          <br><span class="smaller">November 12, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/05-invariant-subspace-and-eigenvalue.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/linear-map-matrix-and-duality"><h3 class="contrast">Linear Map, Matrix, and Duality</h3></a>
+          <br><span class="smaller">October 26, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/04-linear-map-matrix-and-duality.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/bases-and-dimension"><h3 class="contrast">Bases and Dimensions</h3></a>
+          <br><span class="smaller">October 5, 2022</span>  <br/>
+          <div><p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/03-base-and-dimension.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/span-and-linear-dependency"><h3 class="contrast">Span and Linear Dependency</h3></a>
+          <br><span class="smaller">October 2, 2022</span>  <br/>
+          <div><p>This note is based on Linear Done Right by Sheldon Axler, explaining some aspects that confuse me when reading Sec. 2.1 of the book. I personally don’t own any credit for the proofs showing here. This is just a compilation of better ways(in my personal opinion) to present the content in the book. By following the same nomenclature in the book, we use \(\mathcal{F}\) to represent either \(\mathbb{R}\) or \(\mathbb{C}\).</p>
+
+<p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/02-span-and-linear-dependency.html">here</a></p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/vector-space-basics"><h3 class="contrast">Vector Space Basics</h3></a>
+          <br><span class="smaller">September 25, 2022</span>  <br/>
+          <div><p>If you wander in the world of quantum computing(QC) long enough, it becomes painful to follow the arguments of quantum algorithms with your vague and shaky knowledge base of linear algebra. Inspired by this, the author takes an initiative to write a series of notes on linear algebra before we undertake the endeavor of QC rigorously. By writing the notes with QC in mind, the author hopes to emphasize the key parts of linear algebra that will repeatedly be used in QC applications.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/density-matrix-formalism"><h3 class="contrast">Density Matrix Formalism</h3></a>
+          <br><span class="smaller">September 12, 2022</span>  <br/>
+          <div><p>TL;DR: Density Matrix and State Vector are the two mathematical arenas for doing calculations based on the postulates of QM. In this note we discuss intrinsic characteristics of Density Matrix, and its relation with quantum computation. Density operator and Density matrix are used interchangeably in the text.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/loving-you-my-way"><h3 class="contrast">我的罗曼蒂克消亡史</h3></a>
+          <br><span class="smaller">April 26, 2022</span>  <br/>
+          <div><p>“如果你能给新的PhD一些建议，你会说什么呢？” Aniruddh，这个比我高出一个头，留着一脸络腮胡，咧嘴笑的时候上嘴唇总是微微翘起的印度大男孩，坐在会议室的另一端意味深长地看着我。而我呢，此时刚刚在他面前演习完我的毕业答辩PPT，有气无力地说道：“吃好喝好，发几篇论文然后走人。”(eat well and sleep well, try to publish something and walk away)。他努了努嘴，把头歪向一边，戏谑道：“如果教授在，你绝对不会这么说吧，刘博士！” “so don’t tell him.” 我俩不约而同地大笑。同在会议室的Erik,伸了伸脖子，摊出双手，咧着嘴小声说了句 “what?”</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/editing-paper-tips"><h3 class="contrast">Tips for Editing Academic Paper</h3></a>
+          <br><span class="smaller">October 8, 2021</span>  <br/>
+          <div><p>just some tips for miserable phd students.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/notes-on-heat-transfer-lab"><h3 class="contrast">Notes on Heat Transfer Labs</h3></a>
+          <br><span class="smaller">April 6, 2021</span>  <br/>
+          <div><h2 id="me-as-an-oathbreaker">Me as an OATHBREAKER</h2>
+<p>I said in my previous post that my love for the students was fading and that it would be my last note on heat transfer lab. Well, somehow my passion for “accessible” part of physics sustained and I decided to make notes for all the labs that I tought throughout last 3 years as a lab TA. The finalized manuscript is attached below. The source Latex code is also available on github <a href="https://github.com/Lonitch/HeatTransferLabNote">here</a>. For those who want to learn some heat transfer from a different perspective, I hope you find this volume a joyful read.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/convection-radiation-basics"><h3 class="contrast">Basics of Convective and Radiative Heat Transfer</h3></a>
+          <br><span class="smaller">March 3, 2021</span>  <br/>
+          <div><h2 id="another-teaching-note-for-heat-transfer-class">Another teaching note for heat transfer class</h2>
+
+<p>My love for Tufte-handout style grows over the past week. So I decided to make another teaching notes using Latex. Since I don’t have much love left for some of my students, this note might be the last one.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/average-second-derivative-feynman"><h3 class="contrast">Derive $\langle\frac{\partial^2}{\partial x^2}\rangle$ with Path Integral</h3></a>
+          <br><span class="smaller">February 24, 2021</span>  <br/>
+          <div><h2 id="a-problem-from-feynmans-path-integral-book">A Problem from Feynman’s Path Integral Book</h2>
+<hr />
+<p>Let \(x_i\) be coordinates at different time instances, prove that</p>
+
+\[\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=\int\int \chi^* \hat{p}\hat{p}\psi dxdy=-\hbar^2\int\int\chi^*\frac{\partial^2}{\partial x^2}\psi dxdy\tag{1}\]
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/heat-conduction-basics"><h3 class="contrast">Basics of Heat Conduction, Inductively</h3></a>
+          <br><span class="smaller">February 20, 2021</span>  <br/>
+          <div><h2 id="a-bit-self-reflection">A Bit Self-reflection</h2>
+<p>Been a while since my last post. A new semester has begun for about 4 weeks now, and my job as teaching assistant to a heat transfer class has to continue despite of the rampage of COVID. My research does not even remotely relate to heat transfer, but here I am, decide to summarize basics of heat conduction using inductive logics. By doing so I may not forget to mention important things during incoming classes. Hopefully, Delivering the content inductively can make the students feel that we are building a tunnel together from nowhere to a place where things can be understood in terms of temperature gradient, Fourier’s law, and heat flux.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/A-heuristic-relation-function-configuration-operator"><h3 class="contrast">A Heuristic Way to Relate Operators on Function and Configurational Space</h3></a>
+          <br><span class="smaller">November 23, 2020</span>  <br/>
+          <div><h2 id="transform-handwriting-notes-in-onenote-to-multiple-page-pdf">Transform handwriting notes in oneNote to multiple-page PDF</h2>
+
+<p>If you’re like me who has long been irritated by the flawed PDF-exporting function in oneNote, and embarrased by lengthy one-page PDF file generated from your handwriting notes, now it’s the time to work around these problems using the following method. For Windows users, the method transforms your trapped long notes into nicely formatted multiple-page PDF file. The method is made of two steps:</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/A-Nice-Integral"><h3 class="contrast">An Interesting Integral</h3></a>
+          <br><span class="smaller">November 4, 2020</span>  <br/>
+          <div><h2 id="find-my-knowledge-shaky-when-i-try-to-solve-this">Find my knowledge shaky when I try to solve this…</h2>
+
+\[I = \int_{\mid Z\mid=3\pi}\frac{1}{z^2(e^z-1)}dz\]
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Taylor-and-Laurent"><h3 class="contrast">Taylor and Laurent Series</h3></a>
+          <br><span class="smaller">November 1, 2020</span>  <br/>
+          <div><h2 id="first-note-written-on-wacom-intuos">First note written on Wacom Intuos</h2>
+<p>Trying to make handwriting notes using Intuos. The experience is not as straightforward as using an iPad, but it’s still doable. I guess the workflow will be more fluent if I get more used to the manipulations and expresskey settings.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/holomorphic-function-map"><h3 class="contrast">Holomorphic Function and Its Integrals</h3></a>
+          <br><span class="smaller">October 27, 2020</span>  <br/>
+          <div><h2 id="cauchy-alarmed">Cauchy alarmed</h2>
+<p>Get obssessed with mindmap, just made one for holomorphic function as a brief summary for dummies…</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/EPI-notes-ICTP"><h3 class="contrast">Seminar Notes on Electron-Phonon Interaction</h3></a>
+          <br><span class="smaller">October 20, 2020</span>  <br/>
+          <div><h2 id="link-to-my-notes">Link to my notes</h2>
+<p>The handwriting notes are based on a seminar series on the topic of electron-phonon interaction (EPI) from first principle, hosted at ICTP, Italy, 2018. You can download it by using the link <a href="https://drive.google.com/file/d/1nDtVoIOdJ6E3Ar0jskQhkcvHemC8yCqv/view?usp=sharing">here</a>. These notes might be some preliminaries for my next paper.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Kohn-Sham-Skeleton"><h3 class="contrast">Skeleton of Kohn-Sham Approach</h3></a>
+          <br><span class="smaller">August 31, 2020</span>  <br/>
+          <div><h2 id="1-non-interacting-reference-system">1. Non-interacting Reference System</h2>
+<p>From Hartrr-Fock approach we know that the Slater determinant is the wavefunction of non-interacting fermion system, where the Hamiltonian is given by</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Basic-Group-Theory"><h3 class="contrast">Notes on Basic Concepts of Group Theory</h3></a>
+          <br><span class="smaller">August 30, 2020</span>  <br/>
+          <div><h2 id="background">Background</h2>
+
+<p>These notes are made based on the purpose of quick exposure to basic concepts of group theory, a pervasive tool used in the research of condensed-matter QFT. The following text will function as a lookup table or a prelude for my possible future application of group theory in QFT problems.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Fermi-Coulomb-Holes"><h3 class="contrast">Fermi and Coulomb Holes</h3></a>
+          <br><span class="smaller">August 28, 2020</span>  <br/>
+          <div><p>The “hole” in density functional theory (DFT) refers to <strong>the depletion of electron density around a reference spatial point</strong>, as a result of exchange-correlation effects among electrons. To see how the holes emerge in the formulation of DFT, let us start with the definition of charge/electron density:</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Structure-Factor-XRD-Peak"><h3 class="contrast">Structure Factor and X-ray Diffraction Peaks</h3></a>
+          <br><span class="smaller">August 19, 2020</span>  <br/>
+          <div><h2 id="laue-condition-miller-index-and-structure-factor">Laue condition, Miller Index, and Structure Factor</h2>
+
+<p><strong>Laue condition</strong> needs to be satisfied to have constructive X-ray diffraction interference (i.e., the peaks on X-ray spectrum). Using the reciprocal lattice, the condition states that</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/kp-method-effective-mass-theory"><h3 class="contrast">k-p Method and Effective Mass Theory</h3></a>
+          <br><span class="smaller">August 18, 2020</span>  <br/>
+          <div><h2 id="veck-cdot-vecp-method">\(\vec{k} \cdot \vec{p}\) method</h2>
+<p><strong>Purpose</strong>: derive analytical expressions for the band dispersion and the effective masses in the immediate vicinity of a \(k-\)point at which all the single-electron states are known.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Sum-to-Int"><h3 class="contrast">From Summation to Integral, Know Your Continuum Limit</h3></a>
+          <br><span class="smaller">August 13, 2020</span>  <br/>
+          <div><h2 id="things-to-say">Things to say</h2>
+
+<p>Just passed my prelim exam. A monumental moment for a Ph.D. student to be officially called as “Ph.D. candidate”. The exam was not as smooth as I expected as I did pretty bad during the Q&amp;A section. The questions I got were not unreasonable but from perspectives that I was less prepared for. So there I was, felt abushed while tried my best to answer the questions using my fractured thoughts and vague memories. Apparently my committee was not pleased by my responses. At the end the chair of my committee had to jump into the conversations to prompt me so that some of my answers did not totally go off the lead. This is the first time I feel frustrated after passing an exam, a brand new experience for a Chinese kid, whose entire education experience has embedded an exam machinery into his head. It’s hard for me not to think that I was mistrusted by my advisor, and misunderstood by my committee, and my Ph.D. research is sort of a joke. But I HAVE TO STOP OVERTHINKING! And this blog is a way to keep my mind occupied.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/tournament-chinese"><h3 class="contrast">A Graph-Theory Trick</h3></a>
+          <br><span class="smaller">August 1, 2020</span>  <br/>
+          <div><h2 id="question">Question</h2>
+<p>现有4支篮球队，A，B，C，D，打单循环赛。对每队来说，赢一场积3分，平一场积1分，输一场不得分。循环赛完毕后凭积分头两支队伍出线进入下一轮。那么一支队伍至少要积多少分才能确保一定出线？</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Harmonic-Lattice-Dynamics"><h3 class="contrast">Harmonic Lattice Dynamics (handwriting notes)</h3></a>
+          <br><span class="smaller">July 29, 2020</span>  <br/>
+          <div><h2 id="why-the-fuss">Why the fuss</h2>
+
+<p>The harmonic lattice is a topic on my writing plan for quite some time. The Harmonic lattice approximation gives the birth of phonon, the starting point of the second quantization. Unlike my previous blogs, this one only shows some handwriting notes that I made during the past two days. For me, preparing these notes is a joyful journey. I discover new things that advance my understanding of the field theory and old things that I took for granted. Also, to my best knowledge, there is no fool-proof introduction to harmonic lattice dynamics in the context of quantum field theory. Physicists tend to make things over-complicated while skipping details crucial for understanding. Chemists give their full trust to physicists and borrow the derived formulae from solid-state textbooks directly. As an amateur physicist and half-chemist, I went through all the troubles to derive equations that finally lead to quantum field operators step by step. I believe I found a way to explain best the quantization of the harmonic lattice based on introductory quantum mechanics. The ending shows the most relevant results of the quantum field theory of phonons that provide creative tools for studying the condensed matter. A big reason for me to show handwriting this time is those bulky equations in my notes. I wish I can have more time to make new blogs like this because this old-school style challenges my resilience, both emotionally and intellectually. But new things have to wait until I finish my prelim exam.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/math-problem-mech"><h3 class="contrast">Interesting Math Problems Solved Mechanically (keep updating)</h3></a>
+          <br><span class="smaller">July 14, 2020</span>  <br/>
+          <div><h2 id="why">Why</h2>
+<p>The youtuber 3Blue1Brown led me to Prof. Mark Levi’s <em>Mathematical Mechanics</em>, a collection of math problems solved by using mechanical intuitions. It is an eye-opening work, because I could never imagine that physics could be a perfect sevant for mathematics before. Solving problems using physics enpowers us to understand well-known theorems in an intuitive way, and the physical instinct embedded in the understanding really sheds lights in the ways of using the theorems efficiently. I will give my solutions to the exercise problems in the book here by transforming them into simple physical systems. Do not worry about too much <em>Solving Hamiltonian</em> in this blog, it is written in a more casual style comparing to my previous blog series, with the joy of problem solving being the primary focus.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Radiation-Matter-Interaction-III"><h3 class="contrast">A Pedastrian Approach to Radiation-Matter Interaction-Part III</h3></a>
+          <br><span class="smaller">July 12, 2020</span>  <br/>
+          <div><h2 id="tldr">TL;DR</h2>
+
+<p>This blog summarizes the quantized systems introduced in the previous two parts and uses them in the context of radiation-matter interaction.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Radiation-Matter-Interaction-II"><h3 class="contrast">A Pedastrian Approach to Radiation-Matter Interaction-Part II</h3></a>
+          <br><span class="smaller">July 5, 2020</span>  <br/>
+          <div><h2 id="tldr">TL;DR</h2>
+
+<p>This blog introduces the quantum theory of free electromagnetic field, a sequel to my QM in Hilbert space blog.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Radiation-Matter-Interaction"><h3 class="contrast">A Pedastrian Approach to Radiation-Matter Interaction-Part I</h3></a>
+          <br><span class="smaller">June 28, 2020</span>  <br/>
+          <div><h2 id="tldr">TL;DR</h2>
+
+<p>This blog introduces the formalism of quantum mechanics in Hilbert space.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>While working on my side project of <em>ab initio</em> polaron theory, I realize that none of my notes is explicitly related to the radiation-matter interaction (RMI). It’s a bit weird at this point that RMI never occur to me as an important thing to learn even though the polaron is a result of interactions between electrons and radiation-excited phonons in crystalline lattice. After a search for proper sources to learn RMI, I laid my eyes on Edward Harris’ <strong>A Pedestrian Approach to Quantum Field Theory</strong>. For a guy who just finished Dr. Klauber’s excellent <strong>Student Friendly Quantum Field Theory</strong>, I was kinda reluctant to start reading another introductory book on QFT with concerns of wasting too much time. But Edward’s book turned out to be a huge page-turner after I scanned through the first chapter. This blog is dedicated to reproduce some of the important conclusions in the first chapter of Edward’s book. All the derivation in this blog is prepared for those who had an introductory non-relativistic quantum mechanics class, but a brief review of axioms of QM is also given somewhere along the derivation.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Landau-Pekar"><h3 class="contrast">Landau and Frohlich, The Beginning of the Polaron</h3></a>
+          <br><span class="smaller">June 15, 2020</span>  <br/>
+          <div><h2 id="background">Background</h2>
+
+<p>The polaron theory will be an important part of my final thesis work. I’m writing this to make sure I own every piece of my research proposal that I need to submit to my prelim committee. The blog is divided into three parts. In the first part I will explain the idea of polaron using Landau’s very first phenomenological theory. The second part develops a simple model to calculate the effective mass and size of the polaron. The results from Landau’s theory will be further developed in the last part to derive a quantized Hamiltonian (i.e. Frohlich’s Hamiltonian).</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Canonical-Dielectric-Response"><h3 class="contrast">Canonical Dielectric Function</h3></a>
+          <br><span class="smaller">June 13, 2020</span>  <br/>
+          <div><h2 id="background">Background</h2>
+
+<p>My humble knowledge of dielectric materials seems to be a big barrier between me and an sound understanding of the dependence of dielectric constant \(\varepsilon\) on alternating field frequency \(\omega\) and wave vector \(\mathbf{k}\). The question of what are the reasonable assumptions needed to construct a dielectric constant function \(\varepsilon(\omega)\) is the primary focus of this article.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Chemical-Pot-Water"><h3 class="contrast">Derive Chemical Potential of Ideal Water Vapor from Equilibrium Statistical Mechanics</h3></a>
+          <br><span class="smaller">June 6, 2020</span>  <br/>
+          <div><p><em>For Uzi.</em></p>
+<h2 id="introduction"><strong>Introduction</strong></h2>
+
+<p>This note is dedicated to the derivation of chemical potential of water molecule at vapor state. The final result in this note can be used in the thermodynamic analysis of hydrated lattice systems where the interstitial and external H2O molecules are at phase equilibrium.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Band-Theory"><h3 class="contrast">Notes on Band Theory for Sloppy Non-Physicists</h3></a>
+          <br><span class="smaller">May 31, 2020</span>  <br/>
+          <div><h2 id="motivation">Motivation</h2>
+
+<p>For a non-physicist, the energy band theory for solid materials could get nasty and hard to internalize. But band theory is like a basic languege everybody is fluent with in the community of solit state material research. Therefore, for people like me who is doing research or simply want to learn more advanced physics, we have to grasp the essences of band theory. To my best knowledge there is no textbook of solid-state materials that is designed for pedestrians. Thus, I am making this blog to summarize basic principles that could be of some use for chemists and beginners to research of materials science. This blog is definitely not mathematically vigorous but will performs as a reminder of important stuff about band theory that people could pick it up and read whenever they are lost in the analyses of energy bands. So still basic stuff, no pressure is on.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Translational-Operator"><h3 class="contrast">Electrons in Periodic Potentials (Tight-binding)</h3></a>
+          <br><span class="smaller">May 28, 2020</span>  <br/>
+          <div><h2 id="background">Background</h2>
+<p>We have discussed what an eigenstate might look like mathematically for an electron in periodic potential using Bloch’s theorem. In this blog we move forward with a closer look on the operators that could be applied to electron eigenstates. After an introduction to two important evolution operators, we will use the information we have so far to examine the energy band structure of electrons in a simple case: tight-binding model.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/First-Second-Quantization"><h3 class="contrast">First and Second quantization</h3></a>
+          <br><span class="smaller">May 22, 2020</span>  <br/>
+          <div><h2 id="motivation">Motivation</h2>
+<p>In preliminary quantum mechanics, we talked about several important postulates that carved into the monument of early quantum mechanics, which include Schrodinger equation, energy level quantization, etc. These postulates underspin what we now call the “First quantization”. After the introduction of the occupation number representation and borrowing the concept of fields from classical mechanics, people started to realize that the basic building unit of our universe is quantum fields which spread out to every corner of the universe. As a consequence physicists reformed the early formulation of QM to make it compatible with the special relativity, and that is the beginning of quantum field theory (QFT). The reformulation is called “second quantization”, and is an essential tool for solving many-body problems. In this blog we will review the basics of first and second quantization by following the three steps: (1) applying Dirac notation to QM formulation, (2) deriving the commutation rules of the creation and annihilation operators, and (3) introducing operators in QFT and their transformations. After this blog we are good to review the tight-binding theory.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Kronecker-product"><h3 class="contrast">Kronecker Product</h3></a>
+          <br><span class="smaller">May 21, 2020</span>  <br/>
+          <div><h2 id="motivation">Motivation</h2>
+<p>The Kronecker product is widely used in Dirac notation, a basic tool for second quantization formulation. People who learned the basics of quantum field theory from Mattuck and Klauber is not fluent with Dirac notation, and could easily mistake Kronecker product with outer product. This blog clarifies the definition of Kronecker product and its application in the formulation of two-body state.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/Bravais-lattice-Bloch-theorem"><h3 class="contrast">Reciprocal Lattice and Bloch's Theorem</h3></a>
+          <br><span class="smaller">May 17, 2020</span>  <br/>
+          <div><h2 id="background">Background</h2>
+
+<p>I’ve been reading stuff for quite some time, now it’s the time to dive into some real-world problems. One of my current research interests is the many-body effects to conductivity properties of electroactive materials, like the electrode materials used in rechargeable battery and Faradaic desalination cell. More specifically, recent studies proved that the dynamics of polarons, quasi-particles made of a bare electron dressed by its interactions with positive charges and phonons, could be used to explain variation of electronic conductivity in various materials<a href="#1">[1]</a>. To study many-body effects in periodic potential environment (i.e., crystal lattice), I will prepare blog articles to refresh and develop a solid understanding of condensed state physics first, then review related concepts/methods from quantum field theory (QFT), and finally hit the details of polaron dynamics. This article is the first step of my possibly long journey to fully understand the polarons.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/three-level-model"><h3 class="contrast">Three-level Model for Reaching Mature Scientific Thinking</h3></a>
+          <br><span class="smaller">May 10, 2020</span>  <br/>
+          <div><p>I spend last two days reading Jakob Schwichtenberg’s <em>Teach Yourself Physics</em>, in which Jacob introduced multiple inspiring books of scientific philosophy.  Philosophy has not been a part of my life since my high school where Chinese students are required to remember philosophical quotes of Confusius and Laozi. Over the last decade, philosophical concepts like Yin and Yang are just fancy words that I use whenever I need to show people I know stuff. As a research assistant it is so easy for me to draw an equivalence sign between philosophy and subjective perspectives. Since my work is to provide objective views of how electrode materials evolve during physio-chemical processes, I used to believe that there is no need to learn things from people who spend their whole life in isolation and write out their hard-to-fanthom thoughts.</p>
+</div> 
+        </li>
+          
+        <li class="listing">
+          <hr class="slender">
+          <a href="/articles/math-mode-test"><h3 class="contrast">$LaTex$ test</h3></a>
+          <br><span class="smaller">May 10, 2020</span>  <br/>
+          <div><p>Use <code class="language-plaintext highlighter-rouge">$$</code> to start a math mode block. The first paragraph is selected as abstract of each post. We avoid using equations in abstracts, and use <code class="language-plaintext highlighter-rouge">&lt;!-- more --&gt;</code> to separate main contents from abstract.<!-- more --></p>
+
+<div class="qc-container numbered-fig" id="drawing-container"><div id="drawing" style="width:55%"></div><span id="drawing-report" for="drawing" class="marginnote" style="width:30%;margin-left: 5.5%;"> test quantum circuit,<a id="drawing-quirk">see QC in Quirk.</a> Its probability distribution is shown below</span></div>
+<script type="text/javascript">
+    // circuit definition
+    var circuit = new QuantumCircuit(3);
+    circuit.addGate("h", 0, 1);
+    circuit.addGate("x", 1, 2);
+    circuit.addGate("x", 0, 0);
+    circuit.addGate("cx", 2, [1, 2]);
+    circuit.addGate("ccx", 3, [0, 1, 2]);
+    run_and_render_svg(circuit, 'drawing');
+</script>
+
+</div> 
+        </li>
+    
+  </ul>
+    </article>
+    <span class="print-footer">blog - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <!-- <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>     -->
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/Lonitch/Lonitch.github.io">Tufte Blog Theme with Latex-like Elements</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

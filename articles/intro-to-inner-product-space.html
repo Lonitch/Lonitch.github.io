@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Sizhe's Inner Product Spaces</title>
+  <meta name="description" content="Please check the full note here">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
+  <link rel="canonical" href="/articles/intro-to-inner-product-space">
+
+  <link rel="alternate" type="application/rss+xml" title="TuBTLE" href="/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="/Q/jsxgraph.css" />
+  <script type="text/javascript" src="/Q/jsxgraphcore.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/Q/Q.css">
+	<link rel="stylesheet" type="text/css" href="/Q/Q-Circuit-Editor.css">
+
+		<script src="https://www.googletagmanager.com/gtag/js" async></script>
+		<script src="/Q/Q.js"></script>
+		<script src="/Q/Q-ComplexNumber.js"></script>
+		<script src="/Q/Q-Matrix.js"></script>
+		<script src="/Q/Q-Qubit.js"></script>
+		<script src="/Q/Q-Gate.js"></script>
+		<script src="/Q/Q-History.js"></script>
+		<script src="/Q/Q-Circuit.js"></script>
+		<script src="/Q/Q-Circuit-Editor.js"></script>
+    <script src="/Q/quantum-circuit.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/Q/Q-utils.js"></script>
+
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="SIZHE"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Inner Product Spaces</h1>
+<p class="subtitle">November 17, 2022</p>
+<div class="post-tags">
+    <em>Tags: </em>
+    <span class="post-tags">
+    
+    [notes] 
+    
+    [linear-algebra] 
+    
+    </span>
+</div>
+<script>
+// generate Q.js results whenever a circuit is evaluated 
+window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
+    const circuit = event.detail.circuit;
+    qjs_caption_results(circuit);
+})
+// re-evaluate Q.js circuit when it's changed.
+window.addEventListener( 'Q gui altered circuit', function( event ){
+    event.detail.circuit.evaluate$()
+})
+</script>
+
+<p>Please check the full note <a href="https://lonitch.github.io/vector_space_basics/06-intro-to-inner-product-vector-space.html">here</a></p>
+
+<br>
+<hr style="border:none;height:1.0px;background-image:linear-gradient(to right, #fff, #333, #fff);">
+<br>
+<!-- <script src="https://utteranc.es/client.js"
+        repo="Lonitch/Lonitch.github.io"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script> -->
+<script src="https://giscus.app/client.js"
+        data-repo="Lonitch/Lonitch.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNjI5MjYyNzI="
+        data-category="General"
+        data-category-id="DIC_kwDOD6vvwM4CZPCU"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // add class to toc list
+        const ulElements = document.querySelector('article').querySelectorAll('ul');
+        let tocElement = null;
+
+        // Iterate through the <ul> elements and find the one with <li> containing <a>
+        ulElements.forEach((ul,i) => {
+        const liWithA = ul.querySelectorAll('li a');
+        const li = ul.querySelectorAll('li');
+        if (liWithA.length == li.length && i==0) {
+            tocElement = ul;
+            tocElement.setAttribute('class','toc-list')
+        }
+        });
+        // add interactive circuit to all elements with class "Q-circuit-palette"
+        Array
+        .from( document.querySelectorAll( '.Q-circuit-palette' ))
+        .forEach( function(el){
+            Q.Circuit.Editor.createPalette(el)
+        })
+        // create numbered indice for figures and equations
+        eqn_fig_indices();
+
+        // shut down display of mjx-container in margin notes
+        MathJax.startup.promise.then(function() {
+            findMjxContainersInMarginNotes();
+        });
+
+        // create references to equations or figures
+        eqn_fig_refs();
+
+        // create Index
+        createIndex();
+        window.addEventListener('resize', createIndex);
+    });
+</script>
+
+    </article>
+    <span class="print-footer">Inner Product Spaces - November 17, 2022 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <!-- <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>     -->
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/Lonitch/Lonitch.github.io">Tufte Blog Theme with Latex-like Elements</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Sizhe's Derive $\langle\frac{\partial^2}{\partial x^2}\rangle$ with Path Integral</title>
+  <meta name="description" content="A Problem from Feynman’s Path Integral BookLet \(x_i\) be coordinates at different time instances, prove that\[\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\fra...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+  <style>
+    /* Style for the table of contents */
+    .toc {
+      width: 100%; /* Full width */
+      list-style: none;
+      padding: 0;
+    }
+  
+    /* Style for individual TOC items */
+    .toc li {
+      margin: 2px 0;
+    }
+  </style>
+  <link rel="canonical" href="/articles/average-second-derivative-feynman">
+
+  <link rel="alternate" type="application/rss+xml" title="TuBTLE" href="/feed.xml" />
+  <link rel="stylesheet" type="text/css" href="/Q/jsxgraph.css" />
+  <script type="text/javascript" src="/Q/jsxgraphcore.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/Q/Q.css">
+	<link rel="stylesheet" type="text/css" href="/Q/Q-Circuit-Editor.css">
+
+		<script src="https://www.googletagmanager.com/gtag/js" async></script>
+		<script src="/Q/Q.js"></script>
+		<script src="/Q/Q-ComplexNumber.js"></script>
+		<script src="/Q/Q-Matrix.js"></script>
+		<script src="/Q/Q-Qubit.js"></script>
+		<script src="/Q/Q-Gate.js"></script>
+		<script src="/Q/Q-History.js"></script>
+		<script src="/Q/Q-Circuit.js"></script>
+		<script src="/Q/Q-Circuit-Editor.js"></script>
+    <script src="/Q/quantum-circuit.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/Q/Q-utils.js"></script>
+
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group">
+	<a href="/"><img class="badge" src="/images/pubtit.png" alt="SIZHE"></a>
+	
+		
+  	
+		
+		    
+		      <a href="/tags/">Tags</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/archive/">Archive</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/">blog</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/about/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/style.css"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Derive $\langle\frac{\partial^2}{\partial x^2}\rangle$ with Path Integral</h1>
+<p class="subtitle">February 24, 2021</p>
+<div class="post-tags">
+    <em>Tags: </em>
+    <span class="post-tags">
+    
+    [notes] 
+    
+    [quantum-mechanics] 
+    
+    [path-integral] 
+    
+    </span>
+</div>
+<script>
+// generate Q.js results whenever a circuit is evaluated 
+window.addEventListener( 'Q.Circuit.evaluate completed', function( event ){
+    const circuit = event.detail.circuit;
+    qjs_caption_results(circuit);
+})
+// re-evaluate Q.js circuit when it's changed.
+window.addEventListener( 'Q gui altered circuit', function( event ){
+    event.detail.circuit.evaluate$()
+})
+</script>
+
+<h2 id="a-problem-from-feynmans-path-integral-book">A Problem from Feynman’s Path Integral Book</h2>
+<hr />
+<p>Let \(x_i\) be coordinates at different time instances, prove that</p>
+
+<p>\(\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=\int\int \chi^* \hat{p}\hat{p}\psi dxdy=-\hbar^2\int\int\chi^*\frac{\partial^2}{\partial x^2}\psi dxdy\tag{1}\)
+<!--more--></p>
+
+<p>with \(\hat{p}=-i\hbar\frac{\partial}{\partial x}\) being momentum operator. There is a misprint in Eqn.(1) as we can see that by verifying the units on both sides. The LHS has a unit of momentum square while the RHS has a unit of momentum squared times length. Note that the unit of wavefunction is \(\sqrt{probability/vol.}\). Therefore, Eqn.(1) should really be</p>
+
+\[\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle=-\hbar^2\int\chi^*(x,t)\frac{\partial^2}{\partial x^2}\psi(x,t) dx\tag{1*}\]
+
+<h2 id="equations-developed-by-feynman-for-later-use">Equations Developed by Feynman for Later Use</h2>
+<hr />
+<p>To show eqn.(1), I first noticed that, from the definition of path integral,</p>
+
+\[\langle\chi|1|\psi\rangle=\int\int\chi^*(x_a,t_b)K(x_a,t_b;x_b,t_a)\psi(x_b,t_a)dx_adx_b\tag{2},\]
+
+<p>with kernel \(K(x,t_b;y,t_a)\) being a path integral of free particle with two ends at \(t_a\) and \(t_b\). The integral with a format shown in eq. (2) is called as <strong>transition amplitude</strong>, whose absolute square gives the probability of finding a system in state \(\chi\) when it starts with a state \(\psi\). If the <strong>1</strong> in Eq.(2) is replaced with a function \(F(x_c,t_c)\), we have a transition element as</p>
+
+\[\langle\chi|F|\psi\rangle_S=\int\int\int_{x_a}^{x_b}\chi^*(x_b,t_b)F(x_c,t_c)e^{iS/\hbar}\mathcal{D}x(t)\psi(x_a,t_a)dx_adx_b\tag{3},\]
+
+<p>The kernel is written out as a path integral explicitly, and the action \(S\) describes the system’s behavior.</p>
+
+<p>Because \(t_c\) is a different time instance, we can further split the path integral in Eq.(3) to get:</p>
+
+\[\langle\chi|F|\psi\rangle_S=\int\int\int \chi^*(b)K(b;c)F(c)K(c;a)\psi(a) dx_cdx_adx_b\tag{4}\]
+
+<p>where \(a=(x_a,t_a)\). Also, for an arbitrary wavefunction \(f(y,t)\), we have</p>
+
+\[\begin{array}{ll}
+\int_{\infty}K(x,t+\epsilon;y,t)f(y,t)dy&amp;=f(x,t+\epsilon)=f(x,t)+\epsilon\frac{\partial f}{\partial t}\\
+&amp;=f(x,t)-\frac{i\epsilon}{\hbar}\hat{H}f(x,t)\tag{5}
+\end{array}\]
+
+<p>Shrodinger’s equation of \(f(x,t)\) is used at the last line of Eq. (5). The Hamiltonian operator \(\hat{H}\) is related to the Lagrangian \(\mathcal{L}\) in \(S\). Using the first equivalence of eq. (5) in eq. (4) gives</p>
+
+\[\langle\chi|F|\psi\rangle_S=\int\chi^*(c)F(c)\psi(c) dx_c\tag{6}.\]
+
+<p>Now, if we replace \(F\) with a product of coordinates at two different time instances, \(x_{k+1}(t+\epsilon)x_k(t)\) in eq.(4), we have</p>
+
+\[\begin{array}{ll}
+\langle\chi|x_{k+1}x_k|\psi\rangle_S&amp;=\int\int\int\int \chi^*(b)K(b;x_{k+1},t+\epsilon)x_{k+1}K(x_{k+1},t+\epsilon;x_k,t)x_k\times\\
+&amp;\quad\quad\quad K(x_k,t;a)\psi(a) dx_{k+1}dx_kdx_adx_b\\
+&amp;=\int\int \chi^*(x_{k+1},t+\epsilon)x_{k+1}K(x_{k+1},t+\epsilon;x_k,t)x_k\psi(x_k,t)dx_{k+1}dx_k.\tag{7}
+ \end{array}\]
+
+<p>According to Feynman’s argument, if we integrate over \(x_k\), we can use eq. (5) to get</p>
+
+\[\begin{array}{ll}
+\int K(x_{k+1},t+\epsilon;x_k,t)x_k\psi(x_k,t)dx_k&amp;=x_{k+1}\psi(x_{k+1},t+\epsilon)\\
+&amp;=(1-\frac{i\epsilon}{\hbar}\hat{H})x_{k+1}\psi(x_{k+1},t)\tag{8},
+ \end{array}\]
+
+<p>It might seem to be that Eq.(5) is applied to Eq.(8) directly by replacing \(f(y)\) in (5) with \(x \psi\) in (8). However, Feynman was trying to motivate us here to build a relationship between the <strong>conventional operator formalism</strong> and the <strong>path integral formalism</strong>. So the \(x\) can be understood as a coordinate operator, or an eigenvalue of the operator. After a time period of \(\epsilon\), the eigenvalue of the coordinate operator for the wavefunction becomes \(x_{k+1}\), and thus the result in (8).</p>
+
+<p>If we move forward with Eqn.(8), the eq. (7) now becomes</p>
+
+\[\begin{array}{ll}
+\langle\chi|x_{k+1}x_k|\psi\rangle_S&amp;=\int \chi^*(x_{k+1},t+\epsilon)x_{k+1}(1-\frac{i\epsilon}{\hbar}\hat{H})x_{k+1}\psi(x_{k+1},t)dx_{k+1}\\
+&amp;=\int \chi^*(x,t+\epsilon)x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
+&amp;=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar}\hat{H})x(1-\frac{i\epsilon}{\hbar}\hat{H})x\psi(x,t)dx\\
+&amp;=\int\chi^*(x)x^2\psi(x)dx+\frac{i\epsilon}{\hbar}\int\chi^*(\hat{H}x-x\hat{H})x\psi(x)dx.\tag{9}
+ \end{array}\]
+
+<p>Since \(\frac{im}{\hbar}[H,x]=p\), the equation above gives</p>
+
+\[\langle\chi|x_{k+1}x_k|\psi\rangle_S=\int\chi^*(x)x^2\psi(x)dx+\frac{\epsilon}{m}\int\chi^*px\psi(x)dx\tag{10}.\]
+
+<h2 id="getting-back-to-eq-1">Getting back to eq. (1)</h2>
+<hr />
+<p>Notice that</p>
+
+\[\begin{array}{ll}
+\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle&amp;=\frac{m^2}{\epsilon^2}\{\langle\chi|x_{k+1}x_k|\psi\rangle-\langle\chi|x_{k+1}x_{k-1}|\psi\rangle-\\
+&amp;\langle\chi|x_kx_k|\psi\rangle+\langle\chi|x_{k}x_{k-1}|\psi\rangle\}\\
+&amp;=\frac{m^2}{\epsilon^2}\{A-B-C+D\}\tag{11}.
+ \end{array}\]
+
+<p>where we let \(x_{k+1}=x\) and \(x_k=y\) to get</p>
+
+\[\begin{array}{ll}
+A&amp;=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;y,t)y\psi(y,t)dxdy\\
+&amp;=\int\chi^*(x,t+\epsilon)x(1-\frac{i\epsilon}{\hbar}H)x\psi(x,t)dx\\
+&amp;=\int\chi^*(x,t)(1+\frac{i\epsilon}{\hbar})x(1-\frac{i\epsilon}{\hbar}H)x\psi(x,t)dx\\
+&amp;=\int\chi^*(x,t)(x^2-\frac{i\epsilon}{\hbar}xHx+\frac{i\epsilon}{\hbar}Hxx+\frac{\epsilon^2}{\hbar^2}HxHx)dx.
+\tag{12}
+\end{array}\]
+
+<p>Things get complicated for \(B\) as we need to converge wavefunctions at \(t_{k+1}\) and \(t_{k-1}\) to \(t_{k}\). So <strong>we use Eqn(8) and its conjugate to calculate \(B\)</strong>. Let \(t_k=t\), \(x_{k+1}=x\), \(x_k=z\), and \(x_{k-1}=y\), we have</p>
+
+\[\begin{array}{ll}
+B&amp;=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;y,t-\epsilon)y\psi(y,t-\epsilon)dxdy\\
+&amp;=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;z,t)K(z,t;y,t-\epsilon)y\psi(y,t-\epsilon)dxdydz\\
+&amp;=\int\chi^*(x,t+\epsilon)xK(x,t+\epsilon;z,t)(1-\frac{i\epsilon}{\hbar})z\psi(z,t-\epsilon)dxdz\\
+&amp;=\int\chi^*(z,t+\epsilon)z(1-\frac{i\epsilon}{\hbar})(1-\frac{i\epsilon}{\hbar})z\psi(z,t-\epsilon)dz\\
+&amp;=\int\chi^*(z,t)(1+\frac{i\epsilon}{\hbar}H)z(1-\frac{i\epsilon}{\hbar})(1-\frac{i\epsilon}{\hbar})z(1+\frac{i\epsilon}{\hbar})\psi(z,t)dz\\
+&amp;=\int\chi^*(z,t)(z^2+\frac{i\epsilon}{\hbar}zzH-2\frac{i\epsilon}{\hbar}zHz+2\frac{\epsilon^2}{\hbar^2}zHzH-\\
+&amp;\frac{\epsilon^2}{\hbar^2}zHHZ+\frac{i\epsilon}{\hbar}Hzz-\frac{\epsilon^2}{\hbar^2}HzzH+2\frac{\epsilon^2}{\hbar^2}HzHz)\psi(z,t)dz
+\tag{13}
+ \end{array}\]
+
+<p>where we used the conjugate of Eqn. (8) at the fourth equivalence. The equations of (7.75) and (7.76) in Feynman’s book were used at the fifth equivalence. Notice that we need to eliminate all the terms that have their orders higher than \(\epsilon^2\) in the equation above. Because those terms are negligible at the limit of \(\epsilon\rightarrow0\).</p>
+
+<p>For \(C\), it’s simply</p>
+
+\[C=\int\chi^*(x,t)x^2\psi(x,t)dx\tag{14}.\]
+
+<p>Finally, for \(D\), we again let \(x_{k}=x\) and \(y=x_{k-1}\) to give</p>
+
+\[\begin{array}{ll}
+D&amp;=\int\chi^*(x,t)xK(x,t;y,t-\epsilon)y\psi(y,t-\epsilon)dxdy\\
+&amp;=\int\chi^*(x,t)x(1-\frac{i\epsilon}{\hbar}H)x\psi(x,t-\epsilon)dx\\
+&amp;=\int\chi^*(x,t)x(1-\frac{i\epsilon}{\hbar}H)x(1+\frac{i\epsilon}{\hbar}H)\psi(x,t)dx\\
+&amp;=\int\chi^*(x,t)(x^2+\frac{i\epsilon}{\hbar}xxH-\frac{i\epsilon}{\hbar}xHx+\frac{\epsilon^2}{\hbar^2}xHxH)\psi(x,t)dx\tag{15}.
+\end{array}\]
+
+<p>Combining (11)-(15), we have all the \(\epsilon\) terms canceled out to give</p>
+
+\[\begin{array}{ll}
+\langle\chi|m\frac{x_{k+1}-x_k}{\epsilon}m\frac{x_k-x_{k-1}}{\epsilon}|\psi\rangle&amp;=\frac{m^2}{\hbar^2}\int\chi^*(x,t)(-xHxH\\
+&amp;-HxHx+xHHx+HxxH)\psi(x,t)dx\\
+&amp;=\int\chi^*(x,t)pp\psi(x,t)dx\tag{16}.
+\end{array}\]
+
+<p>which does match Feynman’s results. Q.E.D.</p>
+
+<br>
+<hr style="border:none;height:1.0px;background-image:linear-gradient(to right, #fff, #333, #fff);">
+<br>
+<!-- <script src="https://utteranc.es/client.js"
+        repo="Lonitch/Lonitch.github.io"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script> -->
+<script src="https://giscus.app/client.js"
+        data-repo="Lonitch/Lonitch.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNjI5MjYyNzI="
+        data-category="General"
+        data-category-id="DIC_kwDOD6vvwM4CZPCU"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // add class to toc list
+        const ulElements = document.querySelector('article').querySelectorAll('ul');
+        let tocElement = null;
+
+        // Iterate through the <ul> elements and find the one with <li> containing <a>
+        ulElements.forEach((ul,i) => {
+        const liWithA = ul.querySelectorAll('li a');
+        const li = ul.querySelectorAll('li');
+        if (liWithA.length == li.length && i==0) {
+            tocElement = ul;
+            tocElement.setAttribute('class','toc-list')
+        }
+        });
+        // add interactive circuit to all elements with class "Q-circuit-palette"
+        Array
+        .from( document.querySelectorAll( '.Q-circuit-palette' ))
+        .forEach( function(el){
+            Q.Circuit.Editor.createPalette(el)
+        })
+        // create numbered indice for figures and equations
+        eqn_fig_indices();
+
+        // shut down display of mjx-container in margin notes
+        MathJax.startup.promise.then(function() {
+            findMjxContainersInMarginNotes();
+        });
+
+        // create references to equations or figures
+        eqn_fig_refs();
+
+        // create Index
+        createIndex();
+        window.addEventListener('resize', createIndex);
+    });
+</script>
+
+    </article>
+    <span class="print-footer">Derive $\langle\frac{\partial^2}{\partial x^2}\rangle$ with Path Integral - February 24, 2021 - Sizhe Liu</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <!-- <li><a href="mailto:hate@spam.net"><span class="icon-mail3"></span></a></li>     -->
+    
+      <li>
+        <a href="https://github.com/Lonitch"><span class="icon-github"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2024 &nbsp;&nbsp;SIZHE LIU</span></br> <br>
+<span>This site created with the <a href="//github.com/Lonitch/Lonitch.github.io">Tufte Blog Theme with Latex-like Elements</a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
